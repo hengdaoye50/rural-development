@@ -1,0 +1,2 @@
+﻿belt_id,name,name_norm,belt_type,theme,province_code,city_code,county_code,cover_desc,scale_villages,scale_towns,announced_ymd,year_precision,issuer,source_id,summary,institutional_note,record_state,created_at,updated_at,created_by
+B540001,高原和美乡村片区化试点,高原和美乡村片区化试点,其他,和美乡村,540000,540000,,自治区层面启动高原和美乡村片区化试点建设；具体县域以下点位尚未公开命名,,,2026,year,西藏自治区农业农村厅,S540005,“十五五”期间启动实施高原和美乡村片区化试点建设，优先布局“两线三区”村庄。,省级试点表述，暂无公开的县以下命名单元，记belt；待点位公开后视机制改area。,active,2026-07-06,2026-09-30,XZ-batch01

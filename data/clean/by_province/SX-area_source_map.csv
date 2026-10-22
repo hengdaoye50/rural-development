@@ -1,0 +1,15 @@
+﻿area_id,source_id,entity_type,rel
+A140001,S140001,area,primary
+A140002,S140001,area,primary
+A140003,S140001,area,primary
+A140004,S140002,area,primary
+A140005,S140002,area,primary
+A140006,S140003,area,primary
+A140007,S140003,area,primary
+A140008,S140003,area,primary
+B140001,S140001,belt,primary
+B140002,S140001,belt,primary
+B140003,S140001,belt,primary
+B140003,S140002,belt,support
+B140004,S140004,belt,primary
+B140005,S140005,belt,primary

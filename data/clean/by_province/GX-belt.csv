@@ -1,0 +1,3 @@
+﻿belt_id,name,name_norm,belt_type,theme,province_code,city_code,county_code,cover_desc,scale_villages,scale_towns,announced_ymd,year_precision,issuer,source_id,summary,institutional_note,record_state,created_at,updated_at,created_by
+B450001,粤桂协作乡村振兴示范带,粤桂协作乡村振兴示范带,带,帮扶协作,450000,450300,,粤桂协作县项目点串点成线连线成片,,,2023,year,粤桂协作机制,S450005,在协作县选取有条件打造升级的项目点，以点为基、串点成线、连线成片打造乡村振兴示范带。,协作框架泛称；无县域以下具名实体单元清单，故记belt。,active,2026-09-30,2026-09-30,GX-batch01
+B450002,右江区乡村振兴示范带,右江区乡村振兴示范带,带,和美乡村,450000,451000,451002,百色市右江区乡村振兴示范带（泛称）,,,2022,year,,S450005,围绕地域特色打造产业兴旺、生态宜居、乡风文明、治理有效、生活富裕的乡村振兴示范带。,报道泛称未见具名设立/挂牌；防误判记belt。,active,2026-09-30,2026-09-30,GX-batch01

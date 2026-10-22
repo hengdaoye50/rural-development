@@ -1,0 +1,4 @@
+area_id,source_id,entity_type,rel
+A630001,S630001,area,primary
+A630002,S630001,area,primary
+A630003,S630002,area,primary

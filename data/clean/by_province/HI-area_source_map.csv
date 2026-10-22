@@ -1,0 +1,10 @@
+﻿area_id,source_id,entity_type,rel
+A460001,S460001,area,primary
+A460002,S460001,area,primary
+A460003,S460001,area,primary
+A460004,S460001,area,primary
+A460005,S460002,area,primary
+A460006,S460003,area,primary
+A460007,S460004,area,primary
+A460008,S460005,area,primary
+B460001,S460001,belt,primary

@@ -1,0 +1,27 @@
+# secrets & env
+.env
+.env.*
+!.env.example
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# office temp
+~$*
+*.tmp
+.DS_Store
+Thumbs.db
+
+# large exports (regenerable)
+data/db/*.sqlite3-journal
+reports/_build/
+
+# keep db file itself in git? default: track CSV + scripts; db can be rebuilt
+data/db/*.sqlite3
+
+# agent workspace
+.mimocode/
+

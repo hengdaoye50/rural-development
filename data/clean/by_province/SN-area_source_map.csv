@@ -1,0 +1,14 @@
+area_id,source_id,entity_type,rel
+A610001,S610001,area,primary
+A610002,S610001,area,primary
+A610003,S610001,area,primary
+A610004,S610002,area,primary
+A610005,S610002,area,primary
+A610006,S610003,area,primary
+A610007,S610003,area,primary
+A610008,S610003,area,primary
+A610009,S610004,area,primary
+A610010,S610004,area,primary
+A610011,S610005,area,primary
+A610012,S610001,area,primary
+A610013,S610001,area,primary

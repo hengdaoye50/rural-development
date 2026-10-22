@@ -1,0 +1,3 @@
+﻿belt_id,name,name_norm,belt_type,theme,province_code,city_code,county_code,cover_desc,scale_villages,scale_towns,announced_ymd,year_precision,issuer,source_id,summary,institutional_note,record_state,created_at,updated_at,created_by
+B530001,中国最美乡愁旅游带,中国最美乡愁旅游带,带,农文旅,530000,530000,,30条中国最美乡愁旅游带（全省命名）,,,2023,year,云南省文化和旅游厅,S530008,推进30条中国最美乡愁旅游带、20条生态特色旅游线路、10条农耕文明旅游线路。,省级文旅命名线路；无县域以下实体设立动作，记belt。,active,2026-09-30,2026-09-30,YN-batch01
+B530002,大理世界一流田园综合体争创单元,大理世界一流田园综合体争创单元,其他,产业,530000,532900,532930,洱源县十四五规划争创世界一流田园综合体,,,2021,year,洱源县人民政府,S530002,加快规划方案和可研报告编制，全力争取列入全省试点。,规划争创表述；两湖一河示范园已单列入area，本条记belt防重复。,active,2026-09-30,2026-09-30,YN-batch01

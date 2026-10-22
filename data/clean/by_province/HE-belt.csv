@@ -1,0 +1,4 @@
+﻿belt_id,name,name_norm,belt_type,theme,province_code,city_code,county_code,cover_desc,scale_villages,scale_towns,announced_ymd,year_precision,issuer,source_id,summary,institutional_note,record_state,created_at,updated_at,created_by
+B130001,滹沱河沿岸和美乡村示范带,滹沱河沿岸和美乡村示范带,带,和美乡村,130000,130100,,滹沱河沿岸9个相关县（市、区）323个村；平山、灵寿、鹿泉、正定、经开、藁城等,323,,2024,year,石家庄市,S130005,9县完成示范带片区规划编制；到2025年底建成省级和美乡村299个占92%重点村62个,跨县示范带；各县有独立执行单元（R09）县级片区另行入库,active,2026-09-28,2026-09-28,HE-batch01
+B130002,草原天路—桑洋水路和美乡村重点片区群,草原天路桑洋水路和美乡村重点片区群,带,和美乡村,130000,130700,,张家口市围绕草原天路、桑洋水路布局省级和美乡村重点片区9个、三级共18个,511,,2025,year,张家口市农业农村局,S130007,把和美乡村重点片区作为推进和美乡村建设的重要载体和平台,区域布局表述；具名片区待补采,active,2026-09-28,2026-09-28,HE-batch01
+B130003,邢台古村落片区,邢台古村落片区,片,文化+和美乡村,130000,130500,130582,邢台古村落片区（含沙河市王硇村等）,,,unknown,unknown,S130006,,片区级表述未见独立设立文件；核心村王硇已知,active,active,2026-09-28,HE-batch01,repair-2026-09

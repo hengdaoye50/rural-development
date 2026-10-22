@@ -1,0 +1,13 @@
+﻿area_id,source_id,entity_type,rel
+A530001,S530001,area,primary
+A530001,S530008,area,support
+A530002,S530002,area,primary
+A530003,S530003,area,primary
+A530004,S530004,area,primary
+A530005,S530005,area,primary
+A530006,S530005,area,primary
+A530007,S530006,area,primary
+A530008,S530007,area,primary
+A530009,S530008,area,primary
+B530001,S530008,belt,primary
+B530002,S530002,belt,primary

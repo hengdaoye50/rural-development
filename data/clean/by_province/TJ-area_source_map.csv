@@ -1,0 +1,14 @@
+﻿area_id,source_id,entity_type,rel
+A120001,S120001,area,primary
+A120002,S120001,area,primary
+A120003,S120001,area,primary
+A120004,S120001,area,primary
+A120004,S120002,area,support
+A120005,S120001,area,primary
+A120006,S120001,area,primary
+A120007,S120001,area,primary
+A120008,S120001,area,primary
+A120009,S120001,area,primary
+A120010,S120001,area,primary
+A120011,S120001,area,primary
+A120012,S120001,area,primary

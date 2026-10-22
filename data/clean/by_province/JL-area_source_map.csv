@@ -1,0 +1,15 @@
+﻿area_id,source_id,entity_type,rel
+A220006,S220002,area,primary
+A220006,S220001,area,support
+A220007,S220008,area,primary
+A220008,S220006,area,primary
+A220009,S220006,area,primary
+A220010,S220006,area,primary
+A220011,S220007,area,primary
+A220012,S220007,area,primary
+B220001,S220005,belt,primary
+B220002,S220003,belt,primary
+B220003,S220003,belt,primary
+B220004,S220003,belt,primary
+B220005,S220003,belt,primary
+B220006,S220003,belt,primary
