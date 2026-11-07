@@ -131,6 +131,28 @@ $env:MIMO_PYTHON
 # 见 scripts/merge_by_province.py；by_province 优先于 master
 ```
 
+### 扫描件 OCR 补采
+
+「PDF 是图片、pypdf 抽 0 字符」的来源用这条补。**必须用 `.venv-ocr` 环境跑**，
+不能用 `MIMO_PYTHON`（后者没有 OCR 依赖，也不要往里装）：
+
+```powershell
+# 一次性的 OCR 环境（rapidocr-onnxruntime + onnxruntime + pypdfium2），已 .gitignore
+uv venv .venv-ocr --python 3.12
+uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfium2
+
+# 本地 PDF -> 原文.md（缺省写到 PDF 同目录）
+& ".venv-ocr\Scripts\python.exe" scripts/ocr_pdf.py path\to\原件.pdf
+# 直接给 URL：下载后识别
+& ".venv-ocr\Scripts\python.exe" scripts/ocr_pdf.py https://xx.gov.cn/a.pdf --out data\raw\JX\xxx\原文.md
+# 先看效果不写盘 / 只跑某几页 / 小字模糊时提高倍率
+& ".venv-ocr\Scripts\python.exe" scripts/ocr_pdf.py 原件.pdf --pages 1-3 --dry-run
+& ".venv-ocr\Scripts\python.exe" scripts/ocr_pdf.py 原件.pdf --scale 3.0
+```
+
+**OCR 不是无损的**：实测会把「〔2024〕」认成全角括号、把「五好两宜」偶尔认成「五好两宣」。
+文号与专有名词必须抽样校读后再入库；`hash_sha256` 按最终写入的字节算。
+
 ### 政策层（`policy` / `area_policy_map` / `event`）
 
 ```powershell

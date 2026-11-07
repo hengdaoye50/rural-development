@@ -8,6 +8,8 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+# OCR 专用环境（rapidocr + onnxruntime + pypdfium2），由 uv 创建，不入库
+.venv-ocr/
 
 # office temp
 ~$*
