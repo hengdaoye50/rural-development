@@ -1,0 +1,17 @@
+{
+  "policy_id": "P370118",
+  "url": "https://www.penglai.gov.cn/api-gateway/jpaas-web-server/front/document/download?fileUrl=YW5UzzlvCwcM%2FNHHX%2FtT6NNcuvg8heRL5%2BNfohpSTg1UeOTHU7F3DjYnQNyP9BNcHfWQa60nh%2FqkOudogjiNm3%2F70IpzE8hhW%2BD5%2F0ogB59oTneoRdkyeqKDxM6qUauAzyoSSQzhKrhlJOKIS3fbqUZ7dtlAH7JveimS8EIzX9I%3D&fileName=2026.2%281%29.pdf",
+  "title": "烟台市蓬莱区人民政府关于印发烟台市蓬莱区国民经济和社会发展第十五个五年规划纲要的通知",
+  "doc_no": "烟蓬政发〔2026〕6号",
+  "issuer": "烟台市蓬莱区人民政府",
+  "issuer_level": "county",
+  "issued_ymd": "2026-05-28",
+  "published_ymd": "2026-07",
+  "doc_type": "规划",
+  "source_kind": "政府公报",
+  "instruments": "规划,产业,财政,金融,组织,人才,数字,土地,一带三谷满天星,片区联治,跨村联建,强村公司,强村贷,涉农资金整合",
+  "full_text_chars": "57007",
+  "hash_sha256": "29a2dff79d7dff7c384596a0cffaf16bda54d1b179948d40c3c4109386c7d3b7",
+  "fetched_at": "2026-11-07",
+  "batch": "POL-SD05-policy"
+}
