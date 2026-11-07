@@ -151,7 +151,16 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 ```
 
 **OCR 不是无损的**：实测会把「〔2024〕」认成全角括号、把「五好两宜」偶尔认成「五好两宣」。
-文号与专有名词必须抽样校读后再入库；`hash_sha256` 按最终写入的字节算。
+`ocr_pdf.py` 默认调用纠错层（`scripts/ocr_normalize.py`）处理这两类错误：文号括号按模式归一，
+专名用库内片区名/市县名做「只差一个形近字」的定向替换。`--no-fix` 可关掉。
+纠错两件套也可单独跑在已有文件上：
+
+```powershell
+& $env:MIMO_PYTHON scripts/ocr_normalize.py --check 原文.md   # 只报告会改什么
+& $env:MIMO_PYTHON scripts/ocr_normalize.py --apply 原文.md   # 就地改写（幂等）
+```
+
+纠错前后都要抽样校读：规则只兜住已知模式，认不出的错字仍需人工。`hash_sha256` 按最终写入的字节算。
 
 ### 政策层（`policy` / `area_policy_map` / `event`）
 

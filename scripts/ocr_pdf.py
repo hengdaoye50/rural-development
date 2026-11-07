@@ -72,6 +72,7 @@ def main() -> int:
     ap.add_argument("--pages")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--min-chars", type=int, default=20)
+    ap.add_argument("--no-fix", action="store_true", help="跳过文号/专名纠错层")
     args = ap.parse_args()
 
     is_url = args.source.lower().startswith(("http://", "https://"))
@@ -101,6 +102,17 @@ def main() -> int:
         print(f"  第 {pno + 1} 页：{n} 字")
 
     body = "\n\n".join(chunks).rstrip() + "\n"
+
+    if not args.no_fix:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from ocr_normalize import load_terms, normalize
+
+        body, changes = normalize(body, load_terms())
+        if changes:
+            print(f"  纠错 {len(changes)} 处：")
+            for kind, old, new in changes:
+                print(f"    [{kind}] {old}  ->  {new}")
+
     chars = len(body.replace("\n", ""))
     print(f"合计 {chars} 字")
     if thin:
