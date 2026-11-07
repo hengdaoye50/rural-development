@@ -1,0 +1,129 @@
+﻿source_id,result,detail
+S110002,recovered,849 字 / C
+S110003,recovered,4254 字 / B
+S110005,recovered,1882 字 / C
+S110006,recovered,2366 字 / B
+S110007,recovered,2644 字 / A
+S110008,recovered,1731 字 / B
+S120002,recovered,2814 字 / B
+S130002,recovered,330 字 / A
+S130003,recovered,9086 字 / A
+S130004,recovered,4566 字 / A
+S130005,recovered,2681 字 / A
+S130006,recovered,1378 字 / B
+S130007,recovered,1585 字 / B
+S140002,recovered,1731 字 / A
+S140003,recovered,3414 字 / B
+S150002,recovered,2418 字 / A
+S150003,recovered,1639 字 / B
+S150004,recovered,9853 字 / A
+S150005,recovered,6689 字 / A
+S310001,recovered,1611 字 / A
+S310002,recovered,2606 字 / A
+S310004,recovered,2422 字 / A
+S310005,recovered,1620 字 / A
+S310006,recovered,1795 字 / A
+S310007,recovered,2595 字 / C
+S310008,recovered,2406 字 / B
+S310009,recovered,24580 字 / A
+S320002,recovered,2813 字 / C
+S320003,recovered,3272 字 / C
+S320005,recovered,4281 字 / C
+S320008,recovered,1473 字 / B
+S320009,recovered,1211 字 / B
+S320010,recovered,1331 字 / A
+S320011,recovered,0 字 / C
+S320012,recovered,3180 字 / A
+S320013,recovered,997 字 / C
+S320014,recovered,997 字 / C
+S320015,recovered,1792 字 / A
+S320016,recovered,3255 字 / A
+S320017,recovered,2348 字 / D
+S320018,recovered,8230 字 / B
+S320019,recovered,2312 字 / B
+S320020,recovered,939 字 / C
+S320021,recovered,1324 字 / B
+S320022,recovered,5513 字 / C
+S320023,recovered,4047 字 / A
+S320024,recovered,145 字 / B
+S320025,recovered,4318 字 / C
+S320026,recovered,567 字 / B
+S320027,recovered,2039 字 / C
+S320028,recovered,4852 字 / C
+S320029,recovered,3180 字 / A
+S340004,recovered,9043 字 / A
+S340005,recovered,1765 字 / A
+S340006,recovered,2758 字 / A
+S340007,recovered,3987 字 / B
+S350002,recovered,4529 字 / B
+S350005,recovered,2363 字 / A
+S350006,recovered,3335 字 / B
+S350007,recovered,5001 字 / D
+S350010,recovered,4529 字 / B
+S350011,recovered,2735 字 / B
+S350012,recovered,4929 字 / B
+S350013,recovered,11042 字 / B
+S360004,recovered,2822 字 / B
+S360007,recovered,1670 字 / C
+S360008,recovered,7209 字 / B
+S360010,recovered,21905 字 / A
+S360011,recovered,3798 字 / B
+S360012,recovered,12653 字 / A
+S370028,recovered,1685 字 / C
+S420005,recovered,459 字 / A
+S420006,recovered,4587 字 / A
+S430004,recovered,879 字 / A
+S430005,recovered,45481 字 / A
+S430007,recovered,794 字 / A
+S430008,recovered,2837 字 / B
+S430010,recovered,4120 字 / C
+S430012,recovered,2325 字 / C
+S440002,recovered,3438 字 / B
+S440005,recovered,738 字 / B
+S440007,recovered,1048 字 / A
+S440008,recovered,1375 字 / B
+S440009,recovered,2296 字 / A
+S440010,recovered,2235 字 / B
+S440011,recovered,1775 字 / A
+S440012,recovered,54915 字 / A
+S450003,recovered,3143 字 / B
+S450004,recovered,2493 字 / B
+S450005,recovered,458 字 / D
+S450006,recovered,380 字 / B
+S450007,recovered,6172 字 / B
+S460004,recovered,3122 字 / A
+S460005,recovered,3425 字 / A
+S500004,recovered,28192 字 / A
+S500005,recovered,16855 字 / A
+S500006,recovered,5895 字 / A
+S500007,recovered,2632 字 / A
+S500008,recovered,30099 字 / A
+S500009,recovered,24821 字 / A
+S500011,recovered,50766 字 / A
+S500012,recovered,28192 字 / A
+S510008,recovered,3223 字 / D
+S510009,recovered,4660 字 / D
+S510010,recovered,2342 字 / C
+S520002,recovered,1391 字 / D
+S520004,recovered,67633 字 / A
+S520007,recovered,15243 字 / A
+S520008,recovered,3578 字 / B
+S520009,recovered,2050 字 / C
+S530003,recovered,4569 字 / A
+S530007,recovered,2643 字 / B
+S530008,recovered,3925 字 / B
+S140004,failed,HTTP 502
+S140005,failed,HTTP 502
+S310003,failed,HTTP 412
+S320006,failed,URLError
+S340001,failed,HTTP 404
+S340002,failed,HTTP 404
+S340003,failed,HTTP 403
+S360006,failed,URLError
+S360009,failed,URLError
+S430011,failed,HTTP 502
+S460003,failed,URLError
+S510007,failed,HTTP 404
+S530002,failed,HTTP 403
+S530004,failed,HTTP 404
+S530006,failed,HTTP 404

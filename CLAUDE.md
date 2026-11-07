@@ -20,23 +20,47 @@
 │   ├── 01-概念界定.md        # 「片区」纳入/排除标准、类型学
 │   ├── 02-数据字典.md        # 字段、取值、编码规则
 │   ├── 03-采集规范.md        # 检索关键词、来源优先级、质检
-│   └── 04-行政区划代码表.md  # 省市县国标代码与别名
+│   ├── 04-行政区划代码表.md  # 省市县国标代码与别名
+│   ├── 07-政策层.md          # 政策文件/政务动态的权威门槛、检索入口、工具编码
+│   └── 08-并行采集编排.md    # 多 agent 分片、采集契约、失败抢救
 ├── data/
-│   ├── raw/                  # 原始来源：按省分目录，只追加不覆盖
-│   │   └── {省代码-省名}/{YYYYMM}-{关键词或来源}/
-│   ├── stage/                # 半结构化中间表（清洗过程用）
-│   ├── clean/                # 入库前最终 CSV（字段对齐数据字典）
+│   ├── raw/                  # 原始证据，只追加不覆盖
+│   │   └── {ABBR}/           # 仅 2 字母省码（ZJ/SD/JS…），禁止 6 位码或中文
+│   │       └── {YYYYMMDD}-{slug}/{原文.md, 原件.pdf, meta.json}
+│   ├── stage/                # 采集中间产物，**根目录不放文件**，只允许三层
+│   │   ├── batches/          # POL-{shard}-policy.jsonl 待入库批次
+│   │   ├── shards/           # {shard}-brief.md + {shard}-counties.csv
+│   │   └── candidates/       # *-candidates.csv 候选清单
+│   ├── clean/
+│   │   ├── {table}.csv       # master，禁止手改
+│   │   └── by_province/      # 文件名只能是 {ABBR}-{table}.csv
 │   └── db/                   # SQLite 主库（片区库.sqlite3）
-├── scripts/                  # 采集/清洗/校验/导出脚本（Python）
-├── reports/                  # 统计报告、图表、专题分析
+├── scripts/                  # 参与管线的脚本，平铺
+│   └── legacy/               # 一次性批次脚本与调试脚本，不参与管线
+├── reports/
+│   ├── qa/                   # 校验与审计报告
+│   ├── gaps/                 # 缺采县清单
+│   ├── pilot/                # 分片采集小结
+│   └── *.md                  # 统计报告、专题分析
 └── archive/                  # 废弃版本，按日期归档，不删
+    └── {YYYY-MM}/            # 按年月归档
 ```
 
 命名规则：
 - 中文目录/文件名用于人类可读文档与报告
 - 数据文件、脚本、表名一律英文 snake_case
-- 原始证据路径必须可回溯：`data/raw/{省}/{日期}-{来源}/原文.md` + `meta.json`
+- 原始证据路径必须可回溯：`data/raw/{ABBR}/{日期}-{slug}/原文.md` + `meta.json`
 - 禁止在 `data/clean` 与 `data/db` 中手改数据；一切修改走脚本或 `data/stage`
+
+**结构红线**（2026-10 规整后确立）：
+
+1. `data/raw/` 顶层只能是 2 字母省码。历史遗留的 `330000-浙江` 已合并入 `ZJ`，
+   新增证据一律用 2 字母
+2. `data/stage/` 根目录不得出现文件，必须落入 `batches/` `shards/` `candidates/`
+3. `data/clean/by_province/` 文件名只能是 `{ABBR}-{table}.csv`。禁止 `-batch03` 之类后缀——
+   `merge_by_province.py` 按 `*-{table}.csv` 匹配，带后缀的文件会被静默跳过
+4. `scripts/legacy/` 里的脚本不参与管线，也不要再被文档引用；管线脚本保持平铺
+5. 结构调整必须先改本节，再执行 `scripts/migrate_layout.py`
 
 ## 工作流程约定
 
@@ -95,9 +119,51 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/infer_times_from_text.py
 & $env:MIMO_PYTHON scripts/export_excerpt_snapshots.py
 
+# 快照完整性补漏（断链检测 -> 补采 -> 补哈希）
+& $env:MIMO_PYTHON scripts/probe_dead_sources.py --csv reports/qa/dead-source-probe.csv
+& $env:MIMO_PYTHON scripts/repair_source_snapshots.py          # 可访问的重抓，死链清空 local_path
+& $env:MIMO_PYTHON scripts/backfill_source_hash.py             # 补录缺失的 hash_sha256
+
+# 健康度总览（进度 + 质量信号汇总，只读）
+& $env:MIMO_PYTHON scripts/health_report.py                    # -> reports/qa/health-latest.md
+
 # 仅用 by_province 重建 clean master（勿直接手改 master）
 # 见 scripts/merge_by_province.py；by_province 优先于 master
 ```
+
+### 政策层（`policy` / `area_policy_map` / `event`）
+
+```powershell
+# 表头升级到 v0.2 政策层结构（幂等；schema 变更后先跑这个）
+& $env:MIMO_PYTHON scripts/migrate_policy_schema.py
+
+# 从现有 source 筛出政策文件候选，输出 data/stage/candidates/policy-candidates.csv
+& $env:MIMO_PYTHON scripts/policy_backfill_candidates.py
+
+# 政策批次入库：stage JSONL -> raw 全文存档 + by_province CSV
+& $env:MIMO_PYTHON scripts/ingest_policy.py data/stage/batches/POL-{省码}-{序号}-policy.jsonl
+& $env:MIMO_PYTHON scripts/ingest_policy.py --dry-run data/stage/batches/xxx.jsonl   # 先看解析结果
+& $env:MIMO_PYTHON scripts/ingest_policy.py --purge POL-{省码}-{序号}-policy  # 回滚该批次
+
+# 并行采集：生成分片清单（每个分片一份 brief.md + counties.csv）
+& $env:MIMO_PYTHON scripts/gen_policy_shards.py
+& $env:MIMO_PYTHON scripts/gen_policy_shards.py ZJ01 SD01   # 只生成指定分片
+
+# 编码一致性审计：查「声称有某政策工具但全文找不到依据」的记录
+& $env:MIMO_PYTHON scripts/audit_instruments.py
+& $env:MIMO_PYTHON scripts/audit_instruments.py --batch POL-ZJ01-policy --csv reports/qa/instruments-audit.csv
+```
+
+**并行采集契约**（详见 `docs/08-并行采集编排.md`）：子智能体只写 `data/stage/batches/POL-{shard}-policy.jsonl`，
+不写 `data/clean`、不分配 ID；`ingest_policy.py` 串行编号并去重（同一 url 或 `doc_no+issuer` 自动跳过）。
+
+**政策层硬约束**（详见 `docs/07-政策层.md`）：
+
+- 只收 `.gov.cn` 域名原文或政府公报；商业门户/聚合站/自媒体**禁止入 `policy`**
+- `credibility` 只允许 `A`/`B`
+- 必须存**全文**（`local_path` 指向 `原文.md`，`full_text_chars` 可复核），只存摘录的退回重采
+- `hash_sha256` 按磁盘字节计算，写入固定 LF，保证 `sha256(file) == hash_sha256` 可验证
+- 采集以「县 × 政策链条」为单位，不按「片区 × 一段话」
 
 **并发约定**：多 agent/多人采集时，clean 行先写入 `data/clean/by_province/{JS|ZJ|SD|...}-*.csv`，再 `merge_by_province.py`，禁止直接改 `data/clean/*.csv`。
 
@@ -121,3 +187,20 @@ $env:MIMO_PYTHON
 - 2025-06：试点定苏、浙、鲁；港澳台出库；时间锚点 2022
 - 2026-09：江苏首批省级片区口径为 **39 个**（2024 指导意见），「40」是 2025 年底建成报道数，统计须区分
 - 2026-09：`area_source_map` 支持一文多片区；`rel` 取 primary/support/mention
+- 2026-10：**政策层独立成层**。`policy` 由 7 字段扩为 29 字段（含 `issuer_level`/`doc_type`/`instruments`/`budget_wan`/`full_text_chars`），新增 `area_policy_map`，`event` 加 `entity_type`/`policy_id`
+- 2026-10：`policy` 引入**来源白名单制**——非 `.gov.cn` 一律不得入库。原 `source` 允许媒体转述，政策层不允许，因工具编码必须建立在原文上
+- 2026-10：采集单位从「片区」改为「县 × 政策链条」。一份省级名单可覆盖上百片区，按县采边际成本远低于按片区采
+- 2026-10：存档要求从「摘录 ≥40 字」升级为「全文 + 可复核哈希」。`full_text_chars < 150` 且非动态类触发 QA 警告
+- 2026-10：**政策层进入探索性穷尽采集阶段，撤回编码收缩**。`instruments` 降级为描述性标签、
+  不设数量上限、不做跨地区归一、不设金标准——用预设九类去统一会抹平北京「百千工程」、
+  上海「五好两宜」、浙江「片区组团」等地区制度差异，而差异本身是研究对象。
+  地方特有提法照原文记录；采集阶段只审「全 `.gov.cn` + 有全文 + 无编造」，不审编码
+- 2026-10：**封闭枚举 vs 开放词表的分界**。仅结构性字段（`entity_type`/`rel`/`issuer_level`/
+  `source_kind`/`credibility`/`type_code`/`precision`/`record_state`）用封闭枚举；
+  描述观察的字段（`instruments`/`event_type`/`valid_state`/`doc_type`）一律开放词表，不做 CHECK。
+  并行采集连续撞了三次枚举墙（片区组团/规划编制/已失效征求意见稿），每次都是逼采集者失真归类。
+  新增取值不改 schema，校验只警告不拦截
+- 2026-10：**快照完整性以「断链 0」为准**。`source` 的 128 条断链已补采 113 条、
+  15 条死链（404/403/502）清空 `local_path` 并标记无快照——宁可显式缺，不留虚假存档。
+  441 条快照全部记录 `hash_sha256`。新增脚本 `probe_dead_sources` / `repair_source_snapshots` /
+  `backfill_source_hash`

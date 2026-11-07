@@ -17,7 +17,7 @@ BY_PROV = CLEAN / "by_province"
 
 TABLES = [
     "area", "belt", "source", "event", "policy",
-    "area_region_map", "belt_region_map", "area_source_map",
+    "area_region_map", "belt_region_map", "area_source_map", "area_policy_map",
 ]
 KEYS = {
     "area": ["area_id"],
@@ -28,10 +28,13 @@ KEYS = {
     "area_region_map": ["area_id", "region_code", "role"],
     "belt_region_map": ["belt_id", "region_code", "role"],
     "area_source_map": ["area_id", "source_id"],
+    "area_policy_map": ["area_id", "policy_id"],
 }
 # region_map.role 受 build_db CHECK 约束
 ROLE_OK = {"county", "town", "village", "spine", "node"}
 ENTITY_TABLES = {"area", "belt", "source", "event", "policy"}
+# 以 (实体id, 键) 组织的 map 表，需按 entity_type 区分 area/belt
+ENTITY_MAPS = {"area_source_map", "area_policy_map"}
 
 
 def _read(path: Path) -> list[dict[str, str]]:
@@ -58,6 +61,7 @@ def merge() -> int:
 
     area_ids = _by_ids("area", "area_id")
     belt_ids = _by_ids("belt", "belt_id")
+    policy_ids = _by_ids("policy", "policy_id")
 
     for table in TABLES:
         master_path = CLEAN / f"{table}.csv"
@@ -76,12 +80,15 @@ def merge() -> int:
 
         index: dict[tuple, dict[str, str]] = {}
         by_keys: set[tuple] = set()
+        by_entities: set[str] = set()
         for p in sorted(BY_PROV.glob(f"*-{table}.csv")):
             for r in _read(p):
                 key = tuple(r.get(k, "") for k in KEYS[table])
                 if any(r.values()):
                     index[key] = r
                     by_keys.add(key)
+                    if table in ("area_region_map", "belt_region_map"):
+                        by_entities.add(r.get("area_id") or r.get("belt_id") or "")
 
         prune_orphans = table in ENTITY_TABLES and bool(by_keys)
         for r in _read(master_path):
@@ -91,6 +98,11 @@ def merge() -> int:
             if table in ("area_region_map", "belt_region_map") and r.get("role") not in ROLE_OK:
                 continue
             if prune_orphans and key not in by_keys:
+                continue
+            # 区划映射表：by_province 覆盖到的实体，其 master 行整体作废——
+            # 否则改区划码后旧码行会残留成重复归属。来源/政策映射是「补缺」语义，
+            # master 的多余行必须保留，不能同样处理
+            if by_entities and (r.get("area_id") or r.get("belt_id")) in by_entities:
                 continue
             index[key] = r
 
@@ -106,14 +118,17 @@ def merge() -> int:
             index = {
                 k: v for k, v in index.items() if v.get("belt_id") in belt_ids
             }
-        elif table == "area_source_map":
+        elif table in ENTITY_MAPS:
             filtered = {}
             for k, v in index.items():
                 if v.get("entity_type") == "belt":
-                    if v.get("area_id") in belt_ids:
-                        filtered[k] = v
-                elif v.get("area_id") in area_ids:
-                    filtered[k] = v
+                    if v.get("area_id") not in belt_ids:
+                        continue
+                elif v.get("area_id") not in area_ids:
+                    continue
+                if table == "area_policy_map" and v.get("policy_id") not in policy_ids:
+                    continue
+                filtered[k] = v
             index = filtered
 
         with master_path.open("w", encoding="utf-8-sig", newline="") as f:

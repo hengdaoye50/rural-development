@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CLEAN = ROOT / "data" / "clean"
 OUT = ROOT / "data" / "clean" / "全国乡村片区数据库-export.xlsx"
 
-TABLES = ["area", "belt", "source", "region", "policy", "event", "area_region_map", "belt_region_map"]
+TABLES = ["area", "belt", "source", "policy", "area_policy_map", "event", "region", "area_region_map", "belt_region_map"]
 
 
 def export() -> None:

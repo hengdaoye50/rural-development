@@ -18,6 +18,174 @@ CRED = {"A", "B", "C", "D", "E"}
 BELT_TYPES = {"带", "圈", "廊", "片", "走廊", "环", "线", "其他"}
 BELT_ROLE = {"county", "town", "village", "spine", "node"}
 
+# ---- 政策层（docs/02 数据字典 §4–§5.1、docs/07 政策层） ----
+POLICY_LEVEL = {"province", "city", "county", "town", "other"}
+DOC_TYPES = {"意见", "方案", "规划", "通知", "办法", "批复", "决定", "导则",
+             "名单", "公告", "动态", "答复", "指南", "总结", "报告", "其他"}
+# doc_type 为开放词表，清单外取值只提示
+DOC_TYPES_HINT = DOC_TYPES | {"新闻发布", "复函", "简报", "纪要", "公报"}
+SOURCE_KINDS = {"政策文件", "政府公报", "部门动态", "新闻发布"}
+VALID_STATE = {"现行有效", "已废止", "已修订", "试点", "征求意见", "公示中", "未知"}
+# valid_state 为开放词表，此处仅为常见值
+VALID_STATE_HINT = VALID_STATE | {"有效", "已失效", "失效", "已撤销", "草案"}
+POLICY_CRED = {"A", "B"}
+# 常用标签，仅为提示用；instruments 是开放词表，允许地方特有提法
+INSTRUMENTS_HINT = {"财政", "土地", "组织", "考核", "规划", "人才", "金融", "产业", "数字"}
+ENTITY_TYPES = {"area", "belt"}
+REL = {"primary", "support", "mention"}
+# event_type 为开放词表，此处只是常见值，用于提示而非拦截
+EVENT_TYPES_HINT = {
+    "设立", "挂牌", "批复", "入选", "扩围", "更名", "撤销",
+    "验收", "评估", "资金", "表扬", "观摩", "其他",
+    "规划编制", "立项", "推进会", "会议", "项目评审", "项目建设",
+    "人大监督", "入选名单", "入选案例", "入选试点", "现场会考察",
+}
+
+# 权威门槛：policy 不得来自商业门户/聚合站（docs/07 §3.2）
+POLICY_DENY_DOMAINS = (
+    "sohu.com", "sina.com.cn", "sina.com", "qq.com", "163.com",
+    "jiemian.com", "52hrtt.com", "toutiao.com", "baidu.com",
+    "weixin.qq.com", "mp.weixin", "zhihu.com", "ifeng.com",
+)
+
+POLICY_REQUIRED = [
+    "policy_id", "title", "issuer", "issuer_level", "date_precision",
+    "doc_type", "source_kind", "province_code", "valid_state", "url",
+    "local_path", "credibility", "fetched_at", "record_state",
+    "created_at", "updated_at", "created_by",
+]
+
+
+def _check_policy(policies, area_ids, belt_ids, region_ids):
+    issues: list[str] = []
+    warnings: list[str] = []
+    for p in policies:
+        pid = p.get("policy_id") or "<empty>"
+        for k in POLICY_REQUIRED:
+            if not p.get(k):
+                issues.append(f"[policy:{pid}] 缺必填字段 {k}")
+
+        if p.get("issuer_level") and p["issuer_level"] not in POLICY_LEVEL:
+            issues.append(f"[policy:{pid}] 非法 issuer_level={p['issuer_level']}")
+        if p.get("doc_type") and p["doc_type"] not in DOC_TYPES_HINT:
+            warnings.append(f"[policy:{pid}] 非预设文种（开放词表，允许）: {p['doc_type']}")
+        if p.get("source_kind") and p["source_kind"] not in SOURCE_KINDS:
+            issues.append(f"[policy:{pid}] 非法 source_kind={p['source_kind']}")
+        if p.get("valid_state") and p["valid_state"] not in VALID_STATE_HINT:
+            warnings.append(f"[policy:{pid}] 非预设时效状态（开放词表，允许）: {p['valid_state']}")
+        if p.get("credibility") and p["credibility"] not in POLICY_CRED:
+            issues.append(f"[policy:{pid}] credibility 只允许 A/B，实为 {p['credibility']}")
+        if p.get("date_precision") and p["date_precision"] not in PRECISION:
+            issues.append(f"[policy:{pid}] 非法 date_precision={p['date_precision']}")
+        if p.get("record_state") and p["record_state"] not in RECORD_STATE:
+            issues.append(f"[policy:{pid}] 非法 record_state={p['record_state']}")
+
+        url = (p.get("url") or "").lower()
+        if url and ".gov.cn" not in url:
+            issues.append(f"[policy:{pid}] 非 .gov.cn 域名，不得入政策层: {url[:60]}")
+        for bad in POLICY_DENY_DOMAINS:
+            if bad in url:
+                issues.append(f"[policy:{pid}] 命中来源黑名单 {bad}")
+                break
+
+        # instruments 是开放词表：预设九类之外的标签（如地方特有提法）照收，不拦截
+        inst = p.get("instruments") or ""
+        foreign = [
+            t.strip() for t in inst.split(",")
+            if t.strip() and t.strip() not in INSTRUMENTS_HINT
+        ]
+        if foreign:
+            warnings.append(
+                f"[policy:{pid}] 非预设标签（开放词表，允许）: {','.join(foreign)}"
+            )
+
+        if p.get("issuer_level") == "county" and not p.get("county_code"):
+            issues.append(f"[policy:{pid}] issuer_level=county 但 county_code 为空")
+        for code_field in ("province_code", "city_code", "county_code"):
+            code = p.get(code_field) or ""
+            if code and region_ids and code not in region_ids:
+                warnings.append(f"[policy:{pid}] {code_field}={code} 不在 region 表")
+
+        chars = (p.get("full_text_chars") or "").strip()
+        if chars:
+            try:
+                n = int(float(chars))
+            except ValueError:
+                issues.append(f"[policy:{pid}] full_text_chars 非数值: {chars}")
+            else:
+                if n < 150 and p.get("doc_type") != "动态":
+                    warnings.append(
+                        f"[policy:{pid}] 全文仅 {n} 字（doc_type={p.get('doc_type')}），疑似只存了摘录"
+                    )
+
+    # doc_no+issuer 唯一（无文号则 url 唯一）
+    seen_doc: dict[tuple, str] = {}
+    seen_url: dict[str, str] = {}
+    for p in policies:
+        if p.get("record_state") != "active":
+            continue
+        pid = p.get("policy_id")
+        docno = (p.get("doc_no") or "").strip()
+        if docno:
+            key = (docno, p.get("issuer") or "")
+            if key in seen_doc:
+                issues.append(f"[policy] 重复 doc_no+issuer: {key} ({seen_doc[key]} / {pid})")
+            else:
+                seen_doc[key] = pid
+        else:
+            u = (p.get("url") or "").strip()
+            if u:
+                if u in seen_url:
+                    issues.append(f"[policy] 无文号但 url 重复: {u[:60]} ({seen_url[u]} / {pid})")
+                else:
+                    seen_url[u] = pid
+
+    return issues, warnings
+
+
+def _check_policy_map(rows, policy_ids, area_ids, belt_ids):
+    issues: list[str] = []
+    for r in rows:
+        key = f"{r.get('area_id')}/{r.get('policy_id')}"
+        et = r.get("entity_type") or ""
+        if et not in ENTITY_TYPES:
+            issues.append(f"[area_policy_map:{key}] 非法 entity_type={et}")
+        if et == "area" and r.get("area_id") not in area_ids:
+            issues.append(f"[area_policy_map:{key}] area_id 不存在")
+        if et == "belt" and r.get("area_id") not in belt_ids:
+            issues.append(f"[area_policy_map:{key}] belt_id 不存在")
+        if r.get("policy_id") not in policy_ids:
+            issues.append(f"[area_policy_map:{key}] policy_id 不存在")
+        if r.get("rel") and r["rel"] not in REL:
+            issues.append(f"[area_policy_map:{key}] 非法 rel={r['rel']}")
+    return issues
+
+
+def _check_event(rows, policy_ids, source_ids, area_ids, belt_ids):
+    issues: list[str] = []
+    warnings: list[str] = []
+    for r in rows:
+        eid = r.get("event_id") or "<empty>"
+        if not r.get("area_id"):
+            issues.append(f"[event:{eid}] 缺 area_id")
+        ent = r.get("entity_type") or "area"
+        if ent not in ENTITY_TYPES:
+            issues.append(f"[event:{eid}] 非法 entity_type={ent}")
+        elif ent == "area" and r.get("area_id") not in area_ids:
+            issues.append(f"[event:{eid}] area_id 不存在: {r.get('area_id')}")
+        elif ent == "belt" and r.get("area_id") not in belt_ids:
+            issues.append(f"[event:{eid}] belt_id 不存在: {r.get('area_id')}")
+        et = r.get("event_type") or ""
+        if not et:
+            issues.append(f"[event:{eid}] 缺 event_type")
+        elif et not in EVENT_TYPES_HINT:
+            warnings.append(f"[event:{eid}] 非预设事件类型（开放词表，允许）: {et}")
+        if r.get("source_id") and r["source_id"] not in source_ids:
+            issues.append(f"[event:{eid}] source_id 不存在: {r['source_id']}")
+        if r.get("policy_id") and r["policy_id"] not in policy_ids:
+            issues.append(f"[event:{eid}] policy_id 不存在: {r['policy_id']}")
+    return issues, warnings
+
 BELT_REQUIRED = [
     "belt_id", "name", "name_norm", "belt_type", "province_code", "city_code",
     "cover_desc", "year_precision", "record_state",
@@ -46,6 +214,9 @@ def validate() -> int:
     sources = _rows("source.csv")
     regions = _rows("region.csv")
     belts = _rows("belt.csv")
+    policies = _rows("policy.csv")
+    area_policy_map = _rows("area_policy_map.csv")
+    events = _rows("event.csv")
 
     area_ids = {a["area_id"] for a in areas}
     belt_ids = {b["belt_id"] for b in belts}
@@ -112,6 +283,15 @@ def validate() -> int:
 
     source_ids = {s.get("source_id") for s in sources}
 
+    policy_ids = {p.get("policy_id") for p in policies}
+    p_issues, p_warnings = _check_policy(policies, area_ids, belt_ids, region_ids)
+    issues.extend(p_issues)
+    warnings.extend(p_warnings)
+    issues.extend(_check_policy_map(area_policy_map, policy_ids, area_ids, belt_ids))
+    e_issues, e_warnings = _check_event(events, policy_ids, source_ids, area_ids, belt_ids)
+    issues.extend(e_issues)
+    warnings.extend(e_warnings)
+
     for b in belts:
         bid = b.get("belt_id") or "<empty>"
         for k in BELT_REQUIRED:
@@ -143,6 +323,9 @@ def validate() -> int:
         f"- source: {len(sources)}",
         f"- region: {len(regions)}",
         f"- belt: {len(belts)}",
+        f"- policy: {len(policies)}",
+        f"- area_policy_map: {len(area_policy_map)}",
+        f"- event: {len(events)}",
         f"- issues: {len(issues)}",
         f"- warnings: {len(warnings)}",
         "",

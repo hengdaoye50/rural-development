@@ -67,22 +67,59 @@ CREATE TABLE IF NOT EXISTS source (
 );
 
 CREATE TABLE IF NOT EXISTS policy (
-    policy_id   TEXT PRIMARY KEY,
-    title       TEXT NOT NULL,
-    doc_no      TEXT,
-    issuer      TEXT NOT NULL,
-    issued_ymd  TEXT,
-    url         TEXT,
-    summary     TEXT
+    policy_id       TEXT PRIMARY KEY,
+    title           TEXT NOT NULL,
+    doc_no          TEXT,
+    issuer          TEXT NOT NULL,
+    issuer_level    TEXT NOT NULL CHECK (issuer_level IN ('province','city','county','town','other')),
+    issued_ymd      TEXT,
+    published_ymd   TEXT,
+    date_precision  TEXT NOT NULL CHECK (date_precision IN ('day','month','year','unknown')),
+    -- doc_type 为开放词表：实际存在「新闻发布」「复函」等类型，预设枚举会逼失真归类
+    doc_type        TEXT NOT NULL,
+    source_kind     TEXT NOT NULL CHECK (source_kind IN ('政策文件','政府公报','部门动态','新闻发布')),
+    province_code   TEXT NOT NULL,
+    city_code       TEXT,
+    county_code     TEXT,
+    instruments     TEXT,
+    scope_desc      TEXT,
+    target_areas    INTEGER,
+    budget_wan      REAL,
+    -- valid_state 为开放词表：实践中存在「有效」「已失效（征求意见稿）」等真实状态，
+    -- 预设枚举会逼采集者失真归类，故不做 CHECK
+    valid_state     TEXT NOT NULL,
+    url             TEXT NOT NULL,
+    local_path      TEXT NOT NULL,
+    hash_sha256     TEXT,
+    full_text_chars INTEGER,
+    summary         TEXT,
+    credibility     TEXT NOT NULL CHECK (credibility IN ('A','B')),
+    fetched_at      TEXT NOT NULL,
+    record_state    TEXT NOT NULL CHECK (record_state IN ('active','superseded','withdrawn')),
+    created_at      TEXT NOT NULL,
+    updated_at      TEXT NOT NULL,
+    created_by      TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS event (
-    event_id   TEXT PRIMARY KEY,
-    area_id    TEXT NOT NULL REFERENCES area(area_id),
-    event_type TEXT NOT NULL CHECK (event_type IN ('设立','挂牌','更名','扩围','撤销','评估','表扬')),
-    ymd        TEXT,
-    note       TEXT,
-    source_id  TEXT
+    event_id    TEXT PRIMARY KEY,
+    area_id     TEXT NOT NULL,
+    entity_type TEXT NOT NULL DEFAULT 'area' CHECK (entity_type IN ('area','belt')),
+    -- event_type 为开放词表：地方事件形态多样（规划编制/立项/人大监督/推进会/入选案例…），
+    -- 预设枚举会逼采集者把观察到的事实硬塞进几个格子，故不做 CHECK
+    event_type  TEXT NOT NULL,
+    ymd         TEXT,
+    note        TEXT,
+    source_id   TEXT,
+    policy_id   TEXT REFERENCES policy(policy_id)
+);
+
+CREATE TABLE IF NOT EXISTS area_policy_map (
+    area_id     TEXT NOT NULL,
+    policy_id   TEXT NOT NULL REFERENCES policy(policy_id),
+    entity_type TEXT NOT NULL CHECK (entity_type IN ('area','belt')),
+    rel         TEXT NOT NULL DEFAULT 'support' CHECK (rel IN ('primary','support','mention')),
+    PRIMARY KEY (area_id, policy_id)
 );
 
 CREATE TABLE IF NOT EXISTS area_region_map (
@@ -155,6 +192,7 @@ CSV_TABLES = {
     "belt": "belt.csv",
     "belt_region_map": "belt_region_map.csv",
     "area_source_map": "area_source_map.csv",
+    "area_policy_map": "area_policy_map.csv",
 }
 
 
