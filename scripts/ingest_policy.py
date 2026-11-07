@@ -212,6 +212,7 @@ def ingest(path: Path, dry_run: bool = False, group: str = "") -> int:
     added_pol: list[tuple[str, dict]] = []
     added_map: list[tuple[str, dict]] = []
     added_ev: list[tuple[str, dict]] = []
+    skipped_ev: list[tuple[str, str, str]] = []
     archives: list[tuple[Path, str, dict]] = []
 
     for r in records:
@@ -312,13 +313,20 @@ def ingest(path: Path, dry_run: bool = False, group: str = "") -> int:
             }))
 
         for e in r.get("events") or []:
+            # event 是实体生命周期事件，area_id 必填（docs/02 §5）。
+            # 政策级的「目标设定/名单公布」这类聚合事件不属于任何单一实体，
+            # 应留在 policy.scope_desc/summary 里，不落 event 表。
+            e_area = (e.get("area_id") or "").strip()
+            if not e_area:
+                skipped_ev.append((pid, e.get("event_type") or "", (e.get("note") or "")[:40]))
+                continue
             eid = (e.get("event_id") or "").strip()
             if not eid or eid in ev_ids:
                 eid = _next_id(f"E{prov[:2]}", ev_ids)
             ev_ids.add(eid)
             added_ev.append((grp, {
                 "event_id": eid,
-                "area_id": e.get("area_id") or "",
+                "area_id": e_area,
                 "entity_type": e.get("entity_type") or "area",
                 "event_type": e.get("event_type") or "",
                 "ymd": e.get("ymd") or "",
@@ -328,6 +336,10 @@ def ingest(path: Path, dry_run: bool = False, group: str = "") -> int:
             }))
 
     print(f"批次 {batch}: policy {len(added_pol)} / map {len(added_map)} / event {len(added_ev)}")
+    if skipped_ev:
+        print(f"  !! 跳过 {len(skipped_ev)} 条缺 area_id 的事件（entity 未定，不入 event 表）:")
+        for pid, etype, note in skipped_ev:
+            print(f"     {pid} [{etype}] {note}")
     for abbr, row in added_pol:
         print(f"  {row['policy_id']}  {abbr}  {row['issuer_level']:8s} "
               f"{row['doc_type']:3s}  {row['full_text_chars']:>5s}字  {row['title'][:38]}")
