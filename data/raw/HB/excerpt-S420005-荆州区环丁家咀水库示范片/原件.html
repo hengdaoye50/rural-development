@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>湖北省公共资源交易电子服务系统</title>
+    <link rel="stylesheet" type="text/css" href="/res/hubei/css/basic.css">
+    <link rel="stylesheet" type="text/css" href="/res/hubei/css/topAndBottom.css">
+    <link rel="stylesheet" type="text/css" href="/res/hubei/css/detail.css">
+    <script>var dh = 1;
+        var i = 0;
+        j = 0;</script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="/res/hubei/css/basic.css">
+<link rel="stylesheet" type="text/css" href="/res/hubei/css/topAndBottom.css">
+<link rel="stylesheet" type="text/css" href="/res/hubei/css/hover-title.css">
+<style>
+.nav2 {
+            position:absolute;
+            top:-8px;
+            left:30px;
+            overflow:hidden;
+            width:13px;
+            height:13px;
+            background:#fff;
+            border-left:1px solid #DACE7C;
+            border-top:1px solid #DACE7C;
+            -webkit-transform:rotate(45deg);
+            -moz-transform:rotate(45deg);
+            -o-transform:rotate(45deg);
+            transform:rotate(45deg);
+        }
+
+ .show-dialog {
+    line-height: 35px;
+    width:90px;
+    height:70px;
+    position:absolute;
+    display:none;
+    border:1px solid #ddd;
+    background: #fff;
+
+
+}
+ ul{
+ list-style: none;
+ }
+ #myul li{
+ float: left;
+ }
+.mymenu:hover ul{        display:block;    }
+.mymenu ul {
+            list-style-type: none;
+            text-align: left;
+           /*  border-bottom: solid 1px #d2d2d2; */
+      /*       background: #FFF 0px 0px no-repeat; */
+            position: absolute;
+            z-index: 99999999;
+            padding: 10px;
+            /* padding-top: 25px; */
+            box-sizing: border-box;
+            line-height: 35px;
+    		width:100px;
+   			height:90px;
+   		    display:none;
+   		    border:1px solid #ddd;
+   			background: #fff;
+        }
+#keywordpass::-ms-clear {display: none;}
+#keywordpass::-ms-reveal{display: none;}
+</style>
+<style>
+
+    .topInput{
+        font-size: 12px;
+        height: 23px;
+        width: 110px;
+        line-height: 25px;
+        padding: 3px 30px 3px 3px;
+        color: #e1e1e0;
+        border-radius:0.5em;
+        border: 1px solid;
+    }
+
+    #areaTitle{
+        height: 50px;
+    }
+    #areaContent{
+        padding-left: 100px;
+        margin: auto;
+        width: 86%;
+        height: 100%;
+    }
+    .list-item-gf{
+        height: 100%;
+        margin-left: 5px;
+        margin-right: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        float: left;
+        text-align: center;
+        color: #666666;
+    }
+
+    .list-item-gf a{
+        margin: 0;
+        padding: 0;
+        font-family: "Microsoft YaHei";
+        /*color: #333333;*/
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 50px;
+    }
+    #areaTitle .active{
+        background-color: #8D322C;
+    }
+
+    #areaTitle .active a{
+        color: #FFFFFF;
+    }
+
+    #areaTitle .notOpen a{
+        color: #E0DFDE;
+    }
+
+    .canOpen{
+        cursor: pointer;
+    }
+
+</style>
+<div class="top">
+    <div id="areaTitle" title="" style="display: none">
+        <div id="areaContent">
+            <li class="list-item-gf canOpen" onclick="jump('001')">
+                <a class="category-item canOpen area001">
+                    湖北省
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('002')">
+                <a class="category-item area002">
+                    武汉
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('003')">
+                <a class="category-item area003">
+                    黄石
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('004')">
+                <a class="category-item area004">
+                    十堰
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('005')">
+                <a class="category-item area005">
+                    荆州
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('006')">
+                <a class="category-item area006">
+                    宜昌
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('007')">
+                <a class="category-item area007">
+                    襄阳
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('008')">
+                <a class="category-item area008">
+                    鄂州
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('009')">
+                <a class="category-item area009">
+                    荆门
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('010')">
+                <a class="category-item area010">
+                    黄冈
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('011')">
+                <a class="category-item area011">
+                    孝感
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('012')">
+                <a class="category-item area012">
+                    咸宁
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('013')">
+                <a class="category-item area013">
+                    随州
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('014')">
+                <a class="category-item area014">
+                    恩施
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('015')">
+                <a class="category-item area015">
+                    仙桃
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('016')">
+                <a class="category-item area016">
+                    天门
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('017')">
+                <a class="category-item area017">
+                    潜江
+                </a>
+            </li>
+            <li class="list-item-gf canOpen" onclick="jump('018')">
+                <a class="category-item area018">
+                    神农架
+                </a>
+            </li>
+        </div>
+    </div>
+    <div class="timeAndReg clearfloat">
+        <input type="hidden" name="currentArea" id="currentArea" value=""/>
+            <div class="time fl">
+               <span id="time_view" style="float:left; font-size:17px; color:#fcff00;"></span>
+               	<span id="TimeNow"></span>
+            </div>
+            <div class="time fl" style="padding-top:6px;">
+            	<iframe height="25px" style="padding-top:6px;" id="fancybox-frame" name="fancybox-frame1539740244830" frameborder="0" scrolling="no" hspace="0"  src="https://i.tianqi.com/index.php?c=code&a=getcode&id=34&h=25&w=280"></iframe>
+            </div>
+            <div class="reg fr">
+            <ul id="myul">
+                    <span >地市服务平台</span>
+                    <select id="topSelect" style="width: 100px;text-align: center;" onchange="jumpArea()">
+                        <option value = '001'>湖北省</option>
+                        <option value = '002'>武汉市</option>
+                        <option value = '003'>黄石市</option>
+                        <option value = '004'>十堰市</option>
+                        <option value = '005'>荆州市</option>
+                        <option value = '006'>宜昌市</option>
+                        <option value = '007'>襄阳市</option>
+                        <option value = '008'>鄂州市</option>
+                        <option value = '009'>荆门市</option>
+                        <option value = '010'>黄冈市</option>
+                        <option value = '011'>孝感市</option>
+                        <option value = '012'>咸宁市</option>
+                        <option value = '013'>随州市</option>
+                        <option value = '014'>恩施州</option>
+                        <option value = '015'>仙桃市</option>
+                        <option value = '016'>天门市</option>
+                        <option value = '017'>潜江市</option>
+                        <option value = '018'>神农架</option>
+                    </select>
+		 			<a href="javascript:;"  onclick="login();" >登录</a>
+
+
+
+            </div>
+        </div>
+        <div class="logo">
+                <img src="/res/hubei/img/logo.png">
+        </div>
+</div>
+<div class="menu">
+    <ul class="clearfloat">
+        <li class="fl li_active"><a href="/xwgg?currentArea=">通知公告</a></li>
+        <li class="fl"><a href="/?currentArea=">信息公开</a></li>
+        <li class="fl"><a href="/jyzk">交易智库</a></li>
+        <li class="fl"><a href="/zxgl/toHmzc">惠企政策</a></li>
+        <li class="fl"><a href="/qiYeXinXi/index">企业信息查询</a></li>
+		<li class="fl li7"><a href="https://www.creditchina.gov.cn/" target="_blank">公共信用查询</a></li>
+    </ul>
+</div>
+<script type="text/javascript" src="/res/hubei/js/jquery.min.js"></script>
+<script type="text/javascript" src="/res/hubei/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/res/hubei/js/common.js"></script>
+<script type="text/javascript">
+
+$('.mymenu').hover(function() {
+	 var position = $(this).offset();
+   $(".mymenu ul").css({
+       left : position.left,
+   });
+});
+
+console.log("")
+
+var currentServerTime = "2026-11-06 12:52:44";
+
+// 原顺序→新顺序映射：原0→0, 原1→1, 原2→2, 原3→5, 原4→3, 原5→4 20261016改
+var dhMap = [0, 1, 2, 5, 3, 4];
+var newDh = dhMap[dh] !== undefined ? dhMap[dh] : dh;
+$('.menu ul li').eq(newDh).addClass("li_active");
+$('.menu ul li').eq(newDh).siblings().removeClass("li_active");
+
+
+function showTime(){
+	var TimeNow = document.getElementById('TimeNow');
+ 	//sta=2 获取日期
+ 	TimeNow.innerHTML = startTime(1);
+}
+
+setInterval("showTime()",1000);
+function globalSearch(){
+	$("#globalSearchForm").submit();
+}
+var baseUrl = "";
+
+function jumpArea(){
+    var area = $("#topSelect option:selected").attr("value")
+    location.href = baseUrl+'/?currentArea='+area;
+}
+
+
+function jump(area){
+    location.href = baseUrl+'/?currentArea='+area;
+    // location.href = 'https://www.hbggzyfwpt.cn/?currentArea='+area;
+}
+
+//登录
+function login() {
+    return location.href = "/dengludenglu?currentArea=" + currentArea;
+    //+ window.location.href;
+// 		+ escape(window.location.href).replace(/\//g, "%2F");
+
+}
+
+//选择地市
+function checkArea() {
+    if ($('#areaTitle').is(':hidden')){
+        $("#areaTitle").show();
+    }else {
+        $("#areaTitle").hide();
+    }
+}
+
+var currentArea = "";
+
+
+$(".category-item-gf").on('click', function () {
+    $(this).siblings().removeClass("category-item-active");
+    $(this).addClass("category-item-active");
+})
+
+$('.list-item-gf').each(function(index){
+    $(this).click(function(){
+        if($(this).attr('class') != 'list-item-gf notOpen'){
+            $(this).addClass('active');
+            $(this).siblings().removeClass('active');
+        }
+    });
+});
+</script>
+<script>
+    $(function(){
+        var areaId = '';
+        if (currentArea == undefined ||currentArea ==null  || currentArea == ''){
+            areaId = 'area'+'001';
+        }else {
+            areaId = 'area' + currentArea;
+        }
+        $('.'+areaId).parent().addClass('active');
+    });
+</script>
+<div class="content clearfloat">
+    <div class="position">
+        <span>当前位置：</span><a href="/?currentArea=">交易信息</a>
+        <span>></span>
+        <a href="/jyxx/jsgcXmxx?currentArea=&businessTypeValue=0">工程建设</a>
+        <span>></span>
+        <a href="/jyxx/jsgcXmxx?currentArea=&businessTypeValue=0">招标文件资格预审文件</a>
+        <span>></span>
+        <a href="#">详细信息</a>
+    </div>
+    <div class="detailCon">
+        <div class="detailTitle">荆州区环丁家咀水库和美乡村示范片续建项目一标段（八岭山镇）招标文件预公示</div>
+        <div class="detailTime">
+            <span>发布时间： 2026-09-21</span>
+        </div>
+        <div class="detailNeirong" id="detailNeirong">
+            
+        </div>
+        <div><b>附件：</b><a href="http://61.136.221.83:9084/EpointWebService/rest/hbpDownAttachAction.action?cmd=download&AttachGuid=77a369ac-8646-4cdf-8f1c-c1c06dafeab6&AttachConStr=EPOINTBID_TP7_JZ_FJK2019&Validate=1a2d85a77229625982b466917f7458ed" style="color: blue">招标正文（荆州区环丁家咀水库和美乡村示范片续建项目一标段（八岭山镇））.pdf</a></div>
+
+    </div>
+</div>
+<script>
+	function getData(that, evt) {
+		var selectObj = evt ? evt.srcElement : null;
+		// IE Only
+		if (evt && selectObj && evt.offsetY && evt.button != 2
+				&& (evt.offsetY > selectObj.offsetHeight || evt.offsetY < 0)) {
+			window.open(selectObj.value);
+		}
+	}
+</script>
+<div class="bottom clearfloat">
+        <div class="leftBg">
+            <img src="/res/hubei/img/bottom_leftbj.png">
+        </div>
+        <div class="rightBg">
+            <img src="/res/hubei/img/bottom_rightbj.png">
+        </div>
+        <div class="bottomCont" >
+            <select class="fl"  onclick="getData(this,event)">
+	            	<option value="https://fgw.hubei.gov.cn/">湖北省发展和改革委员会</option>
+	            	<option value="http://xypt.hbggzyfwpt.cn/">湖北省招标投标信用平台</option>
+	            	<option value="http://www.ctba.org.cn/">中国招投标协会</option>
+	            	<option value="http://jycg.hubei.gov.cn/bmdt/ggzydzjycgpt/">湖北省公共资源电子交易平台</option>
+	            	<option value="http://www.ggzy.gov.cn/">全国公共资源交易平台</option>
+	            	<option value="http://www.hbtba.com/m/index.php">湖北省招标投标协会</option>
+	            	<option value="http://www.ccgp-hubei.gov.cn/">湖北省政府采购网</option>
+            </select>
+            <div style="float: left;">
+	            <span style="margin-left: 120px;">版权所有：湖北省发展和改革委员会&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://beian.miit.gov.cn" target="_blank">鄂ICP备19018316号-2</a>
+	            </span>
+				<br/>
+	            <span style="margin-left: 190px;">
+	                                       
+	            	<img id="imgConac" vspace="0" hspace="0" border="0" src/res/images/wjba.png" >
+			 		<a target="_blank" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=42010602001618" ><img src="" style="float:left;"/>
+			 			鄂公网安备 42010602001618号&nbsp;&nbsp;    
+			 		</a>
+	            </span>
+	 		</div>
+        </div>
+		<div>
+			<img style="margin-top: -15px;padding-left: 20px" src="/res/hubei/img/ggjy.png">
+		</div>
+    </div><script type="text/javascript" src="/res/hubei/js/jquery.min.js"></script>
+<script type="text/javascript">
+
+</script>
+</script>
+</body>
+</html>

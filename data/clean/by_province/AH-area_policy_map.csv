@@ -1,0 +1,10 @@
+﻿area_id,policy_id,entity_type,rel
+A340005,P340001,area,primary
+A340006,P340001,area,primary
+A340007,P340001,area,primary
+A340008,P340001,area,primary
+A340001,P340002,area,primary
+A340002,P340002,area,primary
+A340003,P340002,area,primary
+A340004,P340002,area,primary
+A340013,P340003,area,primary

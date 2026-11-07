@@ -1,0 +1,6 @@
+﻿area_id,policy_id,entity_type,rel
+A440008,P440001,area,mention
+A440001,P440002,area,support
+A440038,P440003,area,support
+A440007,P440004,area,mention
+A440003,P440005,area,support

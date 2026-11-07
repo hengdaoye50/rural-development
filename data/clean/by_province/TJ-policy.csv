@@ -1,1 +1,1 @@
-﻿policy_id,title,doc_no,issuer,issued_ymd,url,summary
+﻿policy_id,title,doc_no,issuer,issuer_level,issued_ymd,published_ymd,date_precision,doc_type,source_kind,province_code,city_code,county_code,instruments,scope_desc,target_areas,budget_wan,valid_state,url,local_path,hash_sha256,full_text_chars,summary,credibility,fetched_at,record_state,created_at,updated_at,created_by

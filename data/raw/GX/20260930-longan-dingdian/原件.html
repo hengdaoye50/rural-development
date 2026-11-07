@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>文章详情</title>
+    <meta charset="utf-8"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="shortcut icon" href="images/favicon.ico?v=20221123"/>
+    <link rel="stylesheet" type="text/css" href="./libs/element-ui/2.13.2/theme-chalk/index.css"/>
+    <link rel="stylesheet" href="./libs/icon/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="./libs/swiper/swiper.min.css"/>
+    <link rel="stylesheet" href="./css/common.css?v=202203021"/>
+    <link rel="stylesheet" href="./css/news.css"/>
+
+    <script>
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua) {
+            if (ua.indexOf("chrome") == -1) {
+                var isIE = ua.indexOf("msie") > -1;
+                if (isIE) {
+                    var ieVersion = parseFloat(ua.match(/msie ([\d.]+)/)[1]);
+                    if (ieVersion < 9) {
+                        if (ua.indexOf("gecko") > 0)
+                            alert("建议使用360浏览器急速模式。");
+                        else
+                            window.location.href = 'tips.html';
+                    }
+                }
+            }
+        } else {
+            window.location.href = 'tips.html';
+        }
+    </script>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
+<div id="app" v-cloak>
+    <div class="com-contain">
+        <!--顶部导航-->
+        <nav-com></nav-com>
+        <!--内容体-->
+        <div class="w1200">
+            <div class="content-contain">
+                <div class="locationBox">
+                    <a href="./index.html">首页</a>
+                    <a> > </a>
+                    <a href="">文章详情</a>
+                </div>
+                <div v-if="aids==1" class="news">
+                    <div class="news-left">
+                        <b class="line"></b>
+                        <h4 class="news-shortTitle">{{content.leadTitle}}</h4>
+                        <h3 class="news-title">{{content.title}}</h3>
+                        <h4 class="news-shortTitle">{{content.shortTitle}}</h4>
+                        <div class="com-list">
+                            <div class="com-list-l">
+                                <b class="source" v-if="content.source!=''">{{content.source}}</b>
+                                <b class="time">{{content.publishTime}}</b>
+                                <b class="author" v-if="content.author!=''">{{content.author}}</b>
+                            </div>
+                            <div class="com-list-r">
+                                <a @click="shreWxClick">
+                                    <i></i>
+                                    <b>分享</b>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="paragraph" v-html="content.content"></div>
+                        <div style="margin-bottom: 20px; text-align: right;">
+                            <p v-if="content.editor" style="font-size: 14px;color: #999999; line-height: 30px;">新媒体编辑：{{content.editor}}</p>
+                            <p v-if="content.liability" style="font-size: 14px;color: #999999; line-height: 30px;">责任编辑：{{content.liability}}</p>
+                            <p v-for="item in content.articleExt" v-if="item.code == 'auditSigner'" style="font-size: 14px;color: #999999;line-height: 30px;">审核人：{{item.value}}</p>
+                        </div>
+                        <div class="collection-fabulous">
+                            <a class="com-cf collection" href="javascript:void(0)">
+                                <i></i>
+                                <span>{{commitReadNums.countClick}}</span>
+                            </a>
+                            <a class="com-cf fabulous" href="javascript:void(0)">
+                                <i @click="clickZan" :class="{'zan-icon': isZan}"></i>
+                                <span>{{commitReadNums.countPraise}}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="news-right">
+                        <div class="recommend">
+                            <div class="com-title-line">
+                                <h3 class="title">
+                                    <span>推荐阅读</span>
+                                </h3>
+                            </div>
+                            <div class="text-img" v-if="recommendList.length>0 && recommendList[0].pic1!=''">
+                                <a target="_blank" :href="recommendList[0].articleUrl">
+                                    <img :src="recommendList[0].pic1" alt="">
+                                    <div class="bottom-name"></div>
+                                    <div class="bottom-names">{{recommendList[0].title}}</div>
+                                </a>
+                            </div>
+                            <ul class="list">
+                                <li v-for="item in recommendList.slice(1,5)">
+                                    <a target="_blank" :href="item.articleUrl">{{item.title}}</a>
+                                </li>
+                            </ul>
+                            <ul class="list">
+                                <li v-for="item in recommendList.slice(6,10)">
+                                    <a target="_blank" :href="item.articleUrl">{{item.title}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearBoth"></div>
+        <!--底部导航-->
+        <link-footer></link-footer>
+
+        <div class="share-wx-news">
+            <i @click="shareNewsClos">x</i>
+            <p class="share-wx-news-title">扫一扫分享到微信</p>
+            <p>
+                <img src="" alt="">
+            </p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="libs/polyfill.min.js"></script>
+<script type="text/javascript" src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="./libs/wxShare.js?v=20180928"></script>
+<script type="text/javascript" src="libs/vue-2.5.2.min.js"></script>
+<script type="text/javascript" src="libs/element-ui/2.13.2/index.min.js"></script>
+<script type="text/javascript" src="libs/swiper/swiper.min.js"></script>
+<script type="text/javascript" src="libs/axios-0.16.2.min.js"></script>
+<script type="text/javascript" src="./js/config.js"></script>
+<script type="text/javascript" src="./js/commonTpl.js"></script>
+<script type="text/javascript" src="js/news.js"></script>
+<script>
+    window.onload=function() {
+        var myVideo = document.getElementsByClassName('app-video')[0];
+        if (myVideo!=undefined) {
+            playVid()
+            function playVid()
+            {
+                myVideo.play();
+            }
+        }
+    }
+</script>
+<script id="_trs_ta_js" src="//ta.trs.cn/c/js/ta.js?mpid=6024" async="async" defer="defer"></script>
+</body>
+</html>

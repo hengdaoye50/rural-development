@@ -1,4 +1,4 @@
-area_id,region_code,role,is_core
+﻿area_id,region_code,role,is_core
 A320001,321281,county,1
 A320001,321200,town,0
 A320002,321281,county,1
@@ -73,7 +73,7 @@ A320073,321204,county,1
 A320074,321204,county,1
 A320075,321204,county,1
 A320076,321204,county,1
-A320077,320114,county,1
+A320077,320117,county,1
 A320078,320118,county,1
 A320079,320830,county,1
 A320080,320804,county,1

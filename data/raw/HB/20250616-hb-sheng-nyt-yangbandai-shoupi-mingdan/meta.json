@@ -1,0 +1,17 @@
+{
+  "policy_id": "P420025",
+  "url": "https://nyt.hubei.gov.cn/bmdt/yw/mtksn/202506/t20250616_5692681.shtml",
+  "title": "湖北日报报道：全省首批 20 个和美乡村样板带",
+  "doc_no": "",
+  "issuer": "湖北省农业农村厅",
+  "issuer_level": "province",
+  "issued_ymd": "2025-04-28",
+  "published_ymd": "2025-06-16",
+  "doc_type": "动态",
+  "source_kind": "新闻发布",
+  "instruments": "样板带,和美乡村",
+  "full_text_chars": "402",
+  "hash_sha256": "25740f26a7bf1d60f61ea0b393032b5963d916de10abce93c3a9a73a7d2918f4",
+  "fetched_at": "2026-11-07",
+  "batch": "POL-HB03-policy"
+}

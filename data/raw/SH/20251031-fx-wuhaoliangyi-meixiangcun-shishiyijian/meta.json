@@ -1,0 +1,17 @@
+{
+  "policy_id": "P310005",
+  "url": "https://www.fengxian.gov.cn/zwgk-search-front/api/fx/policy/info?contentId=3221",
+  "title": "关于印发《奉贤区关于推进“五好两宜”和美乡村建设工作的实施意见》的通知",
+  "doc_no": "沪奉农委〔2025〕59号",
+  "issuer": "上海市奉贤区农业农村委员会、上海市奉贤区发展和改革委员会、上海市奉贤区财政局",
+  "issuer_level": "county",
+  "issued_ymd": "2025-10-31",
+  "published_ymd": "2025-10-31",
+  "doc_type": "意见",
+  "source_kind": "政策文件",
+  "instruments": "财政,组织,规划,考核,产业",
+  "full_text_chars": "2126",
+  "hash_sha256": "14835c85445f21e6486baea0be74307d3b886632dc11f8bbe2d9b3a5b6507e8d",
+  "fetched_at": "2026-11-05",
+  "batch": "POL-SH01-policy"
+}

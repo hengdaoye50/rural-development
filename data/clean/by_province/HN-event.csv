@@ -1,1 +1,3 @@
-﻿event_id,area_id,event_type,ymd,note,source_id
+﻿event_id,area_id,entity_type,event_type,ymd,note,source_id,policy_id
+E430001,A430001,area,示范创建,2023,高标准打造杨林街镇鸽产业发展示范片区，2023年获市级首批“党建引领乡村振兴示范基地”,,P430001
+E430002,A430001,area,认定,2023,特色产业示范片区被评为市级首批“党建引领乡村振兴示范基地”,,P430002

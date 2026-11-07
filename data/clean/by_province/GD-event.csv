@@ -1,1 +1,4 @@
-﻿event_id,area_id,event_type,ymd,note,source_id
+﻿event_id,area_id,entity_type,event_type,ymd,note,source_id,policy_id
+E440001,A440001,area,获评,2024-01-22,入选2022年度“广东省十大乡村振兴示范带”（区农业农村局2024-01-22发布）,,P440002
+E440002,A440038,area,获评,2024-01-15,入选2022年度“广东省十大乡村振兴示范带”，获1亿元奖励资金,,P440003
+E440003,A440003,area,组织设立,2025-05-07,示范带大党委揭牌成立（太和镇、钟落潭镇联合）,,P440005

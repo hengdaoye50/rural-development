@@ -1,1 +1,1 @@
-﻿event_id,area_id,event_type,ymd,note,source_id
+﻿event_id,area_id,entity_type,event_type,ymd,note,source_id,policy_id
