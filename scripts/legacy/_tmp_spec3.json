@@ -1,0 +1,30 @@
+{
+  "title": "2024年博罗县政府工作报告",
+  "doc_no": "",
+  "issuer": "博罗县人民政府",
+  "issuer_level": "county",
+  "issued_ymd": "2024-02-28",
+  "published_ymd": "",
+  "doc_type": "报告",
+  "source_kind": "部门动态",
+  "province_code": "440000",
+  "city_code": "441300",
+  "county_code": "441322",
+  "instruments": "产业,规划,财政,示范带",
+  "scope_desc": "全县；报告点名环罗浮山示范带",
+  "target_areas": null,
+  "budget_wan": 10000,
+  "valid_state": "现行有效",
+  "url": "http://www.boluo.gov.cn/zwgk/zfgzbg/content/post_5214938.html",
+  "credibility": "B",
+  "summary": "博罗县十七届人大四次会议政府工作报告。在回顾农业与乡村建设成效时明确「环罗浮山示范带成功入选省十大乡村振兴示范带并获1亿元奖励」，是博罗五条乡村振兴示范带获省级认定与省财政奖补的直接记载。",
+  "slug": "gd-hz-bl-zhengfu-gongzuobaogao-2024",
+  "fetched_at": "2026-11-08",
+  "full_text_file": "C:/Users/zjh22/AppData/Local/Temp/gd02/boluo-2024-report.md",
+  "areas": [
+    {"area_id": "A440011", "entity_type": "area", "rel": "primary"}
+  ],
+  "events": [
+    {"area_id": "A440011", "entity_type": "area", "event_type": "入选", "ymd": "2024-01", "note": "入选省十大乡村振兴示范带并获1亿元奖励（政府工作报告表述）"}
+  ]
+}

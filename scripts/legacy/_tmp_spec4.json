@@ -1,0 +1,31 @@
+{
+  "title": "2024年佛山市政府工作报告",
+  "doc_no": "",
+  "issuer": "佛山市人民政府",
+  "issuer_level": "city",
+  "issued_ymd": "2024-01-27",
+  "published_ymd": "",
+  "doc_type": "报告",
+  "source_kind": "部门动态",
+  "province_code": "440000",
+  "city_code": "440600",
+  "county_code": "",
+  "instruments": "规划,产业,示范带,片区组团",
+  "scope_desc": "全市五区；6条“百里芳华”示范带精华段基本建成，并启动乡村振兴综合示范片建设",
+  "target_areas": 6,
+  "budget_wan": "",
+  "valid_state": "现行有效",
+  "url": "https://www.foshan.gov.cn/zwgk/zfgzbg/content/post_5907143.html",
+  "credibility": "B",
+  "summary": "佛山市政府工作报告（2024年1月27日市十六届人大四次会议）。载明「启动建设乡村振兴综合示范片，6条‘百里芳华’示范带精华段基本建成，‘西江十里画廊’入选省十大乡村振兴示范带，第二、三批40个市级示范村完成建设」，是市级层面确认三水西江十里画廊获省级认定、并说明佛山以「百里芳华」示范带＋综合示范片双轨推进的直接依据。",
+  "slug": "gd-fs-zhengfu-gongzuobaogao-2024",
+  "fetched_at": "2026-11-08",
+  "full_text_file": "C:/Users/zjh22/AppData/Local/Temp/gd02/foshan-zfgzbg-2024.md",
+  "areas": [
+    {"area_id": "A440028", "entity_type": "area", "rel": "support"},
+    {"area_id": "A440029", "entity_type": "area", "rel": "mention"}
+  ],
+  "events": [
+    {"area_id": "A440028", "entity_type": "area", "event_type": "入选", "ymd": "2024-01", "note": "市政府工作报告载明西江十里画廊入选省十大乡村振兴示范带"}
+  ]
+}

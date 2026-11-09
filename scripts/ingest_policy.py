@@ -57,6 +57,12 @@ POLICY_COLS = [
     "summary", "credibility", "fetched_at", "record_state",
     "created_at", "updated_at", "created_by",
 ]
+# docs/07 §3.1：source_kind 是封闭枚举（决策日志 2026-10），取值直接决定 credibility 口径。
+SOURCE_KIND_VALUES = ("政策文件", "政府公报", "部门动态", "新闻发布")
+# 只收已实际出现过的同义写法。认不出的值必须报错而不是猜一个——
+# 把「部门动态」硬归成「政策文件」会造出 A 级假证据。
+SOURCE_KIND_SYNONYMS = {"部门公开": "部门动态"}
+
 MAP_COLS = ["area_id", "policy_id", "entity_type", "rel"]
 EVENT_COLS = [
     "event_id", "area_id", "entity_type", "event_type", "ymd",
@@ -241,6 +247,14 @@ def ingest(path: Path, dry_run: bool = False, group: str = "") -> int:
             print(f"  跳过重复标题：{r.get('title')[:40]}")
             continue
 
+        sk_raw = (r.get("source_kind") or "").strip()
+        sk = SOURCE_KIND_SYNONYMS.get(sk_raw, sk_raw)
+        if sk != sk_raw:
+            print(f"  ~ source_kind「{sk_raw}」→「{sk}」  {(r.get('title') or '')[:30]}")
+        if sk not in SOURCE_KIND_VALUES:
+            print(f"跳过：source_kind={sk_raw!r} 不在 docs/07 §3.1 枚举内（{r.get('title')}）")
+            return 1
+
         pid = (r.get("policy_id") or "").strip()
         if not pid or pid in pol_ids:
             pid = _next_id(f"P{prov[:2]}", pol_ids)
@@ -264,6 +278,8 @@ def ingest(path: Path, dry_run: bool = False, group: str = "") -> int:
         for c in POLICY_COLS:
             if c in r and r[c] is not None:
                 row[c] = str(r[c])
+        # row 是从 r 原样搬过来的，这里覆盖为已规整、已通过枚举校验的取值
+        row["source_kind"] = sk
         row.update({
             "policy_id": pid,
             "date_precision": r.get("date_precision") or _precision(r),

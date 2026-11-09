@@ -1,0 +1,30 @@
+{
+  "title": "2026年梅州市梅县区人民政府工作报告",
+  "doc_no": "",
+  "issuer": "梅州市梅县区人民政府",
+  "issuer_level": "county",
+  "issued_ymd": "2026-01-30",
+  "published_ymd": "2026-02-10",
+  "doc_type": "报告",
+  "source_kind": "部门动态",
+  "province_code": "440000",
+  "city_code": "441400",
+  "county_code": "441403",
+  "instruments": "规划,产业,组织,财政,片区组团,典型村,强村公司,产业村长,农文旅融合",
+  "scope_desc": "全区；组团式打造涵盖3个典型镇18个典型村的丙雁松片区",
+  "target_areas": null,
+  "budget_wan": "",
+  "valid_state": "现行有效",
+  "url": "http://www.gdmx.gov.cn/zwgk/zfgzbg/content/post_2869617.html",
+  "credibility": "B",
+  "summary": "梅县区二届人大六次会议政府工作报告。回顾中明确「组团式打造涵盖3个典型镇18个典型村的丙雁松片区，丙雁示范带入选省十大乡村振兴示范带」，丙雁松片区入选省农文旅融合发展试点；部署2026年「以典型镇村引领、片区组团发展为抓手」，以三河三线为纽带串珠成链建设美丽乡村廊道，高标准推进丙雁松片区农文旅融合省级试点。",
+  "slug": "gd-mz-mx-zhengfu-gongzuobaogao-2026",
+  "fetched_at": "2026-11-08",
+  "full_text_file": "C:/Users/zjh22/AppData/Local/Temp/gd02/meixian_2026.md",
+  "areas": [
+    {"area_id": "A440016", "entity_type": "area", "rel": "support"}
+  ],
+  "events": [
+    {"area_id": "A440016", "entity_type": "area", "event_type": "入选", "ymd": "", "note": "政府工作报告载明丙雁示范带入选省十大乡村振兴示范带"}
+  ]
+}

@@ -176,6 +176,13 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 & $env:MIMO_PYTHON scripts/ingest_policy.py --dry-run data/stage/batches/xxx.jsonl   # 先看解析结果
 & $env:MIMO_PYTHON scripts/ingest_policy.py --purge POL-{省码}-{序号}-policy  # 回滚该批次
 
+# 补录漏挂的片区↔政策映射（采集端 areas 漏项；url 去重会整条跳过，只能定点补）
+& $env:MIMO_PYTHON scripts/add_area_policy_link.py A120007 P120001 primary "市级方案点名该片区"
+& $env:MIMO_PYTHON scripts/add_area_policy_link.py --dry-run A210009 P210001 primary "省级名单含该示范带"
+
+# 剔除口径不符的误录（raw 存档移到 archive/，不删）
+& $env:MIMO_PYTHON scripts/drop_policy.py P540013 "中央全会规划建议，非县区级片区化部署"
+
 # 并行采集：生成分片清单（每个分片一份 brief.md + counties.csv）
 & $env:MIMO_PYTHON scripts/gen_policy_shards.py
 & $env:MIMO_PYTHON scripts/gen_policy_shards.py ZJ01 SD01   # 只生成指定分片

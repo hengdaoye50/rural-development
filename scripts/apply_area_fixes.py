@@ -27,6 +27,17 @@ FIXES: list[tuple[str, str, str, str, str]] = [
      "360727 被龙南占用后腾出的错位；安远县实为 360726"),
     ("A510016", "SC", "510681", "510682",
      "issuer 与 cover_desc 均指什邡市，510681 是广汉市；什邡为 510682"),
+    ("A370178", "SD", "371522", "371521",
+     "cover_desc 自述「阳谷县侨润街道春和八里」，371522 是莘县；阳谷县为 371521"),
+    ("A140003", "SX", "140521", "140522",
+     "summary 自述「县级代码按晋城辖域推定（阳城县）」；横河镇属阳城县 140522，"
+     "SX01 采集到阳政办发〔2025〕1号「横河镇太行一号国家风景道旅游环线精品片区」"),
+]
+
+# area_id, 省缩写, 现 name, 应 name, 依据（只改 area.name 与 name_norm）
+NAME_FIXES: list[tuple[str, str, str, str, str]] = [
+    ("A650004", "XJ", "色也克镇乡村振兴示范片区", "色也克乡乡村振兴示范片区",
+     "岳普湖县为 4 镇 5 乡，色也克是乡；2025-01 乡镇国土空间规划与泰安援疆报道均作「色也克乡」"),
 ]
 
 
@@ -61,6 +72,25 @@ def main() -> int:
             print(f"  {area_id} {table}: {old} -> {new}  ({why})")
             if not dry:
                 _write(path, cols, rows)
+    print(f"{'dry-run，' if dry else ''}共改 {changed} 行")
+
+    for area_id, abbr, old, new, why in NAME_FIXES:
+        path = BY_PROV / f"{abbr}-area.csv"
+        cols, rows = _read(path)
+        hit = [r for r in rows if r.get("area_id") == area_id and r.get("name") == old]
+        if not hit:
+            stale = [r.get("name") for r in rows if r.get("area_id") == area_id]
+            print(f"  跳过 {area_id} name: 无「{old}」（现值 {stale}）")
+            continue
+        for r in hit:
+            r["name"] = new
+            if "name_norm" in r:
+                r["name_norm"] = new
+        changed += len(hit)
+        print(f"  {area_id} name: {old} -> {new}  ({why})")
+        if not dry:
+            _write(path, cols, rows)
+
     print(f"{'dry-run，' if dry else ''}共改 {changed} 行")
     if not dry and changed:
         print("接着跑：merge_by_province -> build_db -> validate_db")

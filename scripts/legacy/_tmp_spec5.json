@@ -1,0 +1,29 @@
+{
+  "title": "2026年佛山市政府工作报告",
+  "doc_no": "",
+  "issuer": "佛山市人民政府",
+  "issuer_level": "city",
+  "issued_ymd": "2026-02-02",
+  "published_ymd": "",
+  "doc_type": "报告",
+  "source_kind": "部门动态",
+  "province_code": "440000",
+  "city_code": "440600",
+  "county_code": "",
+  "instruments": "规划,产业,示范带,片区组团,美丽乡村走廊,强村公司",
+  "scope_desc": "全市；153公里“百里芳华”乡村振兴示范带",
+  "target_areas": null,
+  "budget_wan": "",
+  "valid_state": "现行有效",
+  "url": "https://www.foshan.gov.cn/zwgk/zfgzbg/content/post_7099206.html",
+  "credibility": "B",
+  "summary": "佛山市政府工作报告（2026年2月2日市十六届人大六次会议）。总结期载明「153公里‘百里芳华’乡村振兴示范带成为美丽宜居乡村样板」；新一年部署提出「推动‘百里芳华’乡村振兴片区组团提质扩面，串点成线打造‘美丽乡村走廊’，连线成片提升乡村风貌」，是佛山把示范带话语升级为「片区组团＋美丽乡村走廊」的市级表述。",
+  "slug": "gd-fs-zhengfu-gongzuobaogao-2026",
+  "fetched_at": "2026-11-08",
+  "full_text_file": "C:/Users/zjh22/AppData/Local/Temp/gd02/foshan-zfgzbg-2026.md",
+  "areas": [
+    {"area_id": "A440028", "entity_type": "area", "rel": "mention"},
+    {"area_id": "A440029", "entity_type": "area", "rel": "mention"}
+  ],
+  "events": []
+}
