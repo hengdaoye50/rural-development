@@ -1,0 +1,17 @@
+{
+  "policy_id": "P310014",
+  "url": "https://www.fengxian.gov.cn/zwgk-search-front/api/fx/gazette/info?id=a3b1f093f6e9f0e20978521ff2b56a97",
+  "title": "上海市奉贤区农业农村委员会关于印发《2025年奉贤区“三农”工作要点》的通知",
+  "doc_no": "沪奉农委〔2025〕1号",
+  "issuer": "上海市奉贤区农业农村委员会",
+  "issuer_level": "county",
+  "issued_ymd": "2025-02-17",
+  "published_ymd": "2025-02-17",
+  "doc_type": "其他",
+  "source_kind": "政府公报",
+  "instruments": "规划,产业,财政,人才,组织,考核,片区组团,五好两宜",
+  "full_text_chars": "2661",
+  "hash_sha256": "cf78746623aec636d9372bca6641d52acbbba3ab0da50542be63cfc6c8d47fc3",
+  "fetched_at": "2026-11-09",
+  "batch": "POL-SH02-policy"
+}

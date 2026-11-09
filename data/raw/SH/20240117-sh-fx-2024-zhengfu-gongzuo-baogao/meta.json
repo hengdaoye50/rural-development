@@ -1,0 +1,17 @@
+{
+  "policy_id": "P310021",
+  "url": "https://www.fengxian.gov.cn/zwgk-search-front/api/fx/gazette/info?id=bd0966c19b6a3aaa4840a478d8094ecc",
+  "title": "政府工作报告（2024年1月17日在上海市奉贤区第六届人民代表大会第五次会议上）",
+  "doc_no": "",
+  "issuer": "上海市奉贤区人民政府",
+  "issuer_level": "county",
+  "issued_ymd": "2024-01-17",
+  "published_ymd": "2024-01-17",
+  "doc_type": "报告",
+  "source_kind": "政府公报",
+  "instruments": "规划,产业,生态,文化,组织,片区组团,和美乡村",
+  "full_text_chars": "12576",
+  "hash_sha256": "819009eab7e45f5bc5028955d0a96908d4a4387ae19d528f971bb6f8b1dcd7b7",
+  "fetched_at": "2026-11-09",
+  "batch": "POL-SH02-policy"
+}

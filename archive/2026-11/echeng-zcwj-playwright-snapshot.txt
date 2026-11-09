@@ -1,0 +1,97 @@
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - generic [ref=e7]: 政府信息公开
+    - link "鄂城区人民政府" [ref=e9] [cursor=pointer]:
+      - /url: /
+  - generic [ref=e11]:
+    - table [ref=e13]:
+      - rowgroup [ref=e14]:
+        - row "搜索" [ref=e15]:
+          - cell [ref=e16]:
+            - textbox "请输入关键字进行检索" [ref=e17]
+          - cell "搜索" [ref=e18]:
+            - link "搜索" [ref=e19] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=e20]:
+      - generic [ref=e22]:
+        - list [ref=e23]:
+          - listitem [ref=e24]:
+            - link "政策" [ref=e25] [cursor=pointer]:
+              - /url: ../
+        - list [ref=e27]:
+          - listitem [ref=e28]:
+            - link "规范性文件" [ref=e29] [cursor=pointer]:
+              - /url: ./
+          - listitem [ref=e30]:
+            - link "其他主动公开文件" [ref=e31] [cursor=pointer]:
+              - /url: ../qtzdgkwj/
+          - listitem [ref=e32]:
+            - link "政策解读" [ref=e33] [cursor=pointer]:
+              - /url: ../zcjd1/
+          - listitem [ref=e34]:
+            - link "公示公告" [ref=e35] [cursor=pointer]:
+              - /url: http://www.echeng.gov.cn/zxzx/gsgg/
+      - generic [ref=e37]:
+        - generic [ref=e38]: 规范性文件
+        - list [ref=e41]:
+          - listitem [ref=e42]:
+            - link "鄂城区人民政府办公室2026年1月至6月行政规范性文件情况说明" [ref=e43] [cursor=pointer]:
+              - /url: ./202607/t20260706_770698.html
+            - generic [ref=e44]: 2026年07月06日
+          - listitem [ref=e45]:
+            - link "行政规范性文件情况说明" [ref=e46] [cursor=pointer]:
+              - /url: ./202602/t20260203_749452.html
+            - generic [ref=e47]: 2026年01月12日
+          - listitem [ref=e48]:
+            - link "鄂城区人民政府办公室 关于印发《鄂城区中小学校布局优化实施方案（2024—2035年）》的通知" [ref=e49] [cursor=pointer]:
+              - /url: ./202507/t20250709_712603.html
+            - generic [ref=e50]: 2025年03月28日
+          - listitem [ref=e51]:
+            - link "鄂城区人民政府 关于印发《鄂州市鄂城区企业房屋征收补偿方案》的通知" [ref=e52] [cursor=pointer]:
+              - /url: ./202507/t20250709_712533.html
+            - generic [ref=e53]: 2024年06月08日
+          - listitem [ref=e54]:
+            - link "鄂城区人民政府办公室 关于确定鄂城区集体土地上房屋宅基地使用权补偿及安置房建设成本价的通知" [ref=e55] [cursor=pointer]:
+              - /url: ./202507/t20250709_712530.html
+            - generic [ref=e56]: 2024年05月24日
+          - listitem [ref=e57]:
+            - link "鄂城区人民政府 关于重新公布鄂城区被征收土地上的附着物和青苗补偿标准的通知" [ref=e58] [cursor=pointer]:
+              - /url: ./202507/t20250709_712537.html
+            - generic [ref=e59]: 2024年02月05日
+          - listitem [ref=e60]:
+            - link "鄂城区人民政府办公室关于印发《鄂城区保障性租赁住房租赁管理办法》的通知" [ref=e61] [cursor=pointer]:
+              - /url: ./202509/t20250902_723294.html
+            - generic [ref=e62]: 2023年06月02日
+          - listitem [ref=e63]:
+            - link "鄂城区人民政府办公室 关于印发《鄂城区餐厨废弃物管理办法实施方案》《鄂城区餐厨废弃物收运处理及财政补贴实施方案》的通知" [ref=e64] [cursor=pointer]:
+              - /url: ./202507/t20250709_712531.html
+            - generic [ref=e65]: 2022年10月09日
+          - listitem [ref=e66]:
+            - link "区人民政府办公室 关于进一步做好被征地农民参加基本养老保险工作的补充意见" [ref=e67] [cursor=pointer]:
+              - /url: ./202509/t20250902_723267.html
+            - generic [ref=e68]: 2021年06月16日
+          - listitem [ref=e69]:
+            - link "鄂城区人民政府办公室 关于印发《鄂城区地方政府债券资金管理暂行办法》的通知" [ref=e70] [cursor=pointer]:
+              - /url: ./202509/t20250902_723274.html
+            - generic [ref=e71]: 2018年11月23日
+          - listitem [ref=e72]:
+            - link "区人民政府关于印发《鄂城区城乡居民基本养老保险实施办法》的通知" [ref=e73] [cursor=pointer]:
+              - /url: ./202509/t20250902_723273.html
+            - generic [ref=e74]: 2016年01月18日
+  - table [ref=e81]:
+    - rowgroup [ref=e82]:
+      - row "ICP备案号：鄂ICP备17005283号-1 鄂公网安备 42070402000191号 网站标识：4207040001 主办单位：鄂城区人民政府 承办：鄂城区人民政府办公室 网站地图 系统管理入口 网站技术支持电话:027-60896103 地址：鄂州市鄂城区凤凰街道办明塘路70号 点击总量： 30356423" [ref=e83]:
+        - cell [ref=e84]:
+          - link [ref=e86] [cursor=pointer]:
+            - /url: https://bszs.conac.cn/sitename?method=show&id=0BF5A4441DC14238E053012819AC56D6
+        - cell "ICP备案号：鄂ICP备17005283号-1 鄂公网安备 42070402000191号 网站标识：4207040001 主办单位：鄂城区人民政府 承办：鄂城区人民政府办公室 网站地图 系统管理入口 网站技术支持电话:027-60896103 地址：鄂州市鄂城区凤凰街道办明塘路70号 点击总量： 30356423" [ref=e88]:
+          - text: ICP备案号：
+          - link "鄂ICP备17005283号-1" [ref=e89] [cursor=pointer]:
+            - /url: https://beian.miit.gov.cn/
+          - text: 鄂公网安备 42070402000191号 网站标识：4207040001 主办单位：鄂城区人民政府 承办：鄂城区人民政府办公室
+          - link "网站地图" [ref=e90] [cursor=pointer]:
+            - /url: https://www.echeng.gov.cn/wzdt/
+          - link "系统管理入口" [ref=e91] [cursor=pointer]:
+            - /url: http://www.ezhou.gov.cn/wcm/app/login.jsp
+          - text: 网站技术支持电话:027-60896103 地址：鄂州市鄂城区凤凰街道办明塘路70号 点击总量： 30356423
+        - cell [ref=e92]

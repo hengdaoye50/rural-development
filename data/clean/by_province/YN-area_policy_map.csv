@@ -1,0 +1,11 @@
+﻿area_id,policy_id,entity_type,rel
+A530007,P530002,area,support
+A530004,P530004,area,mention
+A530004,P530005,area,support
+A530002,P530006,area,support
+A530007,P530007,area,mention
+A530001,P530009,area,mention
+A530001,P530010,area,mention
+A530002,P530013,area,support
+A530003,P530015,area,mention
+A530001,P530016,area,mention

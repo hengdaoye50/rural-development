@@ -1,0 +1,17 @@
+{
+  "policy_id": "P310011",
+  "url": "https://www.fengxian.gov.cn/zwgk-search-front/api/fx/policy/info?contentId=5967",
+  "title": "上海市奉贤区人民政府关于印发《奉贤区推进乡村全面振兴“十五五”规划》的通知",
+  "doc_no": "沪奉府发〔2026〕19号",
+  "issuer": "上海市奉贤区人民政府",
+  "issuer_level": "county",
+  "issued_ymd": "2026-09-28",
+  "published_ymd": "2026-10-08",
+  "doc_type": "规划",
+  "source_kind": "政策文件",
+  "instruments": "规划,产业,人才,文化,生态,组织,考核,片区组团,乡村更新,五好两宜",
+  "full_text_chars": "6104",
+  "hash_sha256": "52925a199a072d095ffa9f36f28375445ac28925bf3a4b4ac25d44a84e2e8c12",
+  "fetched_at": "2026-11-09",
+  "batch": "POL-SH02-policy"
+}

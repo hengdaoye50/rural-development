@@ -1,0 +1,16 @@
+﻿area_id,policy_id,entity_type,rel
+A220008,P220003,area,primary
+A220009,P220003,area,primary
+A220010,P220003,area,primary
+A220006,P220006,area,mention
+A220006,P220007,area,mention
+A220007,P220008,area,mention
+A220008,P220009,area,support
+A220011,P220010,area,mention
+A220012,P220010,area,mention
+A220008,P220012,area,support
+A220008,P220014,area,support
+A220012,P220015,area,mention
+A220007,P220016,area,support
+A220007,P220017,area,mention
+A220008,P220018,area,mention
