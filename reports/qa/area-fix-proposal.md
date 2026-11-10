@@ -48,22 +48,34 @@
 
 ### 待裁
 
-**1. A650004 整行字段错位（比改名的性质更严重）**
+**1. 新疆岳普湖 5 条记录被上一轮修复脚本写坏（不是单条 A650004）**
 
-上一轮 `repair-2026-09` 脚本把多个字段挤进了 `tags`，现状：
-`tags` 里混着 town_codes/cover_desc/issuer/summary 的原文；`town_codes` 与 `scale_towns` 都是
-`repair-2026-09`；`summary`、`cover_desc` 是时间戳；`updated_at` 退成 `2023-01-01`；`issuer`、`lead_org` 空。
-按行内残存原文可无损重建：
+`created_by = repair-2026-09` 的 A650001–A650005 五行，字段块被整体错位：
+`tags` 里用逗号串着原本属于 `town_codes` / `cover_desc` / `scale_*` / `issuer` / `summary` 的内容；
+`town_codes`、`cover_desc`、`scale_towns`、`summary`、`created_at`、`updated_at` 被写成
+`repair-2026-09` 或时间戳；`issuer`、`lead_org` 全空。
 
-| 字段 | 重建值 |
-|---|---|
-| `tags` | `产业;文旅` |
-| `town_codes` | `色也克乡` |
-| `cover_desc` | `岳普湖县色也克乡乡村振兴示范片区，色也克乡百草园项目` |
-| `issuer` | `泰安援疆指挥部/色也克乡党委` |
-| `summary` | `沿省道S310连片打造的岳普湖县5大乡村振兴示范片区涉及岳普湖乡、艾西曼镇、色也克乡、铁热木镇等6个乡镇，色也克乡百草园为片区产业项目之一。` |
-| `scale_towns` | 留空（原文无明确数） |
-| `updated_at` | `2026-09-30T12:00:00+08:00` |
+`repair_alignment.py` 判不出来：这些行是 25 列的矩形，只是语义错位。
+
+从 `tags` 里残存的原文可以逐行还原，但**部分字段已截断，无法完整恢复**——例如 A650003 的
+`summary` 只剩「岳普湖乡成」六个字。因此这项修正的性质是**重建而非纠错**，需逐行确认。
+
+| area_id | 可还原字段 | 无法还原 |
+|---|---|---|
+| A650001 | tags=`党建;产业;和美乡村`、town_codes=`艾西曼镇`、cover_desc 完整、scale_villages=`10` | summary（被时间戳覆盖） |
+| A650002 | tags=`和美乡村`、town_codes=`也克先拜巴扎镇`、cover_desc 完整、issuer=`泰安援疆指挥部/也克先拜巴扎镇党委` | summary |
+| A650003 | tags=`产业`、town_codes=`岳普湖乡`、cover_desc 完整、issuer=`泰安援疆指挥部/岳普湖乡党委` | summary（截断为「岳普湖乡成」） |
+| A650004 | tags=`产业;文旅`、town_codes=`色也克乡`、cover_desc 完整、issuer=`泰安援疆指挥部/色也克乡党委`、summary 完整 | — |
+| A650005 | tags=`产业`、town_codes=`铁热木镇`、cover_desc 完整、issuer=`泰安援疆指挥部/铁热木镇党委` | summary（截断） |
+
+共同项：`founded_ymd=2023-01-01`、`founded_precision=day` 疑似同批脚本统一填充，**没有原文支撑**，
+建议改为空值 + `founded_precision=unknown`（`docs/02` 规定未知日期留空，不猜）。
+
+`updated_at` 建议统一改为 `2026-09-30T12:00:00+08:00`（该批的入库时点，见 `created_at`）。
+
+> 处置建议：等 XJ01 采集代理带回的原文（岳普湖县政府工作报告、五个片区国土空间规划公示稿、
+> 泰安援疆系列报道）可用时，用原文重建 `summary` 与 `cover_desc`，而不是从坏行反推。
+> 反推只能保证不再更糟，不能保证准确。
 
 **2. 福建龙岩 6 个片区名可能全部来自媒体稿**
 

@@ -1,0 +1,17 @@
+{
+  "policy_id": "P330505",
+  "url": "http://www.panan.gov.cn/api-gateway/jpaas-jsurvey-web-server/front/dczj/showJsurveys.do?formId=68a79fb9f090454bac6dbbc21883295b",
+  "title": "磐安县农业农村局关于《磐安县乡村片区组团发展项目和资金管理办法（征求意见稿）》公开征求意见的公告",
+  "doc_no": "",
+  "issuer": "磐安县农业农村局",
+  "issuer_level": "county",
+  "issued_ymd": "2026-07-09",
+  "published_ymd": "2026-07-09",
+  "doc_type": "公告",
+  "source_kind": "部门动态",
+  "instruments": "财政,片区组团,项目管理,资金管理,组织",
+  "full_text_chars": "405",
+  "hash_sha256": "2c91992ab53649a0694e1cbab262bcd8af0b7ed1b4856f7191492aa60edc7434",
+  "fetched_at": "2026-11-06",
+  "batch": "POL-ZJ07-policy"
+}
