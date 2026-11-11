@@ -127,6 +127,13 @@ $env:MIMO_PYTHON
 # 健康度总览（进度 + 质量信号汇总，只读）
 & $env:MIMO_PYTHON scripts/health_report.py                    # -> reports/qa/health-latest.md
 
+# 采集成果总览（分省矩阵 / 文种 / 年份 / 话语分化 / 缺口，全部现查现算）
+& $env:MIMO_PYTHON scripts/report_corpus_overview.py           # -> reports/采集成果总览.md
+
+# 漏挂反查：正文点名了片区但 area_policy_map 没挂（ingest 只认 JSONL 的 areas 字段）
+& $env:MIMO_PYTHON scripts/audit_missing_policy_links.py
+& $env:MIMO_PYTHON scripts/audit_missing_policy_links.py --csv reports/qa/missing-policy-links.csv
+
 # 仅用 by_province 重建 clean master（勿直接手改 master）
 # 见 scripts/merge_by_province.py；by_province 优先于 master
 ```
