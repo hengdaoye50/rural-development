@@ -9,6 +9,7 @@
 用法：
   python scripts/add_area_policy_link.py A120007 P120001 primary "市级方案点名「古蕴田园乡村旅游」示范片区"
   python scripts/add_area_policy_link.py --dry-run A210009 P210001 primary "省级名单含桓仁雅河带"
+  python scripts/add_area_policy_link.py --remove A330338 P330005 "挂错对象：A330338 是田园雅集，诗画琏溪是 A330339"
 """
 from __future__ import annotations
 
@@ -53,10 +54,37 @@ def _write(path: Path, header: list[str], rows: list[dict[str, str]]) -> None:
 def main() -> int:
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     dry = "--dry-run" in sys.argv
-    if len(args) < 3:
+    remove = "--remove" in sys.argv
+    if len(args) < 2:
         print(__doc__)
         return 2
-    area_id, policy_id, rel = args[0], args[1], args[2]
+
+    if remove:
+        area_id, policy_id = args[0], args[1]
+        why = args[2] if len(args) > 2 else ""
+        hit = 0
+        for p in sorted(BY_PROV.glob("*-area_policy_map.csv")):
+            header, rows = _read(p)
+            keep = [
+                r for r in rows
+                if not (r.get("area_id") == area_id and r.get("policy_id") == policy_id)
+            ]
+            if len(keep) != len(rows):
+                hit += len(rows) - len(keep)
+                print(f"  - {p.name}: 删 {len(rows) - len(keep)} 行（{area_id} ↔ {policy_id}）")
+                if not dry:
+                    _write(p, header, keep)
+        if not hit:
+            print(f"未找到映射 {area_id} ↔ {policy_id}")
+            return 0
+        print(f"  理由：{why}")
+        if not dry:
+            print("接着跑：merge_by_province -> build_db -> validate_db")
+        else:
+            print("dry-run，未写盘")
+        return 0
+
+    area_id, policy_id, rel = args[0], args[1], args[2] if len(args) > 2 else "support"
     why = args[3] if len(args) > 3 else ""
     if rel not in REL_VALUES:
         print(f"rel={rel!r} 不在 {REL_VALUES} 内")
