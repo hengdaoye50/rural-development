@@ -40,6 +40,63 @@ NAME_FIXES: list[tuple[str, str, str, str, str]] = [
      "岳普湖县为 4 镇 5 乡，色也克是乡；2025-01 乡镇国土空间规划与泰安援疆报道均作「色也克乡」"),
 ]
 
+# 整行字段重建：上一轮 repair-2026-09 把若干列挤进了 tags，导致结构化字段变成垃圾值。
+# 原值在 tags 里逐段完整保留（已逐行核对，无截断），因此按下表还原，不是推测。
+# 结构：area_id -> (省缩写, {字段: 新值}, 依据)
+# 护栏：仅当该行 created_by == 'repair-2026-09' 且 town_codes 仍是垃圾值时才执行，可反复重跑。
+ROW_REBUILDS: dict[str, tuple[str, dict[str, str], str]] = {
+    "A650001": ("XJ", {
+        "tags": "党建;产业;和美乡村",
+        "town_codes": "艾西曼镇",
+        "cover_desc": "岳普湖县艾西曼镇「党建领航·田园牧歌」示范片区，10个行政村1.93万人，饲料加工厂/合作社孵化中心等",
+        "scale_villages": "10",
+        "scale_towns": "",
+        "issuer": "泰安援疆指挥部/艾西曼镇党委",
+        "summary": "艾西曼镇「党建领航·田园牧歌」乡村振兴示范片区位于岳普湖县西部，是岳普湖县5大乡村振兴示范片区中位置最西的片区。2023年以来泰安援疆指挥部以「党建领航、产业强基、和美增色」为创建思路，投入援疆资金3000余万，重点实施饲料加工厂、党支部领办合作社孵化中心等项目。2024年畜牧养殖饲料营养转化率由40%提升到85%以上。",
+    }, "tags 残留段 0/1/2/3/4/6 分别还原为 tags/town_codes/cover_desc/scale_villages/issuer/summary"),
+    "A650002": ("XJ", {
+        "tags": "和美乡村",
+        "town_codes": "也克先拜巴扎镇",
+        "cover_desc": "岳普湖县也克先拜巴扎镇「和美乡村·幸福巴扎」示范片区，位于艾西曼片区以东",
+        "scale_villages": "",
+        "scale_towns": "",
+        "issuer": "泰安援疆指挥部/也克先拜巴扎镇党委",
+        "summary": "也克先拜巴扎镇「和美乡村·幸福巴扎」乡村振兴示范片区与艾西曼镇片区相接，同属岳普湖县5大乡村振兴示范片区。",
+    }, "tags 残留段 0/1/2/5/6 还原；段 3、4 原为空"),
+    "A650003": ("XJ", {
+        "tags": "产业",
+        "town_codes": "岳普湖乡",
+        "cover_desc": "岳普湖乡无花果产业示范片区，新疆最大无花果标准种植基地，年加工无花果果酱450吨",
+        "scale_villages": "",
+        "scale_towns": "",
+        "issuer": "泰安援疆指挥部/岳普湖乡党委",
+        "summary": "岳普湖乡成功创建全国「一村一品」示范村镇，成为新疆最大的无花果标准种植基地；新建党建引领无花果加工合作社，探索「援疆企业+党支部+农户」运营模式，年可加工无花果果酱450吨。",
+    }, "tags 残留段 0/1/2/4/5 还原"),
+    "A650004": ("XJ", {
+        "tags": "产业;文旅",
+        "town_codes": "色也克乡",
+        "cover_desc": "岳普湖县色也克镇乡村振兴示范片区，色也克镇百草园项目",
+        "scale_villages": "",
+        "scale_towns": "",
+        "issuer": "泰安援疆指挥部/色也克镇党委",
+        "summary": "沿省道S310连片打造的岳普湖县5大乡村振兴示范片区涉及岳普湖乡、艾西曼镇、色也克镇、铁热木镇等6个乡镇，色也克镇百草园为片区产业项目之一。",
+    }, "tags 残留段 0/1/2/4/5 还原；cover_desc 与 summary 照原文保留「色也克镇」（引文不改），仅 town_codes 用规范建制「乡」"),
+    "A650005": ("XJ", {
+        "tags": "产业",
+        "town_codes": "铁热木镇",
+        "cover_desc": "岳普湖县铁热木镇乡村振兴示范片区，全国小茴香绿色食品原料基地",
+        "scale_villages": "",
+        "scale_towns": "",
+        "issuer": "泰安援疆指挥部/铁热木镇党委",
+        "summary": "铁热木镇成功申报农业农村部「全国小茴香绿色食品原料基地」认证；岳普湖县乡村振兴示范片区打造项目被评为「山东援疆出色项目」。",
+    }, "tags 残留段 0/1/2/4/5 还原"),
+}
+
+# 重建后统一清掉没有原文支撑的占位日期与垃圾时间戳
+# docs/02：未知日期留空，不猜
+ROW_REBUILD_CLEAR = {"founded_ymd": "", "founded_precision": "unknown"}
+BATCH_TIMESTAMP = "2026-09-30T12:00:00+08:00"
+
 
 def _read(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as f:
@@ -92,6 +149,47 @@ def main() -> int:
             _write(path, cols, rows)
 
     print(f"{'dry-run，' if dry else ''}共改 {changed} 行")
+
+    # 整行重建：只处理 created_by=repair-2026-09 且字段仍是垃圾值的行
+    garbage = {"repair-2026-09", "2023-01-01", "2026-09-30T12:00:00+08:00", ""}
+
+    def _corrupt(r: dict[str, str]) -> bool:
+        tc = (r.get("town_codes") or "").strip()
+        cd = (r.get("cover_desc") or "").strip()
+        sm = (r.get("summary") or "").strip()
+        # town_codes 是数字（错位吞进来的村数）或垃圾值，且描述/摘要也是垃圾
+        return (tc.isdigit() or tc in garbage) and (cd in garbage or sm in garbage)
+
+    by_abbr: dict[str, tuple[list[str], list[dict[str, str]]]] = {}
+    rebuilt = 0
+    for area_id, (abbr, fields, why) in ROW_REBUILDS.items():
+        path = BY_PROV / f"{abbr}-area.csv"
+        if abbr not in by_abbr:
+            by_abbr[abbr] = _read(path)
+        cols, rows = by_abbr[abbr]
+        hit = [
+            r for r in rows
+            if r.get("area_id") == area_id
+            and r.get("created_by") == "repair-2026-09"
+            and _corrupt(r)
+        ]
+        if not hit:
+            print(f"  跳过 {area_id} 重建：不是 repair-2026-09 留下的坏行（已是修好状态）")
+            continue
+        for r in hit:
+            r.update(fields)
+            r.update(ROW_REBUILD_CLEAR)
+            if r.get("created_at") in garbage:
+                r["created_at"] = BATCH_TIMESTAMP
+            r["updated_at"] = BATCH_TIMESTAMP
+        rebuilt += len(hit)
+        print(f"  {area_id} 整行重建 {len(fields)} 字段 + 清占位日期  ({why})")
+    if not dry and rebuilt:
+        for abbr, (cols, rows) in by_abbr.items():
+            _write(BY_PROV / f"{abbr}-area.csv", cols, rows)
+    changed += rebuilt
+
+    print(f"{'dry-run，' if dry else ''}累计共改 {changed} 行")
     if not dry and changed:
         print("接着跑：merge_by_province -> build_db -> validate_db")
     return 0

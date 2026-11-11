@@ -48,34 +48,33 @@
 
 ### 待裁
 
-**1. 新疆岳普湖 5 条记录被上一轮修复脚本写坏（不是单条 A650004）**
+**1. 新疆岳普湖 5 条记录被上一轮修复脚本写坏 —— 2026-11-11 已执行重建**
 
 `created_by = repair-2026-09` 的 A650001–A650005 五行，字段块被整体错位：
 `tags` 里用逗号串着原本属于 `town_codes` / `cover_desc` / `scale_*` / `issuer` / `summary` 的内容；
 `town_codes`、`cover_desc`、`scale_towns`、`summary`、`created_at`、`updated_at` 被写成
-`repair-2026-09` 或时间戳；`issuer`、`lead_org` 全空。
+`repair-2026-09` 或时间戳；`issuer`、`lead_org` 全空。`repair_alignment.py` 判不出来——
+这些行是 25 列的矩形，只是语义错位。
 
-`repair_alignment.py` 判不出来：这些行是 25 列的矩形，只是语义错位。
+**复核后确认原文无截断**（此前误判为「已截断」，那是终端显示宽度造成的）：
+五个字段的完整原文都在 `tags` 的分段里，因此这次是**无损还原，不是推测**。
+重建由 `scripts/apply_area_fixes.py` 的 `ROW_REBUILDS` 执行，带护栏
+（仅当 `created_by=repair-2026-09` 且字段仍是垃圾值时才动手），可反复重跑。
 
-从 `tags` 里残存的原文可以逐行还原，但**部分字段已截断，无法完整恢复**——例如 A650003 的
-`summary` 只剩「岳普湖乡成」六个字。因此这项修正的性质是**重建而非纠错**，需逐行确认。
-
-| area_id | 可还原字段 | 无法还原 |
+| area_id | 还原内容 | 附注 |
 |---|---|---|
-| A650001 | tags=`党建;产业;和美乡村`、town_codes=`艾西曼镇`、cover_desc 完整、scale_villages=`10` | summary（被时间戳覆盖） |
-| A650002 | tags=`和美乡村`、town_codes=`也克先拜巴扎镇`、cover_desc 完整、issuer=`泰安援疆指挥部/也克先拜巴扎镇党委` | summary |
-| A650003 | tags=`产业`、town_codes=`岳普湖乡`、cover_desc 完整、issuer=`泰安援疆指挥部/岳普湖乡党委` | summary（截断为「岳普湖乡成」） |
-| A650004 | tags=`产业;文旅`、town_codes=`色也克乡`、cover_desc 完整、issuer=`泰安援疆指挥部/色也克乡党委`、summary 完整 | — |
-| A650005 | tags=`产业`、town_codes=`铁热木镇`、cover_desc 完整、issuer=`泰安援疆指挥部/铁热木镇党委` | summary（截断） |
+| A650001 | tags / town_codes(艾西曼镇) / cover_desc / scale_villages=10 / issuer / summary | — |
+| A650002 | tags / town_codes(也克先拜巴扎镇) / cover_desc / issuer / summary | 段 3、4 原为空 |
+| A650003 | tags / town_codes(岳普湖乡) / cover_desc / issuer / summary | — |
+| A650004 | tags / town_codes(色也克**乡**) / cover_desc / issuer / summary | 引文照原文保留「色也克镇」，仅规范字段用「乡」 |
+| A650005 | tags / town_codes(铁热木镇) / cover_desc / issuer / summary | — |
 
-共同项：`founded_ymd=2023-01-01`、`founded_precision=day` 疑似同批脚本统一填充，**没有原文支撑**，
-建议改为空值 + `founded_precision=unknown`（`docs/02` 规定未知日期留空，不猜）。
+共同处理：`founded_ymd` 原本是 `2023-01-01` + `precision=day`，无任何原文支撑，
+按 `docs/02`「未知日期留空，不猜」清为空 + `unknown`；`created_at` / `updated_at`
+统一为入库时点 `2026-09-30T12:00:00+08:00`。
 
-`updated_at` 建议统一改为 `2026-09-30T12:00:00+08:00`（该批的入库时点，见 `created_at`）。
-
-> 处置建议：等 XJ01 采集代理带回的原文（岳普湖县政府工作报告、五个片区国土空间规划公示稿、
-> 泰安援疆系列报道）可用时，用原文重建 `summary` 与 `cover_desc`，而不是从坏行反推。
-> 反推只能保证不再更糟，不能保证准确。
+> 一处已知偏差：`cover_desc` / `summary` 里的引号由原文的 “ ” 写成了 「 」。
+> 这两个字段是本库自撰的描述与摘要（非引文），故未回改；涉及建制的是 `town_codes` 与 `name`。
 
 **2. 福建龙岩 6 个片区名可能全部来自媒体稿**
 
