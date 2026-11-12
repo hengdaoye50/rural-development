@@ -22,8 +22,8 @@ REGION_CSV = ROOT / "data" / "clean" / "region.csv"
 SRC = ROOT / "data" / "stage" / "candidates" / "mca-2023-xzqh.html"
 FIELDS = ["region_code", "name", "short_name", "level", "parent_code", "aliases"]
 
-# 只补这几个省（本轮逆向校验涉及的省份），避免一次动太多
-WANT_PROV = {"210000": "辽宁", "130000": "河北"}
+# 补哪些省；留空表示全部省级单位（region.csv 原本是从 area 表反推的，普遍缺县）
+WANT_PROV: dict[str, str] = {}
 COUNTY_RE = re.compile(r"^(\d{6})\s*(.+)$")
 TAG = re.compile(r"<[^>]+>")
 ROW = re.compile(r"<tr\b.*?</tr>", re.S | re.I)
@@ -44,7 +44,7 @@ def parse_counties(html_text: str) -> list[tuple[str, str, str]]:
         if not cells:
             continue
         code = next((c for c in cells if re.fullmatch(r"\d{6}", c)), "")
-        if not code or not (code.startswith("21") or code.startswith("13")):
+        if not code:
             continue
         name = next((c for c in cells if re.search(r"[\u4e00-\u9fa5]", c)), "")
         if not name:
