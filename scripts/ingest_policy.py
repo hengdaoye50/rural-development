@@ -63,6 +63,21 @@ SOURCE_KIND_VALUES = ("政策文件", "政府公报", "部门动态", "新闻发
 # 把「部门动态」硬归成「政策文件」会造出 A 级假证据。
 SOURCE_KIND_SYNONYMS = {"部门公开": "部门动态"}
 
+# docs/02 §4：issuer_level 是封闭枚举。采集端常见同义写法在此规整，
+# 认不出的直接报错——级别决定后面按层级做的统计，猜错会污染口径。
+ISSUER_LEVEL_VALUES = ("province", "city", "county", "town", "other")
+ISSUER_LEVEL_SYNONYMS = {
+    "township": "town",
+    "village": "town",
+    "镇": "town",
+    "乡": "town",
+    "街道": "town",
+    "市": "city",
+    "县": "county",
+    "区": "county",
+    "省": "province",
+}
+
 MAP_COLS = ["area_id", "policy_id", "entity_type", "rel"]
 EVENT_COLS = [
     "event_id", "area_id", "entity_type", "event_type", "ymd",
@@ -280,6 +295,14 @@ def ingest(path: Path, dry_run: bool = False, group: str = "") -> int:
                 row[c] = str(r[c])
         # row 是从 r 原样搬过来的，这里覆盖为已规整、已通过枚举校验的取值
         row["source_kind"] = sk
+        il_raw = (row.get("issuer_level") or "").strip()
+        il = ISSUER_LEVEL_SYNONYMS.get(il_raw, il_raw)
+        if il != il_raw:
+            print(f"  ~ issuer_level「{il_raw}」→「{il}」  {(row.get('title') or '')[:30]}")
+        if il not in ISSUER_LEVEL_VALUES:
+            print(f"跳过：issuer_level={il_raw!r} 不在 docs/02 枚举内（{row.get('title')}）")
+            return 1
+        row["issuer_level"] = il
         row.update({
             "policy_id": pid,
             "date_precision": r.get("date_precision") or _precision(r),

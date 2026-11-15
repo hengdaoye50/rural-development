@@ -1,111 +1,93 @@
-"""Temporary helper: fetch a .gov.cn page and extract the article body as Markdown."""
-import hashlib
-import os
+"""临时检索工具：抓取 URL，抽正文，按关键词定位（不参与管线）。"""
+import html
 import re
-import subprocess
 import sys
-import tempfile
-
-from bs4 import BeautifulSoup
+import urllib.request
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
+      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+TAG = re.compile(r"<[^>]+>")
+DROP = re.compile(r"(?is)<(script|style|noscript|iframe)[^>]*>.*?</\1>")
+BLOCK = re.compile(r"(?i)</?(p|div|br|tr|li|h[1-6]|table|section|article)[^>]*>")
 
-DROP_TAGS = ["script", "style", "nav", "header", "footer", "noscript", "iframe", "form"]
 
-
-def fetch(url):
-    """Use curl.exe: some .gov.cn sites answer 502 to python-requests TLS fingerprints."""
-    fd, tmp = tempfile.mkstemp(suffix=".html")
-    os.close(fd)
+def to_text(raw: bytes) -> str:
+    m = re.search(rb'charset=["\']?([\w-]+)', raw[:4000], re.I)
+    enc = m.group(1).decode("ascii", "ignore").lower() if m else "utf-8"
+    if enc in ("gb2312", "gbk", "gb18030"):
+        enc = "gb18030"
     try:
-        subprocess.run(["curl.exe", "-s", "-L", "--max-time", "50",
-                        "-H", "User-Agent: " + UA,
-                        "-H", "Accept-Language: zh-CN,zh;q=0.9",
-                        "-o", tmp, url], check=False)
-        with open(tmp, "rb") as f:
-            raw = f.read()
-    finally:
-        try:
-            os.remove(tmp)
-        except OSError:
-            pass
-    if not raw:
-        raise RuntimeError("empty response " + url)
-    m = re.search(rb'charset=["\']?([\w-]+)', raw[:3000], re.I)
-    enc = "utf-8"
-    if m:
-        enc = m.group(1).decode("ascii", "ignore").lower()
-        if enc in ("gb2312", "gbk", "gb18030"):
-            enc = "gb18030"
-    try:
-        return raw.decode(enc, "ignore")
+        s = raw.decode(enc, "ignore")
     except LookupError:
-        return raw.decode("utf-8", "ignore")
+        s = raw.decode("utf-8", "ignore")
+    s = DROP.sub(" ", s)
+    s = BLOCK.sub("\n", s)
+    s = TAG.sub(" ", s)
+    s = html.unescape(s)
+    lines = [re.sub(r"[ \t\u3000]+", " ", ln).strip() for ln in s.splitlines()]
+    return "\n".join(ln for ln in lines if ln)
 
 
-def pick_root(soup):
-    for sel in ["#zoom", ".TRS_Editor", "#content", ".content", "#zoomcon",
-                ".article-content", ".view", "#article", ".news_content",
-                ".Article", "#print", ".main-content", ".detail", "#mainText"]:
-        node = soup.select_one(sel)
-        if node and len(node.get_text(strip=True)) > 300:
-            return node
-    best, best_len = None, 0
-    for d in soup.find_all("div"):
-        ps = d.find_all("p", recursive=False)
-        if len(ps) < 3:
-            continue
-        total = sum(len(p.get_text(strip=True)) for p in ps)
-        if total > best_len:
-            best, best_len = d, total
-    if best is not None:
-        return best
-    return soup.body or soup
+def fetch(url: str, timeout: int = 25):
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return r.read(), (r.headers.get("Content-Type") or "").lower(), ""
+    except Exception as e:  # noqa: BLE001
+        return None, "", f"{type(e).__name__}:{e}"
 
 
-def to_md(node):
-    out = []
-    for el in node.find_all(["h1", "h2", "h3", "h4", "p", "li"]):
-        txt = el.get_text("", strip=True)
-        if not txt:
-            continue
-        if el.name.startswith("h"):
-            out.append("#" * int(el.name[1]) + " " + txt)
-        elif el.name == "li":
-            out.append("- " + txt)
-        else:
-            out.append(txt)
-    return out
+def main() -> int:
+    args = sys.argv[1:]
+    urls = [a for a in args if a.startswith("http")]
+    keys = [a for a in args if not a.startswith("http")]
+    rc = 0
+    for url in urls:
+        rc |= scan(url, keys)
+    return rc
 
 
-def main():
-    url = sys.argv[1]
-    out = sys.argv[2]
-    html = fetch(url)
-    soup = BeautifulSoup(html, "html.parser")
-    for t in soup(DROP_TAGS):
-        t.decompose()
-    root = pick_root(soup)
-    text = "\n\n".join(to_md(root))
-    text = re.sub(r"\n{3,}", "\n\n", text).strip()
-    with open(out, "w", encoding="utf-8", newline="\n") as f:
-        f.write(text)
-    body = BeautifulSoup(html, "html.parser")
-    for t in body(DROP_TAGS):
-        t.decompose()
-    title = body.title.get_text(strip=True) if body.title else ""
-    print("URL:", url)
-    print("TITLE:", title)
-    print("CHARS:", len(text))
-    print("SHA256:", hashlib.sha256(text.encode("utf-8")).hexdigest())
-    print("---HEAD---")
-    print(text[:900])
-    print("---TERMS---")
-    for kw in ["示范带", "片区", "画廊", "走廊", "万元", "亿元"]:
-        for h in [m.start() for m in re.finditer(kw, text)][:3]:
-            print("[" + kw + "]", text[max(0, h - 60):h + 80].replace("\n", " "))
+def scan(url: str, keys: list) -> int:
+    raw, ctype, err = fetch(url)
+    if raw is None:
+        print(f"[FAIL] {url} -> {err}")
+        return 1
+    if "pdf" in ctype:
+        try:
+            import io
+
+            from pypdf import PdfReader
+
+            rd = PdfReader(io.BytesIO(raw))
+            text = "\n".join((p.extract_text() or "") for p in rd.pages)
+        except Exception as e:  # noqa: BLE001
+            print(f"[PDF-ERR] {e}")
+            return 1
+    else:
+        text = to_text(raw)
+    print(f"[OK] {url} ctype={ctype} chars={len(text)}")
+    if not keys:
+        print(text[:3000])
+        return 0
+    flat = re.sub(r"\s+", " ", text)
+    seen, hits = set(), 0
+    for k in keys:
+        for m in re.finditer(re.escape(k), flat):
+            lo, hi = max(0, m.start() - 120), min(len(flat), m.end() + 160)
+            win = flat[lo:hi]
+            if win in seen:
+                continue
+            seen.add(win)
+            hits += 1
+            print(f"--- [{k}] ---")
+            print(win)
+            if hits >= 12:
+                break
+        if hits >= 12:
+            break
+    print(f"[HITS] {hits} textlen={len(flat)}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
