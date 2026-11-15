@@ -1,0 +1,36 @@
+{
+ "out": "_tmp_rec_A320012.json",
+ "body_file": "_tmp_yz1.txt",
+ "start": "碧波绕村郭",
+ "end": "持久惠及于民。",
+ "meta": {
+  "title": "从“一处美”到“全域兴” 扬中“三江湾片区”打造和美乡村新图景",
+  "doc_no": "",
+  "issuer": "扬中市人民政府",
+  "issuer_level": "county",
+  "issued_ymd": "2026-03-30",
+  "published_ymd": "2026-03-30",
+  "doc_type": "新闻",
+  "source_kind": "部门动态",
+  "province_code": "320000",
+  "city_code": "321100",
+  "county_code": "321182",
+  "instruments": "宜居宜业和美乡村,片区建设,水环境治理,四好农村路,公共空间治理,人居环境整治,公共服务配套,强村公司",
+  "scope_desc": "扬中市人民政府门户网站政务公开·法定主动公开内容·重大民生信息（乡村振兴/涉农补贴）栏目文章。记扬中市三江湾及北部滨江片区以总计1.37亿元投入、120个重点项目推进宜居宜业和美乡村建设，涉及新坝镇营房村、新治村、联合村；片区定位「生态江湾岛、幸福太平洲」；累计提升农村公路12条14.73公里、改善生态河道18条28.03公里。",
+  "target_areas": "扬中市三江湾及北部滨江片区",
+  "budget_wan": "13700",
+  "valid_state": "现行有效",
+  "url": "http://www.yz.gov.cn/yangzhong/tpgj/202604/2495bcf7b31843d4beedc1e963e58f31.shtml",
+  "credibility": "B",
+  "summary": "扬中市政府网站2026-03-30发布，明确称「扬中市三江湾及北部滨江片区」，为该片区在建的官方一手记载：投入1.37亿元、实施120个重点项目，以水环境治理、路网提升、公共空间治理三要素推进，定位「生态江湾岛、幸福太平洲」。",
+  "slug": "js-yz-sanjiangwan-beibu-binjiang-pianqu",
+  "fetched_at": "2026-11-15",
+  "record_state": "active",
+  "areas": [
+   {"area_id": "A320012", "entity_type": "area", "rel": "primary"}
+  ],
+  "events": [
+   {"area_id": "A320012", "entity_type": "area", "event_type": "推进", "ymd": "2026-03-30", "note": "扬中市三江湾及北部滨江片区累计投入1.37亿元、实施120个重点项目，农村公路提升12条14.73公里、生态河道改善18条28.03公里"}
+  ]
+ }
+}

@@ -1,0 +1,2608 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="referrer" content="no-referrer"/>
+    <title>搜一下</title>
+
+    <link rel="stylesheet" href="../static/js/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../static/css/base.css"/>
+    <script type="text/javascript">
+        var timestamp = new Date().getTime()
+        document.write('<link href="../static/css/main.css?v=' + timestamp + '" rel="stylesheet" type="text/css"/>')
+    </script>
+    <link rel="stylesheet" href="../static/css/parts/existInCacheBox.css"/>
+    <link rel="stylesheet" href="../static/css/calendar.min.css">
+    <link rel="stylesheet" href="../static/css/samr.css"/>
+    <link rel="stylesheet" href="../static/css/parts/bszn.css"/>
+    <link href="../static/js/map/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/countryMarket/samr.css"/>
+    <link rel="stylesheet" href="../static/css/calendar.min.css">
+    <link rel="stylesheet" href="../static/css/newAdd.css"/>
+    <link rel="stylesheet" href="../static/css/ai/css/ai-layui.css"/>
+
+    <script type="text/javascript" src="../static/common/config.js"></script>
+    <script type="text/javascript" src="../static/js/ai/ai-layui.js"></script>
+
+
+    <script>
+
+
+        function getParam(paramName) {
+            paramValue = '', isFound = !1
+            if (this.location.search.indexOf('?') == 0 && this.location.search.indexOf('=') > 1) {
+                arrSource = unescape(this.location.search).substring(1, this.location.search.length).split('&'), i = 0
+                while (i < arrSource.length && !isFound) arrSource[i].indexOf('=') > 0 && arrSource[i].split('=')[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split('=')[1], isFound = !0), i++
+            }
+            return paramValue == '' && (paramValue = null), paramValue
+        }
+
+        function getParamChinese(paramName) {
+            paramValue = '', isFound = !1
+            if (this.location.search.indexOf('?') == 0 && this.location.search.indexOf('=') > 1) {
+                arrSource = unescape(this.location.search).substring(1, this.location.search.length).split('&'), i = 0
+                while (i < arrSource.length && !isFound) arrSource[i].indexOf('=') > 0 && arrSource[i].split('=')[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split('=')[1], isFound = !0), i++
+            }
+            paramValue = decodeURI(paramValue)
+            return paramValue == '' && (paramValue = null), paramValue
+        }
+
+        function getUrlParam(name) {
+            var url = window.location.search //获取url中"?"符后的字串
+            var theRequest = new Object()
+            if (url.indexOf('?') != -1) {
+                var str = url.substr(1)
+                strs = str.split('&')
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split('=')[0]] = decodeURI(strs[i].split('=')[1])
+                }
+            }
+            return theRequest[name]
+        }
+
+        var siteCode = getParam('siteCode')
+
+        //跳转页面未传递siteCode参数，默认使用这个站点：  todo 测试使用 升级去除
+        /* if  (siteCode==null || !siteCode)  {
+             siteCode= '5100000062';
+          }*/
+        //跳转页面未传递siteCode参数，默认使用这个站点：  todo 测试使用 升级去除
+
+        var column = getUrlParam('column')  //一级栏目
+        if (column == null || typeof (column) == 'undefined' || typeof (column) == undefined || column == 'undefined' || column == '') {
+            column = '全部'
+        } else if (column.indexOf('%') == 0) {
+            column = getParamChinese('column')
+        }
+
+        //搜索范围 0全文1标题
+        var wordPlace = getUrlParam('wordPlace');
+        //label查询
+        var label = getUrlParam('label');
+
+        //支持传递时间参数查询
+        //发布时间开始
+        var startTime = getUrlParam('startTime');
+        //发布时间结束
+        var endTime = getUrlParam('endTime');
+
+        var allSearchWord = getUrlParam('searchWord')  //搜索词
+
+        //测试搜索词：  todo 测试使用 升级去除
+         //   allSearchWord = '飞机场';
+        //测试搜索词：  todo 测试使用 升级去除
+
+        if (allSearchWord.indexOf('%') == 0) {
+            allSearchWord = getParamChinese('searchWord')
+        }
+
+
+
+        var sonSiteCode = getParam('sonSiteCode');
+
+        if (sonSiteCode == null || typeof (sonSiteCode) == 'undefined' || typeof (sonSiteCode) == undefined || sonSiteCode == 'undefined' || sonSiteCode == '') {
+            sonSiteCode = ''
+        }
+
+        if (siteCode == '4600000001') {
+            window.location.href = ctx + 'html/searchResult_hainan.html?siteCode=4600000001&column=' + column + '&searchWord=' + allSearchWord
+        } else if (siteCode == 'bm30000012' && column == 'zfxxgk') {
+            window.location.href = ctx + 'html/searchResult_market.html?siteCode=bm30000012&column=zfxxgk&searchWord=' + allSearchWord
+        }
+        if (siteCode == 'bm64050001') {
+            document.write('<link rel="icon" href="../static/images/neimeng.ico" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/neimeng.ico" type="image/x-icon">')
+        } else if (siteCode == 'bm29360001') {
+            document.write('<link rel="icon" href="../static/images/ico/bm29360001.ico" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/ico/bm29360001.ico" type="image/x-icon">')
+        } else if (siteCode == 'N000015770') {
+            document.write('<link rel="icon" href="../static/images/ico/bm29360001.ico" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/ico/N000015770.JPG" type="image/x-icon">')
+        } else if (siteCode == 'N000008661' || siteCode == 'N000010601' || siteCode == 'N000008659') {
+            document.write('<link rel="icon" href="../static/images/ico/N000008661.ico" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/ico/N000008661.ico" type="image/x-icon">')
+        } else if (siteCode == 'N000005579') {
+            document.write('<link rel="icon" href="../static/images/ico/anAn.ico" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/ico/anAn.ico" type="image/x-icon">')
+        } else if (siteCode == 'bm29190001') { <!-- 国家税务总局广东省税务局ico-->
+            document.write('<link rel="icon" href="../static/images/ico/gssw.png" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/ico/gssw.png" type="image/x-icon">')
+        } else if (siteCode == 'N000019204') { <!-- 海南社保局ico-->
+            document.write('<link rel="icon" href="../static/images/ico/hnsbj.png" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/ico/hnsbj.png" type="image/x-icon">')
+        } else if (siteCode == 'N000026543') { <!-- 卫生人才网ico-->
+            document.write('<link rel="icon" href="../static/images/ico/wsrcw.png" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/ico/wsrcw.png" type="image/x-icon">')
+        } else if (siteCode == 'N000014366' || siteCode == 'E000000359') { <!-- 深圳机场ico-->
+            document.write('<link rel="icon" href="../static/images/ico/szjichang.png" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/ico/szjichang.png" type="image/x-icon">')
+        } else if (siteCode == 'N000043249' || siteCode == 'N000043250') { <!-- 海南电影节站点-->
+            document.write('<link rel="icon" href="../static/images/ico/hainanmovie.png" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/ico/hainanmovie.png" type="image/x-icon">')
+        } else if (siteCode == 'N000019107' || siteCode == 'N000064887') { <!-- 广期所-->
+            document.write("<link rel=\"icon\" href=\"../static/images/gqs.ico\" type=\"image/x-icon\">");
+            document.write("<link rel=\"shortcut icon\" href=\"../static/images/gqs.ico\" type=\"image/x-icon\">");
+        } else {
+            document.write('<link rel="icon" href="../static/images/hainan_ico.ico" type="image/x-icon">')
+            document.write('<link rel="shortcut icon" href="../static/images/hainan_ico.ico" type="image/x-icon">')
+        }
+        if (siteCode == 'bm30000012') {
+            document.write('<link rel="stylesheet" href="../static/css/countryMarket/marketFooter.css" />')
+        }
+        if (siteCode == '3210000002') {
+            document.write('<link rel="stylesheet" href="../static/css/3210000002.css" />')
+        }
+
+        //参数
+        var siteName = ''
+        var searchBoxSettingsType = 0 //搜索框类型
+        var rangeSelections = ''  //搜索框下拉
+        var column2 = '全部'        //二级栏目
+        var type = '全部'
+        var left_right_index = 0  //栏目切换位置
+        var oneWidth = 0 //卷进去的总宽度
+        var liSum = 0 //li总长度
+        var noSearchWordBefore = ''
+        var orSearchTypeBefore = ''
+        var webConfig = ''//智能化开关
+        var pageWidth = '1' //页面宽度
+        var pageNum = 0  //当前页面
+        var pageSize = 10  //每页数量
+        var resultCount = 0
+        var styleColor = '#3dbd74' //默认颜色
+        var searchStyle = {}  //搜索样式
+        //搜索时间间隔限制
+        var time = 6
+        var intervalSeconds = 0
+        var lastVisitTime
+        //  var sonSiteCode = ''//子站点
+        var conditionArrayResult = {} //
+        var searchHover = 0 //悬浮
+        var conditionsPattern = 0
+        var conditionsPatternStatus = false
+        var searchResultAll = {}
+        var areaSearch = 0  //
+        var zffwTotal = 0   //
+        var pageData
+        var siteAddress //站点所属地区
+        //站点语言 默认中文
+        var language = 0;
+        //站点信息
+        var siteMap;
+        //地图搜索
+        var localsearchbs;
+        var localsearch;
+        var oldSearchWord = '';
+    </script>
+
+    <style>
+        body {
+            line-height: normal;
+        }
+
+        .modal-body {
+            max-height: 463px;
+        }
+
+        .cancelButton {
+            width: 67px;
+            padding: 6px;
+            background-color: #428bca;
+            border-color: #357ebd;
+            color: #fff;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            -khtml-border-radius: 10px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid transparent;
+            font-weight: 900;
+            font-size: 90%;
+            line-height: 8px;
+        }
+
+        .zwfwTab .zwfwTabTit ul li.active a {
+            background: #fff;
+            margin-top: -1px;
+            height: 31px;
+            border-left: 1px solid #e9e9e9;
+            border-right: 1px solid #e9e9e9;
+            color: #333;
+        }
+
+        .ztzdTabBox .zwfwTabTit ul li.active a {
+            background: #fff;
+            margin-top: -1px;
+            height: 31px;
+            border-left: 1px solid #e9e9e9;
+            border-right: 1px solid #e9e9e9;
+            color: #333;
+        }
+
+        .advanced-search input {
+            margin-bottom: 0px;
+        }
+
+        .wh658 {
+            width: 530px;
+        }
+
+        .searchPubList {
+            margin-bottom: 0px;
+        }
+
+        .wh273 {
+            width: 193px;
+        }
+
+        .wh193 {
+            width: 145px;
+        }
+
+        #selectHint {
+            width: 100%;
+            height: auto;
+            background: #fff;
+            box-sizing: border-box;
+            top: 40px;
+            display: none;
+            position: absolute;
+            left: -0.991px;
+            outline: none;
+            border: 1px solid #ccc;
+            border-top: 0;
+            /*border-bottom: 0;*/
+            z-index: 222;
+            text-align: left;
+        }
+
+        .resultTabBox {
+            border: none;
+        }
+
+        .pagination_con .pagination {
+            margin-top: 0;
+            margin-bottom: 0;
+            width: auto;
+        }
+
+        .logo img {
+            width: auto;
+        }
+
+        .logo {
+            padding-top: 0;
+        }
+
+        .dateListTxt input {
+            padding: 0px;
+            text-indent: 6px;
+        }
+
+        .searchNotResults {
+            margin-left: 0px !important;
+        }
+
+        .listTips {
+            margin-left: 0px !important;
+        }
+
+        .headerCenter {
+            margin: 0px auto 20px !important;
+            padding-top: 28px;
+        }
+
+        .searchBox .search-input {
+            background-color: white;
+        }
+
+        /* 设置aiChatDiv的基本样式 */
+        #aiChatDiv {
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow: auto;
+            resize: both;
+            min-height: 50px;
+            max-width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            color: black;
+            white-space: pre-wrap; /* 保留空白字符和换行符 */
+            text-align: left;
+            margin-bottom: 3%;
+        }
+
+        /* 设置think标签内的样式 */
+        #aiChatDiv think {
+            color: gray;
+            font-size: 14px;
+            display: block;
+            font-weight: normal;
+        }
+
+
+        /*.nav {
+            border: none !important;
+            margin-bottom: 0px !important;
+            height: 42px !important;
+        }*/
+
+
+
+        .ai-chat-container {
+
+            height: 500px;
+            margin: 30px auto 30px;
+            font-size: 16px;
+        }
+
+        .ai-index{
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            background: #F0F4FF;
+            border-radius: 50%;
+            color: #5681FF;
+            font-weight: 500;
+            margin-right: 6px;
+            font-style: normal;
+            text-align: center;
+        }
+
+        .ai-search-box {
+            position: relative;
+            margin-bottom: 28px;
+            width: 94%;
+        }
+
+        .ai-search-box .ai-layui-input {
+
+            height: 52px;
+            background: #FFFFFF;
+            border-radius: 32px;
+            border: 6px solid rgba(46, 109, 244, 0.13);
+            margin-left: 48px;
+            padding: 0 90px 0 48px;
+        }
+
+        .ai-search-box .ai-layui-input:focus, .ai-search-box .ai-layui-input:hover {
+            border-color: rgba(46, 109, 244, 0.13) !important;
+        }
+
+        .ai-search-robot {
+            width: 98px;
+            position: absolute;
+            left: 0;
+            top: -13px;
+            z-index: 9;
+        }
+
+        .ai-search-box .ai-layui-btn-normal {
+            height: 30px;
+            line-height: 30px;
+            background: #2E6DF4;
+            padding: 0 11px;
+            position: absolute;
+            right: -30px;
+            top: 11px;
+            font-size: 14px;
+
+        }
+
+        .ai-chat-main {
+            height: 400px;
+            overflow-y: auto;
+            border-radius: 12px;
+            background: url(../static/images/ai/ai-chat-bg.png) no-repeat;
+            background-size: cover;
+            padding: 20px 30px 30px;
+        }
+
+        .ai-text-color {
+            color: #0765FF
+        }
+
+        .ai-chat-tip {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .ai-chat-tip img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .ai-chat-tip p {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .ai-mb-12 {
+            margin-bottom: 12px;
+        }
+
+        .ai-mb-16 {
+            margin-left: -0.5%;
+            margin-top: -15%;
+            margin-bottom: 5%;
+        }
+
+        .ai-answer-ai-content {
+            line-height: 22px;
+            color: #333333;
+        }
+
+        .ai-question {
+            color: #D40401;
+        }
+
+        .ai-modify-list li {
+            background: #FFFFFF;
+            border-radius: 19px;
+            color: #2E6DF4;
+            padding: 6px 20px;
+            cursor: pointer;
+        }
+
+        .ai-modify-list {
+            display: inline-flex;
+            flex-direction: column;
+        }
+
+        .ai-modify-list li + li {
+            margin-top: 12px;
+        }
+
+        .ai-result-tip {
+            margin: 24px 0 12px;
+            font-weight: 500;
+            color: #2E6DF4;
+        }
+
+        .ai-result-list {
+            background: #FFF;
+            border-radius: 12px;
+            padding: 16px 24px;
+            font-size: 14px;
+        }
+
+        . ai-result-list .ai-desc,.ai-content-list .ai-desc {
+            color: #4F473D;
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .ai-content-list {
+            margin-top: 16px;
+        }
+        .ai-content-list .ai-title {
+            font-weight: 500;
+            color: #2E6DF4;
+            margin-bottom: 12px;
+        }
+
+        .ai-result-list li + li, .ai-content-list li +li {
+            margin-top: 16px;
+        }
+
+        .ai-relate-result {
+            margin-top: 32px;
+        }
+
+        .ai-total-num {
+            color: #333333;
+        }
+
+        .ai-relate-list .ai-info-box {
+            display: flex;
+            margin-bottom: 28px;
+        }
+
+        .ai-relate-list .ai-info-box .ai-type {
+            display: inline-block;
+            font-weight: 500;
+            background: #D40401;
+            padding: 4px 20px;
+            color: #fff;
+            margin-right: 16px;
+        }
+
+        .ai-relate-list .ai-info-box .ai-index {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            background: #F0F4FF;
+            border-radius: 50%;
+            color: #5681FF;
+            font-weight: 500;
+            margin-right: 6px;
+            font-style: normal;
+            text-align: center;
+        }
+
+        .ai-relate-list .ai-info-box .ai-title {
+            font-weight: 500;
+            color: #175DB1;
+            display: flex;
+            align-items: center;
+        }
+
+        .ai-relate-list .ai-content {
+            font-weight: 400;
+            font-size: 18px;
+            color: #534851;
+        }
+
+        .ai-relate-list .ai-bottom-info {
+            color: #818388;
+        }
+
+        .ai-relate-list .ai-bottom-info .ai-time {
+            margin-left: 48px;
+        }
+        .think-content {
+            font-family: PingFangSC, PingFang SC;
+            color: #828282;
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 12px;
+            line-height: 24px;
+        }
+        .display {
+            display: none;
+        }
+
+    </style>
+</head>
+<body style="text-align: center">
+<!--头部-->
+<p id="backToTop" style="display: none;">
+    <a title="回到顶部" href="javascript:void(0);">
+        <img class="top-img" src="../static/images/backtop.png">
+    </a>
+</p>
+<div class="headHeights" style="display: none">
+    <div class="header clearfix">
+        <div class="headerContainer">
+            <a href="#" target="_blank" class="logo fl"><img id="logoImage" src="" alt=""/></a>
+            <div>
+                <!--search BOX-->
+                <div class="searchBox fl" style="position: relative;z-index: 1;">
+                    <div class="clearfix">
+                        <div class="search-input fl">
+                            <input id="rangeSelection" type="hidden">
+                            <input id="specificRule" type="hidden">
+                            <input id="searchBoxSettingsIndex" type="hidden">
+                            <div class="fl searchDowmMenu" style="display: none;">
+                                <div class="tit" onclick="searchDowmMenu(this)">
+                                    <span id="searchMenuSelect" style="float:left"></span>
+                                    <i class="icon-headDown icon-headDownTriangle"></i>
+                                </div>
+                                <ul style="display: none;">
+                                </ul>
+                            </div>
+                            <div class="voiceIconBox" onclick="voiceSearch(this)" style="display: none;">
+                                <img src="../static/images/voiceSearch/voiceIcon.png" width="20px" height="20">
+                            </div>
+                            <input type="text" class="inp_srh" placeholder="" autocomplete="off" id="allSearchWord"
+                                   value="" onFocus="getTip(this)" x-webkit-speech lang="zh-CN"/>
+
+                            <ul id="selectHint" class="searchul">
+                                <li class="searchLi"></li>
+                                <li class="searchLi"></li>
+                                <li class="searchLi"></li>
+                            </ul>
+                        </div>
+                        <div class="search-btn fl">
+                            <input type="button" class="styleColor search_icon" onclick='searchProcess("", 11)'/>
+                            <i class="icon icon-search styleColor" onclick='searchProcess("", 11)'></i>
+                        </div>
+
+                    </div>
+                    <!--热搜词开关-->
+                    <div class="hotWord clearfix" id="hotWord">
+                        <h1 class="fl"></h1>
+                    </div>
+                </div>
+                <!--访问频率限制-->
+                <div id="myModal_search_highs" class="modal hide fade myModal-edit advance-modal" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true">您访问过于频繁，请休息<span id="times"></span>秒再来！
+                </div>
+                <!--高级搜索\文号搜索\二次搜索\附件搜索-->
+                <div id="moreSearchFun">
+
+                </div>
+                <!--
+                                <div class="fl clearfix variousSearchDiv" style=" max-width: 42%;margin-top: 1%;">
+                                    <table>
+                                        <tr class="variousSearch">
+
+                                        </tr>
+                                    </table>
+                                </div>
+                -->
+
+
+                <div style="clear: both"></div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+
+    </div>
+    <!--status =100 为正常状态-->
+    <div>
+        <div class="nav styleColor">
+            <!--导航栏-->
+            <div class="navWidth">
+                <div style="float: left;margin-left:0px;overflow: hidden;" class="titleTarget">
+                    <ul id="showTitle">
+                    </ul>
+                </div>
+            </div>
+            <!--滚动后导航栏-->
+            <div class="nav-bar-hidden secondTitl styleColor" style="display: none;">
+                <div class="popupad" style="width: 54%;display: inline-block;">
+                    <div style="float: left"><span class='left' style="cursor:pointer;display: none;"><</span></div>
+                    <div style="float: left;width:79%;margin-left:0px;overflow: hidden;position: relative;height: 37px;"
+                         class="titleTarget2">
+                        <ul id="showTitl" style="display: inline-block;height: 37px;margin-left: 0px">
+                        </ul>
+                    </div>
+                    <div style="float: left"><span class='right' style="display: none;cursor:pointer;">></span></div>
+                </div>
+                <div class="fr Search-engine">
+                    <input type="text" name="" autocomplete="off" id="allSearchWor" value="" class="inp_srh fl"
+                           placeholder="" hidden/>
+                    <input type="button" onclick='searchProcess("", 1, 1)' class="fl search_icon"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div style="min-height: 500px;">-->
+<div>
+
+
+    <!--我要查-->
+    <div id="woyaocha"></div>
+    <!--内容区 start-->
+    <div class="mainCon clearfix mainConHeights">
+
+
+        <!--筛选器站群-->
+        <div class="jiyuehua clearfixp" style="display: none">
+            <div class="pubSortListBox clearfix">
+                <label class="sorTtit fl" style="line-height:30px">集约化站群：</label>
+                <div class="shixianbumen fl">
+                </div>
+            </div>
+        </div>
+        <!--搜索条件 平铺列表样式 -->
+        <div class="timeSortBy" style="display: none">
+            <div class="pubSortListBox clearfix ">
+                <div><label class="sorTtit fl">时间范围：</label></div>
+                <div class="sortListCon">
+                    <ul class="clearfix">
+                        <li class="active" data="0"><a href="javascript:;">时间不限</a></li>
+                        <li data="1"><a href="javascript:;">一年内</a></li>
+                        <li data="2"><a href="javascript:;">一月内</a></li>
+                        <li data="3"><a href="javascript:;">一周内</a></li>
+                        <li data="4"><a href="javascript:;">一日内</a></li>
+                        <li class="clearfix " data="5">
+                            <a href="javascript:;" class="fl">自定义：</a>
+                            <div class="customizeData fl">
+                                <span class="dateWords fl">从</span>
+                                <div id="test7" class="dataSelectBox fl input-group date startTime">
+                                    <input type="text" class="dateText" name="startDate" id="startDate2"
+                                           style="border: 1px solid #ececec;background: #fff;width: 120px;height: 30px;line-height: 30px;padding: 0 10px;margin: 2px 10px;outline: none;border-radius: 4px;">
+                                    <span class="input-group-addon"><i class="icon-samr icon-date fa fa-calendar"
+                                                                       style="margin-top: -4px;margin-right: 7px;"></i></span>
+                                </div>
+                                <span class="dateWords fl">至</span>
+                                <div id="test8" class="dataSelectBox fl input-group date endTime">
+                                    <input type="text" class="dateText" name="endDate" id="endDate2"
+                                           style="border: 1px solid #ececec;background: #fff;width: 120px;height: 30px;line-height: 30px;padding: 0 10px;margin: 2px 10px;outline: none;border-radius: 4px;">
+                                    <span class="input-group-addon"><i class=" icon-samr icon-date fa fa-calendar"
+                                                                       style="margin-top: -4px;margin-right: 7px;"></i></span>
+                                </div>
+
+                                <a href="javascript:;" class="btnSubmitSearch"
+                                   style="color: #fff !important;font-weight: normal !important;">确定</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <input type="hidden" class="conditionValue" id="timeRangeValue" value="0">
+                </div>
+            </div>
+
+            <div class="pubSortListBox clearfix conPattern" style="display: none">
+                <div><label class="sorTtit fl">结果分类：</label></div>
+                <div class="sortListCon searchLocation" style="margin-left: 128px;">
+                    <ul class="clearfix">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pubSortListBox clearfix ">
+                <div><label class="sorTtit fl">格式分类：</label></div>
+                <div class="sortListCon">
+                    <ul class="clearfix">
+                        <li class="active" data="0"><a href="javascript:;">全部格式</a></li>
+                        <li data="1"><a href="javascript:;"><i class="icon-file icon-word"></i>WORD</a></li>
+                        <li data="2"><a href="javascript:;"><i class="icon-file icon-ppt"></i>PPT</a></li>
+                        <li data="3"><a href="javascript:;"><i class="icon-file icon-pdf"></i>PDF</a></li>
+                        <li data="4"><a href="javascript:;"><i class="icon-file icon-excel"></i>EXCEL</a></li>
+                        <li data="5"><a href="javascript:;"><i class="icon-file icon-txt"></i>TXT</a></li>
+                        <li data="6"><a href="javascript:;"><i class="icon-file icon-zip"></i>ZIP</a></li>
+                    </ul>
+                    <input type="hidden" class="conditionValue" id="fileTypeRangeValue" value="0">
+                </div>
+            </div>
+            <div class="pubSortListBox clearfix">
+                <div><label class="sorTtit fl">结果排序：</label></div>
+                <div class="sortListCon">
+                    <ul class="clearfix">
+                        <li class="active" data="0"><a href="javascript:;">默认排序</a></li>
+                        <li data="2"><a href="javascript:;">按相关度</a></li>
+                        <li data="1"><a href="javascript:;">按时间倒序</a></li>
+                        <li data="3"><a href="javascript:;">按时间正序</a></li>
+                    </ul>
+                    <input type="hidden" class="conditionValue" id="orderWayRangeValue" value="0">
+                </div>
+            </div>
+        </div>
+        <!--左侧 start-->
+        <div class="leftSide-layer fl">
+            <div class="results-list clearfix" style="height: 45px;line-height: 45px;">
+                <div class="fl">
+                    <p class="fl" id="resultTotal"></p>
+                </div>
+                <div class="searchListTabBox fr" style="margin-top: 10px;display: none">
+                    <ul>
+                        <li class="active" data="1"><a href="javascript:;">只搜标题</a></li>
+                        <li data="0"><a href="javascript:;">搜索全文</a></li>
+                    </ul>
+                    <input type="hidden" class="conditionValue" id="selectRangeValue" value="0">
+                </div>
+            </div>
+            <!-- 地域搜索 -->
+            <div class="searchResults" id="areaSearchInfo" style="display: none">
+                <!--  <H3 style="font-size:18px;">根据您的位置,我们推荐您<span style="color:red;"></span>的搜索结果
+                      <button
+                              onclick="cancelAreaSearch()" class="cancelButton">取消
+                      </button>
+                  </H3>-->
+            </div>
+            <!-- 栏目地理识别搜索 -->
+            <div class="searchResults" id="citySearchInfo" style="display: none">
+                <!--  <H3 style="font-size:18px;">根据您的位置,我们推荐您<span style="color:red;"></span>的搜索结果
+                      <button
+                              onclick="cancelAreaSearch()" class="cancelButton">取消
+                      </button>
+                  </H3>-->
+            </div>
+            <!-- label条件筛选 -->
+            <div class="filter-title filter-label" style="display: none">
+                <span class="filter-con">
+                    <a href="javascript:void(0);" style="margin: 10px -10px;background-color: #CCCCCC;"
+                       data-value="bs_bldx" class="govWorkInfo" onclick="searchProcessJudge('','','')"></a>
+                </span>
+            </div>
+
+
+            <!--<div class="fl gqslabel" style="display: block;margin-top: 1.5%;margin-left: 0%;margin-right: 2%;height: 69px;width: 93px;">
+                <div class="">
+                    <div class="announcement-button" style="border: 1px solid #4874CD;padding: 4px 5px;letter-spacing: 2px;background-color: white;color: #4874CD;font-size: 14px;font-weight: bold;"></div>
+                </div>
+            </div>-->
+
+            <div class="fl gqslabel" style="display: none;margin-top: 1.5%;margin-left: 0%;margin-right: 2%;height: 69px;width: 93px;">
+                <div class="">
+                    <div class="announcement-button"
+                         style="border: 1px solid #4874CD;
+                    padding: 4px 5px;
+                    letter-spacing: 2px;
+                    background-color: white;
+                    color: #4874CD;
+                    font-size: 14px;
+                    font-weight: bold;
+                    /* 新增：多行文本溢出控制 */
+                    width: 100%;
+                    height: 100%;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;     /* 显示2行 */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    line-height: 1.2;          /* 行高 */
+                    text-align: center;
+                    box-sizing: border-box;">
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--搜索条件 下拉列表样式-->
+            <div class="downMenuBox clearfix" id="searchSelect" style="display:none;margin-bottom: 8px;">
+
+
+            </div>
+
+
+            <!--智能模块-->
+            <div id="aiStreamDiv" class="ai-chat-container" style="display: none">
+                <div class="ai-search-box layui-form">
+                    <img class="ai-search-robot" src="../static/images/ai/ai-robot.png" alt="图片"/>
+                    <div class="ai-layui-input-wrap">
+                        <input id="aiSearchWord" ai-type="text" name="" placeholder="" value="" class="ai-layui-input">
+                        <button id="aiSearchButton" onclick='searchAiProcess()' ai-type="button" class="layui-btn ai-layui-btn-normal layui-btn-radius">智能搜索</button>
+                    </div>
+                </div>
+                <div id="aiChatBoxId" class="ai-chat-main">
+                    <div class="ai-chat-tip">
+                        <img src="../static/images/ai/ai-tip.svg" alt="">
+                        <p class="ai-text-color">智能搜索结果</p>
+                    </div>
+
+
+                    <!-- ai纠错 提取搜索词  -->
+                    <div id="aiWord" class="chat-ai-content" style="text-align: left;display: none;font-family: monospace;">
+                        <div id="errorWord" class="ai-answer-ai-content ai-mb-12 display">
+                            您好！检测到您输入了“<span id="aiSearchWord2" class="ai-question"></span>”，可能存在笔误或冗余，影响搜索效果。
+                        </div>
+                       <!-- <p class="modify-ai-desc ai-mb-16">
+                            为您推荐一下规范表述：
+                        </p>-->
+                        <p id="jcts" class="modify-ai-desc ai-mb-12 display">
+                            为您检测一下搜索内容是否规范表述：
+                        </p>
+                        <ul id="aiWordList" class="ai-modify-list">
+                        </ul>
+                    </div>
+
+                    <!-- ai无稿件内容总结 -->
+                    <div id="aiNotData" class="chat-ai-content" style="text-align: left;display: none">
+                        <p class="ai-result-tip">根据搜索结果，以下是智能总结内容：</p>
+                        <ul class="ai-result-list">
+                            <li>
+                                <p class="ai-desc">暂无智能搜索内容。</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- ai稿件内容总结 -->
+                    <div id="aiData" class="chat-ai-content" style="text-align: left;display: none">
+                        <p class="ai-result-tip">根据搜索结果，以下是智能总结内容：</p>
+
+                        <div  class="ai-result-list">
+                            <p id="aiDataTitle" class="ai-desc"></p>
+                            <div id="think" class="think-content"></div>
+                        </div>
+
+                        <ul id="aiDataList" class="ai-content-list">
+                            <li>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <!--  <div class="ai-relate-result">
+                   <p class="ai-total-num ai-mb-16">相关结果264个</p>
+                   <ul class="ai-relate-list">
+                     <li>
+                       <div class="ai-info-box">
+                         <p class="ai-type">政府文件测试</p>
+                         <div class="ai-title">
+                           <i class="ai-index">1</i>
+                           <p> <span class="ai-question">成都</span>市购买房产、2025年最新政策</p>
+                         </div>
+                       </div>
+                       <div class="ai-content ai-mb-16">
+                         在成都市购买建筑面积大于等于90平米的商品房或二手房，并取得房产证且缴纳社保满1年，可申请落户本人、配偶及未成年子女
+                       </div>
+                       <div class="ai-bottom-info">
+                         <span>四川省人民政府</span>
+                         <span class="ai-time">2022-07-08</span>
+                       </div>
+                     </li>
+                   </ul>
+                 </div> -->
+
+            </div>
+
+            <!--智能模块 -->
+
+
+            <!--天气预报 start-->
+            <!--房贷计算器 start-->
+            <div id="dkLayerBox">
+            </div>
+            <!--办事栏目下条件筛选框 start-->
+            <!--智能纠错 start-->
+            <div class="searchResults" id="errorCorrection" style="display: none">
+            </div>
+
+            <!-- 框计算 start -->
+            <div class="characterIntro" id="boxComputer" style="display: none">
+                <div class="login-box-info">
+                </div>
+            </div>
+
+            <!--置顶信息介绍 start-->
+            <!-- 机构名片介绍 start-->
+            <div class="clearfix ldwxxBox " id="businessCard"
+                 style="border-radius:10px;box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);padding: 10px 10px 10px 10px;margin-bottom: 29px;">
+            </div>
+
+
+            <!-- 地理名片介绍 start-->
+            <div class="clearfix ldwxxBox " id="locationCard" style="display: none;margin-bottom: 10px">
+            </div>
+            <!--多个领导人 start-->
+            <div class="relatedPerson ldrzd clearfix" style="display: none">
+                <div class="leaderWord"><h1></h1></div>
+                <ul></ul>
+            </div>
+            <!--单个领导人-->
+            <div class="clearfix ldwxxBox singLeader" style="display: none">
+                <div class="fl ldrImgBox">
+                    <a target="_blank"><img></a>
+                </div>
+                <div class="ldrInfoBox">
+                    <div class="ldrzw" style="text-align:left"></div>
+                    <div class="ldwjj" style="text-align:left">简介：</div>
+                    <div class="ldrgzfg" style="text-align:left">工作分工：</div>
+                </div>
+            </div>
+            <div class="zwfwTabBox ztzdTabBox ldNewsInfo" style="display: none">
+                <div class="zwfwTabAllCon">
+                    <div class="zwfwTabListCon" style="display: block;">
+                        <ol></ol>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--专题置顶 start-->
+            <div class="ztzdBox clearfix" style="display: none">
+                <div class="fl ztzdPicBox">
+                    <ul></ul>
+                    <ol></ol>
+                    <div class="slide prev" style="display: none">
+                        <p></p>
+                    </div>
+                    <div class="slide next" style="display: none">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="fl ztList">
+                    <ul></ul>
+                </div>
+            </div>
+            <!--专题区块切换 -->
+            <div id="" class="zwfwTabBox ztzdTabBox ztzdLabel" style="display: none">
+                <div class="zwfwTabTit clearfix">
+                    <ul></ul>
+                </div>
+                <div class="zwfwTabAllCon">
+                </div>
+            </div>
+
+            <!--置顶稿件 -->
+            <div class="zwfwTabBox zwzd" id="preArticle" style="display: none">
+
+            </div>
+
+            <!--相关推荐 start-->
+            <div class="zwfwTabBox relatezwfwTabBox" style="display: none">
+                <!--相关标题和内容-->
+                <div id="relateTitleContents">
+
+                </div>
+                <!--相关业务系统/相关机构-->
+                <div class="zwfwVertical zwfwVerticalLeft" style="border-bottom: none;">
+                    <div id="leftRelateInfo">
+
+                    </div>
+
+                    <div style="clear: both"></div>
+                </div>
+
+            </div>
+            <!--相关推荐 end-->
+            <div id="mapWord" class="wordGuide Residence-permit" style="display:none;width:102%">
+                <div class="bigTit clearfix">
+                    <i class="convenientMap_icon fl"></i>
+                    <a id="mapATxt" class="titleFont permitT titleSelf"
+                       style="width: 513px; white-space: nowrap; font-size: 16px;">惠民便民地图</a>
+                </div>
+                <div class="clearfix">
+                    <!-- 地图 开始
+                    <div id="l-map" class="fl l-map"></div>  -->
+                    <!-- 地图 结束-->
+
+                    <!-- 地图信息 开始
+                    <div id="r-result" class="fl r-result" style="width: 50%;text-align: left"></div> -->
+                    <!-- 地图信息 结束 -->
+
+                    <!-- 天地图 开始-->
+                    <div id="mapDiv" class="fl l-map" style="z-index: 0"></div>
+
+
+                    <div class="fl r-result"
+                         style="width: 50%;text-align: left">
+
+                        <input type="text" style="display: none;" id="keyWord" value=""/>
+                        <input type="button" style="display: none;" id="tdtSearch"
+                               value="搜索"/>
+
+                        <!-- 提示词面板 -->
+                        <div id="promptDiv" class="prompt"></div>
+                        <!-- 统计面板 -->
+                        <div id="statisticsDiv" class="statistics"></div>
+                        <!-- 建议词面板 -->
+                        <div id="suggestsDiv" class="suggests"></div>
+                        <!-- 公交提示面板 -->
+                        <div id="lineDataDiv" class="lineData"></div>
+                        <!-- 搜索结果面板 	-->
+                        <div id="resultDiv" class="result">
+                            <div id="searchDiv" class="title_font"></div>
+                            <div id="pageDiv">
+                                <!--   <input type="button" value="第一页" onClick="localsearch.firstPage()"/>
+                                 <input type="button" value="上一页" onClick="localsearch.previousPage()"/>
+                                 <input type="button" value="下一页" onClick="localsearch.nextPage()"/>
+                                 <input type="button" value="最后一页" onClick="localsearch.lastPage()"/>
+                                 <br/>
+                                 转到第<input type="text" value="1" id="pageId" size="3"/>页
+                                 <input type="button" onClick="localsearch.gotoPage(parseInt(document.getElementById('pageId').value));"
+                                        value="转到"/>
+                                        -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 天地图 结束-->
+
+                </div>
+            </div>
+            <!--政务服务直达-tab切换版本 start-->
+            <div class="zwfwTabBox zwfwTab zwzd" id="zwzdTab" style="display: none">
+                <div class="zwfwTabTit clearfix">
+                    <ul></ul>
+                </div>
+                <div class="zwfwTabAllCon">
+                </div>
+
+            </div>
+            <!--政务服务直达-竖版 start-->
+            <div class="zwfwTabBox zwzd" id="zwzd" style="display: none">
+
+            </div>
+
+            <!--最新相关消息 start-->
+            <div class="newsInfo" style="margin-top: 6%;">
+            </div>
+            <!--搜索结果：基本内容 start-->
+            <!--政务服务展示模板-->
+            <div class="bsznListBox" style="display: none">
+                <ul></ul>
+            </div>
+            <!--政策文件  、、、、、、、、-->
+
+            <!--ai结果-->
+            <!-- <div id="aiChatDiv" style="border: 1px solid #ccc; padding: 10px; overflow: auto; resize: both; min-height: 50px; max-width: 100%; color: black; font-size: 16px; font-weight: bold;">
+                 AI查询中...
+             </div>-->
+
+            <!--ai结果-->
+
+            <!--正常搜索结果-->
+            <div id="wordGuideList">
+
+            </div>
+            <!--搜索结果为禁搜词-->
+            <div class="searchResults searchForbid" style="display: none">
+                <i class="icon icon-searchResults"></i>
+                <span>您搜索的内容包含敏感信息，请重试！</span>
+            </div>
+            <!---没有搜索结果-->
+            <div class="searchNotResults" style="display: none">
+                <div class="resultsTit" id="fullSiteDiv">
+                    很抱歉，未找到<span id="fullSiteSpan"></span>相关的内容
+                </div>
+
+                <div id="listTips" class="listTips">
+                    <div class="tips">温馨提示：</div>
+                    <div class="listTips"><i></i> 请检查您的输入是否正确</div>
+                    <div class="listTips"><i></i> 请简化查询词或尝试其他相关词</div>
+                    <div class="listTips"><i></i> 阅读 <a style="cursor:pointer;color: #0088cc;" onclick="searchHelp()">搜索使用帮助</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--底部相关搜索  start-->
+
+            <div class="relatedSearch" style="display: none">
+                <h1>相关搜索</h1>
+                <ul class="clearfix" id="relatedSearch">
+
+
+                </ul>
+            </div>
+            <!--翻页  start-->
+            <div class="pagination clearfix" style="display: none;margin-bottom: 30px;width: 1000px;">
+                <ul id="jumpToFirstUl" style="visibility: hidden;display: none">
+                    <li class="prev" jp-role="prev" jp-data="3">
+                        <a onclick="turnToFirstPage()" value="1">首页
+                        </a>
+                    </li>
+                </ul>
+                <ul id="pageInfo"></ul>
+                <ul id="jumpTopageUl" style="visibility: hidden;">
+                    <li class="page" jp-role="page" jp-data="1" style="width: 53px;">
+                        <a style="width: 58px;height: 34px;border: none;">
+                            <input type="text" id="turnToPageValue" style="height: 33px;width: 58px; text-align:center"
+                                   value="">
+                        </a>
+                    </li>
+                    <li class="prev" jp-role="prev" jp-data="3">
+                        <a id="turnToPageNum" onclick="turnToPageMethod()" value="1">跳转
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--左侧 end-->
+        <!--右侧内容 start -->
+        <div class="rightSide-layer fl left-content">
+            <!--相关领导-->
+            <div id="rightLeader" style="margin-bottom: 30px;display: none">
+            </div>
+            <!--相关业务系统/相关业务机构-->
+            <div id="rightRelateInfo">
+            </div>
+            <!--树形结构-->
+            <div id="statisticsTree">
+
+            </div>
+            <!--普通样式-->
+            <div class="tjxxList" id="statisticsInfo">
+            </div>
+            <!--智能推荐-->
+            <div id="zntj" style="display: none">
+            </div>
+            <!--热搜资源-->
+            <div class="searchRange hotArticleRange" style="display: none">
+                <h1></h1>
+                <div class="rdtjListBox">
+                    <ul></ul>
+                </div>
+            </div>
+            <!--搜索排行-->
+            <div class="searchRange hotWordsRange" style="display: none">
+                <h1></h1>
+                <div class="rdtjListBox">
+                    <ul></ul>
+                </div>
+            </div>
+
+            <!--右侧相关推荐-->
+            <div class="zntjList" id="relativeInfo" style="margin-top: 25px;display: none">
+                <div class="title-info clearfix">
+                    <h1>相关推荐</h1>
+                    <a href="javascript:void(0)" id="relateRecommends"
+                       onclick="showRecommendInfo()" style="display: none;"><span id="showRecommends" data="0">展开</span><i></i></a>
+                </div>
+                <div class="leader-list-info clearfix" id="relateRecommend"></div>
+            </div>
+            <!-- 关联词-->
+            <div id="id_releation_word" style="display: none;text-align: left;">
+
+            </div>
+            <!--政策文件统计信息-->
+            <!--最近搜索记录-->
+            <div id="recentSearchRecords" class="fl left-content"
+                 style="display: none;text-align: left;margin-top: 0px">
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!--政策文件展示模板-->
+    <div class="resultConBox" style="display: none;min-height: 500px;">
+
+    </div>
+
+</div>
+
+<!--办事入口地图-->
+<div class="zhezhao" id='zhezhao' style="opacity:0;">
+    <div class="tankuang">
+        <div id="header">
+            <div id="header-left"></div>
+            <div id="header-right" onclick="hidder()">x</div>
+        </div>
+        <div>
+            <!-- <div id="map-operate" unselectable="on" class="show-3d">
+                 <div id="iploc" class="ipLocCont BMap_noprint anchorBR"
+                      style="position: absolute; z-index: 10; bottom: 80px; right: 10px; top: auto; left: auto;">
+                     <div class="hide titleComm title">定位您的位置</div>
+                     <div class="hide titleComm loading-button">定位中</div>
+                     <div class="hide titleComm titleFailed">定位失败</div>
+                     <div class="icon">
+                         <span class="success"></span>
+                     </div>
+                 </div>
+                 <div unselectable="on" class=" BMap_stdMpCtrl BMap_stdMpType1 BMap_noprint anchorBR"
+                      style="width: 65px; height: 47px; bottom: 30px; right: 1px; top: auto; left: auto; position: absolute; z-index: 10;">
+                     <div class="BMap_stdMpZoom" style="height: 56px; width: 65px;">
+                         <div class="BMap_button_new BMap_stdMpZoomIn" title="放大一级">
+                             <div class="BMap_smcbg in"></div>
+                         </div>
+                         <div class="BMap_button_new BMap_stdMpZoomOut" title="缩小一级" style="top: 27px;">
+                             <div class="BMap_smcbg out"></div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <div id="container"></div>-->
+
+
+            <div class="wordGuide Residence-permit" style="display:block;width:100%">
+                <div class="clearfix">
+                    <div id="mapDiv-bs" class="fl l-map" style="width: 850px;height: 499px"></div>
+
+                    <div style="display: none">
+                        <p>本示例演示如何根据关键字本地搜索。</p>
+                        <input type="text" id="keyWord-bs" value="天安门"/>
+                        <input type="button" id="tdtSearch-bs"
+                               value="搜索"/>
+                        <br/>
+                        <!-- 提示词面板 -->
+                        <div id="promptDiv-bs" class="prompt"></div>
+                        <!-- 统计面板 -->
+                        <div id="statisticsDiv-bs" class="statistics"></div>
+                        <!-- 建议词面板 -->
+                        <div id="suggestsDiv-bs" class="suggests"></div>
+                        <!-- 公交提示面板 -->
+                        <div id="lineDataDiv-bs" class="lineData"></div>
+                        <!-- 搜索结果面板 	-->
+                        <div id="resultDiv-bs" class="result">
+                            <div id="searchDiv-bs"></div>
+                            <div id="pageDiv-bs">
+                                <!--     <input type="button" value="第一页" onClick="localsearch.firstPage()"/>
+                                    <input type="button" value="上一页" onClick="localsearch.previousPage()"/>
+                                    <input type="button" value="下一页" onClick="localsearch.nextPage()"/>
+                                    <input type="button" value="最后一页" onClick="localsearch.lastPage()"/>
+                                    <br/>
+                                    转到第<input type="text" value="1" id="pageId" size="3"/>页
+                                    <input type="button" onClick="localsearch.gotoPage(parseInt(document.getElementById('pageId').value));"
+                                           value="转到"/> -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<!--语音搜索--弹框--start-->
+<div class="mask" style="display: none;"></div>
+<div class="dialogVoiceSearch" style="display: none;">
+    <div>
+        <div class="languageBox clearfix">
+            <label class="fl tit">语种：</label>
+            <div class="languageDropMenuBox fl">
+                <span class="selectText">普通话</span>
+                <input type="hidden" value="1537" id="languageId"/>
+                <!--  <i class="icon-headDown icon-headDownTriangle"></i>-->
+                <!-- <i class="icon-headDown icon-headUpTriangle"></i>向上 -->
+                <!--  <ul class="languageDownList">
+                      <li data="1537"><a href="javascript:;"><i class="selectedLanguage"></i>普通话</a></li>
+                      <li data="1637"><a href="javascript:;"><i></i>粤语</a></li>
+                      <li data="1837"><a href="javascript:;"><i></i>四川话</a></li>
+                  </ul>-->
+            </div>
+        </div>
+        <i class="titClose"></i>
+    </div>
+    <div>
+        <div class="fl voiceSearchPic">
+            <div style="width:110px;height: 110px">
+                <img src="../static/images/voiceSearch/video.gif" width="110" height="110" class="videoGif"
+                     style="margin-top: 40%;">
+            </div>
+
+            <audio id="audioSave" controls autoplay style="display: none"></audio>
+        </div>
+        <div class="fl" style="margin-top: 10px;">
+            <div class="resultInfo" style="opacity: 0"><!-- 想搜什么，说来听听 -->识别错误，请重新输入！</div>
+            <div class="btnResultBox" style="margin-left: -50px;">
+                <a class="btnD btnRed" href="javascript:;" id="btn-start-upload" onclick="uploadRecording();">识别并搜索</a>
+                <a class="btnD" href="javascript:;" onclick="startRecording();">重新输入</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mask"></div>
+<!--右侧悬浮满意度调查--快捷入口--start-->
+<div id="userFeedback" style="display: none;">
+    <!--<div class="floatingFrame">
+        <div class="feedbackTit"><img src="../static/images/userFeedback/iconSearchFeedback.png">搜索反馈</div>
+        <div class="publicResultBg satisfied">
+            <div class="feedbackImgBg" data="1"><img src="../static/images/userFeedback/redFace.png"></div>
+            <div class="tit">满意</div>
+        </div>
+        <div class="publicResultBg notSatisfied">
+            <div class="feedbackImgBg" data="2"><img src="../static/images/userFeedback/grayFace.png"></div>
+            <div class="tit">不满意</div>
+        </div>
+        <div class="morefeedbackBtn"><a href="javascript:;">更多反馈&gt;</a></div>
+    </div>
+    &lt;!&ndash;右侧悬浮满意度调查&#45;&#45;快捷入口&#45;&#45;end&ndash;&gt;
+    &lt;!&ndash;右侧悬浮-感谢反馈和谢谢反馈&#45;&#45;start&ndash;&gt;
+    <div class="floatingTipsBox thanksTipsBox" style="display: none">谢谢反馈！<span class="tipsClear" style="cursor: pointer;">×</span> </div>
+    <div class="floatingTipsBox refuseTipsBox" style="display: none;width: 11%;height: 12%;">
+        您当日反馈次数过多
+        <br>
+        请明日再试！ <span class="tipsClear" style="cursor: pointer;">×</span>
+    </div>
+    &lt;!&ndash;右侧悬浮-感谢反馈和谢谢反馈&#45;&#45;end&ndash;&gt;
+    &lt;!&ndash;满意度调查问卷-弹框&#45;&#45;start&ndash;&gt;
+    <div class="dialogQuestionnaireBox">
+        <a class="closeBlackBox" href="javascript:;"><img src="../static/images/userFeedback/closeBlack.png"></a>
+        <div class="centerCon">
+            <div class="questionnairePic"><img src="../static/images/userFeedback/questionnaireBg.png"></div>
+            <div class="textInfo">
+                为提升政府网站位公众服务水平，诚邀您参与用户体验反馈活动，欢迎提出您在使用过程中遇到的问题或宝贵意见。我们将认真对待您的意见和建议，参考您的反馈不断完善搜索功能，更好的为所有用户服务。
+            </div>
+            <div class="questionAnswerBox">
+                <div class="questionsTitBox">
+                    <div class="bigRound"></div>
+                    <div class="smallRound"></div>
+                    <div class="code fl">一、</div>
+                    <div class="tit fl wh166">您搜索的关键词</div>
+                </div>
+                <div class="textKey"><input type="text" placeholder="关键词最少输入1个字，最多输入100个字；"/></div>
+            </div>
+            <div class="questionAnswerBox questionAnswerBox2">
+                <div class="questionsTitBox">
+                    <div class="bigRound"></div>
+                    <div class="smallRound"></div>
+                    <div class="code fl">二、</div>
+                    <div class="tit fl wh226">对于这次搜索结果是否满意</div>
+                </div>
+                <div class="selectCheck">
+                    <span><i class="iconRadio icon-radioRed" data="1"></i>非常满意</span>
+                    <span><i class="iconRadio icon-radioRed" data="2"></i>基本符合预期</span>
+                    <span><i class="iconRadio icon-radioRed" data="3"></i>有待改进</span>
+                </div>
+            </div>
+            <div class="questionAnswerBox">
+                <div class="questionsTitBox">
+                    <div class="bigRound"></div>
+                    <div class="smallRound"></div>
+                    <div class="code fl">三、</div>
+                    <div class="tit fl wh456">提出您在使用过程中遇到的问题或宝贵意见（不少于10个字）</div>
+                </div>
+                <div class="textAreaBox">
+                    <textarea placeholder="意见不少于10个字，最多为100字"></textarea>
+                </div>
+            </div>
+            <div class="veriCodeBox">
+                <div class="codeTit">验证码</div>
+                <div class="textAndPic clearfix">
+                    &lt;!&ndash;<div class="fl textVerif" ><input type="text" placeholder=""/></div>
+                    <div class="fl captchaImg"><img src="../static/images/userFeedback/captchaImg.png"></div>&ndash;&gt;
+                    <div id="mpanel5" style="height: 70px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="diaologBtnBox">
+            <a href="javascript:;" class="btnDefault btnSubmit" id="check-btn">提交问卷</a>
+            <a href="javascript:;" class="btnDefault btnClose">关闭</a>
+        </div>
+    </div>-->
+</div>
+
+<iframe src="../static/common/searchHelp.html?v=20220614" width="100%" height="600"
+        style="margin:0 auto;display:none" id="searchHelpCon" frameborder="0"></iframe>
+<div class="clearfix"></div>
+<div class="clearfix"></div>
+<div class="masonryContain">
+    <div style="height: auto;">
+        <div id="masonry" class="imagecontainer">
+
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+</div>
+<div class="main-content clearfix" style="display: none">
+    <div class="menu1-container">
+        <p>您没有搜索权限,请联系我们重新申请</p>
+        <p>客服热线 400-097-6005</p>
+    </div>
+</div>
+<div id="footer" style="display: none;bottom: 0;">
+    <div class="foote">
+        <div class="bottom1" style="width:24.8%;float:left;margin-top: 10px">
+        </div>
+        <div class="bottom2" style="width:49.8%;float:left;">
+            <div class="copy">
+            </div>
+        </div>
+        <div class="bottom3" style="float:left;width:24.8%;text-align: left;">
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+
+<div id="variousSearch">
+</div>
+
+<!--分页信息-->
+<input type="text" style="display: none" value="0" id="pageNum">
+<input type="text" style="display: none" value="10" id="pageSize">
+<!--地域搜索-->
+<input type="text" style="display: none" value="" id="areaSearchFlag">
+<!--栏目地域搜索-->
+<input type="text" style="display: none" value="" id="citySearchFlag">
+<!--子站的网站标识码-->
+<input type="text" style="display: none" value="" id="sonSiteCode">
+<!--二级栏目-->
+<input type="text" style="display: none" value="" id="column2">
+<!--一级栏目-->
+<input type="text" style="display: none" value="全部" id="column">
+<input type="text" style="display: none" value="" id="startTime">
+<input type="text" style="display: none" value="" id="endTime">
+<input type="text" style="display: none" value="" id="timeTemp">
+<input type="text" style="display: none" value="" id="totalDataNum">
+
+<input type="text" style="display: none" value="" id="userCount">
+<input type="text" style="display: none" value="" id="siteCode">
+<input type="text" style="display: none" value="" id="searchLogId">
+<!--自己添加的-->
+<!--查询范围-->
+<input type="hidden" id="wordPlace" value="">
+<!--排序方式-->
+<input type="hidden" id="orderBy" value="">
+<!--文件类型-->
+<input type="hidden" id="fileType" value="">
+<input type="hidden" value="" id="left_right_index">
+<input type="hidden" value="" id="label">
+<!--搜索类型   1.普通搜索 2 高级搜索 3 文号搜索-->
+<input type="text" style="display: none" value="" id="searchStamp">
+<!--是否纠错-->
+<input type="hidden" id="checkHandleTemp" value="">
+<input type="text" style="display: none" value="" id="secondSearchWords">
+<input type="hidden" id="manualWord" value="">
+<input type="hidden" id="originWordPlace" value="">
+<!--------------------------------------------- 高级搜索保留信息------------------------------------------------->
+
+<!--------------------------------------------- 文号搜索保留信息------------------------------------------------->
+
+
+<script type="text/javascript" src="../static/js/ucap/jquery.min.js"></script>
+<script src="../static/js/common/common.js"></script>
+<script src="../static/js/common/domClick.js"></script>
+<script src="../static/js/common/other.js"></script>
+<script src="../static/js/common/existInCacheBox.js"></script>
+
+<script type="text/javascript" src="../static/cookie/userHistory.js"></script>
+<script type="text/javascript" src="../static/cookie/userLook.js"></script>
+<!--    js文件-->
+<script type="text/javascript" src="../static/js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../static/cookie/json.min.js"></script>
+<script type="text/javascript" src="../static/js/datapicker/bootstrap-datepicker.min.js"></script>
+<!--分页js-->
+<script src="../static/js/jqPaginator.min.js"></script>
+<!--瀑布流js-->
+<script src="../static/js/jQeasing.min.js"></script>
+<script src="../static/js/json2.min.js"></script>
+<script src="../static/js/jquery.masonry.min.js"></script>
+<script src="../static/js/jquery.infinitescroll.min.js"></script>
+
+<script src="../static/js/common/existInCacheBox.js"></script>
+<script src="../static/js/common/thematictemplate.js?v=1.3"></script>
+<script src="../static/js/common/searchBoxSettings.js"></script>
+<script src="../static/js/common/rightInfo.js"></script>
+<script src="../static/js/common/searchInit.js"></script>
+<script src="../static/js/common/searchResult.js"></script>
+<script src="../static/js/common/footer.js"></script>
+<script src="../static/js/common/variousSearch.js"></script>
+<!-- ztree -->
+<script type="text/javascript" src="../static/js/sonSiteTree/jquery.ztree.core-3.5.min.js"></script>
+<script type="text/javascript" src="../static/js/sonSiteTree/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="../static/js/sonSiteTree/jquery.ztree.exedit-3.5.js"></script>
+<!--百度地图 -->
+<!--<script type="text/javascript">
+    window._BMapSecurityConfig = {
+        // 代理服务器地址
+        serviceHost: 'https://zs.kaipuyun.cn/_BMapService/'
+    }
+</script>
+<script src="https://zs.kaipuyun.cn/_BMapService/api?type=webgl&v=2"></script>-->
+
+
+<!--惠民地图-->
+<!--<script type="text/javascript"
+        src="https://api.tianditu.gov.cn/api?v=4.0&tk=d20989dc4c4ba1d3ed3c312db491aa67"></script>
+<script>
+
+
+</script>-->
+
+
+<script type="text/javascript" src="../static/js/map/main.js"></script>
+<script type="text/javascript" src="../static/js/common/clickLog.js"></script>
+
+
+<link rel="stylesheet" href="../static/layUI/laydate/theme/default/laydate.css" media="all">
+<script src="../static/layUI/laydate/laydate.js"></script>
+<script>
+
+    var isPageLoad = false  //翻页是否加载
+
+    //顶部固定信息展示
+    $.ajaxSettings.async = false
+    searchInit(ctx + 'index/getSiteInfo', {'siteCode': siteCode})
+    $.ajaxSettings.async = true
+    //内容展示
+    if (stringNotEmpty(getParam('left_right_index'))) {
+        left_right_index = getParam('left_right_index')
+    }
+
+
+    var timeStamp = 0;
+
+    if (stringNotEmpty(startTime)){
+        $("#startTime").val(startTime);
+        $("#startDate").val(startTime.substring(0, 10));
+        $("#startDateHigh").val(startTime.substring(0, 10));
+    }
+    if (stringNotEmpty(endTime)){
+        $("#endTime").val(endTime);
+        $("#endDate").val(endTime.substring(0, 10));
+        $("#endDateHigh").val(endTime.substring(0, 10));
+    }
+
+    if(stringNotEmpty(startTime) || stringNotEmpty(endTime)){
+        $('#timeRangeValue').val(5)
+        timeStamp = 5;
+    }
+
+
+    var param = {
+        'siteCode': siteCode,
+        'searchWord': allSearchWord,
+        'column': column,
+        "wordPlace": wordPlace,
+        "label": label,
+        "startTime" : startTime,
+        "endTime" : endTime,
+        "timeStamp": timeStamp,
+        'uc': 1,
+        'left_right_index': left_right_index,
+        'sonSiteCode': sonSiteCode
+    }
+
+
+    if (stringNotEmpty(getParam('searchBoxSettingsIndex'))) {
+        param['searchBoxSettingsIndex'] = getParam('searchBoxSettingsIndex')
+    }
+    showResult(ctx + 'search/s', param)
+
+    //底部信息
+    showFooter()
+
+    if (pageWidth == 0) {
+        $('head').append('<link href="../static/css/other/pageWidth.css" rel="stylesheet" type="text/css" />')
+    }
+
+    if (searchStyle.siteGroupStyle == 1) {
+        $('head').append('<link href="../static/css/sonSiteTree/zTreeStyle.css" rel="stylesheet" type="text/css" />')
+    }
+    if (searchStyle.siteGroupStyle == 3) {
+        /*宜春市、马鞍山、阿坝州 广安 门户站群样式定制 */
+        if (siteCode == '3405000046' || siteCode == '3609000002' || siteCode == '5132000003' || siteCode == '5116000002') {
+            $('head').append('<link href="../static/css/3405000046/siteGroup3405000046.css" rel="stylesheet" type="text/css" />')
+        } else {
+            $('head').append('<link href="../static/css/siteGroup.css" rel="stylesheet" type="text/css" />')
+        }
+        $('head').append('<link href="../static/css/samr.css" rel="stylesheet" type="text/css" />')
+        /*$('head').append('<link href="../static/css/other/siteGrop.css" rel="stylesheet" type="text/css" />')*/
+
+        $('head style').append('.jiyuehua .icon-listDownArrow{\n' +
+            '    background: url(../static/images/icon-listDownArrow.jpg),linear-gradient(' + searchStyle.color + ', ' + searchStyle.color + ');\n' +
+            '    background-position: 0px 1px\n' +
+            '}\n' +
+            '.jiyuehua .icon-listUpArrow{\n' +
+            '    background: url(../static/images/icon-listUpArrow.jpg),linear-gradient(' + searchStyle.color + ', ' + searchStyle.color + ');\n' +
+            '    background-position: 0px 2px\n' +
+            '}')
+    }
+
+    if (webConfig.indexOf('搜索反馈') > -1) {
+        var feedBackHtml = "";
+
+        if (2 == language) {
+            //英文站点
+            feedBackHtml = " <div class=\"floatingFrame\">\n" +
+                "        <div class=\"feedbackTit\"><img src=\"../static/images/userFeedback/iconSearchFeedback.png\">Search feedback</div>\n" +
+                "        <div class=\"publicResultBg satisfied\">\n" +
+                "            <div class=\"feedbackImgBg\" data=\"1\"><img src=\"../static/images/userFeedback/redFace.png\"></div>\n" +
+                "            <div class=\"tit\">satisfied</div>\n" +
+                "        </div>\n" +
+                "        <div class=\"publicResultBg notSatisfied\">\n" +
+                "            <div class=\"feedbackImgBg\" data=\"2\"><img src=\"../static/images/userFeedback/grayFace.png\"></div>\n" +
+                "            <div class=\"tit\">Dissatisfied</div>\n" +
+                "        </div>\n" +
+                "        <div class=\"morefeedbackBtn\"><a href=\"javascript:;\">More feedback&gt;</a></div>\n" +
+                "    </div>\n" +
+                "    <!--右侧悬浮满意度调查--快捷入口--end-->\n" +
+                "    <!--右侧悬浮-感谢反馈和谢谢反馈--start-->\n" +
+                "    <div class=\"floatingTipsBox thanksTipsBox\" style=\"    width: 14%;display: none\">Thank you for feedback！<span class=\"tipsClear\" style=\"cursor: pointer;\">×</span> </div>\n" +
+                "    <div class=\"floatingTipsBox refuseTipsBox\" style=\"display: none;width: 11%;height: 12%;\">\n" +
+                "        You provided too many feedback on that day\n" +
+                "        <br>\n" +
+                "        Please try again tomorrow！ <span class=\"tipsClear\" style=\"cursor: pointer;\">×</span>\n" +
+                "    </div>\n" +
+                "    <!--右侧悬浮-感谢反馈和谢谢反馈--end-->\n" +
+                "    <!--满意度调查问卷-弹框--start-->\n" +
+                "    <div class=\"dialogQuestionnaireBox\">\n" +
+                "        <a class=\"closeBlackBox\" href=\"javascript:;\"><img src=\"../static/images/userFeedback/closeBlack.png\"></a>\n" +
+                "        <div class=\"centerCon\">\n" +
+                "            <div class=\"questionnairePic\"><img src=\"../static/images/userFeedback/questionnaireBg.png\"></div>\n" +
+                "            <div class=\"textInfo\">\n" +
+                "                To improve the public service level of government websites, we sincerely invite you to participate in the user experience feedback activity. We welcome any issues or valuable opinions you may encounter during the use process. We will take your opinions and suggestions seriously, refer to your feedback and continuously improve the search function to better serve all users。\n" +
+                "            </div>\n" +
+                "            <div class=\"questionAnswerBox\">\n" +
+                "                <div class=\"questionsTitBox\">\n" +
+                "                    <div class=\"bigRound\"></div>\n" +
+                "                    <div class=\"smallRound\"></div>\n" +
+                "                    <div class=\"code fl\">one、</div>\n" +
+                "                    <div class=\"tit fl wh166\">The keywords you searched for</div>\n" +
+                "                </div>\n" +
+                "                <div class=\"textKey\"><input type=\"text\" placeholder=\"Enter a minimum of 1 word for keywords and a maximum of 100 words;\"/></div>\n" +
+                "            </div>\n" +
+                "            <div class=\"questionAnswerBox questionAnswerBox2\">\n" +
+                "                <div class=\"questionsTitBox\">\n" +
+                "                    <div class=\"bigRound\"></div>\n" +
+                "                    <div class=\"smallRound\"></div>\n" +
+                "                    <div class=\"code fl\">two、</div>\n" +
+                "                    <div class=\"tit fl wh226\">Are you satisfied with the search results this time</div>\n" +
+                "                </div>\n" +
+                "                <div class=\"selectCheck\">\n" +
+                "                    <span><i class=\"iconRadio icon-radioRed\" data=\"1\"></i>Very satisfied</span>\n" +
+                "                    <span><i class=\"iconRadio icon-radioRed\" data=\"2\"></i>Basic compliance</span>\n" +
+                "                    <span><i class=\"iconRadio icon-radioRed\" data=\"3\"></i>Needs improvement</span>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "            <div class=\"questionAnswerBox\">\n" +
+                "                <div class=\"questionsTitBox\">\n" +
+                "                    <div class=\"bigRound\"></div>\n" +
+                "                    <div class=\"smallRound\"></div>\n" +
+                "                    <div class=\"code fl\">three、</div>\n" +
+                "                    <div class=\"tit fl wh456\">Present any issues or valuable suggestions you encounter during use (no less than 10 words)</div>\n" +
+                "                </div>\n" +
+                "                <div class=\"textAreaBox\">\n" +
+                "                    <textarea placeholder=\"Opinion should be no less than 10 words, with a maximum of 100 words\"></textarea>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "            <div class=\"veriCodeBox\">\n" +
+                "                <div class=\"codeTit\">Verification code</div>\n" +
+                "                <div class=\"textAndPic clearfix\">\n" +
+                "                    <!--<div class=\"fl textVerif\" ><input type=\"text\" placeholder=\"\"/></div>\n" +
+                "                    <div class=\"fl captchaImg\"><img src=\"../static/images/userFeedback/captchaImg.png\"></div>-->\n" +
+                "                    <div id=\"mpanel5\" style=\"height: 70px;\"></div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"diaologBtnBox\">\n" +
+                "            <a href=\"javascript:;\" class=\"btnDefault btnSubmit\" id=\"check-btn\">Submit questionnaire</a>\n" +
+                "            <a href=\"javascript:;\" class=\"btnDefault btnClose\">close</a>\n" +
+                "        </div>\n" +
+                "    </div>";
+        } else {
+            feedBackHtml = " <div class=\"floatingFrame\">\n" +
+                "        <div class=\"feedbackTit\"><img src=\"../static/images/userFeedback/iconSearchFeedback.png\">搜索反馈</div>\n" +
+                "        <div class=\"publicResultBg satisfied\">\n" +
+                "            <div class=\"feedbackImgBg\" data=\"1\"><img src=\"../static/images/userFeedback/redFace.png\"></div>\n" +
+                "            <div class=\"tit\">满意</div>\n" +
+                "        </div>\n" +
+                "        <div class=\"publicResultBg notSatisfied\">\n" +
+                "            <div class=\"feedbackImgBg\" data=\"2\"><img src=\"../static/images/userFeedback/grayFace.png\"></div>\n" +
+                "            <div class=\"tit\">不满意</div>\n" +
+                "        </div>\n" +
+                "        <div class=\"morefeedbackBtn\"><a href=\"javascript:;\">更多反馈&gt;</a></div>\n" +
+                "    </div>\n" +
+                "    <!--右侧悬浮满意度调查--快捷入口--end-->\n" +
+                "    <!--右侧悬浮-感谢反馈和谢谢反馈--start-->\n" +
+                "    <div class=\"floatingTipsBox thanksTipsBox\" style=\"display: none\">谢谢反馈！<span class=\"tipsClear\" style=\"cursor: pointer;\">×</span> </div>\n" +
+                "    <div class=\"floatingTipsBox refuseTipsBox\" style=\"display: none;width: 11%;height: 12%;\">\n" +
+                "        您当日反馈次数过多\n" +
+                "        <br>\n" +
+                "        请明日再试！ <span class=\"tipsClear\" style=\"cursor: pointer;\">×</span>\n" +
+                "    </div>\n" +
+                "    <!--右侧悬浮-感谢反馈和谢谢反馈--end-->\n" +
+                "    <!--满意度调查问卷-弹框--start-->\n" +
+                "    <div class=\"dialogQuestionnaireBox\">\n" +
+                "        <a class=\"closeBlackBox\" href=\"javascript:;\"><img src=\"../static/images/userFeedback/closeBlack.png\"></a>\n" +
+                "        <div class=\"centerCon\">\n" +
+                "            <div class=\"questionnairePic\"><img src=\"../static/images/userFeedback/questionnaireBg.png\"></div>\n" +
+                "            <div class=\"textInfo\">\n" +
+                "                为提升政府网站位公众服务水平，诚邀您参与用户体验反馈活动，欢迎提出您在使用过程中遇到的问题或宝贵意见。我们将认真对待您的意见和建议，参考您的反馈不断完善搜索功能，更好的为所有用户服务。\n" +
+                "            </div>\n" +
+                "            <div class=\"questionAnswerBox\">\n" +
+                "                <div class=\"questionsTitBox\">\n" +
+                "                    <div class=\"bigRound\"></div>\n" +
+                "                    <div class=\"smallRound\"></div>\n" +
+                "                    <div class=\"code fl\">一、</div>\n" +
+                "                    <div class=\"tit fl wh166\">您搜索的关键词</div>\n" +
+                "                </div>\n" +
+                "                <div class=\"textKey\"><input type=\"text\" placeholder=\"关键词最少输入1个字，最多输入100个字；\"/></div>\n" +
+                "            </div>\n" +
+                "            <div class=\"questionAnswerBox questionAnswerBox2\">\n" +
+                "                <div class=\"questionsTitBox\">\n" +
+                "                    <div class=\"bigRound\"></div>\n" +
+                "                    <div class=\"smallRound\"></div>\n" +
+                "                    <div class=\"code fl\">二、</div>\n" +
+                "                    <div class=\"tit fl wh226\">对于这次搜索结果是否满意</div>\n" +
+                "                </div>\n" +
+                "                <div class=\"selectCheck\">\n" +
+                "                    <span><i class=\"iconRadio icon-radioRed\" data=\"1\"></i>非常满意</span>\n" +
+                "                    <span><i class=\"iconRadio icon-radioRed\" data=\"2\"></i>基本符合预期</span>\n" +
+                "                    <span><i class=\"iconRadio icon-radioRed\" data=\"3\"></i>有待改进</span>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "            <div class=\"questionAnswerBox\">\n" +
+                "                <div class=\"questionsTitBox\">\n" +
+                "                    <div class=\"bigRound\"></div>\n" +
+                "                    <div class=\"smallRound\"></div>\n" +
+                "                    <div class=\"code fl\">三、</div>\n" +
+                "                    <div class=\"tit fl wh456\">提出您在使用过程中遇到的问题或宝贵意见（不少于10个字）</div>\n" +
+                "                </div>\n" +
+                "                <div class=\"textAreaBox\">\n" +
+                "                    <textarea placeholder=\"意见不少于10个字，最多为100字\"></textarea>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "            <div class=\"veriCodeBox\">\n" +
+                "                <div class=\"codeTit\">验证码</div>\n" +
+                "                <div class=\"textAndPic clearfix\">\n" +
+                "                    <!--<div class=\"fl textVerif\" ><input type=\"text\" placeholder=\"\"/></div>\n" +
+                "                    <div class=\"fl captchaImg\"><img src=\"../static/images/userFeedback/captchaImg.png\"></div>-->\n" +
+                "                    <div id=\"mpanel5\" style=\"height: 70px;\"></div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"diaologBtnBox\">\n" +
+                "            <a href=\"javascript:;\" class=\"btnDefault btnSubmit\" id=\"check-btn\">提交问卷</a>\n" +
+                "            <a href=\"javascript:;\" class=\"btnDefault btnClose\">关闭</a>\n" +
+                "        </div>\n" +
+                "    </div>";
+        }
+
+        $('#userFeedback').append(feedBackHtml);
+        $('#userFeedback').css('display', 'block')
+        $('head').append('<link href="../static/js/userFeedback/verify.css" rel="stylesheet" type="text/css" />')
+        document.writeln('<script src=\'../static/js/userFeedback/verify.js\'><\/script>')
+        document.writeln('<script src=\'../static/js/userFeedback/userFeedback.js\'><\/script>')
+    }
+
+    //lauUI-data
+
+    /*layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1' //指定元素
+        });
+    });*/
+
+    //日期范围
+    //下拉样式
+    laydate.render({
+        elem: '#test6'
+        //设置开始日期、日期日期的 input 选择器
+        //数组格式为 5.3.0 开始新增，之前版本直接配置 true 或任意分割字符即可
+        , range: ['#startDate', '#endDate']
+    })
+    //平铺样式
+    laydate.render({
+        elem: '#test7,test8'
+        //设置开始日期、日期日期的 input 选择器
+        //数组格式为 5.3.0 开始新增，之前版本直接配置 true 或任意分割字符即可
+        , range: ['#startDate2', '#endDate2']
+    })
+    laydate.render({
+        elem: '#test8'
+        //设置开始日期、日期日期的 input 选择器
+        //数组格式为 5.3.0 开始新增，之前版本直接配置 true 或任意分割字符即可
+        , range: ['#startDate2', '#endDate2']
+    })
+
+    //时间插件
+    /* $(".input-group.date").datepicker({
+         format: "yyyy-mm-dd",
+         minView: "month",
+         autoclose: true
+     })
+     //设置初始化时间
+     //设置结束时间必须晚于开始时间
+     $(".startTime").datepicker().on('changeDate', function (e) {
+         //获取选取的开始时间
+         var endTimeStart = $("#startDate").val();
+         //设置开始时间
+         $('.endTime').datepicker('setStartDate', endTimeStart);
+     });*/
+    hideTds()
+
+    //倒计时
+    function getRandomCode() {
+        if (time === 0) {
+            time = 6
+            // $("#myModal_search_highs").hide("toggle");
+            $('#myModal_search_highs').modal('hide')//隐藏modal
+            $('.modal-backdrop').remove()//去掉遮罩层
+            return
+        } else {
+            time--
+            $('#times').text(time)
+            $('#myModal_search_highs').modal('show')
+        }
+        setTimeout(function () {
+            getRandomCode()
+        }, 1000)
+    }
+
+    $('.modal-backdrop').css('height', $(document).height())
+
+    //回车事件
+    var ull = document.getElementById('selectHint')
+    var uli = ull.getElementsByTagName('li')
+    var search = document.getElementById('selectHint')
+    document.onkeydown = function (e) {
+        var event = window.event || e
+        var e = event ? event : (window.event ? window.event : null)
+        switch (e.keyCode) {
+            case 38://向上键
+                if (ull.style.display == 'block') {
+                    if (keypos <= 0) {
+                        keypos = uli.length
+                    }
+                    keypos--
+                    uli[keypos].style.background = '#f3f3f3'
+                    input.value = uli[keypos].innerText
+                    if (keypos == uli.length - 1) {
+                        uli[0].style.background = '#fff'
+                    } else {
+                        uli[keypos + 1].style.background = '#fff'
+                    }
+                }
+                break
+            case 40://向下键
+                if (ull.style.display == 'block') {
+                    keypos++
+                    uli[keypos].style.background = '#f3f3f3'
+                    input.value = uli[keypos].innerText
+                    if (keypos == 0) {
+                        uli[uli.length - 1].style.background = '#fff'
+                    } else {
+                        uli[keypos - 1].style.background = '#fff'
+
+                    }
+                    if (keypos >= uli.length - 1) {
+                        keypos = -1
+                    }
+                }
+                break
+            case 13://回车
+                var isVisiable = $('#selectHint').is(":visible")
+                if (keypos >= 0 && isVisiable) {
+                    input.value = uli[keypos].innerText
+                }
+                keypos = -1
+                search.innerText = ''
+                var searchWord = ''
+                if ($('#allSearchWor').is(':focus')) {
+                    searchWord = $('#allSearchWor').val()
+                } else if ($('#allSearchWord').is(':focus')) {
+                    searchWord = $('#allSearchWord').val().replace(/(^\s*)|(\s*$)/g, '')//toLowerCase();
+                } else {
+                    return
+                }
+                searchProcess(searchWord, 1)
+                break
+            default:
+                break
+        }
+    }
+
+    document.onclick = function (event) {
+        var event = event || window.event
+        var target = event.target || event.srcElement
+        search.innerText = ''
+    }
+    var keypos = -1
+    var hits = []
+
+    $(function () {
+        /*
+        * 监听input中value变化
+        **/
+        if (document.all) {
+            input = document.getElementById('allSearchWord')
+        } else {
+            input = document.querySelector('#allSearchWord')
+        }
+        //初始化图片滑动标题
+        boxmover('.imagecontainer', 'a', 0)
+        init()
+
+        setTimeout(function () {
+            $('#boxComputer').show()
+            $('body,html').scrollTop(0)
+        }, 500)
+
+        function init() {
+            if ('oninput' in input) {//IE9+
+                input.addEventListener('input', action, false)
+            } else {//ie8-
+                input.attachEvent('onpropertychange', action)
+            }
+        }
+
+    })
+
+    $('#statisticsInfo li').each(function () {
+        if (stringNotEmpty($(this).find('a').text()) && $(this).find('a').text().indexOf('(0)') > -1) {
+            $(this).find('a').removeAttr('onclick')
+        }
+        $data = $(this).attr('data')
+        if (stringNotEmpty($data)) {
+            showSonSites($data)
+        }
+    })
+
+    //跨浏览器事件函数
+    function addEvent(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false)
+        } else if (element.attachEvent) { //兼容ie
+            element.attachEvent('on' + type, handler)
+        } else {
+            element['on' + type] = handler
+        }
+    }
+
+    /*返回顶部按钮*/
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 100) {
+            $('#backToTop').fadeIn(500)
+        } else {
+            $('#backToTop').fadeOut(500)
+        }
+    })
+    $('#backToTop').click(function () {
+        $('body,html').animate({scrollTop: 0}, 600)
+        return false
+    })
+
+    //时间范围
+    $('#time').on('click', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($('.wh165').hasClass('on')) {
+            $('#timeRange_downSelect').slideUp()
+            $('.wh165').removeClass('on')
+        } else {
+            $('#timeRange_downSelect').slideDown()
+            $('.wh165').addClass('on')
+        }
+    })
+    $('#timeRange_downSelect li').on('click', function () {
+
+        var text = $(this).text()//获取点击事件的内容
+        $('#timeRangeValue').val($(this).attr('data'))
+        //自定义时间不触发搜索时间
+        if (text.indexOf(conditionArrayResult[91]) > -1) {
+            return
+        }
+        $('#timeRange').html(text)//切换文件类型
+        $('#timeRange_downSelect').slideUp()//文件类型div消失
+        $('#timeRange').removeClass('on')//移出类名
+        // 配置子站群
+        searchProcessJudge()
+        //searchProcess();
+    })
+    $('#timeRange_downSelect li span').on('click', function (event) {
+        $('#timeRange_downSelect').slideUp()
+        $('.wh165').removeClass('on')
+    })
+    $('#timeRange_downSelect').on('click', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+    })
+
+    //自定义时间查询
+    function customTime() {
+
+        $('#timeRange').text(conditionArrayResult[91])
+        $('#timeRange_downSelect').hide()
+        searchProcessJudge()
+        //$("#startDate").val('');
+        //$("#endDate").val('');
+    }
+
+    //查询范围
+    $('.rang').on('click', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($(this).hasClass('on')) {
+            $('#selectRange_downSelect').slideUp()
+            $(this).removeClass('on')
+        } else {
+            $('#selectRange_downSelect').slideDown()
+            $(this).addClass('on')
+            $('#selectRange_downSelect li input').on('focus', function () {
+                $('#selectRange_downSelect').slideUp()
+                $('#selectRange').removeClass('on')
+            })
+        }
+    })
+    /*文件格式切换开始*/
+    $('#selectRange_downSelect li').on('click', function () {
+        var text = $(this).text()//获取点击事件的内容
+        $('#selectRangeValue').val($(this).attr('data'))
+        $('#selectRange').html(text)//切换文件类型
+        $('#selectRange_downSelect').slideUp()//文件类型div消失
+        $('#selectRange').removeClass('on')//移出类名
+
+        searchProcessJudge()
+    })
+    //排序方式
+    $('.sort').on('click', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($(this).hasClass('on')) {
+            $('#orderWay_downSelect').slideUp()
+            $(this).removeClass('on')
+        } else {
+            $('#orderWay_downSelect').slideDown()
+            $(this).addClass('on')
+            $('#orderWay_downSelect li input').on('focus', function () {
+                $('#orderWay_downSelect').slideUp()
+                $('#orderWayRange').removeClass('on')
+            })
+        }
+    })
+    /*文件格式切换开始*/
+    $('#orderWay_downSelect li').on('click', function () {
+        var text = $(this).text()//获取点击事件的内容
+        $('#orderWayRangeValue').val($(this).attr('data'))
+        $('#orderWayRange').html(text)//切换文件类型
+        $('#orderWay_downSelect').slideUp()//文件类型div消失
+        $('#orderWayRange').removeClass('on')//移出类名
+
+        searchProcessJudge()
+    })
+    //文件类型
+    $('.wh140').on('click', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($(this).hasClass('on')) {
+            $('#fileType_downSelect').slideUp()
+            $(this).removeClass('on')
+        } else {
+            $('#fileType_downSelect').slideDown()
+            $(this).addClass('on')
+            $('#fileType_downSelect li input').on('focus', function () {
+                $('#fileType_downSelect').slideUp()
+                $('#fileTypeRange').removeClass('on')
+            })
+
+        }
+        //searchProcess();
+    })
+    /*文件格式切换开始*/
+    $('#fileType_downSelect li').on('click', function () {
+        var text = $(this).text()//获取点击事件的内容
+        $('#fileTypeRangeValue').val($(this).attr('data'))
+        $('#fileTypeRange').html(text)//切换文件类型
+        $('#fileType_downSelect').slideUp()//文件类型div消失
+        $('#fileTypeRange').removeClass('on')//移出类名
+
+        searchProcessJudge()
+    })
+
+    //发文机构
+    $('.wh141').on('click', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($(this).hasClass('on')) {
+            $('#docNameCommon_downSelect').slideUp()
+            $(this).removeClass('on')
+        } else {
+            $('#docNameCommon_downSelect').slideDown()
+            $(this).addClass('on')
+            $('#docNameCommon_downSelect li input').on('focus', function () {
+                $('#docNameCommon_downSelect').slideUp()
+                $('#docNameCommon').removeClass('on')
+            })
+
+        }
+        $('#docNameCommon_downSelect').css({'overflow': '', 'overflow-y': 'auto'})
+    })
+    /*文件格式切换开始*/
+    $('#docNameCommon_downSelect li').on('click', function () {
+        var text = $(this).text()//获取点击事件的内容
+        $('#docNameCommonValue').val($(this).attr('data'))
+        $('#docNameCommon').html(text)//切换文件类型
+        $('#docNameCommon_downSelect').slideUp()//文件类型div消失
+        $('#docNameCommon').removeClass('on')//移出类名
+
+        searchProcessJudge()
+    })
+
+    //主题分类
+    $('.wh142').on('click', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($(this).hasClass('on')) {
+            $('#topical_downSelect').slideUp()
+            $(this).removeClass('on')
+        } else {
+            $('#topical_downSelect').slideDown()
+            $(this).addClass('on')
+            $('#topical_downSelect li input').on('focus', function () {
+                $('#topical_downSelect').slideUp()
+                $('#topical').removeClass('on')
+            })
+
+        }
+        $('#topical_downSelect').css({'overflow': '', 'overflow-y': 'auto'})
+    })
+    /*文件格式切换开始*/
+    $('#topical_downSelect li').on('click', function () {
+        var text = $(this).text()//获取点击事件的内容
+        $('#topicalValue').val($(this).attr('data'))
+        $('#topical').html(text)//切换文件类型
+        $('#topical_downSelect').slideUp()//文件类型div消失
+        $('#topical').removeClass('on')//移出类名
+
+        searchProcessJudge()
+    })
+    //房贷计算器-年限
+    $('#dkLayerBox').on('click', '.dkYears', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($(this).hasClass('on')) {
+            $(this).find('ul').slideUp()
+            $(this).removeClass('on')
+        } else {
+            $(this).find('ul').slideDown()
+            $(this).addClass('on')
+            $('.dkYears ul li').on('click', function () {
+                var text = $(this).text()
+                $(this).parents('.dkYears').find('.showTit').html(text)
+            })
+        }
+    })
+    //房贷计算器-公积金利率
+    $('#dkLayerBox').on('click', '.dkCombination .loanRate,.dkFund .loanRate', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($(this).hasClass('on')) {
+            $(this).find('ul').slideUp()
+            $(this).removeClass('on')
+        } else {
+            $(this).find('ul').slideDown()
+            $(this).addClass('on')
+            $('.dkCombination .loanRate ul li,.dkFund .loanRate ul li').on('click', function () {
+                $(this).parents('.loanRate').find('.showTit').html($(this).text())
+                $(this).parents('.loanRate').find('.showTit').attr('data', $(this).attr('data'))
+            })
+        }
+    })
+    /**
+     * 语音切换事件
+     */
+    var voiceWord = ''
+
+    $('#videoWord').bind('input propertychange', function () {
+        voiceWord = $('#videoWord').val().replace(/(^\s*)|(\s*$)/g, '').replace('搜索', '').replace('搜', '').replace(/，|。|,|\.|！|？|\?|!/, ' ')
+        $('#allSearchWord').val(voiceWord)
+        searchProcess(voiceWord, 1)
+    })
+
+
+    //主体标题点击事件
+    $('#wordGuideList').on('click', '.permitR,.similarArticlesList a', function () {
+        var siteUrl = $.trim($(this).attr('href'))
+        // 获取title
+        var siteTitle = $.trim($(this).text().replace(/[\r\n\s]/g, ''))
+        siteTitle = replaceQuote(siteTitle)
+        //获取label
+        var label = $.trim($(this).parents().children('span').text())
+        var column = $('#column').val();
+        var hit = createHit(siteTitle, siteUrl, 0, label);
+        hits.push(hit);
+        updateSearchLog();
+        //稿件点击记录点击日志
+        saveClickLog(15, 1, siteTitle, siteUrl, 0, label, column);
+    })
+
+    $('#wordGuideList').on('click', '.permitU,.permitT', function () {
+        var siteUrl = $.trim($(this).parents('.Residence-permit').find('.permitU').attr('href'))
+        // 获取title
+        var siteTitle = $.trim($(this).parents('.Residence-permit').find('.permitT').text()).replace(/[\r\n\s]/g, '')
+        siteTitle = replaceQuote(siteTitle)
+        //获取文章位置信息
+        var sitePosition = $(this).parents('.Residence-permit').attr('id')
+        sitePosition = 10 * pageNum + sitePosition
+        //获取label
+        var label = $.trim($(this).parents().children('span').text())
+        var column = $('#column').val();
+        var hit = createHit(siteTitle, siteUrl, sitePosition, label);
+        hits.push(hit)
+
+        updateSearchLog();
+        //稿件点击记录点击日志
+        saveClickLog(15, 1, siteTitle, siteUrl, sitePosition, label, column);
+
+    })
+
+    /*-------------------------------------------高级搜索、文号搜索等开始-----------------------------------------------*/
+    /**
+     * 高级搜索输入内容进行校验
+     *
+     **/
+    function checkForHighSearch() {
+        // 搜索关键词
+        if (!$.trim($('#allSearchWordHigh').val()) || $.trim($('#allSearchWordHigh').val()) == '多个关键字可用空格区分') {
+            alert('请输入搜索关键词')
+            return false
+        }
+        // 全部信息和任意信息不能为NULL
+        if (!$('#searchAll').is(':checked') && !$('#searchOr').is(':checked')) {
+            alert('全部信息或者任意信息不能为空')
+            return false
+        }
+        // 文件格式
+        if (!$('#allType').is(':checked') && !$('#typeWORD').is(':checked') && !$('#typePPT').is(':checked') && !$('#typePDF').is(':checked')
+            && !$('#typeEXCEL').is(':checked') && !$('#typeTXT').is(':checked') && !$('#typeZIP').is(':checked')) {
+            alert('文档格式不能为空')
+            return false
+        }
+        // 时间范围
+        if (!$('#searchAllTime').is(':checked') && !$('#searchYear').is(':checked') && !$('#searchMonth').is(':checked')
+            && !$('#searchWeek').is(':checked') && !$('#searchDay').is(':checked')) {
+            alert('时间范围不能为空')
+            return false
+        }
+        // 排序方式
+        if (!$('#orderByRelate').is(':checked') && !$('#orderByTime').is(':checked')) {
+            alert('排序方式不能为空')
+            return false
+        }
+        // 搜索位置
+        if (!$('#searchAllText').is(':checked') && !$('#searchTitle').is(':checked')) {
+            alert('搜索位置不能为空')
+            return false
+        }
+
+        return true
+    }
+
+    // 高级搜索
+    $('#highSearch').click(function () {
+        $('#myModal_search_high').modal('toggle')
+        $('#allContent').css('overflow-y', 'hidden')
+        //
+        var allSearchWord = $('#allSearchWord').val()
+        if (allSearchWord) {
+            $('#allSearchWordHigh').val(allSearchWord.trim())
+        }
+        //
+    })
+    // 高级搜索
+    $('#advanceSearch').click(function () {
+        $('#myModal_search_high').modal('toggle')
+        //显示滚动条
+        $('#allContent').css('overflow-y', '')
+        // 重制搜索类型
+        $('#searchStamp').val(-1)
+        advanceSearchProcess(false, true)
+    })
+
+    /*文号搜索*/
+    $('#articleSearch').on('click', function () {
+        $('#myModal_search_number').modal('toggle')
+        //显示滚动条
+        $('#allContent').css('overflow-y', '')
+        // 重制搜索类型
+        $('#searchStamp').val(-1)
+        articleSearchProcess(true, -1)
+    })
+    // 文号搜索
+    $('#docSearch').click(function () {
+        $('#myModal_search_number').modal('toggle')
+        $('#allContent').css('overflow-y', 'hidden')
+        //
+        var allSearchWord = $('#allSearchWord').val()
+        if (allSearchWord) {
+            $('#articleSearchWord').val(allSearchWord.trim())
+        }
+        //
+    })
+    // 附件搜索
+    $('#attachmentSearch').click(function () {
+        $('#myModal_search_appendix').modal('toggle')
+        // 重制搜索类型
+        $('#searchStamp').val(-1)
+        appendixSearchProcess()
+    })
+    $('#myModal_search_number .close,#myModal_search_high .close').click(function () {
+        $('#allContent').css('overflow-y', '')
+    })
+    // 附件搜索
+    $('#appendixSearch').click(function () {
+        $('#myModal_search_appendix').modal('toggle')
+    })
+
+    $('#searchType').find('input[type=checkbox]').bind('click', function () {
+        $('#searchType').find('input[type=checkbox]').not(this).attr('checked', false)
+    })
+
+    $('#searchTypeAppendix').find('input[type=checkbox]').bind('click', function () {
+        $('#searchTypeAppendix').find('input[type=checkbox]').not(this).attr('checked', false)
+    })
+
+    $('#searchOrder').find('input[type=checkbox]').bind('click', function () {
+        $('#searchOrder').find('input[type=checkbox]').not(this).attr('checked', false)
+    })
+
+    $('#searchLocation').find('input[type=checkbox]').bind('click', function () {
+        $('#searchLocation').find('input[type=checkbox]').not(this).attr('checked', false)
+    })
+    //搜索频道
+    $('#searchChannel').find('input[type=checkbox]').bind('click', function () {
+        $('#searchChannel').find('input[type=checkbox]').not(this).attr('checked', false)
+    })
+    $('#articleSearchType').find('input[type=checkbox]').bind('click', function () {
+        $('#articleSearchType').find('input[type=checkbox]').not(this).attr('checked', false)
+    })
+
+    $('#searchFileType').find('input[type=checkbox]').bind('click', function () {
+        $('#searchFileType').find('input[type = checkbox]').not(this).attr('checked', false)
+    })
+
+    $('#searchTimeRange').find('input[type=checkbox]').bind('click', function () {
+        $('#searchTimeRange').find('input[type=checkbox]').not(this).attr('checked', false)
+        // document.getElementById('idDateTime').style.display = 'block'
+        $('#startTime').val('')
+        $('#endTime').val('')
+        // document.getElementById('idDateTime').style.display = 'none'
+
+    })
+
+    //高级搜索排序方式
+    $('.OrderByHigh').click(function () {
+        if ($(this).hasClass('icon-radioS')) {
+            return
+        } else {
+            $('.OrderByHigh').removeClass('icon-radioS')
+            $('.OrderByHigh').addClass('icon-radioD')
+            $(this).addClass('icon-radioS')
+            $(this).removeClass('icon-radioD')
+        }
+    })
+    //搜索位置
+    $('.wordPlace').click(function () {
+        if ($(this).hasClass('icon-radioS')) {
+            return
+        } else {
+            $('.wordPlace').removeClass('icon-radioS')
+            $('.wordPlace').addClass('icon-radioD')
+            $(this).addClass('icon-radioS')
+            $(this).removeClass('icon-radioD')
+        }
+    })
+    $('#docNameId').on('click', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($('.docName').hasClass('on')) {
+            $('.dropDownDocName').slideUp()
+            $('.docName').removeClass('on')
+        } else {
+            $('.dropDownDocName').slideDown()
+            $('.docName').addClass('on')
+
+            $('.dropDownDocName li').on('click', function () {
+                var text = $(this).text()//获取点击事件的内容
+                $('#docName').html(text)
+                $('.dropDownDocName').slideUp()
+                $('.docName').removeClass('on')
+            })
+        }
+        $('.dropDownDocName').css('overflow', '')
+    })
+    $('#topicalIdHigh').on('click', function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($('.topical').hasClass('on')) {
+            $('.dropDownTopical').slideUp()
+            $('.topical').removeClass('on')
+        } else {
+            $('.dropDownTopical').slideDown()
+            $('.topical').addClass('on')
+
+            $('.dropDownTopical li').on('click', function () {
+                var text = $(this).text()//获取点击事件的内容
+                $('#topical').html(text)
+                $('#topicalHigh').html(text)
+                $('.dropDownTopical').slideUp()
+                $('.topical').removeClass('on')
+            })
+        }
+        $('.dropDownTopical').css('overflow', '')
+    })
+
+    function resettingHigh() {
+        $('#articleSearchWord').val('')
+        $('#docTypeHeight').val('')
+        $('#docYear').val('')
+        $('#docNo').val('')
+        $('#indexno').val('')
+        $('#topicalHigh').text('全部')
+        $('#docName').text('所有机构')
+        $('#startDateHigh').val('')
+        $('#endDateHigh').val('')
+        $('#appendixName').val('')
+
+        $('.wordPlace,.OrderByHigh').each(function () {
+            if ($(this).prev().val() == '0') {
+                $(this).addClass('icon-radioS')
+                $(this).removeClass('icon-radioD')
+            } else {
+                $(this).addClass('icon-radioD')
+                $(this).removeClass('icon-radioS')
+            }
+        })
+    }
+
+    /*-------------------------------------------高级搜索、文号搜索等结束-----------------------------------------------*/
+    $('#allSearchWord,#myModal_search_high,.tankuang,#bldz').on('click', function (e) {
+        stopPropagation(e)
+    })
+
+    document.onclick = function (e) {
+        $('.dropDownMenu').slideUp()
+        $('.languageDownList').slideUp()
+        if (searchBoxSettingsType == 1) {
+            $('.search-input .searchDowmMenu ul').slideUp()
+            if ($('#rangeSelection').val() != '1') {
+                $('.mainCon3').removeClass('mainCon3').addClass('mainCon2')
+                $('.nav').removeClass('nav2')
+            }
+        }
+        $('.topical').removeClass('on')
+        $('.searchul').hide()
+        //mapClose();
+        $('#selectHint').hide()
+        $('.downSelect:not(\'#timeRange_downSelect\')').slideUp()
+        var eve = event || window.event
+        var objEle = eve.target || eve.srcElement
+        if ($(objEle).is('th') || $(objEle).is('td') || $(objEle).is('.month')) {
+            return
+        } else {
+            $('#timeRange_downSelect').slideUp()
+            $('.wh165').removeClass('on')
+        }
+    }
+
+    function getTip(e) {
+        action()
+    }
+
+    function pagination_go(totalPage) {
+        var num = $('#pagination_input').val()
+        if (!numberCheck(num) || num > totalPage) {
+            alert('请输入1-' + totalPage + '的数字')
+            return
+        }
+        $('#pageNum').val(num - 1)
+        // 搜索处理
+        searchProcessJudge()
+    }
+
+    $('.dialogVoiceSearch .titClose').click(function () {
+        $('.mask').hide()
+        $('.dialogVoiceSearch').hide()
+    })
+    $('.dialogVoiceSearch .languageBox .languageDropMenuBox').click(function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        $('.dialogVoiceSearch .languageBox .languageDropMenuBox .languageDownList').slideToggle()
+    })
+    $('.dialogVoiceSearch .languageBox .languageDropMenuBox .languageDownList li').click(function (e) {
+        stopPropagation(e)//阻止事件冒泡
+        if ($(this).find('i').hasClass('selectedLanguage')) {
+            return
+        }
+        $(this).siblings().find('i').removeClass('selectedLanguage')
+        $(this).find('i').addClass('selectedLanguage')
+        $(this).parents('.languageDropMenuBox').find('.selectText').text($(this).text())
+        $('#languageId').val($(this).attr('data'))
+        $('.dialogVoiceSearch .languageBox .languageDropMenuBox .languageDownList').slideUp()
+    })
+    $('.timeSortBy ul li a,.searchListTabBox ul li a').click(function () {
+        if (($(this).parents('li').hasClass('active') || $(this).parents().hasClass('searchLocation')) && !$(this).hasClass('btnSubmitSearch')) {
+            return
+        }
+        $(this).parents('li').addClass('active').siblings().removeClass('active')
+        var data = $(this).parents('li').attr('data')
+
+        if ($(this).parents().hasClass('searchListTabBox')) {
+            $(this).parents('.searchListTabBox').find('.conditionValue').val(data)
+        } else {
+            $(this).parents('.pubSortListBox').find('.conditionValue').val(data)
+        }
+        if ($(this).text() != '自定义') {
+            searchProcessJudge()
+        }
+    })
+
+    //搜索日志更新
+    function updateSearchLog() {
+        setTimeout(function () {
+            $.ajax({
+                url: ctx + '/updateSearchLog',
+                type: 'POST',
+                data: {
+                    searchLogId: $('#searchLogId').val(),
+                    hits: JSON.stringify(hits)
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log('updateSearchLog searchLogId:日志查看数存储成功')
+                }
+            })
+        }, 300)
+    }
+
+</script>
+<!--语音搜索-->
+<script src="../static/js/voiceSearch/recorder.js?v=20250903"></script>
+<script src="../static/js/voiceSearch/voiceSearch.js"></script>
+<script src="../static/js/assist/assist-entry.js"></script>
+</body>
+</html>
