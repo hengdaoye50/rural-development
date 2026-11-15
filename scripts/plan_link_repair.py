@@ -83,13 +83,20 @@ def main() -> int:
     # 每县政策全文：同时保留原文（抽候选名用）与归一文本（精确匹配用）
     text_by_county: dict[str, list[tuple[str, str, str]]] = defaultdict(list)
     prov_text: dict[str, list[tuple[str, str, str]]] = defaultdict(list)
-    for p in conn.execute("SELECT policy_id, province_code, county_code, local_path FROM policy"):
+    p_is_province_roster: dict[str, bool] = {}
+    for p in conn.execute(
+        "SELECT policy_id, province_code, county_code, issuer_level, local_path FROM policy"
+    ):
         body = ROOT / p["local_path"]
         if not body.exists():
             continue
         raw = body.read_text(encoding="utf-8")
         item = (p["policy_id"], raw, norm(raw))
         prov_text[p["province_code"]].append(item)
+        # 省级/市级发文且没有落到具体县的，视为「名单类」——它可能点名多个县的片区
+        p_is_province_roster[p["policy_id"]] = (
+            p["issuer_level"] in ("province", "city") and not (p["county_code"] or "").strip()
+        )
         if p["county_code"]:
             text_by_county[p["county_code"]].append(item)
 
@@ -104,6 +111,12 @@ def main() -> int:
         if len(nname) >= 4 and own:
             for pid, _raw, t in own:
                 if nname in t:
+                    hit_in = pid
+                    break
+        # 省级名单类政策的 county_code 是空的，但正文会点名县与片区，必须一并查
+        if not hit_in and len(nname) >= 4:
+            for pid, _raw, t in prov_text.get(a["province_code"], []):
+                if p_is_province_roster.get(pid) and nname in t:
                     hit_in = pid
                     break
 
