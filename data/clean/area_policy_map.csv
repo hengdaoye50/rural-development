@@ -930,6 +930,7 @@ A330366,P330512,area,primary
 A330371,P330515,area,mention
 A330371,P330516,area,support
 A330372,P330514,area,primary
+A330373,P330259,area,support
 A330378,P330221,area,primary
 A330378,P330266,area,primary
 A330378,P330271,area,primary
@@ -1208,6 +1209,7 @@ A370048,P370079,area,mention
 A370049,P370050,area,support
 A370049,P370051,area,mention
 A370049,P370054,area,support
+A370050,P370288,area,support
 A370051,P370081,area,mention
 A370051,P370087,area,support
 A370051,P370088,area,support
