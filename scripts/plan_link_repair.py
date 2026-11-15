@@ -113,34 +113,38 @@ def main() -> int:
                 if nname in t:
                     hit_in = pid
                     break
-        # 省级名单类政策的 county_code 是空的，但正文会点名县与片区，必须一并查
+        # 扩大到全省所有政策：市级文件、跨县规划、省级名单都可能点名本县片区。
+        # 之前只查「本县 + 省级名单」，导致上海 P310023 逐条列了 11 个产业片区
+        # 却一直没被检出的情况。
         if not hit_in and len(nname) >= 4:
             for pid, _raw, t in prov_text.get(a["province_code"], []):
-                if p_is_province_roster.get(pid) and nname in t:
+                if nname in t:
                     hit_in = pid
                     break
 
+        # 形近匹配只在本县内做。不能扩到全省：区内同名片区很多
+        # （「安仁」在龙泉市与建德市都有、「花漾」在海宁市与余杭区都有），
+        # 跨县形近匹配会大量假阳性。精确名匹配（上一段）才允许跨县。
+        if not hit_in and own and len(nname) >= 4:
+            for pid, raw, _t in own:
+                for cand in CANDIDATE.findall(raw):
+                    r = difflib.SequenceMatcher(None, nname, norm(cand)).ratio()
+                    if r > fuzzy_ratio:
+                        fuzzy_ratio, fuzzy_pid, fuzzy_name = r, pid, cand
+                        if fuzzy_ratio >= 0.95:
+                            break
+
+        # 形近名去掉通用词后必须还剩下 ≥3 个字，才是真名字而非类别名
         if hit_in:
             grade, action = "A", "正文已点名，核实后 add_area_policy_link"
+        elif fuzzy_ratio >= 0.6 and len(norm(strip_generic(fuzzy_name))) >= 3:
+            grade = "B1"
+            action = f"形近名「{fuzzy_name}」，名称校核后可挂"
+            hit_in = fuzzy_pid
         elif own:
-            if len(nname) >= 4:
-                for pid, raw, _t in own:
-                    for cand in CANDIDATE.findall(raw):
-                        r = difflib.SequenceMatcher(None, nname, norm(cand)).ratio()
-                        if r > fuzzy_ratio:
-                            fuzzy_ratio, fuzzy_pid, fuzzy_name = r, pid, cand
-            if fuzzy_ratio >= 0.6:
-                # 形近名去掉通用词后必须还剩下 ≥3 个字，才是真名字而非类别名
-                if len(norm(strip_generic(fuzzy_name))) >= 3:
-                    grade = "B1"
-                    action = f"形近名「{fuzzy_name}」，名称校核后可挂"
-                    hit_in = fuzzy_pid
-                else:
-                    grade = "B2"
-                    action = f"仅匹配到类别名「{fuzzy_name}」，不算形近"
-            else:
-                grade = "B2"
-                action = "本县全文无相近名，疑名称来自媒体稿或全文不完整"
+            grade = "B2"
+            action = ("仅匹配到类别名「%s」，不算形近" % fuzzy_name if fuzzy_name
+                      else "本县全文无相近名，疑名称来自媒体稿或全文不完整")
         else:
             grade = "C" if prov_text.get(a["province_code"]) else "D"
             action = ("本县无全文，需新采（目标明确）" if grade == "C"
