@@ -85,7 +85,11 @@ def main() -> int:
         return 1
 
     # 名单文件本身就是片区层的第一手来源：为每个不同的 source_policy_id 派生一条 source
-    prov2_guess = {"LN": "21", "HE": "13", "SD": "37", "ZJ": "33", "JS": "32"}.get(abbr, "")
+    # 省级码：从名单县码前两位取（area 表此前可能还没有该省）
+    prov2_guess = next(
+        ((r.get("county_code") or "").strip()[:2] for r in roster
+         if (r.get("county_code") or "").strip()), ""
+    ) or {"LN": "21", "HE": "13", "SD": "37", "ZJ": "33", "JS": "32"}.get(abbr, "")
     s_seq = max(
         (int(r["source_id"][3:]) for r in src_rows
          if r.get("source_id", "").startswith(f"S{prov2_guess}") and r["source_id"][3:].isdigit()),
@@ -101,6 +105,13 @@ def main() -> int:
             continue
         if pr["url"] in src_by_url:
             policy_src[pid] = src_by_url[pr["url"]]
+            # 复用时刷新过短的 excerpt（validate 要求 ≥40 字）
+            for sr in src_rows:
+                if sr["source_id"] == policy_src[pid] and len(sr.get("excerpt") or "") < 40:
+                    sr["excerpt"] = (
+                        f"{pr['title']}｜{pr.get('issuer') or ''}｜{pr.get('published_ymd') or ''}"
+                        f"｜按该文件点名的片区逐条补建 area"
+                    )
             continue
         s_seq += 1
         sid = f"S{prov2_guess}{s_seq:04d}"
@@ -111,7 +122,8 @@ def main() -> int:
             "title": pr["title"],
             "publisher": pr["issuer"] or "",
             "published_ymd": pr["published_ymd"] or "",
-            "excerpt": f"{pr['title']}（按名单逐片补建片区，共 {len(roster)} 条）",
+            "excerpt": (f"{pr['title']}｜{pr.get('issuer') or ''}｜{pr.get('published_ymd') or ''}"
+                        f"｜按该文件点名的片区逐条补建 area，本批 {len(roster)} 条"),
             "fetched_at": date.today().isoformat(),
             "credibility": pr["credibility"] or "A",
             "local_path": pr["local_path"] or "",
@@ -122,9 +134,16 @@ def main() -> int:
         print(f"  派生来源 {sid} <- {pid} {pr['title'][:40]}")
 
 
+    # 省码优先级：area 表已有值 → 名单首行的县码前两位（最可靠）→ 缺省映射
     prov2 = next(
-        (r["province_code"][:2] for r in area_rows if r.get("province_code")), None
-    ) or {"LN": "21", "HE": "13", "SD": "37", "ZJ": "33", "JS": "32"}.get(abbr, "")
+        (r["province_code"][:2] for r in area_rows if r.get("province_code")), ""
+    )
+    if not prov2:
+        first_cc = next(((r.get("county_code") or "").strip() for r in roster
+                         if (r.get("county_code") or "").strip()), "")
+        prov2 = first_cc[:2]
+    if not prov2:
+        prov2 = {"LN": "21", "HE": "13", "SD": "37", "ZJ": "33", "JS": "32"}.get(abbr, "")
     existing = {r.get("area_id") for r in area_rows}
     seq = max(
         (int(i[3:]) for i in existing if i and i.startswith(f"A{prov2}") and i[3:].isdigit()),
