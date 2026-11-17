@@ -1,0 +1,435 @@
+﻿area_id,area_name,province_code,area_status,policy_id,rel,tier,policy_title,local_path
+A110001,科学田园·渔阳北房,110000,运行中,P110006,support,place_only,怀柔区“十五五”时期乡村振兴发展规划,data/raw/BJ/202609-bj-hr-shisanwu-xiangcun-zhenxing-guihua/原文.md
+A110002,长城会客厅·国际乡创地,110000,运行中,P110006,support,place_only,怀柔区“十五五”时期乡村振兴发展规划,data/raw/BJ/202609-bj-hr-shisanwu-xiangcun-zhenxing-guihua/原文.md
+A110003,科创引雁来·智领新栖点,110000,运行中,P110006,support,place_only,怀柔区“十五五”时期乡村振兴发展规划,data/raw/BJ/202609-bj-hr-shisanwu-xiangcun-zhenxing-guihua/原文.md
+A120002,悠闲山谷，幻彩田园,120000,运行中,P120001,primary,place_only,关于印发《天津市乡村旅游示范片区提升和精品线路提亮实施方案》的通知,data/raw/TJ/20240318-tj-shi-xcly-shifanpianqu-tisheng-fangan/原文.md
+A120002,悠闲山谷，幻彩田园,120000,运行中,P120008,support,place_only,2026年天津市中国农民丰收节新闻发布会,data/raw/TJ/20260915-tj-2026-zhongguo-nongmin-fengshoujie-xinwenfabuhui/原文.md
+A120006,稻香河蟹肥，乡间美食邀,120000,运行中,P120009,primary,place_only,天津市宁河区人民政府办公室关于印发七里海乡村旅游重点片区规划的通知,data/raw/TJ/20241231-tj-nh-qilihai-xiangcunlvyou-zhongdian-pianqu-guihua/原文.md
+A120007,古蕴田园风光,120000,运行中,P120001,primary,place_only,关于印发《天津市乡村旅游示范片区提升和精品线路提亮实施方案》的通知,data/raw/TJ/20240318-tj-shi-xcly-shifanpianqu-tisheng-fangan/原文.md
+A120007,古蕴田园风光,120000,运行中,P120010,support,place_only,天津市静海区人民政府关于静海区2024年乡村振兴促进工作情况的报告,data/raw/TJ/20250609-sd-jinghai-2024-xiangcun-zhenxing-cujin-gongzuo-baogao/原文.md
+A120008,湖畔田园旅游度假,120000,运行中,P120001,primary,place_only,关于印发《天津市乡村旅游示范片区提升和精品线路提亮实施方案》的通知,data/raw/TJ/20240318-tj-shi-xcly-shifanpianqu-tisheng-fangan/原文.md
+A120008,湖畔田园旅游度假,120000,运行中,P120002,primary,place_only,东丽区人民政府办公室关于印发东丽区乡村旅游重点片区规划的通知,data/raw/TJ/20241231-tj-dl-xcly-zhongdian-pianqu-guihua/原文.md
+A120008,湖畔田园旅游度假,120000,运行中,P120004,support,place_only,《东丽区乡村旅游重点片区规划》政策解读,data/raw/TJ/20250102-tj-dl-xcly-zhongdian-pianqu-guihua-jiedu/原文.md
+A120009,非遗古韵，年画之乡,120000,运行中,P120001,primary,place_only,关于印发《天津市乡村旅游示范片区提升和精品线路提亮实施方案》的通知,data/raw/TJ/20240318-tj-shi-xcly-shifanpianqu-tisheng-fangan/原文.md
+A120010,寻源稻香，兵米小站,120000,运行中,P120001,primary,place_only,关于印发《天津市乡村旅游示范片区提升和精品线路提亮实施方案》的通知,data/raw/TJ/20240318-tj-shi-xcly-shifanpianqu-tisheng-fangan/原文.md
+A120011,自在休闲，魅力北辰,120000,运行中,P120001,primary,place_only,关于印发《天津市乡村旅游示范片区提升和精品线路提亮实施方案》的通知,data/raw/TJ/20240318-tj-shi-xcly-shifanpianqu-tisheng-fangan/原文.md
+A120012,向海乐活，醉美滨海,120000,运行中,P120001,primary,place_only,关于印发《天津市乡村旅游示范片区提升和精品线路提亮实施方案》的通知,data/raw/TJ/20240318-tj-shi-xcly-shifanpianqu-tisheng-fangan/原文.md
+A130001,隆尧县东方食品城和美乡村重点片区,130000,运行中,P130006,support,place_only,隆尧县农业农村局关于公开遴选隆尧县2025年省级和美乡村重点片区建设总体规划单位结果的公示,data/raw/HE/20261008-he-xt-ly-2025-pianqu-zongtiguihua-linxuan-jieguo/原文.md
+A130001,隆尧县东方食品城和美乡村重点片区,130000,运行中,P130013,primary,place_only,2025年隆尧县人民政府工作报告,data/raw/HE/20250225-he-xt-ly-2025-zhengfu-gongzuo-baogao/原文.md
+A130001,隆尧县东方食品城和美乡村重点片区,130000,运行中,P130017,primary,place_only,关于公开遴选《隆尧县2025年省级和美乡村重点片区奖补项目》招标代理单位的公告,data/raw/HE/20250224-he-xt-ly-2025-pianqu-jiangbu-zhaobiaodaili-linxuan/原文.md
+A130001,隆尧县东方食品城和美乡村重点片区,130000,运行中,P130018,support,place_only,隆尧县农业农村局关于公开遴选隆尧县2025年省级和美乡村重点片区奖补项目监理单位结果的公告,data/raw/HE/20250715-he-xt-ly-2025-pianqu-jiangbu-jianli-jieguo/原文.md
+A130005,藁城区滹沱河沿岸和美乡村重点片区,130000,运行中,P130014,support,place_only,石家庄市政府工作报告（2026年2月5日市十五届人大七次会议）,data/raw/HE/20260210-he-sjz-2026-zhengfu-gongzuo-baogao/原文.md
+A150004,葡园绿道农业产业融合发展示范区,150000,运行中,P150010,primary,place_only,美丽乡村绘新景 “乡愁经济”促振兴,data/raw/NM/20240109-nm-wuhai-puyuan-lvdao-xiangchou-jingji/原文.md
+A210002,辽中区产业引领型乡村振兴示范带,210000,运行中,P210016,support,place_only,沈阳市2025年政府工作报告,data/raw/LN/20250117-ln-sy-shi-2025-zhengfu-gongzuo-baogao/原文.md
+A210003,台安县新开河镇—黄沙坨镇乡村振兴示范带,210000,运行中,P210001,primary,place_only,中共辽宁省委农村工作领导小组办公室关于公布辽宁省2023年乡村振兴示范带创建名单的通知,data/raw/LN/20230426-ln-sheng-nongwei-2023-shifandai-mingdan/原文.md
+A210006,庄河市光明山版乡村振兴示范带,210000,运行中,P210001,primary,place_only,中共辽宁省委农村工作领导小组办公室关于公布辽宁省2023年乡村振兴示范带创建名单的通知,data/raw/LN/20230426-ln-sheng-nongwei-2023-shifandai-mingdan/原文.md
+A210006,庄河市光明山版乡村振兴示范带,210000,运行中,P210017,primary,place_only,庄河市2025年政府工作报告（2024年12月27日在庄河市第八届人民代表大会第四次会议上）,data/raw/LN/2025-ln-dl-zh-2025-zhengfu-gongzuo-baogao/原文.md
+A210006,庄河市光明山版乡村振兴示范带,210000,运行中,P210018,primary,place_only,庄河市2026年政府工作报告（2025年12月30日在庄河市第八届人民代表大会第五次会议上）,data/raw/LN/20251231-ln-dl-zh-2026-zhengfu-gongzuo-baogao/原文.md
+A210007,瓦房店市王店村—马圈村乡村振兴示范带,210000,运行中,P210001,primary,place_only,中共辽宁省委农村工作领导小组办公室关于公布辽宁省2023年乡村振兴示范带创建名单的通知,data/raw/LN/20230426-ln-sheng-nongwei-2023-shifandai-mingdan/原文.md
+A210008,本溪县小市镇同江峪村—草河掌镇草河掌村乡村振兴示范带,210000,运行中,P210006,support,place_only,本农发〔2024〕1号 本溪市农业农村局 本溪市乡村振兴局关于开展2023年乡村振兴示范乡镇示范村创建的通知,data/raw/LN/20240704-ln-bx-shi-nongfa-2024-1-shifan-xiangzhen-cun/原文.md
+A210009,桓仁县雅河朝鲜族乡乡村振兴示范带,210000,运行中,P210021,support,place_only,2025年桓仁满族自治县政府工作报告（2024年12月26日在桓仁满族自治县第八届人民代表大会第四次会议上）,data/raw/LN/20241226-ln-hr-2025-zhengfu-gongzuo-baogao/原文.md
+A230007,海伦市乡村振兴示范带,230000,待核,P230020,support,place_only,2025年绥化市政府工作报告,data/raw/HL/20250109-suihua-2025-zhengfu-gongzuo-baogao/原文.md
+A310011,奉贤青村镇“五好两宜”和美乡村试点片区,310000,运行中,P310002,primary,place_only,关于做好上海市2025年“五好两宜”和美乡村试点（第一批）工作的通知,data/raw/SH/20250214-sh-2025-wuhaoliangyi-shidian-diyipi-tongzhi/原文.md
+A310011,奉贤青村镇“五好两宜”和美乡村试点片区,310000,运行中,P310011,support,place_only,上海市奉贤区人民政府关于印发《奉贤区推进乡村全面振兴“十五五”规划》的通知,data/raw/SH/20261008-sh-fx-qu-xiangcun-quanmian-zhenxing-shiwuwu-guihua/原文.md
+A310011,奉贤青村镇“五好两宜”和美乡村试点片区,310000,运行中,P310014,support,place_only,上海市奉贤区农业农村委员会关于印发《2025年奉贤区“三农”工作要点》的通知,data/raw/SH/20250217-sh-fx-nongwei-2025-sannong-gongzuo-yaodian/原文.md
+A310011,奉贤青村镇“五好两宜”和美乡村试点片区,310000,运行中,P310015,support,place_only,上海市奉贤区农业农村委员会关于印发《2026年奉贤区“三农”工作要点》的通知,data/raw/SH/20260326-sh-fx-nongwei-2026-sannong-gongzuo-yaodian/原文.md
+A310011,奉贤青村镇“五好两宜”和美乡村试点片区,310000,运行中,P310017,primary,place_only,奉贤区迎接“五好两宜”和美乡村试点市级中期评估,data/raw/SH/20260625-sh-fx-qingcun-wuhaoliangyi-shidian-shiji-zhongqi-pinggu/原文.md
+A310011,奉贤青村镇“五好两宜”和美乡村试点片区,310000,运行中,P310019,primary,place_only,奉贤区人大常委会主任赴青村镇调研“五好两宜”和美乡村建设情况,data/raw/SH/20250417-sh-fx-renda-zhuren-qingcun-wuhaoliangyi-diaoyan/原文.md
+A310011,奉贤青村镇“五好两宜”和美乡村试点片区,310000,运行中,P310020,support,place_only,全力打造南上海重要增长极，奋发进取、开创未来丨五届区委十一次全会举行,data/raw/SH/20250711-sh-fx-wujie-quwei-shiyici-quanhui-qingcun-shidian/原文.md
+A310018,浦东生鲜蔬果产业片区,310000,运行中,P310023,primary,place_only,上海市人民政府关于印发《上海市推进农业高质量发展行动方案（2021-2025年）》的通知,data/raw/SH/20210112-sh-js-jinshan-tese-guoshu-nonglv-ronghe-chanyequ-xingdongfangan-2021/原文.md
+A310019,金山特色果蔬产业片区,310000,运行中,P310024,primary,place_only,关于同意《上海市金山区特色果蔬产业片区农业高质量发展规划》《上海市金山区农旅融合产业片区农业高质量发展规划》的批复,data/raw/SH/20211018-sh-js-jinshan-guoshu-nonglv-pianqu-guihua-pifu-2021/原文.md
+A310020,金山农旅融合产业片区,310000,运行中,P310024,primary,place_only,关于同意《上海市金山区特色果蔬产业片区农业高质量发展规划》《上海市金山区农旅融合产业片区农业高质量发展规划》的批复,data/raw/SH/20211018-sh-js-jinshan-guoshu-nonglv-pianqu-guihua-pifu-2021/原文.md
+A320001,花海森林宜居宜业和美乡村示范片区,320000,运行中,P320025,primary,place_only,泰州兴化：打造宜居宜业和美乡村示范片区,data/raw/JS/20240325-js-tz-xh-huakai-senlin-pianqu/原文.md
+A320002,烟波草荡 林下果香宜居宜业和美乡村示范片区,320000,运行中,P320025,primary,place_only,泰州兴化：打造宜居宜业和美乡村示范片区,data/raw/JS/20240325-js-tz-xh-huakai-senlin-pianqu/原文.md
+A320011,金仓湖现代农业示范片区,320000,运行中,P320081,support,place_only,太仓市2026年政府工作报告,data/raw/JS/20260122-js-sz-tc-zhengfu-gongzuo-baogao-2026/原文.md
+A320017,宜南茶乡竹海山水画廊片区,320000,运行中,P320018,primary,place_only,无锡市政府工作报告（2025年）,data/raw/JS/20250116-js-wx-zfgzbg-2025/原文.md
+A320017,宜南茶乡竹海山水画廊片区,320000,运行中,P320022,support,place_only,关于拟支持的宜居宜业和美乡村片区建设项目公示,data/raw/JS/20241224-js-wx-pianqu-jianshe-xiangmu-gongshi/原文.md
+A320018,锡东稻香吴韵片区,320000,运行中,P320018,primary,place_only,无锡市政府工作报告（2025年）,data/raw/JS/20250116-js-wx-zfgzbg-2025/原文.md
+A320018,锡东稻香吴韵片区,320000,运行中,P320022,support,place_only,关于拟支持的宜居宜业和美乡村片区建设项目公示,data/raw/JS/20241224-js-wx-pianqu-jianshe-xiangmu-gongshi/原文.md
+A320019,惠山江南桃花源片区,320000,运行中,P320015,support,place_only,无锡市惠山区江南桃花源宜居宜业和美乡村片区发展规划项目征求意见公告,data/raw/JS/20240724-js-wx-hs-jiangnan-taohuayuan-pianqu-guihua-caigou/原文.md
+A320019,惠山江南桃花源片区,320000,运行中,P320018,primary,place_only,无锡市政府工作报告（2025年）,data/raw/JS/20250116-js-wx-zfgzbg-2025/原文.md
+A320019,惠山江南桃花源片区,320000,运行中,P320022,support,place_only,关于拟支持的宜居宜业和美乡村片区建设项目公示,data/raw/JS/20241224-js-wx-pianqu-jianshe-xiangmu-gongshi/原文.md
+A320022,两湖片区（省级宜居宜业和美乡村片区（带））,320000,运行中,P320047,support,place_only,市政府办公室关于印发《常州市城乡环境大整治实施方案》的通知,data/raw/JS/20250318-js-cz-chengxianghuanjing-dazhengzhi-shishifangan-2025/原文.md
+A320023,环长荡湖省级示范片区,320000,运行中,P320039,primary,place_only,金坛区：走融合发展之路 推动城乡“双向奔赴”,data/raw/JS/20250116-js-cz-jt-huanchangdanghu-shifanpianqu-2024/原文.md
+A320023,环长荡湖省级示范片区,320000,运行中,P320047,support,place_only,市政府办公室关于印发《常州市城乡环境大整治实施方案》的通知,data/raw/JS/20250318-js-cz-chengxianghuanjing-dazhengzhi-shishifangan-2025/原文.md
+A320033,海门张謇故里片区,320000,运行中,P320084,support,place_only,江苏省宜居宜业和美乡村常乐片区项目生态河道建设工程、河道疏浚工程、绿化工程施工资格后审公告,data/raw/JS/20241115-js-nt-hm-changle-pianqu-shengtai-hedao-zhaobiao/原文.md
+A320040,六塘河中游稻香农园片区,320000,运行中,P320096,support,place_only,2026年宿豫区政府工作报告,data/raw/JS/20260121-js-sq-suyu-2026-zhengfu-gongzuo-baogao/原文.md
+A320042,黄河故道北部国家农业公园片区,320000,运行中,P320103,support,place_only,黄河故道北部片区（宿城段）水环境综合整治工程方案编制中标结果公告,data/raw/JS/20250218-js-sq-sucheng-hhgd-beibu-pianqu-shuihuanjing-zhongbiao/原文.md
+A320044,黄河故道南部生态富民片区,320000,运行中,P320090,support,place_only,泗阳县发展和改革局关于泗阳县李口镇和美乡村黄河故道南部片区农文旅驿站及导示系统项目可行性研究报告批复,data/raw/JS/20260207-js-sq-siyang-hhgd-nanbu-pianqu-nongwenlv-yizhan/原文.md
+A320047,淮沭河花乡核心区片区,320000,运行中,P320089,support,place_only,县政府办公室关于印发沭阳县花乡片区垃圾管理工作实施方案的通知,data/raw/JS/20260724-js-sq-shuyang-huaxiang-pianqu-laji-guanli/原文.md
+A320047,淮沭河花乡核心区片区,320000,运行中,P320095,support,place_only,关于《沭阳县花乡片区垃圾管理工作实施方案》的政策解读,data/raw/JS/20260728-js-sq-shuyang-huaxiang-pianqu-laji-fangan-jiedu/原文.md
+A320047,淮沭河花乡核心区片区,320000,运行中,P320102,support,place_only,《沭阳县花乡片区垃圾管理工作实施方案（征求意见稿）》起草说明,data/raw/JS/20260612-js-sq-shuyang-huaxiang-pianqu-laji-fangan-qicao-shuoming/原文.md
+A320053,东海海陵生态湖景休闲观光片区,320000,运行中,P320072,primary,place_only,和美乡村，东海这样建设！,data/raw/JS/20251014-js-lyg-dh-hailing-shengtai-hujing-pianqu/原文.md
+A320053,东海海陵生态湖景休闲观光片区,320000,运行中,P320073,support,place_only,封波参加石梁河镇、平明镇代表团审议,data/raw/JS/20250108-js-lyg-dh-fengbo-shilianghe-pianqu-shenyi/原文.md
+A320053,东海海陵生态湖景休闲观光片区,320000,运行中,P320085,primary,place_only,我县计划1.6亿元建设海陵生态湖景休闲观光示范片区,data/raw/JS/20240715-js-lyg-dh-hailing-pianqu-1.6yi-jianshe/原文.md
+A320054,白马湖片区,320000,运行中,P320059,support,place_only,关于金湖县吕良镇2024年宜居宜业和美乡村建设项目建议书的批复,data/raw/JS/20240807-js-ha-jh-lvliang-hemeixiangcun-jianshexiangmu-pifu/原文.md
+A320057,建湖旅游二号线片区,320000,运行中,P320057,primary,place_only,建湖县旅游二号线宜居宜业和美乡村片区规划项目,data/raw/JS/20251204-js-yc-jh-lvyouerhaoxian-pianqu-guihua-caigou-hetong/原文.md
+A320057,建湖旅游二号线片区,320000,运行中,P320058,support,place_only,恒济镇聚焦强村富民全面推进乡村振兴,data/raw/JS/20260709-js-yc-jh-hengji-zhen-yan-lvyou2haoxian-jiancheng-shengji-pianqu/原文.md
+A320074,蒋垛草莓产业共富团,320000,运行中,P320028,support,place_only,姜堰区创新“点团片”梯次发展模式建设宜居宜业和美乡村,data/raw/JS/20250704-js-tz-jy-diantuanpian-tici-fazhan/原文.md
+A320075,张甸小杂粮链式发展示范团,320000,运行中,P320028,support,place_only,姜堰区创新“点团片”梯次发展模式建设宜居宜业和美乡村,data/raw/JS/20250704-js-tz-jy-diantuanpian-tici-fazhan/原文.md
+A320077,溧水无想山南片区,320000,运行中,P320013,support,place_only,区政府办公室关于印发溧水区加快推进农业农村高质量发展的若干措施的通知,data/raw/JS/20260430-js-nj-ls-nongye-gaozhiliang-ruogan-cuoshi/原文.md
+A320078,高淳慢城片区,320000,运行中,P320006,support,place_only,高淳区扎实推进和美乡村建设,data/raw/JS/20241129-js-nj-gc-2024-pianqu-huacheng/原文.md
+A330012,舟山市普陀区大黄杨尖片区,330000,运行中,P330244,support,place_only,普陀区整治城乡风貌环境 绘就和美共富新画卷,data/raw/ZJ/20260101-pt-zhengzhi-chengxiang-fengmao-7jia2/原文.md
+A330021,象山县环蟹钳港茅洋片区,330000,运行中,P330331,support,place_only,环蟹钳港共富样板区上榜最佳实践案例,data/raw/ZJ/20231030-zj-nb-xs-xiangshan-huanxieqiangang-gongfu-yangbanqu-anli/原文.md
+A330021,象山县环蟹钳港茅洋片区,330000,运行中,P330332,support,place_only,审计助力环蟹钳港共富样板区项目精准落地,data/raw/ZJ/20230913-zj-nb-xs-xiangshan-huanxieqiangang-shenji-zhuli/原文.md
+A330021,象山县环蟹钳港茅洋片区,330000,运行中,P330340,support,place_only,乡村片区组团激发“聚变效应”,data/raw/ZJ/20250710-zj-nb-xs-xiangshan-pianqu-zutuan-jubian-xiaoying/原文.md
+A330033,慈溪市匡堰镇南部片区,330000,运行中,P330318,support,place_only,省农业农村厅副厅长杨大海赴匡堰镇开展片区组团调研工作,data/raw/ZJ/20250228-zj-nb-cx-cixi-kuangyan-pianqu-zutuan-diaoyan/原文.md
+A330043,水润翠屏农文旅片区,330000,运行中,P330356,support,place_only,翠屏山中央公园，有新动作！,data/raw/ZJ/20240709-zj-nb-zh-zhenhai-cuipingshan-zhongyang-gongyuan-xindongzuo/原文.md
+A330050,五车堰新乡邻经济发展片区,330000,运行中,P330342,support,place_only,余姚市人民政府办公室关于印发2024年和美乡村“重点攻坚 协同治理”实施方案的通知,data/raw/ZJ/20250110-zj-nb-yy-yuyao-hemeixiangcun-zhongdiangongjian-xietongzhili-fangan/原文.md
+A330055,象山西沪港桂花产业片区,330000,运行中,P330283,primary,place_only,墙头镇西沪港桂花产业片区入选省重点村组团片区,data/raw/ZJ/20260512-zj-nb-xs-xiangshan-xihugang-guihua-pianqu-sheng-zhongdiancun/原文.md
+A330055,象山西沪港桂花产业片区,330000,运行中,P330310,support,place_only,关于下拨2021年度“环西沪港”省级共同富裕新时代美丽乡村示范带第一批补助资金的通知,data/raw/ZJ/20211213-zj-nb-xs-xiangshan-huanxihugang-shifandai-buzhu-2021/原文.md
+A330055,象山西沪港桂花产业片区,330000,运行中,P330312,support,place_only,党建引领片区组团发展，墙头镇深耕“一片林”串起“共富链”,data/raw/ZJ/20260703-zj-nb-xs-xiangshan-qiangtou-yipianlin-pianqu-zutuan/原文.md
+A330057,傅家路众家治村片区,330000,运行中,P330354,support,place_only,傅家路村“八美共融”绽放共富之花,data/raw/ZJ/20250529-zj-nb-cx-cixi-fujialu-bameigongrong-gongfu/原文.md
+A330066,天凝时光杏福未来片区,330000,运行中,P330509,primary,place_only,《嘉善县“县城-中心镇-重点村”发展轴空间专项规划（草案）》公示,data/raw/ZJ/20250804-zj-jx-jiashan-fazhanzhou-kongjian-zhuanxiang-guihua-caoan/原文.md
+A330071,宋韵狮城古村片区,330000,运行中,P330107,primary,place_only,《淳安县“县城—中心镇—重点村”发展轴空间专项规划（2025—2035年）》批后公布,data/raw/ZJ/20251011-hz-ca-fazhanzhou-kongjian-zhuanxiang-guihua-2025-2035/原文.md
+A330076,泛下淤片区,330000,运行中,P330181,support,place_only,关于开化县2025年国民经济和社会发展计划执行情况与2026年国民经济和社会发展计划草案的报告,data/raw/ZJ/20261106-kh-jihua-baogao-2026/原文.md
+A330077,爱屿天涯组团片区,330000,运行中,P330235,primary,place_only,舟山市激活片区组团发展助力缩小“三大差距”,data/raw/ZJ/20250625-zs-shi-jihuo-pianqu-zutuan-fazhan/原文.md
+A330084,保安源综合发展片区,330000,运行中,P330142,support,place_only,桐庐县分水镇2026年工作计划,data/raw/ZJ/20260330-tl-fenshui-zhen-2026-gongzuo-jihua/原文.md
+A330092,灵山生态旅居片,330000,运行中,P330090,support,place_only,《杭州市西湖区“县城－中心镇－重点村”发展轴空间专项规划（2025-2035年）》的批后公布,data/raw/ZJ/20251028-hz-xh-fazhanzhou-kongjian-zhuanxiang-guihua-2025-2035/原文.md
+A330093,沿江生态原乡片,330000,运行中,P330090,primary,place_only,《杭州市西湖区“县城－中心镇－重点村”发展轴空间专项规划（2025-2035年）》的批后公布,data/raw/ZJ/20251028-hz-xh-fazhanzhou-kongjian-zhuanxiang-guihua-2025-2035/原文.md
+A330165,丽水街片区,330000,运行中,P330157,support,place_only,永嘉召开会议专题研究乡村片区组团发展和农业全产业链工作,data/raw/ZJ/20250828-zj-wz-yj-pianquzutuan-zhuanxianghuiyi/原文.md
+A330166,林福片区,330000,运行中,P330157,support,place_only,永嘉召开会议专题研究乡村片区组团发展和农业全产业链工作,data/raw/ZJ/20250828-zj-wz-yj-pianquzutuan-zhuanxianghuiyi/原文.md
+A330167,韩埠片区,330000,运行中,P330157,support,place_only,永嘉召开会议专题研究乡村片区组团发展和农业全产业链工作,data/raw/ZJ/20250828-zj-wz-yj-pianquzutuan-zhuanxianghuiyi/原文.md
+A330168,镬炉片区,330000,运行中,P330157,support,place_only,永嘉召开会议专题研究乡村片区组团发展和农业全产业链工作,data/raw/ZJ/20250828-zj-wz-yj-pianquzutuan-zhuanxianghuiyi/原文.md
+A330169,南陈片区,330000,运行中,P330157,support,place_only,永嘉召开会议专题研究乡村片区组团发展和农业全产业链工作,data/raw/ZJ/20250828-zj-wz-yj-pianquzutuan-zhuanxianghuiyi/原文.md
+A330180,库村片区,330000,运行中,P330170,support,place_only,张银贵专题研究重点村片区组团发展,data/raw/ZJ/20260728-zj-wz-ts-zhangyingui-pianquzutuan-zhuanxiangyanjiu/原文.md
+A330213,聚高合片区,330000,运行中,P330181,support,place_only,关于开化县2025年国民经济和社会发展计划执行情况与2026年国民经济和社会发展计划草案的报告,data/raw/ZJ/20261106-kh-jihua-baogao-2026/原文.md
+A330221,亭旁宁和红韵和美乡村片区,330000,运行中,P330214,support,place_only,三门县农业农村局拟安排2026年度县财政土地出让收入支持的建设项目储备库,data/raw/ZJ/20251029-sm-xian-2026-xiangmu-chubeiku/原文.md
+A330222,健跳海上田园和美片区,330000,运行中,P330214,support,place_only,三门县农业农村局拟安排2026年度县财政土地出让收入支持的建设项目储备库,data/raw/ZJ/20251029-sm-xian-2026-xiangmu-chubeiku/原文.md
+A330224,海润山海画廊花园绿谷片区,330000,运行中,P330214,support,place_only,三门县农业农村局拟安排2026年度县财政土地出让收入支持的建设项目储备库,data/raw/ZJ/20251029-sm-xian-2026-xiangmu-chubeiku/原文.md
+A330224,海润山海画廊花园绿谷片区,330000,运行中,P330275,support,place_only,沈洪峰督导深化乡村片区组团发展和农村人居环境整治工作,data/raw/ZJ/20260916-sm-xian-shumufeng-dudao-pianqu-zutuan/原文.md
+A330230,住龙红绿金融合片区,330000,运行中,P330440,support,place_only,关于《龙泉市“县城-中心镇-重点村”发展轴空间专项规划（2025-2035年）》（公示稿）公示公告,data/raw/ZJ/20250418-zj-ls-lq-fazhanzhou-kongjian-zhuangxiang-guihua-2025-2035/原文.md
+A330232,城畔原乡云阶山田未来乡村共富片区,330000,运行中,P330440,primary,place_only,关于《龙泉市“县城-中心镇-重点村”发展轴空间专项规划（2025-2035年）》（公示稿）公示公告,data/raw/ZJ/20250418-zj-ls-lq-fazhanzhou-kongjian-zhuangxiang-guihua-2025-2035/原文.md
+A330235,养生福地吴坑片区,330000,运行中,P330441,support,place_only,《青田县“县城-中心镇-重点村”发展轴空间专项规划》公示,data/raw/ZJ/20250416-zj-ls-qt-fazhanzhou-kongjian-zhuanxiang-guihua-2025/原文.md
+A330236,白浦杨梅综合产业片区,330000,运行中,P330441,primary,place_only,《青田县“县城-中心镇-重点村”发展轴空间专项规划》公示,data/raw/ZJ/20250416-zj-ls-qt-fazhanzhou-kongjian-zhuanxiang-guihua-2025/原文.md
+A330244,产城融合先行片区,330000,运行中,P330442,support,place_only,关于《缙云县“县城-中心镇-重点村”发展轴空间专项规划（2025-2035年）》公示稿公示公告,data/raw/ZJ/20250411-zj-ls-jy-fazhanzhou-kongjian-zhuanxiang-guihua-2025-2035/原文.md
+A330245,东方镇芥菜全产业链片区,330000,运行中,P330442,primary,place_only,关于《缙云县“县城-中心镇-重点村”发展轴空间专项规划（2025-2035年）》公示稿公示公告,data/raw/ZJ/20250411-zj-ls-jy-fazhanzhou-kongjian-zhuanxiang-guihua-2025-2035/原文.md
+A330250,产城融合发展片区,330000,运行中,P330388,support,place_only,松阳县农业农村局关于第038号《推进古市镇山下阳村乡村运营》建议答复的函,data/raw/ZJ/20251116-zj-ls-sy-rddbjy-d038-shanxiayang-yunying/原文.md
+A330254,景宁畲族风情大花园建设片区,330000,运行中,P330424,primary,place_only,“县城-中心镇-重点村”发展轴空间专项规划草案公示,data/raw/ZJ/20250407-zj-ls-jn-fazhanzhou-guihua-caoan-gongshi/原文.md
+A330255,景宁茶香畲寨发展片区,330000,运行中,P330424,primary,place_only,“县城-中心镇-重点村”发展轴空间专项规划草案公示,data/raw/ZJ/20250407-zj-ls-jn-fazhanzhou-guihua-caoan-gongshi/原文.md
+A330260,园博星火片区,330000,运行中,P330057,support,place_only,我区两村入选2025年第二批（非山区海岛县）省级重点村,data/raw/ZJ/20250806-zj-wz-oh-liangcun-ruxuan-di-erpi-zhongdiancun/原文.md
+A330260,园博星火片区,330000,运行中,P330058,support,place_only,区农业农村局组织召开乡村片区组团发展项目评审会,data/raw/ZJ/20250807-zj-wz-oh-pianqu-zutuan-xiangmu-pingshenhui/原文.md
+A330267,新光-薛家片区,330000,运行中,P330375,support,place_only,关于《浦江县虞宅乡新光村村庄规划（2021-2035）》的公示,data/raw/ZJ/20240926-zj-jh-pj-yuzhai-xinguang-cun-zhuangguihua/原文.md
+A330267,新光-薛家片区,330000,运行中,P330497,primary,place_only,《浦江县“县城-中心镇-重点村”发展轴空间专项规划》批后公布,data/raw/ZJ/20251022-zj-jh-pj-fazhanzhou-kongjian-zhuanxiang-guihua-pihou/原文.md
+A330268,智韵诸葛诗耕田园片区,330000,运行中,P330499,support,place_only,《兰溪市“县城-中心镇-重点村”发展轴空间专项规划（2025-2035年）》批后公布,data/raw/ZJ/20251024-zj-jh-lx-fazhanzhou-kongjian-zhuanxiang-guihua-pihou/原文.md
+A330285,古村新发片区,330000,运行中,P330170,support,place_only,张银贵专题研究重点村片区组团发展,data/raw/ZJ/20260728-zj-wz-ts-zhangyingui-pianquzutuan-zhuanxiangyanjiu/原文.md
+A330287,番茄天地福缘古韵片区,330000,运行中,P330077,support,place_only,龙行审投〔2022〕216号 关于龙港市“福缘古韵”鲸头未来乡村建设工程项目建议书的批复,data/raw/ZJ/20230202-zj-wz-lg-fuyuan-guyun-jingtou-xiangmu-jianyishu-pifu/原文.md
+A330287,番茄天地福缘古韵片区,330000,运行中,P330078,support,place_only,龙行审投〔2022〕217号 关于龙港市“福缘古韵”鲸头未来乡村建设工程可行性研究报告的批复,data/raw/ZJ/20230202-zj-wz-lg-fuyuan-guyun-jingtou-kexingxing-pifu/原文.md
+A330299,耕织故里片区,330000,运行中,P330127,primary,place_only,中共杭州市临安区委农村工作领导小组关于印发《临安区以“千万工程”牵引城乡融合发展缩小“三大差距”打造共同富裕临安样板2026年工作计划》的通,data/raw/ZJ/20260527-la-2026-nian-gongzuo-jihua-sandachaju/原文.md
+A330299,耕织故里片区,330000,运行中,P330128,support,place_only,2026年杭州市临安区政府工作报告,data/raw/ZJ/20260306-la-2026-zhengfu-gongzuo-baogao/原文.md
+A330299,耕织故里片区,330000,运行中,P330129,support,place_only,缩小“三大差距”“兴村”焕新颜⑫｜耕织未来共富片区：以点扩面 解锁组团共建新路径,data/raw/ZJ/20250729-la-gengzhi-weilai-gongfu-pianqu/原文.md
+A330317,富春山居黄金左岸片区,330000,运行中,P330119,primary,place_only,关于印发《深化新时代“千万工程”打造现代版富春山居图桐庐标杆行动方案（2023-2025年）》的通知,data/raw/ZJ/20231116-tl-qianwan-gongcheng-tonglu-biaogan-xingdong-fangan-2023-2025/原文.md
+A330317,富春山居黄金左岸片区,330000,运行中,P330144,support,place_only,我县入选浙江省2025年度深入推进农村综合改革支持共富乡村建设试点名单,data/raw/ZJ/20241127-tl-shengji-gongfu-xiangcun-shidian-2025/原文.md
+A330317,富春山居黄金左岸片区,330000,运行中,P330479,primary,place_only,《桐庐县“县城-中心镇-重点村”发展轴空间专项规划（2025-2035年）》批后公布,data/raw/ZJ/20251028-tl-fazhanzhou-kongjian-zhuanxiang-guihua-pihou/原文.md
+A330321,姚林仙境大景区片区,330000,运行中,P330479,primary,place_only,《桐庐县“县城-中心镇-重点村”发展轴空间专项规划（2025-2035年）》批后公布,data/raw/ZJ/20251028-tl-fazhanzhou-kongjian-zhuanxiang-guihua-pihou/原文.md
+A330338,田园雅集片区,330000,运行中,P330005,primary,place_only,关于公布第二批湖州市新时代美丽乡村样板片区 （组团式未来乡村）、第七批美丽乡村示范乡镇、第六批美丽乡村精品村拟表彰名单的公示,data/raw/ZJ/20230213-zj-hz-d2-yangbanpianqu-biaozhang/原文.md
+A330348,陆羽沓梦片区,330000,运行中,P330508,primary,place_only,《长兴县“县城—中心镇—重点村”发展轴空间专项规划（2025-2035年）》批后公告,data/raw/ZJ/20251013-zj-hz-changxing-fazhanzhou-kongjian-zhuanxiang-guihua-pihou/原文.md
+A330350,归园田居禅茶霞幕片区,330000,运行中,P330005,primary,place_only,关于公布第二批湖州市新时代美丽乡村样板片区 （组团式未来乡村）、第七批美丽乡村示范乡镇、第六批美丽乡村精品村拟表彰名单的公示,data/raw/ZJ/20230213-zj-hz-d2-yangbanpianqu-biaozhang/原文.md
+A330354,大仙潭环莫干山片区,330000,运行中,P330136,support,place_only,浙江省人民政府办公厅关于印发浙江省“十五五”农业农村现代化规划的通知,data/raw/ZJ/20260716-zj-shisiwu-nongye-nongcun-xiandaihua-guihua/原文.md
+A330354,大仙潭环莫干山片区,330000,运行中,P330360,primary,place_only,我县重点村片区组团项目补助资金位列全市第一,data/raw/ZJ/20260303-zj-hz-dq-zhongdiancun-pianqu-zutuan-buzhu-quanshi-diyi/原文.md
+A330381,翠屏梅堰片区,330000,运行中,P330285,primary,place_only,匡堰组团“出道”打造翠屏共富示范带,data/raw/ZJ/20231025-zj-nb-cx-cixi-kuangyan-cuiping-gongfu-shifandai/原文.md
+A330383,产教共融研旅花园片区,330000,运行中,P330206,support,place_only,2026年东阳市政府工作报告,data/raw/ZJ/20261106-dy-govreport-2026/原文.md
+A330394,花漾村乡村振兴片区组团,330000,运行中,P330079,support,place_only,长安“花漾村”探索乡村运营新模式,data/raw/ZJ/20240909-zj-jx-hn-changan-huayangcun-xiangcun-yunying/原文.md
+A330399,大尖山乡村振兴片区组团,330000,运行中,P330084,support,place_only,乡村振兴共富项目—黄湾和美乡村示范片区建设项目资格预审公告,data/raw/ZJ/20241113-zj-jx-hn-huangwan-hemeixiangcun-shifanpianqu-zhaobiao/原文.md
+A330400,转塘龙坞艺韵茶乡片区,330000,运行中,P330090,primary,place_only,《杭州市西湖区“县城－中心镇－重点村”发展轴空间专项规划（2025-2035年）》的批后公布,data/raw/ZJ/20251028-hz-xh-fazhanzhou-kongjian-zhuanxiang-guihua-2025-2035/原文.md
+A330405,泗洲头大户外融合片区,330000,运行中,P330353,support,place_only,泗洲头大户外运动俱乐部开建,data/raw/ZJ/20221206-zj-nb-xs-xiangshan-sizhoutou-dahuwai-yundong-julebu/原文.md
+A330431,小吃经共富组团,330000,待核,P330457,support,place_only,2026年嵊州市片区（重点村）建设项目—小吃经片区黄胜堂村项目招标公告,data/raw/ZJ/20251127-zj-sx-sz-xiaochijing-pianqu-huashengtang-zhaobiao/原文.md
+A340009,茗香景秀·皖美新杭乡村振兴示范片区,340000,运行中,P340016,primary,place_only,关于对市政协一届四次会议第5号提案的答复函,data/raw/AH/20251103-guangde-zhengxie-tian-5-hao-dafuhan-shifanpianqu/原文.md
+A340010,湖光山色·生态卢村乡村振兴示范片区,340000,运行中,P340016,primary,place_only,关于对市政协一届四次会议第5号提案的答复函,data/raw/AH/20251103-guangde-zhengxie-tian-5-hao-dafuhan-shifanpianqu/原文.md
+A340011,茶扇风情·康养东亭乡村振兴示范片区,340000,运行中,P340016,primary,place_only,关于对市政协一届四次会议第5号提案的答复函,data/raw/AH/20251103-guangde-zhengxie-tian-5-hao-dafuhan-shifanpianqu/原文.md
+A350028,周宁跨村联建片区,350000,待核,P350041,support,place_only,周宁县人民政府关于印发周宁县国民经济和社会发展第十五个五年规划纲要的通知,data/raw/FJ/20260513-zn-shisiwu-guihua-gangyao/原文.md
+A350028,周宁跨村联建片区,350000,待核,P350048,support,place_only,周宁泗桥：以项目之“笔”绘乡村新景,data/raw/FJ/20261029-zn-siqiao-zongsan-pianqu/原文.md
+A350029,泉州一县一溪一特色田园风光片区,350000,运行中,P350009,primary,place_only,走好具有泉州特色的乡村振兴之路 建设宜居宜业和美侨乡,data/raw/FJ/20230921-fj-qz-yixianyixi-tianyuanfengguang-10ge-shifan/原文.md
+A350029,泉州一县一溪一特色田园风光片区,350000,运行中,P350010,support,place_only,泉州市财政局 泉州市农业农村局关于下达2023年市级乡村振兴专项资金（“一县一溪一特色”田园风光建设项目）的通知,data/raw/FJ/20230928-fj-qz-caizheng-2023-yixianyixi-500wan/原文.md
+A360002,赣东北四融一共和美乡村先行区,360000,运行中,P360026,support,place_only,婺源县召开“四融一共”和美乡村建设工作推进会,data/raw/JX/20241031-jx-wy-sirongyigong-tuijinhui-2024/原文.md
+A360002,赣东北四融一共和美乡村先行区,360000,运行中,P360027,primary,place_only,关于印发学习运用“千万工程”经验有力有效推进2024年宜居宜业和美乡村建设工作方案的通知,data/raw/JX/20240510-jx-sheng-2024yijuyihemeixiangcun-gongzuofangan/原文.md
+A360003,赣中四融一共和美乡村先行区,360000,运行中,P360027,primary,place_only,关于印发学习运用“千万工程”经验有力有效推进2024年宜居宜业和美乡村建设工作方案的通知,data/raw/JX/20240510-jx-sheng-2024yijuyihemeixiangcun-gongzuofangan/原文.md
+A360003,赣中四融一共和美乡村先行区,360000,运行中,P360034,support,place_only,政府工作报告——2026年10月27日在宜春市第六届人民代表大会第一次会议上,data/raw/JX/20261104-yc-shi-2026-zhengfugongzuobaogao/原文.md
+A360003,赣中四融一共和美乡村先行区,360000,运行中,P360035,support,place_only,关于宜春市2024年国民经济和社会发展计划执行情况与2025年国民经济和社会发展计划草案的报告,data/raw/JX/20250311-yc-shi-2024-jihua-zhixing-qingkuang-baogao/原文.md
+A360006,永修四融一共先行村连片片区,360000,运行中,P360002,primary,place_only,永修县农业农村局2025年工作总结及2026年工作打算,data/raw/JX/20260108-yongxiu-2025-nongye-nongcunju-gongzuozongjie/原文.md
+A360007,章贡区沙石水东先行片区,360000,运行中,P360001,primary,place_only,章贡区2026年“四融一共”和美乡村建设工作要点,data/raw/JX/20260423-zgq-2026-sirongyigong-gongzuoyaodian/原文.md
+A360012,南康镜坝洋江生态片区,360000,运行中,P360008,support,place_only,镜坝镇政府工作报告,data/raw/JX/20260105-nankang-jingba-zhen-zhengfu-gongzuobaogao/原文.md
+A360012,南康镜坝洋江生态片区,360000,运行中,P360017,support,place_only,关于印发《赣州市南康区国民经济和社会发展第十五个五年规划纲要》的通知,data/raw/JX/20260720-nankang-shiwuwu-guihua-gangyao/原文.md
+A360013,吉州区四融一共先行示范区,360000,运行中,P360027,primary,place_only,关于印发学习运用“千万工程”经验有力有效推进2024年宜居宜业和美乡村建设工作方案的通知,data/raw/JX/20240510-jx-sheng-2024yijuyihemeixiangcun-gongzuofangan/原文.md
+A360017,庐山四融一共先行村片区,360000,运行中,P360003,support,place_only,2026年庐山市政府工作报告,data/raw/JX/20260113-lushan-2026-zhengfu-gongzuobaogao/原文.md
+A360018,修水四融一共建设片区,360000,运行中,P360012,support,place_only,修水县2025年国民经济和社会发展计划执行情况与2026年国民经济和社会发展计划草案的报告,data/raw/JX/20260309-xiushui-2026-jihua-caoan-baogao/原文.md
+A360018,修水四融一共建设片区,360000,运行中,P360021,support,place_only,《九江日报》整版报道我县2025年经济社会高质量发展综述,data/raw/JX/20260305-xiushui-jiujiangribao-2025-zongshu/原文.md
+A360019,安远四融一共先行片区,360000,运行中,P360030,support,place_only,2026年9月政府工作报告（安远县）,data/raw/JX/20261023-jx-ay-2026-zhengfugongzuobaogao/原文.md
+A360021,上江线四融一共示范带,360000,运行中,P360042,support,place_only,2025年政府工作报告——2026年2月9日在上犹县第十九届人民代表大会第六次会议上,data/raw/JX/20260209-sy-2026-zhengfugongzuobaogao/原文.md
+A360022,上太线四融一共示范带,360000,运行中,P360042,support,place_only,2025年政府工作报告——2026年2月9日在上犹县第十九届人民代表大会第六次会议上,data/raw/JX/20260209-sy-2026-zhengfugongzuobaogao/原文.md
+A360029,湖光山色特色先行片区,360000,运行中,P360066,support,place_only,2026年彭泽县政府工作报告,data/raw/JX/20260928-2026年彭泽县政府工作报告/原文.md
+A360030,城郊江边特色先行片区,360000,运行中,P360066,support,place_only,2026年彭泽县政府工作报告,data/raw/JX/20260928-2026年彭泽县政府工作报告/原文.md
+A370010,十里湾·印象白楼片区,370000,运行中,P370100,primary,place_only,2024年度薛城区农业农村局关于市政协十一届三次会议第113308号提案的答复（关于学习“千万工程”经验，加快推进“双十百千”工程，打造乡村,data/raw/SD/20240911-sd-zz-xc-zhengxie-113308-shuangshi-baiqian/原文.md
+A370013,悠然南山·慢城永安片区,370000,运行中,P370097,support,place_only,枣庄市市中区人民政府关于印发《枣庄市市中区国民经济和社会发展第十五个五年规划纲要》的通知,data/raw/SD/20260730-sd-zz-sz-15-5-guihua-gangyao/原文.md
+A370014,七彩番茄·魅力古城片区,370000,运行中,P370237,support,place_only,寿光市人民政府关于印发寿光市国民经济和社会发展第十五个五年规划纲要的通知,data/raw/SD/20261008-sd-wf-sg-shouguang-shiwuwu-guihua-gangyao/原文.md
+A370015,菜乡雅韵·和美尧河片区,370000,运行中,P370237,support,place_only,寿光市人民政府关于印发寿光市国民经济和社会发展第十五个五年规划纲要的通知,data/raw/SD/20261008-sd-wf-sg-shouguang-shiwuwu-guihua-gangyao/原文.md
+A370016,古韵龙湾·鱼农融合片区,370000,运行中,P370321,support,place_only,临朐县冶源街道18公里绿道 解锁滨水文旅新范式,data/raw/SD/20260820-linqu-yeyuan-guyun-longwan-pianqu-lvdao/原文.md
+A370023,上农智田片区,370000,运行中,P370244,primary,place_only,2026年潍城区政府工作报告,data/raw/SD/20260122-sd-wf-wc-2026-zhengfu-gongzuo-baogao/原文.md
+A370029,夏津椹好片区,370000,运行中,P370136,primary,place_only,2024年夏津县政府工作报告,data/raw/SD/20240118-xiajin-2024-zhengfu-gongzuo-baogao/原文.md
+A370029,夏津椹好片区,370000,运行中,P370139,primary,place_only,关于对美丽乡村建设存在的问题及建议提案的答复,data/raw/SD/20250630-xiajin-meili-xiangcun-tian-fuda/原文.md
+A370031,三涧溪齐鲁样板示范区,370000,运行中,P370295,primary,place_only,凤凰网：济南章丘区：擦亮乡村振兴齐鲁样板创新名片,data/raw/SD/20230616-sd-jn-zq-xiangcun-zhenxing-qilu-yangban-chuangxin-mingpian/原文.md
+A370038,莒南县片区联合党委（镇级）,370000,运行中,P370314,support,place_only,莒南：省派第一书记多元举措谋发展,data/raw/SD/20250802-sd-ly-jn-shengpai-diyi-shuji/原文.md
+A370053,弥水明珠·蝶变洛城片区,370000,运行中,P370237,support,place_only,寿光市人民政府关于印发寿光市国民经济和社会发展第十五个五年规划纲要的通知,data/raw/SD/20261008-sd-wf-sg-shouguang-shiwuwu-guihua-gangyao/原文.md
+A370053,弥水明珠·蝶变洛城片区,370000,运行中,P370240,support,place_only,2025年政府工作报告（寿光市）,data/raw/SD/20250116-sd-wf-sg-2025-zhengfu-gongzuo-baogao/原文.md
+A370061,沿黄九品·品品连乡片区,370000,运行中,P370184,support,place_only,片区赋能聚合力 多元聚力兴乡村 ——东阿县扎实推进沿黄乡村振兴示范片区建设,data/raw/SD/20260701-sd-lc-de-yanhuang-pianqu-caizheng-jingyan/原文.md
+A370065,董官屯镇片区,370000,运行中,P370190,support,place_only,政府工作报告——在巨野县第十九届人民代表大会第六次会议上,data/raw/SD/20261108-sd-hz-jy-zhengfu-gongzuo-baogao-2026/原文.md
+A370078,齐鲁古道·山水新章片区,370000,运行中,P370293,primary,place_only,济南市章丘区农业农村局对区十八届人大五次会议第123号代表建议“关于在圣井街道圣悦村打造乡村振兴示范村的建议”的答复,data/raw/SD/20260616-sd-jn-zq-rd-jianyi-123-dafu/原文.md
+A370082,黄河·稻乡湾片区,370000,运行中,P370043,support,place_only,全力抓好“泉韵乡居”乡村振兴齐鲁样板示范区创建（济南市济阳区农业农村局重点任务）,data/raw/SD/20240320-sd-jiyang-quanyun-xiangju-shifanqu-zhongdian-renwu/原文.md
+A370084,花开辛庄·未来种心片区,370000,运行中,P370032,primary,place_only,2026年政府工作报告（济南市钢城区）,data/raw/SD/20260212-sd-gangcheng-2026-zhengfu-gongzuo-baogao/原文.md
+A370084,花开辛庄·未来种心片区,370000,运行中,P370033,support,place_only,关于济南市钢城区2024年国民经济和社会发展计划执行情况与2025年计划草案的报告,data/raw/SD/20250402-sd-gangcheng-2024-jihua-zhixing-qingkuang-2025-caoan/原文.md
+A370084,花开辛庄·未来种心片区,370000,运行中,P370044,support,place_only,2025年政府工作报告（济南市钢城区第十九届人民代表大会第五次会议）,data/raw/SD/20250124-sd-gangcheng-2025-zhengfu-gongzuo-baogao/原文.md
+A370093,红色记忆·赤诚龙乡片区,370000,运行中,P370016,support,place_only,昌邑市人民政府关于印发《政府工作报告》的通知,data/raw/SD/20260325-changyi-zfgzbg-2026/原文.md
+A370094,火山古韵·品质八鲜片区,370000,运行中,P370238,support,place_only,昌乐县人民政府关于印发昌乐县国民经济和社会发展第十五个五年规划纲要的通知,data/raw/SD/20261021-sd-wf-cl-changle-shiwuwu-guihua-gangyao/原文.md
+A370094,火山古韵·品质八鲜片区,370000,运行中,P370239,primary,place_only,山东省潍坊市昌乐县乔官镇人民政府履行职责事项清单,data/raw/SD/20250826-sd-wf-cl-qiaoguan-lvzhi-shixiang-qingdan/原文.md
+A370094,火山古韵·品质八鲜片区,370000,运行中,P370245,support,place_only,昌乐县人民政府关于印发2024年政府工作报告的通知,data/raw/SD/202402-sd-wf-cl-2024-zhengfu-gongzuo-baogao/原文.md
+A370102,古镇林海·画乡鲤都片区,370000,运行中,P370186,support,place_only,县委常委会召开会议 研究全县黄河流域生态保护和高质量发展、乡村振兴示范片区建设等工作,data/raw/SD/20240104-sd-lc-gt-xianwei-changweihui-pianqu/原文.md
+A370108,富美田园片区,370000,运行中,P370194,support,place_only,全力推进乡村振兴战略 打造宜居宜业富美临清（市政府新闻办新闻发布会）,data/raw/SD/20231219-sd-lc-lq-pianqu-xinwen-fabuhui-2023/原文.md
+A370114,红韵崔口片区,370000,运行中,P370152,primary,place_only,【德州市政府第108次市政府常务会议】尚堂镇：答好富美乡村“立体答卷”,data/raw/SD/20251127-qingyun-shangtang-hemeishangtang-pianqu/原文.md
+A370122,幸福河畔·四美梁辛乡村振兴片区,370000,运行中,P370146,primary,place_only,禹城市2026年政府工作报告,data/raw/SD/20260317-yucheng-2026-zhengfu-gongzuo-baogao/原文.md
+A370122,幸福河畔·四美梁辛乡村振兴片区,370000,运行中,P370147,primary,place_only,禹城市“辉煌十四五 奋进新征程”主题系列新闻发布会——农业农村专场,data/raw/SD/20251124-yucheng-nongyenongcun-zhuangchang-fabuhui/原文.md
+A370122,幸福河畔·四美梁辛乡村振兴片区,370000,运行中,P370148,primary,place_only,禹城市安仁镇：以实干绘就乡村振兴新答卷,data/raw/SD/20260129-yucheng-anrenzhen-pianquhua/原文.md
+A370122,幸福河畔·四美梁辛乡村振兴片区,370000,运行中,P370149,primary,place_only,十里望回族镇：三产融合兴村富民,data/raw/SD/20260817-yucheng-shiliwang-sanchanyurong/原文.md
+A370123,华店蘑盒乡村振兴片区,370000,运行中,P370122,support,place_only,关于公开征求《齐河县“十五五”乡村振兴片区建设总体规划（征求意见稿）》意见的公告,data/raw/SD/20260702-qihe-shihanwu-pianqu-zongtiguihua-zhengqiu/原文.md
+A370123,华店蘑盒乡村振兴片区,370000,运行中,P370123,support,place_only,关于公开征求《齐河县“十五五”乡村振兴片区建设总体规划（征求意见稿）》意见建议的情况说明,data/raw/SD/20260806-qihe-shihanwu-pianqu-zongtiguihua-qingkuangshuoming/原文.md
+A370123,华店蘑盒乡村振兴片区,370000,运行中,P370124,support,place_only,齐河县2026年市级常态化帮扶资金分配结果公告,data/raw/SD/20260826-qihe-2026-shiji-changtaihua-bangfu/原文.md
+A370123,华店蘑盒乡村振兴片区,370000,运行中,P370125,support,place_only,齐河县2026年省级常态化帮扶资金分配结果公告,data/raw/SD/20260826-qihe-2026-shengji-changtaihua-bangfu/原文.md
+A370123,华店蘑盒乡村振兴片区,370000,运行中,P370126,support,place_only,齐河县2026年中央常态化帮扶资金分配结果公告,data/raw/SD/20260718-qihe-2026-zhongyang-changtaihua-bangfu-0718/原文.md
+A370123,华店蘑盒乡村振兴片区,370000,运行中,P370157,support,place_only,《齐河县“十五五”乡村振兴片区建设总体规划（征求意见稿）》起草说明,data/raw/SD/20260702-qihe-shihanwu-pianqu-zongtiguihua-qicaoshuoming/原文.md
+A370124,盘龙里·黄河故道乡村振兴片区,370000,运行中,P370133,primary,place_only,2025年临邑县政府工作报告,data/raw/SD/20250122-linyi-2025-zhengfu-gongzuo-baogao/原文.md
+A370124,盘龙里·黄河故道乡村振兴片区,370000,运行中,P370134,primary,place_only,2024年临邑县政府工作报告,data/raw/SD/20240229-linyi-2024-zhengfu-gongzuo-baogao/原文.md
+A370124,盘龙里·黄河故道乡村振兴片区,370000,运行中,P370135,primary,place_only,县政府第66次常务会议（研究争创省级乡村振兴片区）,data/raw/SD/20260306-linyi-xianzhengfu-66-ci-changwuhui-pianqu/原文.md
+A370124,盘龙里·黄河故道乡村振兴片区,370000,运行中,P370153,primary,place_only,【德州市政府第112次市政府常务会议】德平镇：联村共兴绘新景 融合发展促增收,data/raw/SD/20260127-dezhou-112-ci-changwuhui-depingzhen/原文.md
+A370126,杨安乡村振兴片区,370000,运行中,P370142,primary,place_only,“扎实推进乡村全面振兴 加快建设农业强市”主题系列新闻发布会,data/raw/SD/20260914-laoling-fabuhui-xiangcun-quanmian-zhenxing/原文.md
+A370126,杨安乡村振兴片区,370000,运行中,P370143,primary,place_only,我市召开衔接乡村振兴集中推进区工作座谈会议,data/raw/SD/20230210-laoling-xianjie-tuijinqu-zuotanhui/原文.md
+A370126,杨安乡村振兴片区,370000,运行中,P370144,primary,place_only,全市衔接乡村振兴集中推进区工作推进会召开,data/raw/SD/20230210-laoling-xianjie-tuijinqu-tuijinhui/原文.md
+A370126,杨安乡村振兴片区,370000,运行中,P370145,primary,place_only,省乡村振兴局来我市对省级衔接乡村振兴集中推进区进行现场核查,data/raw/SD/20230210-laoling-sheng-xianjie-tuijinqu-hecha/原文.md
+A370127,桃园街道乡村振兴片区,370000,运行中,P370127,support,place_only,平原县人民政府2026年政府工作报告（县十八届人大第六次会议）,data/raw/SD/20260114-pingyuan-2026-zhengfu-gongzuo-baogao/原文.md
+A370129,山海胜景·莓好古寨片区,370000,运行中,P370261,support,place_only,关于乳山市2025年国民经济和社会发展计划执行情况与2026年国民经济和社会发展计划（草案）的报告,data/raw/SD/20260807-sd-wh-rs-jihua-baogao-2026/原文.md
+A370130,昆嵛山生态经济乡村振兴齐鲁样板片区,370000,运行中,P370251,support,place_only,关于区政协十一届一次会议第68号促进乡村振兴与人才招引的提案的答复函,data/raw/SD/20220826-sd-wh-wd-zhengxie-dafu-pianqu-rencai/原文.md
+A370130,昆嵛山生态经济乡村振兴齐鲁样板片区,370000,运行中,P370253,support,place_only,精建细管提质效 城乡共融展新篇,data/raw/SD/20260104-sd-wh-wd-jingjianxiguan-pianqu/原文.md
+A370131,金井黄山·清泉康谷乡村振兴齐鲁样板片区,370000,运行中,P370246,primary,place_only,我市五个片区入选第四批省级乡村振兴片区,data/raw/SD/20250624-sd-wh-nyncju-dishipi-shengjipianqu-mingdan/原文.md
+A370131,金井黄山·清泉康谷乡村振兴齐鲁样板片区,370000,运行中,P370247,primary,place_only,威海5个片区入选省级乡村振兴片区,data/raw/SD/20250626-sd-wh-shi-zhengfu-5ge-pianqu-ruxuan-shengji/原文.md
+A370132,正棋山城乡融合衔接乡村振兴集中推进区,370000,运行中,P370254,support,place_only,关于区政协十五届五次会议第44号委员提案的答复,data/raw/SD/20260610-sd-wh-hc-zhengxie-dafu-pianqu-guihua/原文.md
+A370132,正棋山城乡融合衔接乡村振兴集中推进区,370000,运行中,P370255,support,place_only,关于区政协十五届四次会议第023号委员提案《关于促进乡村旅游高质量发展的建议》的答复,data/raw/SD/20250620-sd-wh-hc-zhengxie-dafu-xiangcunlvyou/原文.md
+A370134,三餐四季·陶韵农香乡村振兴齐鲁样板片区,370000,运行中,P370329,primary,place_only,片区化推进乡村振兴 打造乡村振兴齐鲁样板,data/raw/SD/20260325-sd-zb-pianquhua-tuijin-zhenxing-qilu-yangban/原文.md
+A370136,强企兴农乡村振兴齐鲁样板片区,370000,运行中,P370330,primary,place_only,【15】2025年济宁市农业农村局承担的重点任务公开承诺事项工作台账（截至9月底）,data/raw/SD/20251010-sd-jn-nongyenongcunjv-zhongdianrenwu-taizhang-2025/原文.md
+A370143,汶水桃源·三宴五味片区,370000,运行中,P370297,support,place_only,关于钢城区第十九届人大第六次会议第20260094号“关于推进汶水桃源片区建设的建议”的答复,data/raw/SD/20260609-sd-jn-gc-rd-jianyi-20260094-wenshuitaoyuan-dafu/原文.md
+A370144,湖埠共美·古道新芳片区,370000,运行中,P370300,support,place_only,济南市章丘区园林和林业绿化局对区十八届人大五次会议第7号代表“关于高质量推进白云湖国家湿地公园保护利用的建议”的答复,data/raw/SD/20260625-sd-jn-zq-rd-jianyi-7-baiyunhu-shidi-dafu/原文.md
+A370147,锦山秀水·一路芳华片区,370000,待核,P370036,primary,place_only,平阴县锦水街道办事处2025年工作总结,data/raw/SD/20251229-sd-pingyin-jinshui-jiedao-2025-gongzuo-zongjie/原文.md
+A370147,锦山秀水·一路芳华片区,370000,待核,P370037,support,place_only,平阴县锦水街道办事处2026年工作计划,data/raw/SD/20260104-sd-pingyin-jinshui-jiedao-2026-gongzuo-jihua/原文.md
+A370148,胶乡古镇·泉韵江南片区,370000,运行中,P370298,primary,place_only,2024年为民十件实事第三季度工作进展（平阴县）,data/raw/SD/20241012-sd-jn-py-2024-weimin-shishi-q3-jinzhan/原文.md
+A370150,粮安商河·陶梨留香片区,370000,运行中,P370301,support,place_only,《直通百姓》-商河县殷巷镇（2025年12月2日）,data/raw/SD/20251202-sd-jn-sh-yinxiang-zhitongbaixing-2025/原文.md
+A370152,宝都古韵·火山八鲜片区,370000,运行中,P370238,support,place_only,昌乐县人民政府关于印发昌乐县国民经济和社会发展第十五个五年规划纲要的通知,data/raw/SD/20261021-sd-wf-cl-changle-shiwuwu-guihua-gangyao/原文.md
+A370152,宝都古韵·火山八鲜片区,370000,运行中,P370239,support,place_only,山东省潍坊市昌乐县乔官镇人民政府履行职责事项清单,data/raw/SD/20250826-sd-wf-cl-qiaoguan-lvzhi-shixiang-qingdan/原文.md
+A370152,宝都古韵·火山八鲜片区,370000,运行中,P370245,support,place_only,昌乐县人民政府关于印发2024年政府工作报告的通知,data/raw/SD/202402-sd-wf-cl-2024-zhengfu-gongzuo-baogao/原文.md
+A370156,碱地生金·沃野粮仓片区,370000,运行中,P370326,support,place_only,昌邑市人民政府关于印发《政府工作报告》的通知（昌政发〔2025〕1号）,data/raw/SD/20250212-changyi-2025-zhengfu-gongzuo-baogao/原文.md
+A370157,美好姜来片区,370000,运行中,P370016,support,place_only,昌邑市人民政府关于印发《政府工作报告》的通知,data/raw/SD/20260325-changyi-zfgzbg-2026/原文.md
+A370158,梨花水镇·智赋田园片区,370000,运行中,P370007,support,place_only,社会经济发展状况（昌邑市2025年工作回顾）,data/raw/SD/20260601-changyi-shehui-jingji-fazhan-zhuangkuang/原文.md
+A370158,梨花水镇·智赋田园片区,370000,运行中,P370016,support,place_only,昌邑市人民政府关于印发《政府工作报告》的通知,data/raw/SD/20260325-changyi-zfgzbg-2026/原文.md
+A370159,安丘天路·诗画泉乡片区,370000,运行中,P370005,support,place_only,对市十九届人大六次会议第67号《关于加大乡村振兴片区建设支持力度的建议》的答复,data/raw/SD/20260622-anqiu-67hao-pianqu-jianyi-dafu/原文.md
+A370161,桃梨芬芳·青云田园片区,370000,运行中,P370324,support,place_only,大汶河旅游发展中心：做大高效生态果蔬种植 叫响都市休闲农业品牌,data/raw/SD/20250818-anqiu-dawenhe-taolifenfang-qingyuntianyuan-pianqu/原文.md
+A370191,瓜香蔬韵·和美稻田片区,370000,运行中,P370237,support,place_only,寿光市人民政府关于印发寿光市国民经济和社会发展第十五个五年规划纲要的通知,data/raw/SD/20261008-sd-wf-sg-shouguang-shiwuwu-guihua-gangyao/原文.md
+A370191,瓜香蔬韵·和美稻田片区,370000,运行中,P370240,support,place_only,2025年政府工作报告（寿光市）,data/raw/SD/20250116-sd-wf-sg-2025-zhengfu-gongzuo-baogao/原文.md
+A370194,万亩枣园·十里画卷片区,370000,运行中,P370016,support,place_only,昌邑市人民政府关于印发《政府工作报告》的通知,data/raw/SD/20260325-changyi-zfgzbg-2026/原文.md
+A410005,沁阳紫陵镇皮筋头饰区域党委片区,410000,运行中,P410022,primary,place_only,沁阳市召开皮筋头饰产业片区融资座谈会,data/raw/HA/20240415-qinyang-pijin-toushi-chanye-pianqu-rongzi-zuotanhui/原文.md
+A410009,兰考葡萄架乡贺村集蜜瓜产业组团,410000,运行中,P410003,support,place_only,乡村建设篇（兰考县2025年乡村建设情况）,data/raw/HA/20261106-lk-xian-xiangcun-jianshe-pian-pianqu-zutu/原文.md
+A410010,兰考徐场村民族乐器产业组团,410000,运行中,P410003,support,place_only,乡村建设篇（兰考县2025年乡村建设情况）,data/raw/HA/20261106-lk-xian-xiangcun-jianshe-pian-pianqu-zutu/原文.md
+A410011,兰考白云山村碱地番茄产业组团,410000,运行中,P410003,support,place_only,乡村建设篇（兰考县2025年乡村建设情况）,data/raw/HA/20261106-lk-xian-xiangcun-jianshe-pian-pianqu-zutu/原文.md
+A410012,兰考闫北村石膏娃娃产业组团,410000,运行中,P410003,support,place_only,乡村建设篇（兰考县2025年乡村建设情况）,data/raw/HA/20261106-lk-xian-xiangcun-jianshe-pian-pianqu-zutu/原文.md
+A410013,兰考东坝头村黄河文旅产业组团,410000,运行中,P410003,support,place_only,乡村建设篇（兰考县2025年乡村建设情况）,data/raw/HA/20261106-lk-xian-xiangcun-jianshe-pian-pianqu-zutu/原文.md
+A410014,兰考孟角大集市场带动产业组团,410000,运行中,P410003,support,place_only,乡村建设篇（兰考县2025年乡村建设情况）,data/raw/HA/20261106-lk-xian-xiangcun-jianshe-pian-pianqu-zutu/原文.md
+A410016,中牟县宜居宜业和美乡村建设培育型先导区,410000,运行中,P410021,primary,place_only,河南省宜居宜业和美乡村建设先导区名单发布 先导先行 豫见和美,data/raw/HA/20250411-ha-sheng-2025-xiandaoqu-mingdan-fabu/原文.md
+A410018,新安县宜居宜业和美乡村建设创制型先导区,410000,运行中,P410007,support,place_only,新安县“十五五”综合交通运输体系发展规划（征求意见稿）,data/raw/HA/20261019-xinan-xian-shiswu-jiaotong-guihua-xianndaoyu/原文.md
+A410019,新乡县宜居宜业和美乡村建设创制型先导区,410000,运行中,P410021,primary,place_only,河南省宜居宜业和美乡村建设先导区名单发布 先导先行 豫见和美,data/raw/HA/20250411-ha-sheng-2025-xiandaoqu-mingdan-fabu/原文.md
+A410020,潢川县宜居宜业和美乡村建设创制型先导区,410000,运行中,P410010,primary,place_only,潢川县上榜！河南省宜居宜业和美乡村建设先导区名单发布,data/raw/HA/20250411-hc-xian-2025-xiandaoyu-mingdan-fabu/原文.md
+A410020,潢川县宜居宜业和美乡村建设创制型先导区,410000,运行中,P410020,support,place_only,潢川县农业农村局建设宜居宜业和美乡村智库赋能和传播推广项目-成交公告,data/raw/HA/20260212-hc-xian-hemeixiangcun-zhiku-chuanbo-caigou-chengjiao/原文.md
+A410021,罗山县宜居宜业和美乡村建设培育型先导区,410000,运行中,P410012,support,place_only,罗山县人民政府办公室关于印发罗山县2025年农业社会化服务项目实施方案的通知,data/raw/HA/20250317-ls-xian-2025-nongye-shehuihua-fuwu-fangan/原文.md
+A410022,南阳市卧龙区宜居宜业和美乡村建设培育型先导区,410000,运行中,P410021,primary,place_only,河南省宜居宜业和美乡村建设先导区名单发布 先导先行 豫见和美,data/raw/HA/20250411-ha-sheng-2025-xiandaoqu-mingdan-fabu/原文.md
+A410023,确山县西南部浅山丘陵区宜居宜业和美乡村先导区,410000,运行中,P410018,primary,place_only,确山：获批两个 全市唯一,data/raw/HA/20250821-qs-xian-shoupi-liangge-shiji-xiaodaoyu-huoipi/原文.md
+A420001,谷城县“生态堰河·醉美乡村”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420001,谷城县“生态堰河·醉美乡村”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420001,谷城县“生态堰河·醉美乡村”样板带,420000,运行中,P420035,primary,place_only,“生态堰河·醉美乡村”和美乡村样板带,data/raw/HB/20260416-hb-xy-gc-shengtaiyanhe-yangbandai/原文.md
+A420002,夷陵区“石屋花海·百里云歌”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420002,夷陵区“石屋花海·百里云歌”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420002,夷陵区“石屋花海·百里云歌”样板带,420000,运行中,P420038,primary,place_only,“石屋花海·百里云歌”和美乡村样板带,data/raw/HB/20260506-hb-yc-yl-shiwuhuahai-yangbandai/原文.md
+A420004,黄陂区“木兰故里觅乡愁”样板带,420000,运行中,P420041,support,place_only,市人民政府办公厅关于印发《学习运用“千万工程”经验 建设宜居宜业和美乡村实施方案》的通知,data/raw/HB/20240407-wh-szf-xxbgting-meixiangcun-shishifangan/原文.md
+A420006,江夏区“五里画廊·界上云乡”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420006,江夏区“五里画廊·界上云乡”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420006,江夏区“五里画廊·界上云乡”样板带,420000,运行中,P420033,primary,place_only,“五里画廊·界上云乡”和美乡村样板带,data/raw/HB/20260331-hb-wh-jx-wulihuayuan-yangbandai/原文.md
+A420006,江夏区“五里画廊·界上云乡”样板带,420000,运行中,P420041,support,place_only,市人民政府办公厅关于印发《学习运用“千万工程”经验 建设宜居宜业和美乡村实施方案》的通知,data/raw/HB/20240407-wh-szf-xxbgting-meixiangcun-shishifangan/原文.md
+A420007,京山市环惠亭湖“三产联动·古韵新生”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420007,京山市环惠亭湖“三产联动·古韵新生”样板带,420000,运行中,P420003,primary,place_only,“三产联动 古韵新生”和美乡村样板带,data/raw/HB/20260701-hb-jm-js-huanhuitinghu-yangbandai/原文.md
+A420007,京山市环惠亭湖“三产联动·古韵新生”样板带,420000,运行中,P420006,primary,place_only,京山市行政审批局关于京山市“环惠亭湖”美丽乡村示范片建设试点项目初步设计方案的批复,data/raw/HB/20230418-hb-jm-js-huanhuitinghu-chubusheji-pifu/原文.md
+A420007,京山市环惠亭湖“三产联动·古韵新生”样板带,420000,运行中,P420007,primary,place_only,关于要求拨付“环惠亭湖”美丽乡村示范片建设项目资金,data/raw/HB/20221025-hb-jm-js-huanhuitinghu-xiangmu-zijin-bofu/原文.md
+A420007,京山市环惠亭湖“三产联动·古韵新生”样板带,420000,运行中,P420008,support,place_only,关于预拨环惠亭湖美丽乡村建设示范片规划设计费,data/raw/HB/20220609-hb-jm-js-huanhuitinghu-guihua-shejifei/原文.md
+A420007,京山市环惠亭湖“三产联动·古韵新生”样板带,420000,运行中,P420010,support,place_only,环惠亭湖美丽乡村示范片区旅游环线即将贯通,data/raw/HB/20250808-hb-jm-js-huanhuitinghu-lvyouhuanxian-guantong/原文.md
+A420007,京山市环惠亭湖“三产联动·古韵新生”样板带,420000,运行中,P420011,support,place_only,关于市政协二届二次会议第2023008号提案的答复（关于大力发展环惠亭湖农文旅产业）,data/raw/HB/20230825-hb-jm-js-zhengxie-2023008-huanhuitinghu-daofu/原文.md
+A420008,郧西县“天河水乡·七夕画廊”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420008,郧西县“天河水乡·七夕画廊”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420008,郧西县“天河水乡·七夕画廊”样板带,420000,运行中,P420040,primary,place_only,“天河水乡·七夕画廊”和美乡村样板带,data/raw/HB/20260515-hb-sy-yx-tianheshuixiang-yangbandai/原文.md
+A420009,英山县“四季花海·水韵茶乡”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420009,英山县“四季花海·水韵茶乡”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420010,大冶市“桃李香情·同心共富”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420010,大冶市“桃李香情·同心共富”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420010,大冶市“桃李香情·同心共富”样板带,420000,运行中,P420039,primary,place_only,“桃李香情·同心共富”和美乡村样板带,data/raw/HB/20260515-hb-hs-dy-taolixiangqing-yangbandai/原文.md
+A420011,鹤峰县“红色研学·土家院落”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420011,鹤峰县“红色研学·土家院落”样板带,420000,运行中,P420025,primary,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420011,鹤峰县“红色研学·土家院落”样板带,420000,运行中,P420031,primary,place_only,[恩施州]32公里和美乡村样板带在青山中延伸,data/raw/HB/20250616-hb-es-hf-yangbandai-32gongli/原文.md
+A420012,建始县“凉乡硒语·三色和美”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420012,建始县“凉乡硒语·三色和美”样板带,420000,运行中,P420025,primary,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420013,松滋市“洈水翠韵·田园牧歌”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420013,松滋市“洈水翠韵·田园牧歌”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420014,荆州区环丁家咀水库和美乡村示范片,420000,运行中,P420021,support,place_only,荆州区2024年政府工作报告,data/raw/HB/20250319-hb-jz-jzq-2024-zhengfu-gongzuo-baogao/原文.md
+A420015,宜都市“橘韵谜乡·柑甜小镇”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420015,宜都市“橘韵谜乡·柑甜小镇”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420015,宜都市“橘韵谜乡·柑甜小镇”样板带,420000,运行中,P420036,primary,place_only,“橘韵谜乡·柑甜小镇”和美乡村样板带,data/raw/HB/20260420-hb-yc-yd-juyunmexiang-yangbandai/原文.md
+A420016,兴山县“昭君故里·香溪和韵”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420016,兴山县“昭君故里·香溪和韵”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420016,兴山县“昭君故里·香溪和韵”样板带,420000,运行中,P420037,primary,place_only,“昭君故里·香溪和韵”和美乡村样板带,data/raw/HB/20260427-hb-yc-xs-zhaojunguxiang-yangbandai/原文.md
+A420017,钟祥市“十慢悠享·云峰翠谷”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420017,钟祥市“十慢悠享·云峰翠谷”样板带,420000,运行中,P420004,primary,place_only,“十慢悠享·云峰翠谷”和美乡村样板带,data/raw/HB/20260623-hb-jm-zx-shimanyouxiang-yangbandai/原文.md
+A420017,钟祥市“十慢悠享·云峰翠谷”样板带,420000,运行中,P420013,support,place_only,对市政协八届四次会议第8号提案的答复（关于做好美丽乡村建设工作的建议）,data/raw/HB/20250605-hb-jm-zx-zhengxie-8hao-daofu-meilixiangcun/原文.md
+A420017,钟祥市“十慢悠享·云峰翠谷”样板带,420000,运行中,P420014,support,place_only,对荆门市十届人大四次会议第144号建议的答复（关于“清洁家园”行动扩面、资金与长效机制优化）,data/raw/HB/20250605-hb-jm-zx-renda-144hao-daofu-qingjiejiayuan/原文.md
+A420017,钟祥市“十慢悠享·云峰翠谷”样板带,420000,运行中,P420015,support,place_only,钟祥市农业农村局2025年工作总结及2026年工作计划,data/raw/HB/20260203-hb-jm-zx-nongyeju-2025-zongjie-2026-jihua/原文.md
+A420017,钟祥市“十慢悠享·云峰翠谷”样板带,420000,运行中,P420016,support,place_only,钟祥市2025年国民经济和社会发展计划执行情况与2026年计划（草案）的报告,data/raw/HB/20251230-hb-jm-zx-2025-jihua-zhixing-2026-jihua-baogao/原文.md
+A420017,钟祥市“十慢悠享·云峰翠谷”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420018,鄂城区四峰山“天然氧吧·赏花品果”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420018,鄂城区四峰山“天然氧吧·赏花品果”样板带,420000,运行中,P420017,primary,place_only,[鄂州]全省首批宜居宜业和美乡村样板带 鄂城区四峰山入选,data/raw/HB/20250521-hb-ez-ec-sifengshan-yangbandai-ruxuan/原文.md
+A420018,鄂城区四峰山“天然氧吧·赏花品果”样板带,420000,运行中,P420018,support,place_only,鄂州市农业农村局2025年度工作总结及2026年工作计划,data/raw/HB/20260211-hb-ez-nongyeju-2025-zongjie-2026-jihua/原文.md
+A420018,鄂城区四峰山“天然氧吧·赏花品果”样板带,420000,运行中,P420019,support,place_only,【新闻发布会】解读鄂城区“三新三强”打擂台、厚筑全市“压舱石”2024年行动计划（涉和美乡村示范带部分）,data/raw/HB/20240409-hb-ez-ec-sanxinsanqiang-2024-xingdongjihua-jiedu/原文.md
+A420018,鄂城区四峰山“天然氧吧·赏花品果”样板带,420000,运行中,P420020,support,place_only,【新闻发布会解读】鄂城区文旅产业融合发展情况,data/raw/HB/20240920-hb-ez-ec-wenlvchanyeronghe-xinwenfabu/原文.md
+A420018,鄂城区四峰山“天然氧吧·赏花品果”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420019,孝昌县“牛迹仙踪·稻香共富”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420019,孝昌县“牛迹仙踪·稻香共富”样板带,420000,运行中,P420002,primary,place_only,“牛迹仙踪·稻香共富”和美乡村样板带,data/raw/HB/20260707-hb-xg-xc-niujixianzong-yangbandai/原文.md
+A420019,孝昌县“牛迹仙踪·稻香共富”样板带,420000,运行中,P420024,support,place_only,孝感两地入选全省美丽乡村示范片建设试点县（孝昌县、安陆市）,data/raw/HB/20211213-hb-xg-xc-shifanpian-shidianxian-rending/原文.md
+A420019,孝昌县“牛迹仙踪·稻香共富”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420020,团风县“灵润养生地·梦栖牛车河”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420020,团风县“灵润养生地·梦栖牛车河”样板带,420000,运行中,P420005,primary,place_only,“灵润养生地·梦栖牛车河”和美乡村样板带,data/raw/HB/20260720-hb-hg-tf-niuchehe-yangbandai/原文.md
+A420020,团风县“灵润养生地·梦栖牛车河”样板带,420000,运行中,P420025,support,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420021,赤壁市“茶韵飘香·阡陌田园”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420021,赤壁市“茶韵飘香·阡陌田园”样板带,420000,运行中,P420025,primary,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420022,曾都区“千年银杏·鎏金漫步”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420022,曾都区“千年银杏·鎏金漫步”样板带,420000,运行中,P420025,primary,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420022,曾都区“千年银杏·鎏金漫步”样板带,420000,运行中,P420029,primary,place_only,政府工作报告（2025年12月26日曾都区第四届人民代表大会第五次会议）,data/raw/HB/20260113-hb-sz-zd-zfgzbg-yinxing-zoulang/原文.md
+A420022,曾都区“千年银杏·鎏金漫步”样板带,420000,运行中,P420030,support,place_only,银杏谷里「党旗红」——曾都区洛阳镇党建引领乡村全面振兴纪实,data/raw/HB/20260827-hb-sz-zd-lyz-dangqihong-yinxinggu/原文.md
+A420023,神农架林区“探秘神农·茶香野韵”样板带,420000,运行中,P420001,primary,place_only,助力打造新时代“鱼米之乡” 湖北推介首批和美乡村样板带（附第一批20条名单）,data/raw/HB/20261107-hb-sheng-shoupi-20tiao-yangbandai-mingdan/原文.md
+A420023,神农架林区“探秘神农·茶香野韵”样板带,420000,运行中,P420025,primary,place_only,湖北日报报道：全省首批 20 个和美乡村样板带,data/raw/HB/20250616-hb-sheng-nyt-yangbandai-shoupi-mingdan/原文.md
+A420023,神农架林区“探秘神农·茶香野韵”样板带,420000,运行中,P420026,primary,place_only,林区农业农村局：携「生态密码」赴盛会 展和美乡村新貌,data/raw/HB/20250430-hb-snj-nyt-tanmishennong-yangbandai/原文.md
+A430003,娄星区“一乡三镇四带五片”示范片区,430000,运行中,P430010,support,place_only,娄底市|和美乡村入画来（娄星区和美乡村建设）,data/raw/HN/20261028-hn-ld-lx-hemeixiangcun-huajuan/原文.md
+A430005,汨罗市端午人家乡村振兴“三生融合”示范区,430000,运行中,P430032,support,place_only,林恒求调研“五好两宜”和美乡村建设工作,data/raw/HN/20240718-hn-yy-ml-wuhaoliangyi-meihao-xiangcun-diaoyan/原文.md
+A430005,汨罗市端午人家乡村振兴“三生融合”示范区,430000,运行中,P430033,primary,place_only,汨罗市端午人家乡村振兴“三生融合”示范区集中安置区二期（5#、6#、7#地块）工程总承包（EPC）招标公告,data/raw/HN/20230728-hn-yy-ml-duanwu-renjia-sanshengronghe-zhaobiao/原文.md
+A430006,汨罗市“五好两宜”和美乡村示范片区,430000,运行中,P430032,primary,place_only,林恒求调研“五好两宜”和美乡村建设工作,data/raw/HN/20240718-hn-yy-ml-wuhaoliangyi-meihao-xiangcun-diaoyan/原文.md
+A430008,汉寿县沧港乡村振兴建设片,430000,运行中,P430004,support,place_only,汉寿县2025年政府工作报告,data/raw/HN/20250210-hn-cd-hs-zhengfu-gongzuo-baogao-2025/原文.md
+A430008,汉寿县沧港乡村振兴建设片,430000,运行中,P430005,support,place_only,市领导调研沧港乡村振兴示范片建设,data/raw/HN/20241127-hn-cd-hs-canggang-shifanpian-diaoyan/原文.md
+A430008,汉寿县沧港乡村振兴建设片,430000,运行中,P430022,primary,place_only,常德市民政局机关第二、第五党支部赴汉寿县开展“一月一课一片一实践”主题党日活动,data/raw/HN/20231114-hn-cd-hs-canggang-shifanpian-fanwei-jieding/原文.md
+A430009,桃源县架桥乡村振兴建设片,430000,运行中,P430027,support,place_only,桃源县人民政府2022年政府工作报告,data/raw/HN/20220303-hn-cd-ty-zhengfu-gongzuo-baogao-2022/原文.md
+A430010,石门县夹山乡村振兴建设片,430000,运行中,P430013,support,place_only,石门县2024年政府工作报告,data/raw/HN/20240325-hn-cd-sm-zhengfu-gongzuo-baogao-2024/原文.md
+A430012,津市市新洲乡村振兴建设片,430000,运行中,P430007,support,place_only,津市市2024年政府工作报告,data/raw/HN/20240307-hn-cd-js-zhengfu-gongzuo-baogao-2024/原文.md
+A430012,津市市新洲乡村振兴建设片,430000,运行中,P430009,support,place_only,津市人大常委会视察“南北双环”乡村振兴示范带、水系连通及水美乡村建设情况,data/raw/HN/20220602-hn-cd-js-nanbeishuanghuan-shifandai-shicha/原文.md
+A430012,津市市新洲乡村振兴建设片,430000,运行中,P430019,support,place_only,津市市2025年政府工作报告,data/raw/HN/20250313-hn-cd-js-zhengfu-gongzuo-baogao-2025/原文.md
+A430013,临澧县修梅乡村振兴建设片,430000,运行中,P430006,primary,place_only,临澧县2022年政府工作报告,data/raw/HN/20220322-hn-cd-ll-zhengfu-gongzuo-baogao-2022/原文.md
+A430013,临澧县修梅乡村振兴建设片,430000,运行中,P430014,support,place_only,【常德市】书写现代农业精彩答卷,data/raw/HN/20230423-hn-cd-meilixiangcun-shifanpianqu-wuxing/原文.md
+A430013,临澧县修梅乡村振兴建设片,430000,运行中,P430025,support,place_only,临澧县2024年政府工作报告,data/raw/HN/20240301-hn-cd-ll-zhengfu-gongzuo-baogao-2024/原文.md
+A430015,武陵区芦荻山乡食用菌产业片,430000,运行中,P430029,support,place_only,武陵区2024年政府工作报告,data/raw/HN/20240229-hn-cd-wl-zhengfu-gongzuo-baogao-2024/原文.md
+A430016,澧县城头山镇葡萄产业片,430000,运行中,P430011,support,place_only,澧县人民政府工作报告(2023年),data/raw/HN/20230301-hn-cd-lx-zhengfu-gongzuo-baogao-2023/原文.md
+A430016,澧县城头山镇葡萄产业片,430000,运行中,P430012,primary,place_only,澧县人民政府工作报告(2020年),data/raw/HN/20200416-hn-cd-lx-zhengfu-gongzuo-baogao-2020/原文.md
+A430017,柳叶湖太阳谷城郊集约型美丽乡村示范片区,430000,运行中,P430030,support,place_only,常德柳叶湖旅游度假区管理委员会关于印发《“绿水青山就是金山银山”实践创新基地建设实施方案》的通知,data/raw/HN/20240426-hn-cd-lyh-liangshan-shishifangan/原文.md
+A430018,石门秀坪幸福屋场型美丽乡村示范片区,430000,运行中,P430014,primary,place_only,【常德市】书写现代农业精彩答卷,data/raw/HN/20230423-hn-cd-meilixiangcun-shifanpianqu-wuxing/原文.md
+A440003,白云深处·诗画帽峰新乡村示范带,440000,运行中,P440005,support,place_only,“白云深处·诗画帽峰”新乡村示范带大党委成立,data/raw/GD/20250507-gz-by-shihuamaofeng-shifandai-dangwei/原文.md
+A440009,渔舟唱晚新乡村示范带,440000,运行中,P440085,primary,place_only,广州基本建成7条精品新乡村示范带,data/raw/GD/20230703-gd-gz-7tiao-jingpin-xinxiangcun-shifandai-xinwen-2023/原文.md
+A440010,时光穗稻新乡村示范带,440000,运行中,P440085,primary,place_only,广州基本建成7条精品新乡村示范带,data/raw/GD/20230703-gd-gz-7tiao-jingpin-xinxiangcun-shifandai-xinwen-2023/原文.md
+A440016,叶帅故里·大美梅县丙雁乡村振兴示范带,440000,运行中,P440039,support,place_only,2026年梅州市梅县区人民政府工作报告,data/raw/GD/20260210-gd-mz-mx-zhengfu-gongzuobaogao-2026/原文.md
+A440018,山宿流泉·善美之乡乡村振兴示范带,440000,运行中,P440006,primary,place_only,清远市实施“百县千镇万村高质量发展工程”之乡村振兴示范带总体规划（2023—2027年）,data/raw/GD/20261108-qy-shi-xiangcun-zhenxing-shifandai-zongti-guihua-2023-2027/原文.md
+A440018,山宿流泉·善美之乡乡村振兴示范带,440000,运行中,P440007,primary,place_only,清远乡村振兴示范带考评结果公布，阳山这条示范带获评“优秀”等次,data/raw/GD/20230516-qy-yangshan-shifandai-kaoping-jieguo/原文.md
+A440018,山宿流泉·善美之乡乡村振兴示范带,440000,运行中,P440016,support,place_only,2021年政府工作报告（清远市清新区）,data/raw/GD/20210208-qy-qingxin-2021-zhengfu-gongzuo-baogao/原文.md
+A440018,山宿流泉·善美之乡乡村振兴示范带,440000,运行中,P440017,primary,place_only,2024年政府工作报告（清远市清新区）,data/raw/GD/20240227-qy-qingxin-2024-zhengfu-gongzuo-baogao/原文.md
+A440018,山宿流泉·善美之乡乡村振兴示范带,440000,运行中,P440018,primary,place_only,清远市清新区农业农村局2024年工作总结及2025年工作计划,data/raw/GD/20250123-qy-qingxin-nyncj-2024-nian-gongzuo-zongjie/原文.md
+A440018,山宿流泉·善美之乡乡村振兴示范带,440000,运行中,P440019,primary,place_only,三坑镇2023年工作总结和2024年工作计划,data/raw/GD/20261108-qy-qingxin-sankeng-2023-nian-gongzuo-zongjie/原文.md
+A440018,山宿流泉·善美之乡乡村振兴示范带,440000,运行中,P440036,primary,place_only,2026年政府工作报告（清远市清新区）,data/raw/GD/20260312-qy-qingxin-2026-zhengfu-gongzuo-baogao/原文.md
+A440019,多彩北江·凤舞清平乡村振兴示范带,440000,运行中,P440007,primary,place_only,清远乡村振兴示范带考评结果公布，阳山这条示范带获评“优秀”等次,data/raw/GD/20230516-qy-yangshan-shifandai-kaoping-jieguo/原文.md
+A440019,多彩北江·凤舞清平乡村振兴示范带,440000,运行中,P440010,primary,place_only,清远市清城区农业农村局2023年工作总结和2024年工作计划,data/raw/GD/20240205-qy-qingcheng-nyncj-2023-nian-gongzuo-zongjie/原文.md
+A440020,湖光山色·诗画田园乡村振兴示范带,440000,运行中,P440007,primary,place_only,清远乡村振兴示范带考评结果公布，阳山这条示范带获评“优秀”等次,data/raw/GD/20230516-qy-yangshan-shifandai-kaoping-jieguo/原文.md
+A440020,湖光山色·诗画田园乡村振兴示范带,440000,运行中,P440029,primary,place_only,阳山县农业农村局2022年工作总结及2023年工作计划,data/raw/GD/20261108-qy-yangshan-nyncj-2022-nian-gongzuo-zongjie/原文.md
+A440022,瑶妃故里·和美稻香乡村振兴示范带,440000,运行中,P440056,support,place_only,2023年连山壮族瑶族自治县政府工作报告,data/raw/GD/20230328-lianshan-2023-zhengfu-gongzuo-baogao/原文.md
+A440022,瑶妃故里·和美稻香乡村振兴示范带,440000,运行中,P440058,support,place_only,2026年连山壮族瑶族自治县政府工作报告,data/raw/GD/20260417-lianshan-2026-zhengfu-gongzuo-baogao/原文.md
+A440022,瑶妃故里·和美稻香乡村振兴示范带,440000,运行中,P440059,support,place_only,连山壮族瑶族自治县人民政府关于印发《连山壮族瑶族自治县国土空间总体规划（2021-2035年）》的通知,data/raw/GD/20241024-lianshan-guotu-kongjian-zongti-guihua-2021-2035/原文.md
+A440022,瑶妃故里·和美稻香乡村振兴示范带,440000,运行中,P440081,support,place_only,关于印发2025年县政府常务会议固定议题安排的通知,data/raw/GD/20250109-lianshan-2025-xianzhengfu-changwuhuiyi-guding-yiti/原文.md
+A440023,粤湘廊道·南岭明珠乡村振兴示范带,440000,运行中,P440006,primary,place_only,清远市实施“百县千镇万村高质量发展工程”之乡村振兴示范带总体规划（2023—2027年）,data/raw/GD/20261108-qy-shi-xiangcun-zhenxing-shifandai-zongti-guihua-2023-2027/原文.md
+A440023,粤湘廊道·南岭明珠乡村振兴示范带,440000,运行中,P440007,primary,place_only,清远乡村振兴示范带考评结果公布，阳山这条示范带获评“优秀”等次,data/raw/GD/20230516-qy-yangshan-shifandai-kaoping-jieguo/原文.md
+A440023,粤湘廊道·南岭明珠乡村振兴示范带,440000,运行中,P440015,primary,place_only,连州市农业农村局2022年工作总结和2023年工作计划,data/raw/GD/20230213-lz-nyncj-2022-nian-gongzuo-zongjie/原文.md
+A440023,粤湘廊道·南岭明珠乡村振兴示范带,440000,运行中,P440028,support,place_only,关于印发《连州市“绿水青山就是金山银山”实践创新基地建设实施方案》的通知,data/raw/GD/20250814-lz-liangshan-shijian-chuangxin-jidi-shishifangan/原文.md
+A440023,粤湘廊道·南岭明珠乡村振兴示范带,440000,运行中,P440031,support,place_only,2025年政府工作报告（连州市）,data/raw/GD/20250320-lz-2025-nian-zhengfu-gongzuo-baogao/原文.md
+A440026,山水浸潭·十里乡风乡村振兴示范带,440000,运行中,P440006,primary,place_only,清远市实施“百县千镇万村高质量发展工程”之乡村振兴示范带总体规划（2023—2027年）,data/raw/GD/20261108-qy-shi-xiangcun-zhenxing-shifandai-zongti-guihua-2023-2027/原文.md
+A440026,山水浸潭·十里乡风乡村振兴示范带,440000,运行中,P440007,primary,place_only,清远乡村振兴示范带考评结果公布，阳山这条示范带获评“优秀”等次,data/raw/GD/20230516-qy-yangshan-shifandai-kaoping-jieguo/原文.md
+A440026,山水浸潭·十里乡风乡村振兴示范带,440000,运行中,P440016,support,place_only,2021年政府工作报告（清远市清新区）,data/raw/GD/20210208-qy-qingxin-2021-zhengfu-gongzuo-baogao/原文.md
+A440026,山水浸潭·十里乡风乡村振兴示范带,440000,运行中,P440017,primary,place_only,2024年政府工作报告（清远市清新区）,data/raw/GD/20240227-qy-qingxin-2024-zhengfu-gongzuo-baogao/原文.md
+A440026,山水浸潭·十里乡风乡村振兴示范带,440000,运行中,P440018,primary,place_only,清远市清新区农业农村局2024年工作总结及2025年工作计划,data/raw/GD/20250123-qy-qingxin-nyncj-2024-nian-gongzuo-zongjie/原文.md
+A440026,山水浸潭·十里乡风乡村振兴示范带,440000,运行中,P440036,support,place_only,2026年政府工作报告（清远市清新区）,data/raw/GD/20260312-qy-qingxin-2026-zhengfu-gongzuo-baogao/原文.md
+A440027,果香渔韵·花漾东城乡村振兴示范带,440000,运行中,P440007,primary,place_only,清远乡村振兴示范带考评结果公布，阳山这条示范带获评“优秀”等次,data/raw/GD/20230516-qy-yangshan-shifandai-kaoping-jieguo/原文.md
+A440028,西江十里画廊乡村振兴示范带,440000,运行中,P440048,support,place_only,佛山三水：产业升级与片区融合双轮驱动｜百千万 见成效,data/raw/GD/20261108-gd-fs-ss-chanYe-shengji-pianqu-ronghe/原文.md
+A440039,凤凰山茶旅走廊乡村振兴示范带,440000,运行中,P440070,support,place_only,2025年潮州市潮安区政府工作报告,data/raw/GD/20250418-chaoan-2025-zhengfu-gongzuo-baogao/原文.md
+A440040,养生汤塘·世外泉乡乡村振兴示范带,440000,运行中,P440006,primary,place_only,清远市实施“百县千镇万村高质量发展工程”之乡村振兴示范带总体规划（2023—2027年）,data/raw/GD/20261108-qy-shi-xiangcun-zhenxing-shifandai-zongti-guihua-2023-2027/原文.md
+A440040,养生汤塘·世外泉乡乡村振兴示范带,440000,运行中,P440007,primary,place_only,清远乡村振兴示范带考评结果公布，阳山这条示范带获评“优秀”等次,data/raw/GD/20230516-qy-yangshan-shifandai-kaoping-jieguo/原文.md
+A440040,养生汤塘·世外泉乡乡村振兴示范带,440000,运行中,P440021,primary,place_only,2022年县政府工作报告（佛冈县）,data/raw/GD/20261108-fg-2022-nian-xian-zhengfu-gongzuo-baogao/原文.md
+A440040,养生汤塘·世外泉乡乡村振兴示范带,440000,运行中,P440032,support,place_only,佛冈走好党建引领乡村振兴“赶考路”,data/raw/GD/20220511-fg-dangjian-yinling-xiangcun-zhenxing/原文.md
+A440040,养生汤塘·世外泉乡乡村振兴示范带,440000,运行中,P440034,support,place_only,佛冈县国民经济和社会发展第十五个五年规划纲要,data/raw/GD/20260211-fg-15-5-guihua-gangyao/原文.md
+A440041,进士之乡·美丽西岸乡村振兴示范带,440000,运行中,P440028,support,place_only,关于印发《连州市“绿水青山就是金山银山”实践创新基地建设实施方案》的通知,data/raw/GD/20250814-lz-liangshan-shijian-chuangxin-jidi-shishifangan/原文.md
+A450002,荷美覃塘田园综合体,450000,运行中,P450009,support,place_only,贵港市覃塘区政府工作报告（2023年2月16日）,data/raw/GX/20230313-gx-gg-qt-zhengfu-gongzuo-baogao-2023/原文.md
+A450003,泗水缤纷田园综合体,450000,运行中,P450007,primary,place_only,广西壮族自治区田园综合体创建工作厅际联席会议办公室关于下达2021年自治区田园综合体试点项目的通知,data/raw/GX/20211011-gx-zzq-2021-tianyuanzongheti-shidian-xiada/原文.md
+A450004,百李挑一田园综合体,450000,运行中,P450007,primary,place_only,广西壮族自治区田园综合体创建工作厅际联席会议办公室关于下达2021年自治区田园综合体试点项目的通知,data/raw/GX/20211011-gx-zzq-2021-tianyuanzongheti-shidian-xiada/原文.md
+A450006,那桐定典乡村振兴示范带,450000,运行中,P450001,support,place_only,隆安县发展改革和科学技术局关于南宁市隆安县“那乡果海”田园综合体项目建议书的批复,data/raw/GX/20210930-gx-nn-la-naxiangguohai-tianyuanzongheti-lixiang-pifu/原文.md
+A450006,那桐定典乡村振兴示范带,450000,运行中,P450002,support,place_only,隆安县发展改革和科学技术局关于隆安县那桐镇定江村新定盆屯乡村振兴（生态综合）示范村建设项目建议书的批复,data/raw/GX/20220128-gx-nn-la-dingjiangcun-xindingpen-shifancun-pifu/原文.md
+A450006,那桐定典乡村振兴示范带,450000,运行中,P450006,support,place_only,隆安县人民政府关于对市十五届人大四次会议第365号代表建议协办意见的函,data/raw/GX/20230422-gx-nn-la-rd-365-xieban-yijian-han/原文.md
+A450006,那桐定典乡村振兴示范带,450000,运行中,P450007,support,place_only,广西壮族自治区田园综合体创建工作厅际联席会议办公室关于下达2021年自治区田园综合体试点项目的通知,data/raw/GX/20211011-gx-zzq-2021-tianyuanzongheti-shidian-xiada/原文.md
+A450006,那桐定典乡村振兴示范带,450000,运行中,P450008,support,place_only,南宁市良庆区、隆安县喜获自治区级田园综合体试点项目,data/raw/GX/20211021-gx-nn-longan-naxiangguohai-shengji-shidian/原文.md
+A460005,博鳌潭门片区和美乡村片区,460000,运行中,P460001,support,place_only,海南省人民政府办公厅关于印发《海南省“十五五”加快农业农村现代化规划》的通知,data/raw/HI/20260613-hi-sheng-1555-nongyenongcun-xiandaihua-guihua/原文.md
+A460005,博鳌潭门片区和美乡村片区,460000,运行中,P460015,support,place_only,2025年政府工作报告（琼海市）,data/raw/HI/20250210-hi-qh-2025-zhengfu-gongzuo-baogao/原文.md
+A500003,龙溪河流域特色农业示范带,500000,运行中,P500005,support,place_only,垫江县1—6月重点建设项目进展情况表（2023年）,data/raw/CQ/20230704-cq-dj-zhongdian-jianshe-xiangmu-jinzhan-2023-1-6/原文.md
+A500010,九龙坡铜罐驿巴渝和美乡村示范片,500000,运行中,P500001,support,place_only,重庆市九龙坡区人民政府关于印发《重庆市九龙坡区“十五五”农业农村现代化规划（2026—2030年）》的通知,data/raw/CQ/20260825-cq-jlp-shisiwu-nongye-xiandaihua-guihua/原文.md
+A500011,北碚区澄江—东阳等示范片,500000,待核,P500002,support,place_only,重庆市北碚区农业农村委员会关于区人大十九届六次会议第20250067号建议的函,data/raw/CQ/20250523-cq-bb-rd-jianyi-20250067-hemeixiangcun-dafu/原文.md
+A510005,绵阳北川石椅羌寨乡村振兴先行区,510000,运行中,P510006,support,place_only,北川羌族自治县人民政府办公室关于印发《北川羌族自治县石椅片区羌族文化遗产区域连片保护规划》的通知,data/raw/SC/20260821-sc-my-bc-shiyi-pianqu-qiangzu-wenhua-yichan-lianpian-baohu-guihua-tongzhi/原文.md
+A510005,绵阳北川石椅羌寨乡村振兴先行区,510000,运行中,P510009,support,place_only,李昊天在以北川石椅羌寨乡村振兴先行区建设为引领示范带动全县乡村全面振兴工作推进会议上强调：继续以一马当先的闯劲和马不停蹄的韧劲 努力干出乡村,data/raw/SC/20260226-sc-my-bc-shiyi-xianxingqu-tuijin-huiyi/原文.md
+A510005,绵阳北川石椅羌寨乡村振兴先行区,510000,运行中,P510010,support,place_only,石椅片区残疾人联合协会成立,data/raw/SC/20240119-sc-my-bc-shiyi-pianqu-canjiren-lianhe-xiehui-chengli/原文.md
+A510006,白沙巴蜀鱼米之乡片区,510000,运行中,P510011,primary,place_only,合江县委书记王波强调：做强长江优势产业带，高质量建设巴蜀鱼米之乡,data/raw/SC/20260306-sc-lz-hj-bashu-yumizhixiang-pianqu-diaoyan/原文.md
+A510011,梨香花海片区,510000,运行中,P510027,support,place_only,华蓥市“三链协同”打造富民蜜梨产业,data/raw/SC/20250919-sc-ga-hy-mili-sanlian-xietong/原文.md
+A510013,鸣钟镇独巍山—小寨乡村旅游片区,510000,运行中,P510026,support,place_only,关于武胜县鸣钟镇党委书记龚泽兵同志、镇长何金钟同志任期经济责任履行情况的审计整改报告,data/raw/SC/20250319-sc-ga-ws-mingzhong-shenji-zhenggai-baogao/原文.md
+A510014,飞来石村—红豆村川渝协作片区,510000,运行中,P510019,primary,place_only,武胜县跨界联建激活“飞地”乡村振兴新动能,data/raw/SC/20260310-sc-ga-ws-feilaishi-hongdou-kuajie-lianjian/原文.md
+A520001,上坝片区（金沙木孔）,520000,运行中,P520002,support,place_only,宜居幸福家园 传奇红色信安,data/raw/GZ/20210720-gz-bj-js-mukong-xinan-jicheng-shidian/原文.md
+A520004,陈家组片区（玉屏亚鱼）,520000,运行中,P520005,support,place_only,“生态饭”铺就玉屏郭家湾多彩乡村振兴路,data/raw/GZ/20240313-gz-tr-yp-yayu-guojiawan-shengtai-fan/原文.md
+A520006,高阶阳组片区（德江平原）,520000,运行中,P520026,support,place_only,德江县平原镇坳田村：“12345”举措打造省级特色田园乡村振兴集成示范试点,data/raw/GZ/20220615-tr-dejiang-pingyuan-aotian-12345/原文.md
+A520006,高阶阳组片区（德江平原）,520000,运行中,P520028,support,place_only,德江县人民政府关于印发《德江县2022年统筹整合使用财政涉农资金方案》的通知,data/raw/GZ/20220726-dj-2022-defufa-2-tongchou-zijin-fangan/原文.md
+A520006,高阶阳组片区（德江平原）,520000,运行中,P520037,support,place_only,2021年东西部协作东莞·铜仁援助资金项目表,data/raw/GZ/20211119-dg-2021-dongxibuxiezuo-tongren-xiangmubiao/原文.md
+A520007,平屯组片区（岑巩注溪）,520000,运行中,P520033,support,place_only,岑巩：注溪镇多措并举打造省级特色田园乡村·乡村振兴集成示范试点建设新样板,data/raw/GZ/20211223-cg-2021-zhuxi-liangshidian-xinyangban/原文.md
+A520007,平屯组片区（岑巩注溪）,520000,运行中,P520040,support,place_only,2023年政府工作报告（岑巩县）,data/raw/GZ/20230202-cg-2023-zhengfu-gongzuo-baogao/原文.md
+A520008,衙院组片区（岑巩注溪）,520000,运行中,P520033,support,place_only,岑巩：注溪镇多措并举打造省级特色田园乡村·乡村振兴集成示范试点建设新样板,data/raw/GZ/20211223-cg-2021-zhuxi-liangshidian-xinyangban/原文.md
+A520008,衙院组片区（岑巩注溪）,520000,运行中,P520040,support,place_only,2023年政府工作报告（岑巩县）,data/raw/GZ/20230202-cg-2023-zhengfu-gongzuo-baogao/原文.md
+A520010,新寨组片区（麻江龙山）,520000,运行中,P520012,support,place_only,2022年麻江县政府工作报告,data/raw/GZ/20220310-gz-qdn-mj-zfgzbg-2022/原文.md
+A520010,新寨组片区（麻江龙山）,520000,运行中,P520013,support,place_only,2023年麻江县政府工作报告,data/raw/GZ/20230224-gz-qdn-mj-zfgzbg-2023/原文.md
+A520010,新寨组片区（麻江龙山）,520000,运行中,P520015,support,place_only,2026年麻江县政府工作报告,data/raw/GZ/20260323-gz-qdn-mj-zfgzbg-2026/原文.md
+A520010,新寨组片区（麻江龙山）,520000,运行中,P520023,primary,place_only,乡村振兴 阔步前行｜扮靓田园乡村 建设瑶韵河坝,data/raw/GZ/20220215-gz-qdn-mj-heba-yaoyun-tianyuan-xiangcun/原文.md
+A520011,大荞地片区（贞丰长田）,520000,运行中,P520039,support,place_only,贞丰县长田镇人民政府单位职责（“一核两业三基地”发展定位）,data/raw/GZ/20240522-zf-changtianzhen-danwei-zhize-yihe-liangye/原文.md
+A520012,大洼组片区（普安茶源）,520000,运行中,P520025,support,place_only,黔西南州乡村振兴局关于州政协九届一次会议第A39号提案的答复,data/raw/GZ/20220805-qxn-2022-zhengxie-A39-dafu/原文.md
+A520012,大洼组片区（普安茶源）,520000,运行中,P520034,support,place_only,关于调整下达盘水街道2025年第五批劳动力跨省就业一次性交通补助等项目资金的通知,data/raw/GZ/20260114-pa-2025-cainong-30-tiaozheng-zijin/原文.md
+A520013,卡法组片区（望谟麻山）,520000,运行中,P520031,support,place_only,2026年望谟县政府工作报告,data/raw/GZ/20260210-wm-2026-zhengfu-gongzuo-baogao/原文.md
+A520015,麻窝寨片区（兴仁大山）,520000,运行中,P520025,support,place_only,黔西南州乡村振兴局关于州政协九届一次会议第A39号提案的答复,data/raw/GZ/20220805-qxn-2022-zhengxie-A39-dafu/原文.md
+A520015,麻窝寨片区（兴仁大山）,520000,运行中,P520032,support,place_only,省委统战部到兴仁市调研新阶联谊组织建设暨乡村振兴工作,data/raw/GZ/20230426-xr-2023-shengwei-tongzhanbu-diaoyan/原文.md
+A520016,大屯村5至8组（平坝乐平）,520000,运行中,P520007,support,place_only,2023年安顺市平坝区人民政府工作报告,data/raw/GZ/20230317-gz-as-pb-2023-zhengfu-gongzuo-baogao/原文.md
+A520017,民乐村刘家寨（清镇红枫湖）,520000,运行中,P520008,support,place_only,清镇市2023年政府工作报告,data/raw/GZ/20230220-gz-gy-qz-2023-zhengfu-gongzuo-baogao/原文.md
+A520018,焦家村、靛山村（普定集成试点）,520000,运行中,P520001,support,place_only,省自然资源厅 省住房和城乡建设厅 省乡村振兴局关于印发《贵州省特色田园乡村·乡村振兴集成示范试点村庄规划设计方案编制导则》的通知,data/raw/GZ/20220602-gz-sheng-tianyu-xiangcun-zhenxing-jicheng-shidian-guihua-daozhe/原文.md
+A520020,凤亭、麻怀等集成示范试点（罗甸）,520000,运行中,P520010,primary,place_only,罗甸县国民经济和社会发展第十五个五年规划纲要,data/raw/GZ/20260508-gz-qn-ld-155-guihua-gangyao-2026-2030/原文.md
+A610009,瀛湖片区湖岸经济带,610000,运行中,P610003,support,place_only,汉滨区2026年政府工作报告（区十九届人大五次会议）,data/raw/SN/20260521-sn-hb-zhengfu-gongzuo-baogao-2026/原文.md
+A610009,瀛湖片区湖岸经济带,610000,运行中,P610005,support,place_only,汉滨区分类打造11个振兴片区，实现强村带弱村协同发展——从“资源分散”到“连片聚势”,data/raw/SN/20260824-sn-hb-11-zhenxing-pianqu/原文.md
+A610009,瀛湖片区湖岸经济带,610000,运行中,P610006,support,place_only,汉滨：连片共绘振兴图,data/raw/SN/20260630-sn-hb-lianpian-gonghui-zhenxingtu/原文.md
+A610010,忠诚蔬菜产业联建片区,610000,运行中,P610003,support,place_only,汉滨区2026年政府工作报告（区十九届人大五次会议）,data/raw/SN/20260521-sn-hb-zhengfu-gongzuo-baogao-2026/原文.md
+A610010,忠诚蔬菜产业联建片区,610000,运行中,P610004,support,place_only,《乡村干部报》组织部长访谈｜向成城：片区联建融合发展 让“盆景”变“风景”,data/raw/SN/20260420-sn-hb-xiangcheng-pianqu-lianjian-fangtan/原文.md
+A610010,忠诚蔬菜产业联建片区,610000,运行中,P610005,support,place_only,汉滨区分类打造11个振兴片区，实现强村带弱村协同发展——从“资源分散”到“连片聚势”,data/raw/SN/20260824-sn-hb-11-zhenxing-pianqu/原文.md
+A610010,忠诚蔬菜产业联建片区,610000,运行中,P610006,support,place_only,汉滨：连片共绘振兴图,data/raw/SN/20260630-sn-hb-lianpian-gonghui-zhenxingtu/原文.md
+A610012,沿黄公路农文旅融合片区,610000,运行中,P610010,support,place_only,我市加快推动沿黄农文旅融合发展,data/raw/SN/20260914-sn-wn-yanhuang-nongwenlv-ronghe/原文.md
+A620001,和政县大南岔河流域片区,620000,运行中,P620016,support,place_only,州委十三届十二次全会暨全州经济高质量发展重点工作推进会议在我州党员干部中引发热烈反响,data/raw/GS/20260807-lxz-zhouwei-shierci-quanhui-pianquhua-meige-xianshi-1ge/原文.md
+A620001,和政县大南岔河流域片区,620000,运行中,P620024,support,place_only,《和政县2026年和美乡村建设工作实施方案》政策解读,data/raw/GS/20260717-hzx-2026-meilixiangcun-shishifangan-zhengcejiedu/原文.md
+A640004,芦沟闸产业融合发展示范园,640000,运行中,P640006,primary,place_only,187家合作社、12个“跨村联建共富”片区……吴忠利通区农文旅融合串起致富“金果果”,data/raw/NX/20250829-nx-wz-lt-nongwenlv-ronghe-jinguoguo/原文.md
+A650001,艾西曼镇“党建领航·田园牧歌”乡村振兴示范片区,650000,运行中,P650001,primary,place_only,登高望远 奋力争先——泰安援疆全力推进乡村振兴示范片区建设,data/raw/XJ/20240903-xj-ks-yph-taianshujiang-shifanpianqu/原文.md
+A650002,也克先拜巴扎镇“和美乡村·幸福巴扎”乡村振兴示范片区,650000,运行中,P650001,primary,place_only,登高望远 奋力争先——泰安援疆全力推进乡村振兴示范片区建设,data/raw/XJ/20240903-xj-ks-yph-taianshujiang-shifanpianqu/原文.md
+A650002,也克先拜巴扎镇“和美乡村·幸福巴扎”乡村振兴示范片区,650000,运行中,P650003,support,place_only,泰安援疆指挥部党委书记、指挥赵伟一行到也克先拜巴扎镇调研乡村振兴示工作,data/raw/XJ/20240418-xj-ks-yph-yekexianbaibazha-pianqu-diaoyan/原文.md
+A650003,岳普湖乡无花果产业示范片区,650000,运行中,P650001,primary,place_only,登高望远 奋力争先——泰安援疆全力推进乡村振兴示范片区建设,data/raw/XJ/20240903-xj-ks-yph-taianshujiang-shifanpianqu/原文.md
+A650004,色也克乡乡村振兴示范片区,650000,运行中,P650001,primary,place_only,登高望远 奋力争先——泰安援疆全力推进乡村振兴示范片区建设,data/raw/XJ/20240903-xj-ks-yph-taianshujiang-shifanpianqu/原文.md

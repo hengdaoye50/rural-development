@@ -134,6 +134,16 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/audit_missing_policy_links.py
 & $env:MIMO_PYTHON scripts/audit_missing_policy_links.py --csv reports/qa/missing-policy-links.csv
 
+# 链接真实性：挂上的 primary/support 在政策全文里到底有没有点名该片区
+# 输出 点名 / 仅提县镇地名（弱依据）/ 完全无关 三档，写 reports/qa/link-veracity.csv
+& $env:MIMO_PYTHON scripts/audit_link_veracity.py
+& $env:MIMO_PYTHON scripts/audit_link_veracity.py --csv reports/qa/link-veracity.csv
+
+# 名单比对：把一份官方名单 CSV 与库内片区做集合匹配（按县限定，防跨县假阳性）
+# 名单 CSV 列：county, area_name, key_village, source_url, note
+& $env:MIMO_PYTHON scripts/match_area_roster.py data/stage/candidates/roster-{省码}-{批次}.csv
+& $env:MIMO_PYTHON scripts/match_area_roster.py <roster.csv> --status 待核 --out reports/qa/roster-match.csv
+
 # 仅用 by_province 重建 clean master（勿直接手改 master）
 # 见 scripts/merge_by_province.py；by_province 优先于 master
 ```

@@ -1,0 +1,34 @@
+﻿area_id,area_name,province_code,area_status,policy_id,rel,tier,policy_title,local_path
+A210008,本溪县小市镇同江峪村—草河掌镇草河掌村乡村振兴示范带,210000,运行中,P210001,primary,missing,中共辽宁省委农村工作领导小组办公室关于公布辽宁省2023年乡村振兴示范带创建名单的通知,data/raw/LN/20230426-ln-sheng-nongwei-2023-shifandai-mingdan/原文.md
+A210010,新宾满族自治县乡村振兴示范带,210000,待核,P210015,support,missing,2025年抚顺市政府工作报告（2025年1月8日在抚顺市第十七届人民代表大会第五次会议上）,data/raw/LN/20250117-ln-fs-shi-2025-zhengfu-gongzuo-baogao/原文.md
+A320017,宜南茶乡竹海山水画廊片区,320000,运行中,P320021,primary,missing,逐绿向新，精绘“美丽无锡”城乡画卷,data/raw/JS/20250214-js-wx-zhulvxiangxin-meiliwuxi/原文.md
+A320018,锡东稻香吴韵片区,320000,运行中,P320021,primary,missing,逐绿向新，精绘“美丽无锡”城乡画卷,data/raw/JS/20250214-js-wx-zhulvxiangxin-meiliwuxi/原文.md
+A320019,惠山江南桃花源片区,320000,运行中,P320021,primary,missing,逐绿向新，精绘“美丽无锡”城乡画卷,data/raw/JS/20250214-js-wx-zhulvxiangxin-meiliwuxi/原文.md
+A320022,两湖片区（省级宜居宜业和美乡村片区（带））,320000,运行中,P320043,primary,missing,省级宜居宜业和美乡村片区（带）两湖片区发展规划成交公告,data/raw/JS/20241115-js-cz-lianghupianqu-guihua-chengjiao-2024/原文.md
+A320027,盐都S125水乡风光片区,320000,运行中,P320108,primary,missing,一号文件解读：宜居宜业和美乡村建设,data/raw/JS/20240424-js-yc-yandu-s125-shuixiangfengguang-pianqu/原文.md
+A320027,盐都S125水乡风光片区,320000,运行中,P320109,primary,missing,马正华听取S125水乡风光片区建设情况时强调 因地制宜创塑特色 助力乡村全面振兴,data/raw/JS/20250325-js-yc-yd-s125-shuixiangfengguang-pianqu-zhuanti/原文.md
+A330052,鸣鹤山水古韵片区,330000,运行中,P330355,support,missing,鸣鹤古镇擘画文旅融合新图景,data/raw/ZJ/20250818-zj-nb-cx-cixi-minghe-guzhen-wenlv-ronghe/原文.md
+A330078,金平渔港经济组团片区,330000,运行中,P330235,primary,missing,舟山市激活片区组团发展助力缩小“三大差距”,data/raw/ZJ/20250625-zs-shi-jihuo-pianqu-zutuan-fazhan/原文.md
+A330160,干江滨海风光片区,330000,运行中,P330272,support,missing,台州市农业农村局2024年度工作总结及2025年工作思路,data/raw/ZJ/20250325-tz-shi-nongyeju-2024-zongjie-2025-silu/原文.md
+A330356,干山融新片区,330000,运行中,P330360,primary,missing,我县重点村片区组团项目补助资金位列全市第一,data/raw/ZJ/20260303-zj-hz-dq-zhongdiancun-pianqu-zutuan-buzhu-quanshi-diyi/原文.md
+A350002,龙潭片区,350000,运行中,P350026,support,missing,熙岭乡：片区党委建设推动党建与乡村振兴有效融合,data/raw/FJ/20231124-fj-nd-pn-xl-pianqudangwei-dangjian-ronghe/原文.md
+A360001,赣南四融一共和美乡村先行区,360000,运行中,P360004,primary,missing,江西省：学习运用“千万工程”经验 探索“四融一共”推进乡村全面振兴有效路径,data/raw/JX/20260925-jx-shengji-sirongyigong-jingyan-cailiao/原文.md
+A360001,赣南四融一共和美乡村先行区,360000,运行中,P360013,primary,missing,2026年政府工作报告,data/raw/JX/20260305-longnan-2026-zhengfu-gongzuobaogao/原文.md
+A360001,赣南四融一共和美乡村先行区,360000,运行中,P360016,support,missing,中共龙南市委关于制定全市国民经济和社会发展第十五个五年规划的建议,data/raw/JX/20260929-longnan-shiwuwu-guihua-jianyi/原文.md
+A360004,赣西南四融一共和美乡村先行区,360000,运行中,P360027,primary,missing,关于印发学习运用“千万工程”经验有力有效推进2024年宜居宜业和美乡村建设工作方案的通知,data/raw/JX/20240510-jx-sheng-2024yijuyihemeixiangcun-gongzuofangan/原文.md
+A360011,大余黄龙积分治理片区,360000,运行中,P360014,support,missing,县农业农村局乡村建设组干部前往黄龙镇调研2025年“四融一共”和美乡村建设工作。,data/raw/JX/20250416-dayu-huanglong-sirongyigong-diaoyan-2025/原文.md
+A360011,大余黄龙积分治理片区,360000,运行中,P360015,support,missing,县农业农村局行政服务组工作人员前往黄龙镇跟进“四融一共”和美乡村建设情况,data/raw/JX/20250120-dayu-huanglong-sirongyigong-gensui-2025/原文.md
+A410003,嵩县环陆浑湖片区,410000,运行中,P410001,support,missing,河南省2026年宜居宜业和美乡村建设先导区支持名单公布,data/raw/HA/20260707-ha-sheng-2026-hemei-xiangcun-xianndaoyu-mingdan/原文.md
+A410004,嵩县田湖西山万亩中药材组团,410000,运行中,P410001,support,missing,河南省2026年宜居宜业和美乡村建设先导区支持名单公布,data/raw/HA/20260707-ha-sheng-2026-hemei-xiangcun-xianndaoyu-mingdan/原文.md
+A430027,赫山区乡村振兴示范片区,430000,待核,P430018,support,missing,中共益阳市泉交河镇委员会 益阳市泉交河镇人民政府关于成立泉交河镇“五好两宜”和美乡村试点试验工作领导小组的通知,data/raw/HN/20230606-hn-yy-hs-quanjiaohe-wuhaoliangyi-lingdaoxiaozu/原文.md
+A520001,上坝片区（金沙木孔）,520000,运行中,P520001,support,missing,省自然资源厅 省住房和城乡建设厅 省乡村振兴局关于印发《贵州省特色田园乡村·乡村振兴集成示范试点村庄规划设计方案编制导则》的通知,data/raw/GZ/20220602-gz-sheng-tianyu-xiangcun-zhenxing-jicheng-shidian-guihua-daozhe/原文.md
+A520002,营脚组片区（纳雍寨乐）,520000,运行中,P520001,support,missing,省自然资源厅 省住房和城乡建设厅 省乡村振兴局关于印发《贵州省特色田园乡村·乡村振兴集成示范试点村庄规划设计方案编制导则》的通知,data/raw/GZ/20220602-gz-sheng-tianyu-xiangcun-zhenxing-jicheng-shidian-guihua-daozhe/原文.md
+A520003,大丫口组片区（纳雍勺窝）,520000,运行中,P520001,support,missing,省自然资源厅 省住房和城乡建设厅 省乡村振兴局关于印发《贵州省特色田园乡村·乡村振兴集成示范试点村庄规划设计方案编制导则》的通知,data/raw/GZ/20220602-gz-sheng-tianyu-xiangcun-zhenxing-jicheng-shidian-guihua-daozhe/原文.md
+A520004,陈家组片区（玉屏亚鱼）,520000,运行中,P520001,support,missing,省自然资源厅 省住房和城乡建设厅 省乡村振兴局关于印发《贵州省特色田园乡村·乡村振兴集成示范试点村庄规划设计方案编制导则》的通知,data/raw/GZ/20220602-gz-sheng-tianyu-xiangcun-zhenxing-jicheng-shidian-guihua-daozhe/原文.md
+A520005,田坝组片区（石阡龙塘）,520000,运行中,P520001,support,missing,省自然资源厅 省住房和城乡建设厅 省乡村振兴局关于印发《贵州省特色田园乡村·乡村振兴集成示范试点村庄规划设计方案编制导则》的通知,data/raw/GZ/20220602-gz-sheng-tianyu-xiangcun-zhenxing-jicheng-shidian-guihua-daozhe/原文.md
+A520010,新寨组片区（麻江龙山）,520000,运行中,P520019,support,missing,广袤沃野谱新篇——我州推进乡村振兴集成示范试点创建工作纪实,data/raw/GZ/20230228-gz-qdn-zhou-jishi-jicheng-shifan-shidian/原文.md
+A520016,大屯村5至8组（平坝乐平）,520000,运行中,P520001,support,missing,省自然资源厅 省住房和城乡建设厅 省乡村振兴局关于印发《贵州省特色田园乡村·乡村振兴集成示范试点村庄规划设计方案编制导则》的通知,data/raw/GZ/20220602-gz-sheng-tianyu-xiangcun-zhenxing-jicheng-shidian-guihua-daozhe/原文.md
+A520017,民乐村刘家寨（清镇红枫湖）,520000,运行中,P520001,support,missing,省自然资源厅 省住房和城乡建设厅 省乡村振兴局关于印发《贵州省特色田园乡村·乡村振兴集成示范试点村庄规划设计方案编制导则》的通知,data/raw/GZ/20220602-gz-sheng-tianyu-xiangcun-zhenxing-jicheng-shidian-guihua-daozhe/原文.md
+A520020,凤亭、麻怀等集成示范试点（罗甸）,520000,运行中,P520018,support,missing,州乡村振兴局：「五个强化」全面推进特色田园乡村·乡村振兴集成示范试点建设,data/raw/GZ/20211111-gz-qn-zhou-xczxj-wuge-qianghua/原文.md
+A610011,张峪沟沟域经济片区,610000,运行中,P610019,primary,missing,支朝奇胡大志调研南秦片区项目建设及沟域经济发展工作,data/raw/SN/20260907-sn-sz-zhangyugou-gouyu-diaoyan/原文.md
+A620001,和政县大南岔河流域片区,620000,运行中,P620015,support,missing,李海默主持召开州委常委会会议（研究部署“百片千村”和美乡村建设）,data/raw/GS/20260420-lxz-zhouwei-changweihui-baipianqiancun/原文.md
