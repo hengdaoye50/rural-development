@@ -148,6 +148,13 @@ $env:MIMO_PYTHON
 # 无 primary/support 依据的在册片区清单（下一轮补采作业面）
 & $env:MIMO_PYTHON scripts/list_thin_evidence_areas.py     # -> reports/qa/areas-thin-evidence.csv
 
+# 类型边界审计：按「有无设立文件」对账 area(T03) 与 belt，只排序不判定
+& $env:MIMO_PYTHON scripts/audit_type_boundary.py          # -> reports/qa/type-boundary-audit.csv
+
+# 统计口径（docs/01 §10）：唯一来源是视图 area_caliber，别自己写口径 SQL
+#   select count(*) from area_caliber where in_main_stat=1;              -- 主统计 A+B
+#   select caliber_group, count(*) from area_caliber where in_scope=1 group by 1;
+
 # 名单比对：把一份官方名单 CSV 与库内片区做集合匹配（按县限定，防跨县假阳性）
 # 名单 CSV 列：county, area_name, key_village, source_url, note
 & $env:MIMO_PYTHON scripts/match_area_roster.py data/stage/candidates/roster-{省码}-{批次}.csv
@@ -289,3 +296,14 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   对 map 表是「by_province 优先 + master 补缺」，只删 by_province 会被 master 补缺并回；
   `ingest_policy --purge` 只清库不清批次 JSONL，重跑就把已剔除的行灌回来。
   `add_area_policy_link --remove` 与 `apply_link_veracity_fix` 均已改为两处同删
+- 2026-11：**「能入库」与「进分母」分成两件事**（`docs/01` §10 统计口径卡）。
+  库里可以放宽（有线索即留档），统计必须收紧。落地为视图 `area_caliber`，五组互斥：
+  A 窗内 434 / B 延续至今 12 / C 时间不详 172 / D 口径外 18 / E 无依据 218，合计 854。
+  对外只报三个数之一：**主统计 A+B=446**、宽统计 A+B+C=618、全量库 854（仅描述采集规模）
+- 2026-11：**「延续至今」用可查证代理判据**，不再停留在原则表述。2022 年前成立者，
+  2023-01-01 后仍有 primary/support 政策或 event 即判延续，否则判口径外（D 组）
+- 2026-11：**口径变更不改数据，只改视图与文档**。D 组不删记录、不改 `status`，
+  由视图排除；这样任何口径调整都可逆，也不会污染 `data/raw` 证据链
+- 2026-11：**`area`/`belt` 分界按「有无设立/批复/名单/挂牌文件」，不看命名形态**。
+  审计结果 `reports/qa/type-boundary-audit.md`：29 条 area→belt、5 条 belt→area
+  （后者仅 2 条证据够硬）。**两类数字在逐条裁定前不得相加当总量**

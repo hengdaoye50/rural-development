@@ -180,6 +180,45 @@ CREATE TABLE IF NOT EXISTS area_source_map (
     rel         TEXT NOT NULL DEFAULT 'support' CHECK (rel IN ('primary','support','mention')),
     PRIMARY KEY (area_id, source_id)
 );
+
+-- 统计口径卡（docs/01 §10）：把「入库」与「进分母」分开。
+-- A 窗口内+有依据 / B 2022 前成立但延续至今 / C 时间不详+有依据 / D 口径外 / E 无依据
+-- D 组不删记录、不改 status，只在此处被排除，口径调整只改本视图
+CREATE VIEW IF NOT EXISTS area_caliber AS
+SELECT *,
+       CASE
+         WHEN time_bucket = 'pre2022_stale' THEN 'D'
+         WHEN has_hard = 0                  THEN 'E'
+         WHEN time_bucket = 'in_window'     THEN 'A'
+         WHEN time_bucket = 'carried_over'  THEN 'B'
+         ELSE 'C'
+       END AS caliber_group,
+       CASE WHEN status <> '待核' THEN 1 ELSE 0 END AS in_scope,
+       CASE WHEN status <> '待核'
+             AND has_hard = 1
+             AND time_bucket IN ('in_window','carried_over') THEN 1 ELSE 0 END AS in_main_stat
+FROM (
+    SELECT a.area_id, a.name, a.province_code, a.county_code, a.status,
+           a.founded_ymd, a.founded_precision,
+           CASE WHEN EXISTS (SELECT 1 FROM area_policy_map m
+                             WHERE m.area_id = a.area_id
+                               AND m.rel IN ('primary','support'))
+                THEN 1 ELSE 0 END AS has_hard,
+           CASE
+             WHEN a.founded_precision = 'unknown' OR COALESCE(a.founded_ymd,'') = '' THEN 'unknown'
+             WHEN substr(a.founded_ymd,1,4) >= '2022' THEN 'in_window'
+             WHEN EXISTS (SELECT 1 FROM area_policy_map m
+                          JOIN policy p ON p.policy_id = m.policy_id
+                          WHERE m.area_id = a.area_id
+                            AND COALESCE(NULLIF(p.published_ymd,''), NULLIF(p.issued_ymd,''), '') >= '2023')
+               OR EXISTS (SELECT 1 FROM event e
+                          WHERE e.area_id = a.area_id AND COALESCE(e.ymd,'') >= '2023')
+               THEN 'carried_over'
+             ELSE 'pre2022_stale'
+           END AS time_bucket
+    FROM area a
+    WHERE a.record_state = 'active'
+);
 """
 
 CSV_TABLES = {

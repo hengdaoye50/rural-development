@@ -70,6 +70,19 @@ def main() -> int:
         add(f"- 另有 {n_sup} 条 `record_state=superseded` 的历史记录不计入上述口径"
             f"（`validate_db.py` 报的行数含它们，故与本节差 {n_sup}）")
 
+    # ---------- 一·五 口径分层（docs/01 §10）----------
+    cal = {r["caliber_group"]: r["n"] for r in cur.execute(
+        "select caliber_group, count(*) n from area_caliber where in_scope=1 group by caliber_group"
+    )}
+    n_main = q("select count(*) from area_caliber where in_main_stat=1")
+    n_wide = sum(cal.get(k, 0) for k in ("A", "B", "C"))
+    add("\n### 口径分层（`docs/01` §10，五组互斥）\n")
+    add(f"- **主统计 A+B：{n_main}**（时间在窗内或延续至今，且有 primary/support 依据）")
+    add(f"- 宽统计 A+B+C：{n_wide}（含时间不详，**不得进年份分布**）")
+    add(f"- A 窗内 {cal.get('A', 0)}｜B 延续至今 {cal.get('B', 0)}｜C 时间不详 {cal.get('C', 0)}"
+        f"｜D 口径外 {cal.get('D', 0)}｜E 无依据 {cal.get('E', 0)}")
+    add("- 全量库 854 只用于说明采集规模，**不得当结论基数**。视图 `area_caliber` 为唯一口径来源")
+
     # ---------- 二、政策层 ----------
     n_pol = q("select count(*) from policy")
     n_a = q("select count(*) from policy where credibility='A'")
