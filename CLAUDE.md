@@ -175,6 +175,11 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/wechat_resolve.py "<搜狗 link>"   # 当前被反爬拦截，仅用于探测
 # 产出 reports/gaps/wechat-leads-{date}.csv；说明见 reports/gaps/wechat-leads-2026-11.md
 
+# 抓 .gov.cn 原文 -> 直接生成 ingest_policy 批次（正文自动提取，过短即拒绝）
+& $env:MIMO_PYTHON scripts/fetch_gov_doc.py --out data/stage/batches/POL-{省码}-{名}-policy.jsonl `
+    --doc "url=https://...,title=...,issuer=...,issuer_level=province,published_ymd=2025-12-31,province_code=370000"
+# 非 .gov.cn 域名直接拒绝；"正文 < 150 汉字"也拒绝，不生成残缺记录
+
 # 统计口径（docs/01 §10）：唯一来源是视图 area_caliber，别自己写口径 SQL
 #   select count(*) from area_caliber where in_main_stat=1;              -- 主统计 A+B
 #   select caliber_group, count(*) from area_caliber where in_scope=1 group by 1;
