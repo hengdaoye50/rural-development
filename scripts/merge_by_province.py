@@ -81,14 +81,19 @@ def merge() -> int:
         index: dict[tuple, dict[str, str]] = {}
         by_keys: set[tuple] = set()
         by_entities: set[str] = set()
+        extra_cols: list[str] = []
         for p in sorted(BY_PROV.glob(f"*-{table}.csv")):
             for r in _read(p):
+                for k in r:
+                    if k not in header and k not in extra_cols:
+                        extra_cols.append(k)  # by_province 新增列不能因为 master 旧表头被丢掉
                 key = tuple(r.get(k, "") for k in KEYS[table])
                 if any(r.values()):
                     index[key] = r
                     by_keys.add(key)
                     if table in ("area_region_map", "belt_region_map"):
                         by_entities.add(r.get("area_id") or r.get("belt_id") or "")
+        header = header + extra_cols
 
         prune_orphans = table in ENTITY_TABLES and bool(by_keys)
         for r in _read(master_path):

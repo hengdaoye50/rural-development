@@ -83,6 +83,15 @@ def main() -> int:
         f"｜D 口径外 {cal.get('D', 0)}｜E 无依据 {cal.get('E', 0)}")
     add("- 全量库 854 只用于说明采集规模，**不得当结论基数**。视图 `area_caliber` 为唯一口径来源")
 
+    sk = {r["setup_kind"]: r["n"] for r in cur.execute(
+        "select setup_kind, count(*) n from area_caliber where in_scope=1 group by setup_kind")}
+    sk_main = {r["setup_kind"]: r["n"] for r in cur.execute(
+        "select setup_kind, count(*) n from area_caliber where in_main_stat=1 group by setup_kind")}
+    add(f"- 设立方式（全量）：名单型 `roster` {sk.get('roster', 0)}｜部署型 `deployment` "
+        f"{sk.get('deployment', 0)}｜未判定 `unknown` {sk.get('unknown', 0)}")
+    add(f"- 设立方式（主统计 {n_main} 内）：名单型 {sk_main.get('roster', 0)}｜"
+        f"部署型 {sk_main.get('deployment', 0)}——**报告必须分列，不可合并**")
+
     # ---------- 二、政策层 ----------
     n_pol = q("select count(*) from policy")
     n_a = q("select count(*) from policy where credibility='A'")

@@ -151,6 +151,11 @@ $env:MIMO_PYTHON
 # 类型边界审计：按「有无设立文件」对账 area(T03) 与 belt，只排序不判定
 & $env:MIMO_PYTHON scripts/audit_type_boundary.py          # -> reports/qa/type-boundary-audit.csv
 
+# 派生设立方式 setup_kind（roster 名单型 / deployment 部署型 / unknown）
+# 依据 docs/01 §10.2；只写 by_province（area 是实体表，merge 会重建 master）
+& $env:MIMO_PYTHON scripts/classify_setup_kind.py --dry-run
+& $env:MIMO_PYTHON scripts/classify_setup_kind.py
+
 # 统计口径（docs/01 §10）：唯一来源是视图 area_caliber，别自己写口径 SQL
 #   select count(*) from area_caliber where in_main_stat=1;              -- 主统计 A+B
 #   select caliber_group, count(*) from area_caliber where in_scope=1 group by 1;
@@ -304,6 +309,13 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   2023-01-01 后仍有 primary/support 政策或 event 即判延续，否则判口径外（D 组）
 - 2026-11：**口径变更不改数据，只改视图与文档**。D 组不删记录、不改 `status`，
   由视图排除；这样任何口径调整都可逆，也不会污染 `data/raw` 证据链
-- 2026-11：**`area`/`belt` 分界按「有无设立/批复/名单/挂牌文件」，不看命名形态**。
-  审计结果 `reports/qa/type-boundary-audit.md`：29 条 area→belt、5 条 belt→area
-  （后者仅 2 条证据够硬）。**两类数字在逐条裁定前不得相加当总量**
+- 2026-11：**`area`/`belt` 分界按「有无设立动作」，且设立动作分两种形态**。
+  只认名单/批复/挂牌会把县域最普遍的设立方式判成不存在，故 2026-11 放宽：
+  `roster`（名单/批复/公布/认定）与 `deployment`（政府工作报告、专项规划点名部署）
+  都算设立，但**必须分列记录**（字段 `area.setup_kind`，派生脚本 `classify_setup_kind.py`）。
+  实测差异是真实的制度差异：山东主统计里 34 条部署型 vs 4 条名单型，河北 20 条名单型 vs 0；
+  合并成一个数字就会把它抹掉
+- 2026-11：**CSV 里出现 schema 没有的列，必须报出来而不是静默丢**。
+  `area_region_map.is_core` 在字典与 CSV 里都存在、DDL 里漏了 `belt_region_map.is_core`，
+  于是 `merge_by_province` 按 master 旧表头写文件、把 by_province 的新列整个吞掉。
+  已改为表头取并集 + DDL 补齐。新增列时三处都要改：`docs/02`、DDL、by_province CSV

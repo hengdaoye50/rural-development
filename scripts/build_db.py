@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS area (
     founded_ymd         TEXT,
     founded_precision   TEXT NOT NULL CHECK (founded_precision IN ('day','month','year','unknown')),
     status              TEXT NOT NULL CHECK (status IN ('运行中','待核','已撤销','已更名','已完成')),
+    setup_kind          TEXT,
     lead_org            TEXT,
     issuer              TEXT,
     summary             TEXT,
@@ -163,6 +164,7 @@ CREATE TABLE IF NOT EXISTS belt_region_map (
     belt_id     TEXT NOT NULL REFERENCES belt(belt_id),
     region_code TEXT NOT NULL REFERENCES region(region_code),
     role        TEXT NOT NULL CHECK (role IN ('county','town','village','spine','node')),
+    is_core     INTEGER CHECK (is_core IN (0,1)),
     PRIMARY KEY (belt_id, region_code, role)
 );
 
@@ -198,7 +200,7 @@ SELECT *,
              AND has_hard = 1
              AND time_bucket IN ('in_window','carried_over') THEN 1 ELSE 0 END AS in_main_stat
 FROM (
-    SELECT a.area_id, a.name, a.province_code, a.county_code, a.status,
+    SELECT a.area_id, a.name, a.province_code, a.county_code, a.status, a.setup_kind,
            a.founded_ymd, a.founded_precision,
            CASE WHEN EXISTS (SELECT 1 FROM area_policy_map m
                              WHERE m.area_id = a.area_id
