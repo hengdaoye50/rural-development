@@ -68,6 +68,8 @@ def main() -> int:
     only_mention = q(
         """SELECT COUNT(DISTINCT m.area_id) FROM area_policy_map m
            WHERE m.entity_type='area' AND m.rel='mention'
+             AND m.area_id IN (SELECT area_id FROM area
+                               WHERE record_state='active' AND status != '待核')
              AND NOT EXISTS (SELECT 1 FROM area_policy_map x
                              WHERE x.area_id=m.area_id AND x.rel IN ('primary','support'))"""
     )
@@ -113,12 +115,13 @@ def main() -> int:
     add("## 三、覆盖率：两种口径")
     add("")
     add("`area_policy_map.rel` 分 primary（直接设立/命名/批复）、support（点名支持）、mention（仅提及）。")
-    add("`health_report.py` 的「有政策依据」不区分 rel，因此存在两种口径：")
+    add("`health_report.py` 取「仅 primary + support」为正式口径（见 `docs/02` §5），")
+    add("下表把宽口径一并列出，只为看清 mention 撑起了多少：")
     add("")
     add("| 口径 | 片区数 | 覆盖率 | 含义 |")
     add("|---|---|---|---|")
-    add(f"| 含 mention | {covered} | {covered / n_area * 100:.1f}% | 正文提到即可算 |")
-    add(f"| 仅 primary + support | {covered_strong} | {covered_strong / n_area * 100:.1f}% | 有实质依据 |")
+    add(f"| 含 mention（旧口径，已废） | {covered} | {covered / n_area * 100:.1f}% | 正文提到即可算 |")
+    add(f"| 仅 primary + support（现行口径） | {covered_strong} | {covered_strong / n_area * 100:.1f}% | 有实质依据 |")
     add("")
     add(f"**有 {only_mention} 个片区只靠 mention 支撑**——严格说它们尚无政策依据。")
     add("")

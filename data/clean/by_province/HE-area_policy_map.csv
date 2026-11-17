@@ -5,7 +5,7 @@ A130005,P130002,area,primary
 A130004,P130003,area,support
 A130003,P130004,area,support
 A130001,P130005,area,support
-A130001,P130006,area,support
+A130001,P130006,area,mention
 A130005,P130007,area,mention
 A130005,P130008,area,mention
 A130005,P130009,area,mention
@@ -13,12 +13,12 @@ A130002,P130010,area,support
 A130003,P130010,area,support
 A130005,P130011,area,support
 A130001,P130012,area,primary
-A130001,P130013,area,primary
-A130005,P130014,area,support
+A130001,P130013,area,mention
+A130005,P130014,area,mention
 A130005,P130015,area,support
 A130004,P130016,area,support
-A130001,P130017,area,primary
-A130001,P130018,area,support
+A130001,P130017,area,mention
+A130001,P130018,area,mention
 A130001,P130019,area,primary
 A130002,P130019,area,primary
 A130003,P130019,area,primary

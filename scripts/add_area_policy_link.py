@@ -63,7 +63,10 @@ def main() -> int:
         area_id, policy_id = args[0], args[1]
         why = args[2] if len(args) > 2 else ""
         hit = 0
-        for p in sorted(BY_PROV.glob("*-area_policy_map.csv")):
+        # master 必须一起删：merge_by_province 对 map 表是「by_province 优先 + master 补缺」，
+        # 只删 by_province 的话 master 那行会被当成补缺并回库（A330338↔P330005 就这样复活过）
+        targets = sorted(BY_PROV.glob("*-area_policy_map.csv")) + [CLEAN / "area_policy_map.csv"]
+        for p in targets:
             header, rows = _read(p)
             keep = [
                 r for r in rows

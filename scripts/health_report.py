@@ -75,30 +75,43 @@ def main() -> int:
     n_a = q("select count(*) from policy where credibility='A'")
     n_chars = q("select sum(full_text_chars) from policy") or 0
     n_map = q("select count(*) from area_policy_map")
+    # 「有政策依据」只认 primary/support：正文点名该片区为对象或佐证。
+    # mention（仅提及）单列，不计入依据——口径见 docs/02 rel 语义与
+    # reports/qa/policy-link-veracity.md
     n_covered = q(
         "select count(distinct area_id) from area_policy_map "
-        f"where entity_type='area' and area_id in (select area_id from area where {VALID})"
+        "where entity_type='area' and rel in ('primary','support') "
+        f"and area_id in (select area_id from area where {VALID})"
+    )
+    n_mention = q(
+        "select count(distinct area_id) from area_policy_map "
+        "where entity_type='area' and rel='mention' "
+        f"and area_id in (select area_id from area where {VALID})"
     )
     n_cty_covered = q(
         f"""select count(distinct a.county_code) from area a
             where {VALID_A}
               and exists (select 1 from area_policy_map m
-                          where m.area_id=a.area_id and m.entity_type='area')"""
+                          where m.area_id=a.area_id and m.entity_type='area'
+                            and m.rel in ('primary','support'))"""
     )
     add("\n## 二、政策层\n")
     add(f"- 政策 `policy`：**{n_pol}** 份（A 级 {n_a} 份，{n_a / n_pol * 100:.0f}%）" if n_pol else "- 政策：0 份")
     add(f"- 全文总量：**{n_chars:,}** 汉字")
     add(f"- 片区-政策挂接：**{n_map}** 条")
-    add(f"- 有政策依据的片区：**{n_covered}/{n_area}**（{n_covered / n_area * 100:.1f}%）")
+    add(f"- 有政策依据的片区（primary/support）：**{n_covered}/{n_area}**"
+        f"（{n_covered / n_area * 100:.1f}%）")
+    add(f"- 仅有 `mention`（正文只提地名、未点名片区）：**{n_mention}** 个，不计入依据")
     add(f"- 有政策依据的县：**{n_cty_covered}/{n_cty}**（{n_cty_covered / n_cty * 100:.1f}%）")
 
     add("\n### 分省进度\n")
-    add("| 省份 | 片区 | 有政策依据的片区 | 政策数 | A 级 | 全文汉字 |")
-    add("|---|---|---|---|---|---|")
+    add("| 省份 | 片区 | 有依据（primary/support） | 仅 mention | 政策数 | A 级 | 全文汉字 |")
+    add("|---|---|---|---|---|---|---|")
     rows = cur.execute(
         """select a.province_code p,
                   count(distinct a.area_id) n_area,
-                  count(distinct case when m.area_id is not null then a.area_id end) n_cov,
+                  count(distinct case when m.rel in ('primary','support') then a.area_id end) n_cov,
+                  count(distinct case when m.rel='mention' then a.area_id end) n_men,
                   (select count(*) from policy pp where pp.province_code=a.province_code) n_pol,
                   (select count(*) from policy pp where pp.province_code=a.province_code and pp.credibility='A') n_a,
                   (select coalesce(sum(full_text_chars),0) from policy pp where pp.province_code=a.province_code) chars
@@ -110,7 +123,7 @@ def main() -> int:
     for r in rows:
         pct = r["n_cov"] / r["n_area"] * 100 if r["n_area"] else 0
         add(f"| {PROV.get(r['p'], r['p'])} | {r['n_area']} | {r['n_cov']}（{pct:.0f}%） | "
-            f"{r['n_pol']} | {r['n_a']} | {r['chars']:,} |")
+            f"{r['n_men']} | {r['n_pol']} | {r['n_a']} | {r['chars']:,} |")
 
     add("\n### 文种分布\n")
     dt = cur.execute("select doc_type, count(*) n from policy group by doc_type order by n desc").fetchall()

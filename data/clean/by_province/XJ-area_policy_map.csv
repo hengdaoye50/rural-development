@@ -1,12 +1,12 @@
 ﻿area_id,policy_id,entity_type,rel
-A650001,P650001,area,primary
-A650002,P650001,area,primary
-A650003,P650001,area,primary
-A650004,P650001,area,primary
+A650001,P650001,area,mention
+A650002,P650001,area,mention
+A650003,P650001,area,mention
+A650004,P650001,area,mention
 A650005,P650001,area,primary
 A650001,P650002,area,primary
 A650002,P650002,area,primary
-A650002,P650003,area,support
+A650002,P650003,area,mention
 A650001,P650008,area,mention
 A650004,P650009,area,mention
 A650005,P650010,area,mention

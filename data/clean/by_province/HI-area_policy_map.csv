@@ -1,5 +1,5 @@
 ﻿area_id,policy_id,entity_type,rel
-A460005,P460001,area,support
+A460005,P460001,area,mention
 A460001,P460002,area,mention
 A460001,P460003,area,support
 A460002,P460004,area,mention
@@ -14,5 +14,5 @@ A460002,P460012,area,mention
 A460003,P460012,area,mention
 A460004,P460012,area,mention
 A460002,P460013,area,mention
-A460005,P460015,area,support
+A460005,P460015,area,mention
 A460008,P460015,area,mention

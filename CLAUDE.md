@@ -139,6 +139,15 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/audit_link_veracity.py
 & $env:MIMO_PYTHON scripts/audit_link_veracity.py --csv reports/qa/link-veracity.csv
 
+# 按审计结论归位 rel：link-wrong 解除、link-weak 降 mention（幂等）
+# 同时改 by_province 与 master——只删 by_province 的话 master 会被当「补缺」并回来
+& $env:MIMO_PYTHON scripts/apply_link_veracity_fix.py --dry-run
+& $env:MIMO_PYTHON scripts/apply_link_veracity_fix.py
+# 跑完必须接：merge_by_province -> build_db -> validate_db -> health_report
+
+# 无 primary/support 依据的在册片区清单（下一轮补采作业面）
+& $env:MIMO_PYTHON scripts/list_thin_evidence_areas.py     # -> reports/qa/areas-thin-evidence.csv
+
 # 名单比对：把一份官方名单 CSV 与库内片区做集合匹配（按县限定，防跨县假阳性）
 # 名单 CSV 列：county, area_name, key_village, source_url, note
 & $env:MIMO_PYTHON scripts/match_area_roster.py data/stage/candidates/roster-{省码}-{批次}.csv
@@ -268,3 +277,15 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   **但江苏等省并不整体公开省级片区名单**——江苏作为数据最厚的试点省，40 个省级片区的
   逐条明细只能从各市县材料拼（已拼出 8 条 + 零散数条）。故此法不是万能的：
   名单公开的省可算漏采率，名单不公开的省只能登记「不可对账」，不得用声明数字充分母
+- 2026-11：**「有政策依据」只认 `primary`/`support`，`mention` 不计入。**
+  此前 96.8% 是在「挂了链接即算」的意义上成立的，严格到「正文点名该片区」后为 **73.0%
+  （623/854）**，县 74.3%。历史数字（65%／74.8%／80.8%／96.8%）一律标注为旧口径，
+  不可与新口径混用。低点名率省（湖北 9%、贵州 16%、河南 26%、天津 33%）的根因是
+  **依据类型不对**（品牌名来自报道、官方文本只写镇级片区；贵州挂在通用导则上），
+  加采不解决，只能改名对齐官方表述或换抽样框
+- 2026-11：**贵州改采《省级集成示范试点名单》作抽样框**。导则证明制度存在，
+  不能证明某个片区存在，用它挂片区是把依据类型搞错
+- 2026-11：**任何「删除」必须同时处理合并与入库两条回填路径**。`merge_by_province`
+  对 map 表是「by_province 优先 + master 补缺」，只删 by_province 会被 master 补缺并回；
+  `ingest_policy --purge` 只清库不清批次 JSONL，重跑就把已剔除的行灌回来。
+  `add_area_policy_link --remove` 与 `apply_link_veracity_fix` 均已改为两处同删
