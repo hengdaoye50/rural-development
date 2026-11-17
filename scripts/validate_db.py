@@ -263,14 +263,37 @@ def validate() -> int:
 
     source_by_id = {s.get("source_id"): s for s in sources}
     source_primary = {s.get("area_id") for s in sources}
+    region_by_code = {r.get("region_code"): r for r in regions}
 
     for a in areas:
         aid = a["area_id"]
         sid = a.get("first_source_id") or ""
         linked = (aid in source_primary) or (sid in source_by_id)
-        if not linked:
+        # 引用悬空是硬缺陷：待核可以「证据不足」，但不能「证据不存在」
+        if sid and sid not in source_by_id:
+            issues.append(f"[area:{aid}] first_source_id={sid} 在 source 表不存在（引用悬空）")
+        elif not linked:
             if a.get("status") != "待核":
                 issues.append(f"[area:{aid}] 无任何 source（且 status≠待核）")
+
+    # 区划归属：占位码与悬空城市码会让按市/县聚合静默出错
+    # 省直辖县级行政区（济源 419001、神农架 429021 等）city_code 等于 county_code，属合法
+    placeholder = {r.get("region_code") for r in regions if r.get("name") == r.get("region_code")}
+    for a in areas:
+        aid = a["area_id"]
+        cc = a.get("county_code") or ""
+        city = a.get("city_code") or ""
+        if cc in placeholder:
+            warnings.append(f"[area:{aid}] county_code={cc} 是 region 占位行（name 等于代码），需回原始来源核定")
+        if city and city not in region_by_code and city != cc:
+            warnings.append(f"[area:{aid}] city_code={city} 在 region 表不存在")
+
+    # 数值字段必须是整数：国道/省道编号、户数常被灌进来
+    for a in areas:
+        for f in ("scale_villages", "scale_towns"):
+            v = (a.get(f) or "").strip()
+            if v and not v.isdigit():
+                warnings.append(f"[area:{a['area_id']}] {f}={v!r} 非整数，需复核")
 
     if regions:
         for r in regions:

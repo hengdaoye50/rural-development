@@ -164,6 +164,12 @@ $env:MIMO_PYTHON
 # 只定位不抽名——正文正则抽片区名七成是城市控规分区，别试
 & $env:MIMO_PYTHON scripts/find_coverage_gaps.py            # -> reports/gaps/coverage-gaps.{md,csv}
 
+# 数据清洗三件套（都幂等，先 --dry-run 看会改哪些行）
+& $env:MIMO_PYTHON scripts/apply_area_fixes.py --dry-run    # 占位码/城市码/数值字段污染
+& $env:MIMO_PYTHON scripts/fix_region_integrity.py --dry-run # region 补缺失市级行、退休码去重
+& $env:MIMO_PYTHON scripts/repair_area_sources.py --dry-run  # first_source_id 悬空，按 raw 证据复原
+# 清洗记录见 reports/qa/data-cleaning-2026-11.md
+
 # 统计口径（docs/01 §10）：唯一来源是视图 area_caliber，别自己写口径 SQL
 #   select count(*) from area_caliber where in_main_stat=1;              -- 主统计 A+B
 #   select caliber_group, count(*) from area_caliber where in_scope=1 group by 1;
@@ -347,3 +353,11 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   46 条「规划批后公布」被误判成名单型（浙江 100/112 → 70/142）。
   收词要挑长搭配（公布名单／公布第X批／结果公布）。**新判据先跑一遍再看分布变化**，
   突变就是误伤
+- 2026-11：**数值字段会被非数值污染，且极隐蔽**。`scale_villages` 里发现过
+  国道编号（G344→344）、省道编号（S611→611）、户数（800余户）、地名（盐城市/盐都区）
+  和区间（3-5）。已清 12 条并在 `validate_db` 加「数值字段须为整数」检查。
+  填数只填确定值，不用区间或概数糊过去
+- 2026-11：**占位区划码会让聚合静默出错**。12 个 `name == region_code` 的占位行曾挂 19 个片区；
+  另有 14 个市码（河北 6、辽宁 8）在 region 里根本不存在，26 条片区的 city_code 悬空。
+  前者按片区自身 cover_desc 定县，后者按「该市码下辖县级行」印证后按 GB/T 2260 补名。
+  `validate_db` 已加占位码与悬空城市码检查

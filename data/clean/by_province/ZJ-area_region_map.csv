@@ -1,4 +1,4 @@
-area_id,region_code,role,is_core
+﻿area_id,region_code,role,is_core
 A330001,330127,county,0
 A330001,330127,town,1
 A330002,330281,county,0
@@ -92,8 +92,8 @@ A330156,330726,county,1
 A330157,330726,county,1
 A330158,330726,county,1
 A330159,331081,county,1
-A330160,331021,county,1
-A330161,331021,county,1
+A330160,331083,county,1
+A330161,331083,county,1
 A330162,330127,county,0
 A330162,330127,town,1
 A330163,330305,county,0

@@ -1,7 +1,7 @@
-area_id,region_code,role,is_core
+﻿area_id,region_code,role,is_core
 A410001,419001,county,1
 A410001,419001,town,0
-A410002,411626,county,1
+A410002,411603,county,1
 A410003,410325,county,1
 A410004,410325,county,1
 A410005,410882,county,1

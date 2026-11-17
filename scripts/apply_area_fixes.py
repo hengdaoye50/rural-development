@@ -43,6 +43,60 @@ FIXES: list[tuple[str, str, str, str, str]] = [
      "同上；猕猴桃产业融合发展片区属安州区"),
     ("A510004", "SC", "510724", "510705",
      "同上；现代优质粮油发展片区属安州区"),
+    # ---- 2026-11 清洗：挂在 region 占位码（name 等于代码）上的 15 条 ----
+    # 依据一律取自该条自身的 cover_desc/name，不推测
+    ("A330160", "ZJ", "331021", "331083",
+     "cover「以干江镇上栈头村为重点村」；干江镇属玉环市 331083，331021 为 region 占位码"),
+    ("A330161", "ZJ", "331021", "331083",
+     "cover「以清港镇垟根村为重点村」；清港镇属玉环市 331083"),
+    ("A340009", "AH", "341822", "341882",
+     "cover「新杭镇域，宣城市级乡村振兴示范片区，广德市三大重点片区之一」；广德市 341882"),
+    ("A340010", "AH", "341822", "341882",
+     "cover「卢村乡域」；卢村乡属广德市 341882"),
+    ("A340011", "AH", "341822", "341882",
+     "cover「东亭镇域」；东亭镇属广德市 341882"),
+    ("A360001", "JX", "360782", "360783",
+     "cover「以龙南为中心」；龙南市 2020 撤县设市后国标码为 360783，360782 为占位码"),
+    ("A360010", "JX", "360727", "360783",
+     "360727 是撤县设市前的龙南县旧码（region 表另存 360783 龙南市），统一到现行码"),
+    ("A410002", "HA", "411626", "411603",
+     "名称「淮阳区…」；淮阳区为 411603，411626 为占位码"),
+    ("A500004", "CQ", "500126", "500155",
+     "cover「重庆市梁平区东山特色片区」；梁平区 500155，500126 非国标有效码"),
+    ("A500005", "CQ", "500126", "500155", "cover「重庆市梁平区西山特色片区」；梁平区 500155"),
+    ("A500006", "CQ", "500126", "500155", "cover「重庆市梁平区平坝特色片区」；梁平区 500155"),
+    ("A500007", "CQ", "500126", "500155",
+     "cover「重庆市梁平区屏锦镇万年社区」；屏锦镇属梁平区 500155"),
+    ("A500008", "CQ", "500126", "500155", "cover「重庆市梁平区西部百里竹海片区」；梁平区 500155"),
+    ("A520016", "GZ", "520421", "520403",
+     "cover「平坝区乐平镇大屯村」；平坝区 520403，520421 为占位码"),
+    ("A520015", "GZ", "522322", "522302",
+     "cover「兴仁市大山镇老里旗村」；兴仁市 522302，522322 为占位码"),
+    ("A610002", "SN", "610521", "610503",
+     "cover「华州区高塘镇渭华现代农业片区」；华州区 610503，610521 为占位码"),
+]
+
+# area_id, 省缩写, 现 city_code, 应 city_code, 依据（只改 area.city_code）
+CITY_FIXES: list[tuple[str, str, str, str, str]] = [
+    ("A370065", "SD", "371500", "371700",
+     "县码 371724 为巨野县（属菏泽市 371700），371500 是聊城市；董官屯镇属巨野县"),
+]
+
+# area_id, 省缩写, 字段, 现值, 依据（清空被污染的数值字段，值多为道路编号或户数）
+FIELD_CLEARS: list[tuple[str, str, str, str, str]] = [
+    ("A320025", "JS", "scale_villages", "344", "cover「G344 国道 47 公里横跨 4 镇 15 村」——344 是国道编号，非村数"),
+    ("A320051", "JS", "scale_villages", "611", "cover「沿 611 省道 15 个行政村」——611 是省道编号，非村数"),
+    ("A320066", "JS", "scale_villages", "600", "cover 无此数，600 个行政村对一个片区不成立，待复核后回填"),
+    ("A350009", "FJ", "scale_villages", "800余户", "户数不是村数，且字段须为整数，待复核"),
+    ("A350029", "FJ", "scale_villages", "325", "cover 无此数，325 个行政村不成立，待复核后回填"),
+    # ---- 2026-11 清洗第二批：validate 新增数值字段检查后浮出的同类污染 ----
+    ("A320027", "JS", "scale_towns", "盐城市/盐都区", "地名写进了数值字段"),
+    ("A320055", "JS", "scale_towns", "宜兴市", "地名写进了数值字段"),
+    ("A320065", "JS", "scale_towns", "泰州市/兴化市", "地名写进了数值字段"),
+    ("A330010", "ZJ", "scale_villages", "大港头一核带五村文旅融合", "片区名写进了数值字段；「一核带五村」不能确定是 5 村还是含核心村，待复核"),
+    ("A330018", "ZJ", "scale_villages", "滨湖六村溇港农遗保护开发", "片区名写进了数值字段；「六村」是否为 6 个行政村待核原文"),
+    ("A330028", "ZJ", "scale_villages", "滕头村及周边9村", "文本写进了数值字段；9 村是否含滕头村本身不明，待复核"),
+    ("A350025", "FJ", "scale_towns", "3-5", "区间值不是确定数，待复核后填确定值"),
 ]
 
 # area_id, 省缩写, 现 name, 应 name, 依据（只改 area.name 与 name_norm）
@@ -201,6 +255,38 @@ def main() -> int:
         for abbr, (cols, rows) in by_abbr.items():
             _write(BY_PROV / f"{abbr}-area.csv", cols, rows)
     changed += rebuilt
+
+    # city_code 修正（只动 area.csv，county 不变）
+    for area_id, abbr, old, new, why in CITY_FIXES:
+        path = BY_PROV / f"{abbr}-area.csv"
+        cols, rows = _read(path)
+        hit = [r for r in rows if r.get("area_id") == area_id and r.get("city_code") == old]
+        if not hit:
+            stale = [r.get("city_code") for r in rows if r.get("area_id") == area_id]
+            print(f"  跳过 {area_id} city: 无 {old}（现值 {stale}）")
+            continue
+        for r in hit:
+            r["city_code"] = new
+        changed += len(hit)
+        print(f"  {area_id} city_code: {old} -> {new}  ({why})")
+        if not dry:
+            _write(path, cols, rows)
+
+    # 清空被污染的数值字段（值仍在 cover_desc/原文里，不丢证据）
+    for area_id, abbr, field, old, why in FIELD_CLEARS:
+        path = BY_PROV / f"{abbr}-area.csv"
+        cols, rows = _read(path)
+        hit = [r for r in rows if r.get("area_id") == area_id and (r.get(field) or "").strip() == old]
+        if not hit:
+            stale = [r.get(field) for r in rows if r.get("area_id") == area_id]
+            print(f"  跳过 {area_id} {field}: 无 {old!r}（现值 {stale}）")
+            continue
+        for r in hit:
+            r[field] = ""
+        changed += len(hit)
+        print(f"  {area_id} {field}: 清空 {old!r}  ({why})")
+        if not dry:
+            _write(path, cols, rows)
 
     print(f"{'dry-run，' if dry else ''}累计共改 {changed} 行")
     if not dry and changed:
