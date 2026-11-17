@@ -92,6 +92,11 @@ def main() -> int:
     add(f"- 设立方式（主统计 {n_main} 内）：名单型 {sk_main.get('roster', 0)}｜"
         f"部署型 {sk_main.get('deployment', 0)}——**报告必须分列，不可合并**")
 
+    m_unit = q("select count(*) from macro_unit")
+    m_belt = q("select count(*) from macro_unit where kind='belt'")
+    add(f"- **宏观层 M（`docs/01` §11）：{m_unit}** 个命名单元（area {m_unit - m_belt} + belt {m_belt}，"
+        f"已去跨表重名）——只用于看量级与分布，**不得当政策依据数**")
+
     # ---------- 二、政策层 ----------
     n_pol = q("select count(*) from policy")
     n_a = q("select count(*) from policy where credibility='A'")

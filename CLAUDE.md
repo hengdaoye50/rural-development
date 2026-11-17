@@ -156,6 +156,10 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/classify_setup_kind.py --dry-run
 & $env:MIMO_PYTHON scripts/classify_setup_kind.py
 
+# 宏观层 M（docs/01 §11）：各省命名单元数量，宽口径，只用于看量级与分布
+& $env:MIMO_PYTHON scripts/report_macro_layer.py            # -> reports/宏观层-分省数量.md
+# 视图 macro_unit 为唯一来源（area + belt 去跨表重名）
+
 # 统计口径（docs/01 §10）：唯一来源是视图 area_caliber，别自己写口径 SQL
 #   select count(*) from area_caliber where in_main_stat=1;              -- 主统计 A+B
 #   select caliber_group, count(*) from area_caliber where in_scope=1 group by 1;
@@ -315,7 +319,13 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   都算设立，但**必须分列记录**（字段 `area.setup_kind`，派生脚本 `classify_setup_kind.py`）。
   实测差异是真实的制度差异：山东主统计里 34 条部署型 vs 4 条名单型，河北 20 条名单型 vs 0；
   合并成一个数字就会把它抹掉
+- 2026-11：**统计分两层，各服务一种问题，不共用分母**（`docs/01` §11）。
+  **M 宏观层**=命名单元（area+belt 去重）**1182**，宽在**证据强度**（媒体稿/待核/时间不详都收），
+  但**对象类型一条不放宽**（示范县镇村、纯园区景区、城市控规分区仍不收），只用于看量级与分布；
+  **P 政策层**=主统计 **446**，时间窗+`primary`/`support`+`setup_kind` 分列，政策分析只能用这个。
+  **跨层相减没有意义**：M−P 的差不是「质量差的片区」，是「证据不足但确实被这么叫的单元」。
+  M 层数字必须与「县覆盖率」并列报，单独出现即误导（青海 3 个只代表我们只采到 3 个）
 - 2026-11：**CSV 里出现 schema 没有的列，必须报出来而不是静默丢**。
   `area_region_map.is_core` 在字典与 CSV 里都存在、DDL 里漏了 `belt_region_map.is_core`，
   于是 `merge_by_province` 按 master 旧表头写文件、把 by_province 的新列整个吞掉。
-  已改为表头取并集 + DDL 补齐。新增列时三处都要改：`docs/02`、DDL、by_province CSV
+  已改为表头取并集 + DDL 补齐。**新增列时三处都要改：`docs/02`、DDL、by_province CSV**

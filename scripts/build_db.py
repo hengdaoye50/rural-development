@@ -221,6 +221,29 @@ FROM (
     FROM area a
     WHERE a.record_state = 'active'
 );
+
+-- 宏观层（docs/01 §11）：命名单元 = area + belt，去重后按省计数。
+-- 只放宽证据强度（含待核/媒体来源/时间不详），对象类型仍受 docs/01 §3 约束。
+-- belt 与 area 同省同名时保留 area 那条，避免同一单元被数两次。
+CREATE VIEW IF NOT EXISTS macro_unit AS
+SELECT a.area_id AS unit_id, 'area' AS kind, a.name, a.name_norm, a.province_code,
+       a.county_code, a.status, a.type_code AS subtype, a.setup_kind,
+       CASE WHEN a.status <> '待核' THEN 1 ELSE 0 END AS in_policy_layer,
+       CASE WHEN EXISTS (SELECT 1 FROM area_policy_map m
+                         WHERE m.area_id = a.area_id AND m.rel IN ('primary','support'))
+            THEN 1 ELSE 0 END AS has_hard
+FROM area a
+WHERE a.record_state = 'active'
+UNION ALL
+SELECT b.belt_id, 'belt', b.name, b.name_norm, b.province_code,
+       NULL, NULL, b.belt_type, NULL,
+       0, 0
+FROM belt b
+WHERE b.record_state = 'active'
+  AND NOT EXISTS (SELECT 1 FROM area a
+                  WHERE a.record_state = 'active'
+                    AND a.province_code = b.province_code
+                    AND a.name_norm = b.name_norm);
 """
 
 CSV_TABLES = {
