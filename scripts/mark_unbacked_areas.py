@@ -18,6 +18,8 @@
 用法：
   python scripts/mark_unbacked_areas.py --dry-run
   python scripts/mark_unbacked_areas.py
+  python scripts/mark_unbacked_areas.py --upgrade --dry-run   # 补到官方依据的升回运行中
+  python scripts/mark_unbacked_areas.py --upgrade
 """
 from __future__ import annotations
 
@@ -61,8 +63,60 @@ def _write(path: Path, header: list[str], rows: list[dict[str, str]]) -> None:
             w.writerow({c: r.get(c, "") for c in header})
 
 
+def upgrade(dry: bool) -> int:
+    """把已补到 primary/support 官方依据的待核片区，status 升回「运行中」。
+
+    只处理**本脚本标记过的**（summary 含 MARK）——它们的待核原因就是「唯一来源为媒体」，
+    现在补到官方依据即解除。原本就在 待核 的记录原因各不相同（如名称待核），
+    不能因为有了政策依据就自动升回。
+    """
+    conn = sqlite3.connect(DB)
+    conn.row_factory = sqlite3.Row
+    rows = conn.execute("""
+        SELECT a.area_id, a.name, a.province_code
+        FROM area a
+        WHERE a.record_state='active' AND a.status='待核'
+          AND a.summary LIKE ?
+          AND EXISTS (SELECT 1 FROM area_policy_map m
+                      WHERE m.area_id=a.area_id AND m.rel IN ('primary','support'))
+    """, (f"%{MARK}%",)).fetchall()
+    print(f"可升级（本脚本标记为待核、且已补到官方依据）：{len(rows)} 条")
+
+    today = date.today().isoformat()
+    cache: dict[str, tuple[list[str], list[dict[str, str]]]] = {}
+    edited = 0
+    for r in rows:
+        abbr = PROV_ABBR.get(r["province_code"])
+        if not abbr:
+            continue
+        if abbr not in cache:
+            cache[abbr] = _read(BY_PROV / f"{abbr}-area.csv")
+        cols, area_rows = cache[abbr]
+        for x in area_rows:
+            if x.get("area_id") != r["area_id"]:
+                continue
+            sm = x.get("summary") or ""
+            if MARK in sm:
+                head, _, tail = sm.partition(MARK)
+                x["summary"] = head.rstrip("｜ ")
+            x["status"] = "运行中"
+            x["updated_at"] = today
+            edited += 1
+            print(f"  ↑ {r['area_id']} {r['name'][:26]}")
+
+    if dry:
+        print(f"\ndry-run：将升级 {edited} 条，未写盘")
+        return 0
+    for abbr, (cols, area_rows) in cache.items():
+        _write(BY_PROV / f"{abbr}-area.csv", cols, area_rows)
+    print(f"\n已升级 {edited} 条；接着跑：merge_by_province -> build_db -> validate_db")
+    return 0
+
+
 def main() -> int:
     dry = "--dry-run" in sys.argv
+    if "--upgrade" in sys.argv:
+        return upgrade(dry)
     conn = sqlite3.connect(DB)
     conn.row_factory = sqlite3.Row
 

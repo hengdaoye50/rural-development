@@ -1,0 +1,10 @@
+﻿============================== http://www.wuxing.gov.cn/wxqggzyjyzxx/gcjs/pbjggs/art/2018/art_43f8001c68f24b549902894e4f31e7c6.html
+ERR unknown url type: '\x01//www.wuxing.gov.cn/wxqggzyjyzxx/gcjs/pbjggs/art/2018/art_43f8001c68f24b549902894e4f31e7c6.html'
+============================== http://ghzy.hangzhou.gov.cn/col/col1228968131/art/2026/art_72af6ef84fe04bc483b59c37b955e0cd.html
+ERR unknown url type: '\x01//ghzy.hangzhou.gov.cn/col/col1228968131/art/2026/art_72af6ef84fe04bc483b59c37b955e0cd.html'
+============================== http://www.nanxun.gov.cn/col/col1229211053/art/2025/art_4054378e791e0bb4b879130ead6bac7b.html
+ERR unknown url type: '\x01//www.nanxun.gov.cn/col/col1229211053/art/2025/art_4054378e791e0bb4b879130ead6bac7b.html'
+============================== http://agri.hangzhou.gov.cn/col/col1692133/art/2026/art_59d8e61ef89a49458a4a2c144a588af0.html
+ERR unknown url type: '\x01//agri.hangzhou.gov.cn/col/col1692133/art/2026/art_59d8e61ef89a49458a4a2c144a588af0.html'
+============================== http://www.huzhou.gov.cn/col/col1229213543/art/2021/art_383809928.html
+ERR unknown url type: '\x01//www.huzhou.gov.cn/col/col1229213543/art/2021/art_383809928.html'

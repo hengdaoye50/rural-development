@@ -1,0 +1,126 @@
+﻿### A330297 330111 壶源流域场口片区 => 0
+### A330298 330111 壶源流域湖源片区 => 0
+### A330323 330182 安仁共富联合体片区 => 0
+### A330324 330182 三江诗路片区 => 0
+### A330325 330182 莓好农园片区 => 0
+### A330326 330182 十里寿昌江片区 => 4
+    杭州市规划和自然资源局 | “十里寿昌江”众创示范区功能提升项目 | http://ghzy.hangzhou.gov.cn/col/col1228968131/art/2026/art_72af6ef84fe04bc483b59c37b955e0cd.html |hits ['十里寿昌江'] |len 0
+    建德市人民政府 | 寿昌镇：奋力书写“十里寿昌江”共富画卷 | http://www.jdnews.com.cn/jdpd/jdyw/content/2022-08/31/content_9432955.html |hits ['十里寿昌江'] |len 0
+    建德市人民政府 | 建德市十里寿昌江旅游标识系统设计服务采购项目 | http://www.jiande.gov.cn/art/2022/3/23/art_1229535324_4025758.html |hits ['十里寿昌江'] |len 0
+    杭州人大网 | 【基层单元新实践】人大代表联络点，共绘“十里寿昌江”新画卷 | https://mp.weixin.qq.com/s?__biz=MzA5MzI1MzA1OQ==&mid=2652253302&idx=2&sn=8c5f38044cc0fefd0c51b0315c |hits ['十里寿昌江'] |len 0
+### A330327 330182 西乡农创片区 => 0
+### A330328 330502 太湖溇港片区 => 15
+    湖州市吴兴区人民政府 | Y2018-001WX太湖溇港片区田园综合体规划项目评标结果公示 | http://www.wuxing.gov.cn/wxqggzyjyzxx/gcjs/pbjggs/art/2018/art_43f8001c68f24b549902894e4f31e7c6.html |hits ['太湖溇港片区', '太湖溇港片区'] |len 2867
+    湖州市吴兴区人民政府 | 20180227已退：Y2018-001WX 太湖溇港片区田园综合体规划项目保证金20001元 | http://www.wuxing.gov.cn/wxqggzyjyzxx/bzjjttz/art/2018/art_8fa6d4782ab14fe381482d36320589bc.html |hits ['太湖溇港片区', '太湖溇港片区'] |len 0
+    湖州市吴兴区人民政府 | 太湖溇港文化 | http://www.wuxing.gov.cn/col/col1229210829/art/2021/art_2127791898.html |hits ['太湖溇港'] |len 497
+    湖州市人民政府 | 人人护美太湖溇港 | http://www.huzhou.gov.cn/col/col1229213557/art/2022/art_1326196636.html |hits ['太湖溇港'] |len 725
+    湖州市人民政府 | 人人护美太湖溇港 | http://www.huzhou.gov.cn/art/2022/6/28/art_1229213557_59053596.html |hits ['太湖溇港'] |len 745
+    湖州市水利局 | 大学生眼里的太湖溇港 | http://slj.huzhou.gov.cn/col/col1229209343/thlggggc/art/2025/art_7cd5752bae004b7cb90ed40fc2e7518d.ht |hits ['太湖溇港'] |len 3662
+### A330329 330502 山水妙境片区 => 2
+    湖州市人民政府 | 筑梦山水妙境里 | http://www.huzhou.gov.cn/col/col1229213543/art/2021/art_383809928.html |hits ['山水妙境'] |len 1318
+    湖州市人民政府 | 筑梦山水妙境里 | http://www.huzhou.gov.cn/art/2021/8/13/art_1229213543_59043186.html |hits ['山水妙境'] |len 1337
+### A330334 330503 水漾窑里片区 => 1
+    湖州市南浔区人民政府 | 善琏镇水漾窑里 村游富农项目入选省级名单 | http://www.nanxun.gov.cn/col/col1229211053/art/2025/art_4054378e791e0bb4b879130ead6bac7b.html |hits ['水漾窑里'] |len 277
+### A330335 330503 全球农遗荻港共富片区 => 0
+### A330337 330503 农业硅谷片区 => 15
+    浙江省农业农村厅 | “农业硅谷”的新质生产力 | http:////nynct.zj.gov.cn/art/2024/3/21/art_1229746526_58957755.html |hits ['农业硅谷'] |len 2930
+    嘉兴市秀洲区人民政府 | “农业硅谷”的新质生产力 | http:////www.xiuzhou.gov.cn/art/2024/3/21/art_1684823_59223260.html |hits ['农业硅谷'] |len 1269
+    湖州市科学技术局 | “农业硅谷”焕新记 | http://kjj.huzhou.gov.cn/col/col1229209486/art/2026/art_15a90fcbdad94ac9b030316aac860473.html |hits ['农业硅谷'] |len 3050
+    湖州市公共资源交易信息网 | 南浔区长三角农业硅谷项目-农业硅谷产业园设计项目 | http://ggzyjy.huzhou.gov.cn/art/2023/3/6/art_1229670647_46577.html |hits ['农业硅谷'] |len 278
+    湖州市公共资源交易信息网 | 南浔区长三角农业硅谷项目-农业硅谷产业园设计项目 | http://ggzyjy.huzhou.gov.cn/jydtx/gcjs/cqxgxx/art/2025/art_a6147994e0b04142a7efeb9273f5b81d.html |hits ['农业硅谷'] |len 0
+    湖州市公共资源交易信息网 | 南浔区长三角农业硅谷项目-农业硅谷产业园设计项目 | http://ggzyjy.huzhou.gov.cn/art/2023/2/21/art_1229670646_46190.html |hits ['农业硅谷'] |len 2397
+### A330341 330503 蚕花圣地片区 => 1
+    湖州市档案信息网 | 蚕花圣地——含山 | http://daj.huzhou.gov.cn/szdag/szzy/xxwjcy/art/2009/art_daa3bf46c66843ff85105983989562f2.html |hits ['蚕花圣地'] |len 0
+### A330359 330521 庙桥枕水片区 => 0
+### A330361 330521 二都绿洲片区 => 0
+### A330367 330681 田上枫景片区 => 0
+### A330371 331002 大陈片区 => 0
+### A330372 331003 柔川片区 => 0
+### A330373 331022 亭旁片区 => 0
+### A330374 331081 大栈头片区 => 0
+### A330387 330182 139乡宿片区 => 2
+    建德市人民政府 | 139乡宿环境提升项目-村庄风貌提升 | http://www.jiande.gov.cn/art/2026/1/23/art_1229418010_95908.html |hits ['139乡宿'] |len 0
+    杭州市农业农村局 | 139乡宿串起家门口的团圆与共富 | http://agri.hangzhou.gov.cn/col/col1692133/art/2026/art_59d8e61ef89a49458a4a2c144a588af0.html |hits ['139乡宿'] |len 1125
+### A330392 330481 神仙湖片区 => 14
+    嘉兴市公共资源交易网 | 神仙湖中餐厅 | http://jxszwsjb.jiaxing.gov.cn/art/2024/11/1/art_1229744043_734665.html |hits ['神仙湖'] |len 0
+    嘉兴市公共资源交易网 | 神仙湖中餐厅 | http://jxszwsjb.jiaxing.gov.cn/art/2024/10/16/art_1229744038_730968.html |hits ['神仙湖'] |len 0
+    嘉兴市公共资源交易网 | 神仙湖旅游开发基础设施建设项目-神仙湖民宿改造工程 | http://jxszwsjb.jiaxing.gov.cn/col/col1229743960/art/2026/art_5e0e0dac59a54ee5b9cd8e9e4b01a8ac.html |hits ['神仙湖'] |len 0
+    嘉兴市公共资源交易网 | 神仙湖旅游开发基础设施建设项目-神仙湖民宿改造工程 | http://jxszwsjb.jiaxing.gov.cn/col/col1229743958/art/2026/art_1dc6c11082644220bd6ed91b657b3a63.html |hits ['神仙湖'] |len 0
+    海宁市人民政府 | 16000尾鱼苗投放神仙湖 | http://www.haining.gov.cn/art/2025/1/14/art_1229519873_59050147.html |hits ['神仙湖'] |len 608
+    嘉兴市公共资源交易网 | 神仙湖民宿装修工程 | http://jxszwsjb.jiaxing.gov.cn/col/col1229744043/art/2026/art_8c1c0562f7a54b7c8e70375e29754ce0.html |hits ['神仙湖'] |len 0
+### A330402 330110 花漾仁和片区 => 0
+### A330403 330127 千岛湖秀水千岛片区 => 0
+### A330404 330182 稻香茶韵片区 => 0
+### A330418 331181 大溪头片区 => 0
+### A330419 330825 黄茶漫旅片区 => 0
+### A330424 330603 古越宋韵片区 => 0
+### A330425 330603 稽山舜源片区 => 5
+    绍兴市柯桥区人民政府 | 稽山舜源带-沿线数字化布展项目合同公告 | http://zfcg.czt.zj.gov.cn/luban/detail?parentId=600007&articleId=lf7C7WlTMNTGu3eJIBsPSQ== |hits ['稽山舜源'] |len 2777
+    绍兴市柯桥区人民政府 | 稽山舜源带-沿线数字化布展项目征求意见公告 | http://zfcg.czt.zj.gov.cn/luban/detail?parentId=600007&articleId=ZWxarb6BSazqSEioPOOong== |hits ['稽山舜源'] |len 683
+    绍兴市柯桥区人民政府 | 绍兴市柯桥区公共资源交易中心关于稽山舜源带-沿线数字化布展项目的更正公告 | http://zfcg.czt.zj.gov.cn/luban/detail?parentId=600007&articleId=HR7thJ7lVR2xNgJ1Cq9Bwg== |hits ['稽山舜源'] |len 3257
+    绍兴市柯桥区人民政府 | 绍兴市柯桥区公共资源交易中心关于稽山舜源带-沿线数字化布展项目的公开招标公告 | http://zfcg.czt.zj.gov.cn/luban/detail?parentId=600007&articleId=KZYFV7lPZn4u/9NFTNIZyQ== |hits ['稽山舜源'] |len 2480
+    绍兴市柯桥区人民政府 | 绍兴市柯桥区公共资源交易中心关于稽山舜源带-沿线数字化布展项目中标(成交)结果公告 | http://zfcg.czt.zj.gov.cn/luban/detail?parentId=600007&articleId=HMKJWY6+LAnOfUGtfRU7+g== |hits ['稽山舜源'] |len 1361
+### A330427 330681 品味千年片区 => 5
+    瑞安市人民政府 | 品味千年古街的别样元宵 | http:////www.ruian.gov.cn/art/2019/2/20/art_1229335301_57848523.html |hits ['品味千年'] |len 111
+    瑞安市人民政府 | 跑马灯、打腰鼓、唱戏曲、吃汤圆……品味千年古街的别样元宵 | http:////www.ruian.gov.cn/art/2019/2/20/art_1229335298_57815100.html |hits ['品味千年'] |len 1033
+    舟山市定海区人民政府 | 马岙街道举行“漫步稻香　品味千年”迎中秋庆国庆集市嘉年华活动 | http://www.dinghai.gov.cn/art/2020/10/10/art_1493971_58921003.html |hits ['品味千年'] |len 180
+    杭州市文化广电旅游局 | 振興杭州曲藝品味千年宋韻——“宋韻留聲杭城記憶”杭州市非遺曲藝書場系列活動啟動儀式暨大華書場成立70周年曲藝專場圓滿舉辦 | http://wgly.hangzhou.gov.cn/art/2023/12/11/art_1229733931_58951486.html |hits ['品味千年'] |len 1113
+    杭州市文化广电旅游局 | 振兴杭州曲艺 品味千年宋韵——“宋韵留声杭城记忆”杭州市非遗曲艺书场系列活动启动仪式暨大华书场成立70周年曲艺专场圆满举 | http://wgly.hangzhou.gov.cn/art/2022/11/24/art_1229696403_58942987.html |hits ['品味千年'] |len 1113
+### A330428 330681 醉美岁月片区 => 0
+### A330429 330681 慢享生活片区 => 4
+    浙江省残疾人联合会 | “传递咖啡香 慢享生活”残疾人就业促进项目开展咖啡教学活动 | http:////www.zjdpf.org.cn/art/2023/12/5/art_1229449494_71363.html |hits ['慢享生活'] |len 396
+    浙江省残疾人联合会 | “传递咖啡香 慢享生活”残疾人就业促进项目开展咖啡教学活动 | http:////www.zjdpf.org.cn/art/2023/11/15/art_1229506377_71171.html |hits ['慢享生活'] |len 398
+    浙江省人民政府 | 台州府城大视听文化产业园：视听产业融古韵 慢享生活添新趣 | http://www.zj.gov.cn/zwgk/zwzt/zyzt/sgzjbxgcjkjswhqs/whmstspzwhshq/art/2026/art_4804fa076c6f48a7aae7 |hits ['慢享生活'] |len 829
+    丽水市人民政府 | 龙泉市“‘慢享生活’之旅”线路入选2022年“浙里田园”休闲农业与乡村旅游精品线路 | http:////www.lishui.gov.cn/art/2022/4/13/art_1229268114_57333490.html |hits ['慢享生活'] |len 240
+### A330430 330681 溯源走心片区 => 6
+    浙江省交通运输厅 | 省交通工程管理中心组织开展“铸魂溯源走心”专题教育 | http:////jtyst.zj.gov.cn/art/2023/11/28/art_1229304975_59034990.html |hits ['溯源走心'] |len 827
+    浙江省交通运输厅 | 省交通工程管理中心组织开展“铸魂溯源走心”专题教育活动 | http:////jtyst.zj.gov.cn/art/2023/11/29/art_1228999548_59035036.html |hits ['溯源走心'] |len 825
+    浙江省交通运输厅 | 省交通工程管理中心组织开展“铸魂溯源走心”专题教育活动 | http:////jtyst.zj.gov.cn/art/2023/11/29/art_1228999549_59035037.html |hits ['溯源走心'] |len 0
+    浙江省农业农村厅 | 诸暨市“溯源走心之旅”美丽乡村带入选省级名单 | http:////nynct.zj.gov.cn/art/2024/12/11/art_1229746526_58963099.html |hits ['溯源走心'] |len 384
+    诸暨市人民政府 | “溯源走心之旅”入选省级名单 | http://www.zhuji.gov.cn/art/2025/1/17/art_1388631_59148521.html |hits ['溯源走心'] |len 502
+    诸暨市人民政府 | “溯源走心之旅”入选省级名单 | http://www.zhuji.gov.cn/art/2024/12/10/art_1229074449_59145706.html |hits ['溯源走心'] |len 496
+### A330431 330683 小吃经共富组团 => 0
+### A330432 330683 书圣风片区 => 0
+### A330434 330602 越乡名仕文化片区 => 0
+### A330435 330602 稽山鉴水片区 => 23
+    浙江省贸促会官方网站 | 要闻 | “稽山鉴水·越商出海”国际经贸大讲堂成功举办 | http://www.ccpitzj.gov.cn/art/2025/12/9/art_1229557693_50969.html |hits ['稽山鉴水'] |len 994
+    浙江省林业局 | 守护蓝色星球 绘就“两山”答卷——绍兴市擘画稽山鉴水持续生“金”新图景 | http://lyj.zj.gov.cn/art/2025/4/24/art_1285509_59097591.html |hits ['稽山鉴水'] |len 1742
+    浙江省林业局 | 守护蓝色星球 绘就“两山”答卷——绍兴市擘画稽山鉴水持续生“金”新图景 | http://lyj.zj.gov.cn/col/col1285509/art/2025/art_3d86955c5ca84fbcb79de492611d3e35.html |hits ['稽山鉴水'] |len 1683
+    浙江省文物局 | 稽山鉴水秀文华——解码水乡古城绍兴的文化自信样本 | http:////wwj.zj.gov.cn/art/2024/9/20/art_1641242_59062049.html |hits ['稽山鉴水'] |len 3165
+    浙江省人民政府 | 解锁越乡共富密码，绘就“稽山鉴水”美丽新画卷 | http://www.zj.gov.cn/col/col1229559826/art/2025/art_495c36b171774ffd9a7875a2c4fa7bad.html |hits ['稽山鉴水'] |len 660
+    浙江省水利厅 | 越城区试点开展全域水土流失治理 守护稽山鉴水绿色生态 | http://slt.zj.gov.cn/art/2024/4/12/art_1567482_59041625.html |hits ['稽山鉴水'] |len 989
+### A330436 330602 红色文化传承片区 => 10
+    浙江省文物局 | 新闻联播 | 【赓续长征精神 奋进复兴征程】加强红色资源保护利用 做好红色文化传承弘扬 | http://wwj.zj.gov.cn/col/col1639078/art/2026/art_e49f8e1637974c1aa915ad932b7ab3b8.html |hits ['红色文化传承'] |len 1722
+    浙江省退役军人事务厅 | 军地携手助力红色文化传承 | http://tyjrswt.zj.gov.cn/art/2025/8/18/art_1229000500_58960776.html |hits ['红色文化传承'] |len 2635
+    浙江省机关事务管理局 | 让红色文化传承不息（新论） | http://jgswj.zj.gov.cn/art/2021/6/4/art_1229505951_58930371.html |hits ['红色文化传承'] |len 1169
+    浙江省退役军人事务厅 | 军地携手助力红色文化传承 | http://tyjrswt.zj.gov.cn/art/2025/8/18/art_1643650_58960755.html |hits ['红色文化传承'] |len 2635
+    浙江省退役军人事务厅 | 军地携手助力红色文化传承 | http://tyjrswt.zj.gov.cn/art/2025/8/18/art_1229500383_58960772.html |hits ['红色文化传承'] |len 2635
+    舟山市退役军人事务局 | 军地携手助力红色文化传承 | http://tyjrswj.zhoushan.gov.cn/col/col1671343/art/2025/art_8bba78170983403d9708e63ad0fb2b02.html |hits ['红色文化传承'] |len 2782
+### A330437 330602 渔乐童趣历史片区 => 0
+### A330438 330602 茶园酒香乐善片区 => 0
+### A330439 330602 生态宜居和美片区 => 2
+    金华市金东区人民政府 | 我区绘就生态宜居和美画卷 | http:////www.jindong.gov.cn/art/2024/4/25/art_1229171399_59336544.html |hits ['生态宜居和美'] |len 943
+    海盐县人民政府 | 奋力绘就宜居宜业和美乡村建设的生态新画卷 | http://www.haiyan.gov.cn/art/2024/6/24/art_1229691116_59443047.html |hits ['生态宜居和美'] |len 4768
+### A330440 330602 放翁牧歌片区 => 0
+### A330441 330602 鉴湖水韵片区 => 0
+### A330443 330921 东沙片区 => 13
+    舟山市人民政府 | 岱山经济开发区东沙片区全力推进项目“加速跑” | http:////www.zhoushan.gov.cn/art/2024/5/17/art_1229747313_59158730.html |hits ['东沙片区', '东沙片区'] |len 592
+    舟山市普陀山-朱家尖管委会 | 关于《普陀山风景名胜区东沙片区详细规划（2024-2025年）》的公告 | http:////pzgwh.zhoushan.gov.cn/art/2024/11/15/art_1229886208_3917744.html |hits ['东沙片区', '东沙片区'] |len 0
+    舟山市公共资源交易服务平台 | 岱山县经济开发区（东沙片区）周边河道环境提升整治工程 | https://zhoushan.etrading.cn/noticeDetails_jyxx.html?infoid=3feec379-fbfa-4d33-9dd1-2d3ff6e19a91&cat |hits ['东沙片区', '东沙片区'] |len 0
+    温州市公共资源交易网 | 东沙片区旅游基础设施工程-岙仔村立面改造工程招标计划 | http://ggzyjy-eweb.wenzhou.gov.cn/art/2023/10/7/art_1229738719_16549.html |hits ['东沙片区', '东沙片区'] |len 61
+    温州市公共资源交易网 | 关于洞头东沙片区和美乡村数字化建设项目中标(成交)结果公告 | http://ggzyjy-eweb.wenzhou.gov.cn/art/2023/10/12/art_1229667086_16978.html |hits ['东沙片区', '东沙片区'] |len 974
+    岱山县人民政府 | 【区域规划】浙江岱山经济开发区（东沙片区）控制性详细规划（公示版） | http://www.daishan.gov.cn/art/2024/4/22/art_1229847808_3862171.html |hits ['东沙片区', '东沙片区'] |len 0
+### A330445 330921 秀山乡片区 => 14
+    岱山县人民政府 | 秀山乡卫生院 | http://www.daishan.gov.cn/art/2020/8/20/art_1229488591_59008620.html |hits ['秀山乡'] |len 0
+    岱山县人民政府 | 秀山乡人民政府 | http://www.daishan.gov.cn/col/col1229683082/dsxxzzfxxgs/art/2026/art_4e3cf0e6c06c4e51ad60f8f4f291a36 |hits ['秀山乡'] |len 1251
+    岱山县人民政府 | 秀山乡人民政府 | http://www.daishan.gov.cn/art/2025/6/17/art_1229683992_59070708.html |hits ['秀山乡'] |len 3099
+    岱山县人民政府 | 秀山乡自来水厂 | http://www.daishan.gov.cn/art/2023/6/15/art_1229734542_59053046.html |hits ['秀山乡'] |len 75
+    舟山市公共资源交易服务平台 | 秀山乡智能化停车场 | http://zsztb.zhoushan.gov.cn/col/col1229679798/gcjsbzlm241/art/2023/art_3b5d39fcddca41dab8602b108a67 |hits ['秀山乡'] |len 0
+    舟山市公共资源交易服务平台 | 秀山乡智能化停车场 | http://zsztb.zhoushan.gov.cn/col/col1229679798/gcjsbzlm241/art/2022/art_fd9a7c80d81c4c9b987a914937e2 |hits ['秀山乡'] |len 0
+### A330446 330921 岱西前岸片区 => 6
+    岱山县人民政府 | 岱西前岸建筑构件码头工程用海变更公示 | http://www.daishan.gov.cn/art/2025/9/1/art_1229727798_59073438.html |hits ['岱西前岸'] |len 361
+    岱山县人民政府 | 岱西前岸建筑构件码头工程出让海域用海公示 | http://www.daishan.gov.cn/art/2023/9/26/art_1229727798_59055258.html |hits ['岱西前岸'] |len 368
+    舟山市公共资源交易服务平台 | 岱西前岸建筑构件码头工程出让海域成交结果公示 | http://zsztb.zhoushan.gov.cn/col/col1229679858/jggsbzlm539/art/2023/art_0bea67e600ad427b99497988d2ee |hits ['岱西前岸'] |len 0
+    舟山市公共资源交易服务平台 | 岱西前岸建筑构件码头工程海域使用权挂牌出让公告 | http://zsztb.zhoushan.gov.cn/col/col1229679858/jyggbzlm877/art/2023/art_454483b6e9f74ad79a6d8b100da0 |hits ['岱西前岸'] |len 0
+    舟山市公共资源交易服务平台 | 岱西前岸建筑构件码头工程海域使用权挂牌出让公告 | http://zsztb.zhoushan.gov.cn/col/col1229679798/zrzyjybzlm228/art/2023/art_2e643e7bdd0e485093aead7e2b |hits ['岱西前岸'] |len 0
+    岱山县人民政府 | 《岱西前岸建筑构件码头工程用海变更海域论证报告表》评审前公示 | http://www.daishan.gov.cn/art/2025/5/29/art_1229727798_59070065.html |hits ['岱西前岸'] |len 293

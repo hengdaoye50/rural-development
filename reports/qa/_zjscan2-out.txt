@@ -1,0 +1,47 @@
+﻿### A330297 330111 壶源流域场口片区 core= 壶源流域场口 countyhits 15 keep 0
+### A330298 330111 壶源流域湖源片区 core= 壶源流域湖源 countyhits 15 keep 0
+### A330323 330182 安仁共富联合体片区 core= 安仁共富联合体 countyhits 0 keep 0
+### A330324 330182 三江诗路片区 core= 三江诗路 countyhits 0 keep 0
+### A330325 330182 莓好农园片区 core= 莓好农园 countyhits 0 keep 0
+### A330327 330182 西乡农创片区 core= 西乡农创 countyhits 0 keep 0
+### A330335 330503 全球农遗荻港共富片区 core= 全球农遗荻港 countyhits 0 keep 0
+### A330359 330521 庙桥枕水片区 core= 庙桥枕水 countyhits 0 keep 0
+### A330361 330521 二都绿洲片区 core= 二都绿洲 countyhits 0 keep 0
+### A330367 330681 田上枫景片区 core= 田上枫景 countyhits 0 keep 0
+### A330371 331002 大陈片区 core= 大陈 countyhits 15 keep 15
+    CORE | 台州市椒江区人民政府 | 《风起大陈》首次亮相大陈岛 | http:////www.jj.gov.cn/art/2024/10/9/art_1311043_59091221.html |len 1022
+    CORE | 台州市椒江区人民政府 | 大陈岛 | http:////www.jj.gov.cn/art/2020/9/15/art_1311051_6767934.html |len 0
+    CORE | 台州市椒江区人民政府 | 大陈镇 | http://www.jj.gov.cn/col/col1229455798/art/2026/art_607a26ea901b42d8b13ab1ccda2de32e.html |len 0
+    CORE | 台州市椒江区人民政府 | 大陈镇 | http://www.jj.gov.cn/art/2025/1/6/art_1229455798_95098.html |len 0
+    CORE | 台州市椒江区人民政府 | 大陈镇 | http://www.jj.gov.cn/art/2024/1/25/art_1229455798_88740.html |len 0
+    CORE | 台州市椒江区人民政府 | 大陈镇 | http:////www.jj.gov.cn/art/2023/6/25/art_1229455830_59078295.html |len 359
+    CORE | 台州市椒江区人民政府 | 大陈镇 | http://www.jj.gov.cn/art/2020/1/11/art_1229455798_25348.html |len 0
+    CORE | 台州市椒江区人民政府 | 大陈镇 | http://www.jj.gov.cn/art/2023/1/31/art_1229455798_73106.html |len 0
+### A330372 331003 柔川片区 core= 柔川 countyhits 4 keep 4
+    CORE | 台州市黄岩区人民政府 | 柔 川 景 区 | http:////www.zjhy.gov.cn/art/2020/8/25/art_1229242519_55107077.html |len 361
+    CORE | 台州市黄岩区人民政府 | 柔 川 景 区 | http:////www.zjhy.gov.cn/art/2019/3/21/art_1572837_31460769.html |len 361
+    CORE | 台州市黄岩区人民政府 | 《台州市黄岩区柔川景区山体林相改造设计》通过评审 | http://www.zjhy.gov.cn/art/2021/1/15/art_1622039_59073404.html |len 454
+    CORE | 台州市黄岩区人民政府 | 关于印发黄岩区柔川景区创建国家4A级旅游景区实施方案的通知 | http:////www.zjhy.gov.cn/art/2016/8/26/art_1229557962_676646.html |len 0
+### A330373 331022 亭旁片区 core= 亭旁 countyhits 15 keep 15
+    CORE | 三门县人民政府 | 亭旁镇 | http://zjysqgk.zj.gov.cn/ysqgkqt/ysqgk/front/showdh.do?deptid=331022JD080000&city=%25E5%258F%25 |len 0
+    CORE | 三门县人民政府 | 2024年三门县亭旁镇道路提升改造工程（亭旁片） （2024年三门县亭旁镇道路提升改造工程（亭旁片）） | http://www.sanmen.gov.cn/art/2024/8/15/art_1229610924_59090734.html |len 2
+    CORE | 三门县人民政府 | 亭旁派出所 | http://www.sanmen.gov.cn/col/col1229319967/xsdw/art/2025/art_2e329634c8914387b1be0066c6e5f965.h |len 0
+    CORE | 三门县人民政府 | 2025年三门县亭旁镇、珠岙镇高标准农田建设项目（亭旁镇） （2025年三门县亭旁镇、珠岙镇高标准农田建设项目 | http://www.sanmen.gov.cn/art/2025/5/28/art_1229610924_59095464.html |len 2
+    CORE | 三门县人民政府 | 亭旁镇上鲍机耕道路建设 （亭旁镇上鲍机耕道路建设） | http://www.sanmen.gov.cn/art/2019/5/15/art_1229610924_59035328.html |len 2
+    CORE | 三门县人民政府 | 关于2024年三门县亭旁镇道路提升改造工程（亭旁片）(招标项目)2024年三门县亭旁镇道路提升改造工程（亭旁片 | http://www.sanmen.gov.cn/col/col1229610924/zbhxrgs/art/2026/art_c94e571d2f2244278013411258ce0c2 |len 0
+    CORE | 三门县人民政府 | 亭旁实验幼儿园扩建工程 （亭旁实验幼儿园扩建工程） | http://www.sanmen.gov.cn/art/2022/7/29/art_1229610924_59037026.html |len 2
+    CORE | 三门县人民政府 | 三门县亭旁集镇建设投资有限公司2025年三门县亭旁镇、珠岙镇高标准农田建设项目（亭旁镇）招标合同 | http://www.sanmen.gov.cn/col/col1229610924/htdlxx/art/2026/art_78db5d4caeed46d5b019eb254f857c10 |len 0
+### A330374 331081 大栈头片区 core= 大栈头 countyhits 0 keep 0
+### A330402 330110 花漾仁和片区 core= 花漾仁和 countyhits 0 keep 0
+### A330403 330127 千岛湖秀水千岛片区 core= 千岛湖秀水千岛 countyhits 15 keep 0
+### A330404 330182 稻香茶韵片区 core= 稻香茶韵 countyhits 0 keep 0
+### A330418 331181 大溪头片区 core= 大溪头 countyhits 15 keep 0
+### A330419 330825 黄茶漫旅片区 core= 黄茶漫旅 countyhits 0 keep 0
+### A330424 330603 古越宋韵片区 core= 古越宋韵 countyhits 0 keep 0
+### A330431 330683 小吃经共富组团 core= 小吃经共富组团 countyhits 0 keep 0
+### A330432 330683 书圣风片区 core= 书圣风 countyhits 1 keep 0
+### A330434 330602 越乡名仕文化片区 core= 越乡名仕文化 countyhits 10 keep 0
+### A330437 330602 渔乐童趣历史片区 core= 渔乐童趣历史 countyhits 0 keep 0
+### A330438 330602 茶园酒香乐善片区 core= 茶园酒香乐善 countyhits 0 keep 0
+### A330440 330602 放翁牧歌片区 core= 放翁牧歌 countyhits 0 keep 0
+### A330441 330602 鉴湖水韵片区 core= 鉴湖水韵 countyhits 0 keep 0
