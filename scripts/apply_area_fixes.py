@@ -82,6 +82,12 @@ CITY_FIXES: list[tuple[str, str, str, str, str]] = [
      "县码 371724 为巨野县（属菏泽市 371700），371500 是聊城市；董官屯镇属巨野县"),
 ]
 
+# area_id, 省缩写, 原因（无任何来源的记录按 docs/03 撤回；不删行，只改 record_state）
+WITHDRAWALS: list[tuple[str, str, str]] = [
+    ("A340018", "AH", "库内 1699 份文件无一提到「茂林镇乡村振兴示范片区」，无 URL/摘录，按 docs/03 撤回"),
+    ("A340019", "AH", "库内 1699 份文件无一提到「萧县乡村振兴示范片区」，无 URL/摘录，按 docs/03 撤回"),
+]
+
 # area_id, 省缩写, 字段, 现值, 依据（清空被污染的数值字段，值多为道路编号或户数）
 FIELD_CLEARS: list[tuple[str, str, str, str, str]] = [
     ("A320025", "JS", "scale_villages", "344", "cover「G344 国道 47 公里横跨 4 镇 15 村」——344 是国道编号，非村数"),
@@ -269,6 +275,23 @@ def main() -> int:
             r["city_code"] = new
         changed += len(hit)
         print(f"  {area_id} city_code: {old} -> {new}  ({why})")
+        if not dry:
+            _write(path, cols, rows)
+
+    # 无来源记录撤回：不删行，只把 record_state 改为 withdrawn
+    for area_id, abbr, why in WITHDRAWALS:
+        path = BY_PROV / f"{abbr}-area.csv"
+        cols, rows = _read(path)
+        hit = [r for r in rows if r.get("area_id") == area_id and r.get("record_state") == "active"]
+        if not hit:
+            stale = [(r.get("record_state"), r.get("status")) for r in rows if r.get("area_id") == area_id]
+            print(f"  跳过 {area_id} 撤回：现值 {stale}")
+            continue
+        for r in hit:
+            r["record_state"] = "withdrawn"
+            r["status"] = "待核"
+        changed += len(hit)
+        print(f"  {area_id} record_state -> withdrawn  ({why})")
         if not dry:
             _write(path, cols, rows)
 
