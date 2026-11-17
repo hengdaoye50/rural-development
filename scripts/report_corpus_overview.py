@@ -44,8 +44,10 @@ def main() -> int:
     conn.row_factory = sqlite3.Row
     q = lambda sql, *a: conn.execute(sql, a).fetchone()[0]  # noqa: E731
 
-    n_area = q("SELECT COUNT(*) FROM area WHERE record_state='active'")
+    n_area = q("SELECT COUNT(*) FROM area WHERE record_state='active' AND status != '待核'")
     n_area_all = q("SELECT COUNT(*) FROM area")
+    n_sup = q("SELECT COUNT(*) FROM area WHERE record_state='superseded'")
+    n_pending = q("SELECT COUNT(*) FROM area WHERE record_state='active' AND status='待核'")
     n_belt = q("SELECT COUNT(*) FROM belt WHERE record_state='active'")
     n_policy = q("SELECT COUNT(*) FROM policy")
     n_source = q("SELECT COUNT(*) FROM source")
@@ -53,12 +55,15 @@ def main() -> int:
     n_map = q("SELECT COUNT(*) FROM area_policy_map")
     n_policy_a = q("SELECT COUNT(*) FROM policy WHERE credibility='A'")
     n_chars = q("SELECT SUM(full_text_chars) FROM policy") or 0
-    n_county = q("SELECT COUNT(DISTINCT county_code) FROM area WHERE record_state='active'")
+    n_county = q("SELECT COUNT(DISTINCT county_code) FROM area WHERE record_state='active' AND status != '待核'")
 
-    covered = q("SELECT COUNT(DISTINCT area_id) FROM area_policy_map WHERE entity_type='area'")
+    VALID_SUB = ("area_id IN (SELECT area_id FROM area "
+                 "WHERE record_state='active' AND status != '待核')")
+    covered = q("SELECT COUNT(DISTINCT area_id) FROM area_policy_map "
+                f"WHERE entity_type='area' AND {VALID_SUB}")
     covered_strong = q(
         "SELECT COUNT(DISTINCT area_id) FROM area_policy_map "
-        "WHERE entity_type='area' AND rel IN ('primary','support')"
+        f"WHERE entity_type='area' AND rel IN ('primary','support') AND {VALID_SUB}"
     )
     only_mention = q(
         """SELECT COUNT(DISTINCT m.area_id) FROM area_policy_map m
@@ -68,7 +73,7 @@ def main() -> int:
     )
     n_cty_covered = q(
         """SELECT COUNT(DISTINCT a.county_code) FROM area a
-           WHERE a.record_state='active' AND EXISTS(
+           WHERE a.record_state='active' AND a.status != '待核' AND EXISTS(
              SELECT 1 FROM area_policy_map m WHERE m.area_id=a.area_id AND m.entity_type='area')"""
     )
 
@@ -94,7 +99,7 @@ def main() -> int:
     add("")
     add("| 层 | 表 | 行数 | 说明 |")
     add("|---|---|---|---|")
-    add(f"| 片区层 | `area` | {n_area_all} | 实体片区，其中 {n_area_all - n_area} 条为 superseded 历史记录 |")
+    add(f"| 片区层 | `area` | {n_area_all} | 实体片区；其中 {n_pending} 条待核、{n_sup} 条 superseded 均不计入统计 |")
     add(f"| 片区层 | `belt` | {n_belt} | 象征性单元（示范带／示范圈／走廊等未实体化命名单元） |")
     add(f"| 政策层 | `policy` | {n_policy} | 全文存档，A 级 {n_policy_a} 份（{n_policy_a / n_policy * 100:.0f}%） |")
     add(f"| 政策层 | `area_policy_map` | {n_map} | 片区↔政策多对多 |")
@@ -132,7 +137,7 @@ def main() -> int:
                ON m.area_id = a.area_id
         LEFT JOIN (SELECT DISTINCT area_id FROM area_policy_map
                    WHERE rel IN ('primary','support')) s ON s.area_id = a.area_id
-        WHERE a.record_state='active'
+        WHERE a.record_state='active' AND a.status != '待核'
         GROUP BY a.province_code ORDER BY n DESC
         """
     ).fetchall()
@@ -202,7 +207,7 @@ def main() -> int:
     add("| type_code | 数量 |")
     add("|---|---|")
     for r in conn.execute(
-        "SELECT type_code, COUNT(*) n FROM area WHERE record_state='active' GROUP BY 1 ORDER BY n DESC"
+        "SELECT type_code, COUNT(*) n FROM area WHERE record_state='active' AND status != '待核' GROUP BY 1 ORDER BY n DESC"
     ):
         add(f"| {r['type_code'] or '（空）'} | {r['n']} |")
     add("")
@@ -211,14 +216,14 @@ def main() -> int:
     add("| status | 数量 |")
     add("|---|---|")
     for r in conn.execute(
-        "SELECT status, COUNT(*) n FROM area WHERE record_state='active' GROUP BY 1 ORDER BY n DESC"
+        "SELECT status, COUNT(*) n FROM area WHERE record_state='active' AND status != '待核' GROUP BY 1 ORDER BY n DESC"
     ):
         add(f"| {r['status'] or '（空）'} | {r['n']} |")
     add("")
     add("### 6.3 有明确成立日期的片区")
     add("")
     n_dated = q(
-        "SELECT COUNT(*) FROM area WHERE record_state='active' "
+        "SELECT COUNT(*) FROM area WHERE record_state='active' AND status != '待核' "
         "AND founded_precision IN ('day','month','year')"
     )
     add(f"{n_dated}/{n_area}（{n_dated / n_area * 100:.1f}%）的片区能给出成立的年、月或日；"

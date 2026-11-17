@@ -52,13 +52,20 @@ def main() -> int:
     add(f"> 生成时间：{date.today().isoformat()}｜数据库：`data/db/片区库.sqlite3`\n")
 
     # ---------- 一、片区层 ----------
-    n_area = q("select count(*) from area where record_state='active'")
+    # docs/01：status=待核 的记录统计默认排除——它们证据链不达标（如唯一来源是媒体稿）
+    VALID = "record_state='active' and status != '待核'"
+    VALID_A = "a.record_state='active' and a.status != '待核'"
+    n_area = q(f"select count(*) from area where {VALID}")
     n_belt = q("select count(*) from belt where record_state='active'")
-    n_cty = q("select count(distinct county_code) from area where record_state='active'")
+    n_cty = q(f"select count(distinct county_code) from area where {VALID}")
     n_sup = q("select count(*) from area where record_state='superseded'")
+    n_pending = q("select count(*) from area where record_state='active' and status='待核'")
     add("## 一、片区层\n")
     add(f"- 片区 `area`：**{n_area}** 个，覆盖 **{n_cty}** 个县（区）")
     add(f"- 象征性单元 `belt`：**{n_belt}** 个")
+    if n_pending:
+        add(f"- 另有 **{n_pending}** 条 `status=待核` 不计入上述口径与覆盖率"
+            f"（证据链不达标，如唯一来源为媒体稿，待补 .gov.cn 官方依据）")
     if n_sup:
         add(f"- 另有 {n_sup} 条 `record_state=superseded` 的历史记录不计入上述口径"
             f"（`validate_db.py` 报的行数含它们，故与本节差 {n_sup}）")
@@ -68,11 +75,15 @@ def main() -> int:
     n_a = q("select count(*) from policy where credibility='A'")
     n_chars = q("select sum(full_text_chars) from policy") or 0
     n_map = q("select count(*) from area_policy_map")
-    n_covered = q("select count(distinct area_id) from area_policy_map where entity_type='area'")
+    n_covered = q(
+        "select count(distinct area_id) from area_policy_map "
+        f"where entity_type='area' and area_id in (select area_id from area where {VALID})"
+    )
     n_cty_covered = q(
-        """select count(distinct a.county_code) from area a
-           where exists (select 1 from area_policy_map m
-                         where m.area_id=a.area_id and m.entity_type='area')"""
+        f"""select count(distinct a.county_code) from area a
+            where {VALID_A}
+              and exists (select 1 from area_policy_map m
+                          where m.area_id=a.area_id and m.entity_type='area')"""
     )
     add("\n## 二、政策层\n")
     add(f"- 政策 `policy`：**{n_pol}** 份（A 级 {n_a} 份，{n_a / n_pol * 100:.0f}%）" if n_pol else "- 政策：0 份")
@@ -93,7 +104,7 @@ def main() -> int:
                   (select coalesce(sum(full_text_chars),0) from policy pp where pp.province_code=a.province_code) chars
            from area a
            left join area_policy_map m on m.area_id=a.area_id and m.entity_type='area'
-           where a.record_state='active'
+           where a.record_state='active' and a.status != '待核'
            group by a.province_code order by n_area desc"""
     ).fetchall()
     for r in rows:
