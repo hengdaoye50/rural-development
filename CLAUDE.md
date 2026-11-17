@@ -160,6 +160,10 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/report_macro_layer.py            # -> reports/宏观层-分省数量.md
 # 视图 macro_unit 为唯一来源（area + belt 去跨表重名）
 
+# 覆盖率缺口定位：把零单元县收敛成「手里已有证据」的一小撮，按 T1/T2/T3 分层
+# 只定位不抽名——正文正则抽片区名七成是城市控规分区，别试
+& $env:MIMO_PYTHON scripts/find_coverage_gaps.py            # -> reports/gaps/coverage-gaps.{md,csv}
+
 # 统计口径（docs/01 §10）：唯一来源是视图 area_caliber，别自己写口径 SQL
 #   select count(*) from area_caliber where in_main_stat=1;              -- 主统计 A+B
 #   select caliber_group, count(*) from area_caliber where in_scope=1 group by 1;
@@ -329,3 +333,9 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   `area_region_map.is_core` 在字典与 CSV 里都存在、DDL 里漏了 `belt_region_map.is_core`，
   于是 `merge_by_province` 按 master 旧表头写文件、把 by_province 的新列整个吞掉。
   已改为表头取并集 + DDL 补齐。**新增列时三处都要改：`docs/02`、DDL、by_province CSV**
+- 2026-11：**覆盖率提升的瓶颈是入口，不是算法**（`reports/gaps/coverage-gaps.md`）。
+  三个负结果已实测：①全库正文正则抽片区名不可用（87 个候选七成是城市控规分区）；
+  ②标题正则精度高但只出 7 条；③分母换成非市辖区无益（市辖区 19.8% > 非市辖区 17.3%）。
+  故办法是「先定位文件、再逐份精读」：2344 个零单元县里收敛出 135 个手里有证据的
+  （T1 本级文件 24 / T2 名单规划类 69 / T3 仅动态提及 42），并优先读**一篇覆盖多县**的
+  高杠杆文件（河北 P130001 一次命中 17 县）
