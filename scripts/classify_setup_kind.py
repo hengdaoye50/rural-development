@@ -30,7 +30,8 @@ DB = ROOT / "data" / "db" / "片区库.sqlite3"
 BY_PROV = ROOT / "data" / "clean" / "by_province"
 FIELD = "setup_kind"
 
-ROSTER_TITLE_WORDS = ("名单", "公布", "批复", "认定", "同意", "评审结果", "创建名单")
+ROSTER_TITLE_WORDS = ("名单", "批复", "认定", "公布名单", "公布第", "结果公布", "评审结果", "创建名单")
+# 注意不要把裸「公布」当名单信号：规划类文件常带「（公布稿）」，会把规划误判成名单型
 ROSTER_DOC_TYPES = {"批复", "名单", "公示", "公告"}
 
 
