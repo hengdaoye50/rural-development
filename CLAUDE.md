@@ -170,6 +170,11 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/repair_area_sources.py --dry-run  # first_source_id 悬空，按 raw 证据复原
 # 清洗记录见 reports/qa/data-cleaning-2026-11.md
 
+# 公众号线索（只做「发现」，不做「证据」；公众号不是 .gov.cn，不得进 policy）
+& $env:MIMO_PYTHON scripts/wechat_leads.py "潍坊 片区 乡村振兴" "昌邑 片区 乡村振兴"
+& $env:MIMO_PYTHON scripts/wechat_resolve.py "<搜狗 link>"   # 当前被反爬拦截，仅用于探测
+# 产出 reports/gaps/wechat-leads-{date}.csv；说明见 reports/gaps/wechat-leads-2026-11.md
+
 # 统计口径（docs/01 §10）：唯一来源是视图 area_caliber，别自己写口径 SQL
 #   select count(*) from area_caliber where in_main_stat=1;              -- 主统计 A+B
 #   select caliber_group, count(*) from area_caliber where in_scope=1 group by 1;
@@ -339,6 +344,10 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   `area_region_map.is_core` 在字典与 CSV 里都存在、DDL 里漏了 `belt_region_map.is_core`，
   于是 `merge_by_province` 按 master 旧表头写文件、把 by_province 的新列整个吞掉。
   已改为表头取并集 + DDL 补齐。**新增列时三处都要改：`docs/02`、DDL、by_province CSV**
+- 2026-11：**公众号只能做「发现」，不能做「证据」**。`docs/07` 白名单只收 `.gov.cn`，
+  公众号无论运营方是县农业农村局还是媒体，都不得进 `policy`；进 `source` 也只能支撑
+  待核或 mention。正确顺序是「公众号确认叫什么 → 去 `.gov.cn` 找文本 → 再建档」，
+  反过来做就是把媒体名当官方名。工具与产出见 `reports/gaps/wechat-leads-2026-11.md`
 - 2026-11：**覆盖率提升的瓶颈是入口，不是算法**（`reports/gaps/coverage-gaps.md`）。
   三个负结果已实测：①全库正文正则抽片区名不可用（87 个候选七成是城市控规分区）；
   ②标题正则精度高但只出 7 条；③分母换成非市辖区无益（市辖区 19.8% > 非市辖区 17.3%）。
