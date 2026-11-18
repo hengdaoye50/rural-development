@@ -175,6 +175,10 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/wechat_resolve.py "<搜狗 link>"   # 当前被反爬拦截，仅用于探测
 # 产出 reports/gaps/wechat-leads-{date}.csv；说明见 reports/gaps/wechat-leads-2026-11.md
 
+# 批量媒体/融媒线索（按缺口清单逐县跑；搜狗约 50-60 次请求触发反爬，自动冷却/中止）
+& $env:MIMO_PYTHON scripts/media_leads.py --from-code 0 --limit 50 --channels sogou-wechat
+# 产出 data/stage/candidates/media-leads-{date}.csv；实测与方案见 reports/gaps/media-leads-2026-11.md
+
 # 抓 .gov.cn 原文 -> 直接生成 ingest_policy 批次（正文自动提取，过短即拒绝）
 & $env:MIMO_PYTHON scripts/fetch_gov_doc.py --out data/stage/batches/POL-{省码}-{名}-policy.jsonl `
     --doc "url=https://...,title=...,issuer=...,issuer_level=province,published_ymd=2025-12-31,province_code=370000"

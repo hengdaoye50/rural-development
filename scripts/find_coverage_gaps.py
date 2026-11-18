@@ -51,7 +51,19 @@ def main(argv: list[str]) -> int:
         "select region_code, name, short_name from region where level='province'")}
     covered = {r[0] for r in con.execute(
         "select distinct county_code from macro_unit where county_code is not null and county_code<>''")}
-    uncovered = set(cty) - covered
+    # 退休/占位区划码不算缺口：片区已按现行码归位，旧码自然「零单元」
+    # 说明：fix_region_integrity 把这些码改回历史名（玉环县/淮阳县/华县/南康市/广德县等），
+    # 但 aliases 里原有值未覆盖，所以按显式清单排除，比按 aliases 匹配可靠
+    RETIRED = {
+        "331021", "341822", "360782", "411626", "520421", "522322", "610521",  # 撤县设市/设区
+        "360727",   # 龙南县旧码，已统一到 360783
+    }
+    placeholder = {r["region_code"] for r in con.execute(
+        "select region_code from region where level='county' and name = region_code")}
+    retired = RETIRED | placeholder
+    uncovered = set(cty) - covered - retired
+    if retired:
+        print(f"  跳过退休/占位区划码 {len(retired)} 个（不算缺口）")
 
     pol = list(con.execute(
         "select policy_id, title, doc_type, local_path, county_code, province_code "
