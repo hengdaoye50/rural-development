@@ -179,6 +179,12 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/media_leads.py --from-code 0 --limit 50 --channels sogou-wechat
 # 产出 data/stage/candidates/media-leads-{date}.csv；实测与方案见 reports/gaps/media-leads-2026-11.md
 
+# 公众号正文（需 OpenCLI Browser Bridge：Chrome 运行中 + 扩展已连）
+# 必须一条龙跑：mp.weixin 的签名链一次性，复用旧链只会拿到空壳
+& $env:MIMO_PYTHON scripts/wechat_fetch.py --query "沁水县 片区 乡村振兴" --top 4
+# 产出 data/stage/candidates/wechat-md/*.md + wechat-fetch-{date}.csv
+# 说明见 reports/gaps/wechat-article-fetch-2026-11.md
+
 # 抓 .gov.cn 原文 -> 直接生成 ingest_policy 批次（正文自动提取，过短即拒绝）
 & $env:MIMO_PYTHON scripts/fetch_gov_doc.py --out data/stage/batches/POL-{省码}-{名}-policy.jsonl `
     --doc "url=https://...,title=...,issuer=...,issuer_level=province,published_ymd=2025-12-31,province_code=370000"
