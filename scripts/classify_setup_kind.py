@@ -20,6 +20,8 @@
 from __future__ import annotations
 
 import csv
+import os
+import re
 import sqlite3
 import sys
 from collections import Counter, defaultdict
@@ -33,16 +35,38 @@ FIELD = "setup_kind"
 ROSTER_TITLE_WORDS = ("名单", "批复", "认定", "公布名单", "公布第", "结果公布", "评审结果", "创建名单")
 # 注意不要把裸「公布」当名单信号：规划类文件常带「（公布稿）」，会把规划误判成名单型
 ROSTER_DOC_TYPES = {"批复", "名单", "公示", "公告"}
+MIN_TABLE_ROWS = 5      # 原文含 ≥5 行「表格且行内含片区」即视为逐条列名
 
 
-def classify(pols: list[tuple[str, str]]) -> str:
-    """pols: [(title, doc_type)]"""
+def roster_policies(con) -> set[str]:
+    """名单常藏在方案附件里，标题看不出来——按原文表格判定。"""
+    ids = set()
+    for pid, lp in con.execute(
+            "select policy_id, local_path from policy where coalesce(local_path,'')<>''"):
+        p = ROOT / lp
+        if not p.exists():
+            continue
+        n = 0
+        for line in p.read_text(encoding="utf-8", errors="ignore").split("\n"):
+            s = line.strip()
+            if s.startswith("|") and "片区" in s:
+                n += 1
+                if n >= MIN_TABLE_ROWS:
+                    ids.add(pid)
+                    break
+    return ids
+
+
+def classify(pols: list[tuple[str, str]], pid_list: list[str], table_roster: set[str]) -> str:
+    """pols: [(title, doc_type)]；pid_list 与之同序，用于查表格名单集合"""
     if not pols:
         return "unknown"
-    for title, doc_type in pols:
+    for (title, doc_type), pid in zip(pols, pid_list):
         if any(w in (title or "") for w in ROSTER_TITLE_WORDS):
             return "roster"
         if (doc_type or "") in ROSTER_DOC_TYPES:
+            return "roster"
+        if pid in table_roster:
             return "roster"
     return "deployment"
 
@@ -70,11 +94,16 @@ def main(argv: list[str]) -> int:
     pol = {r[0]: (r[1], r[2]) for r in con.execute(
         "select policy_id, title, doc_type from policy")}
     links: dict[str, list[tuple[str, str]]] = defaultdict(list)
+    link_pids: dict[str, list[str]] = defaultdict(list)
     for aid, pid in con.execute(
             "select area_id, policy_id from area_policy_map where rel in ('primary','support')"):
         links[aid].append(pol[pid])
+        link_pids[aid].append(pid)
 
-    want = {r[0]: classify(links.get(r[0], [])) for r in con.execute("select area_id from area")}
+    table_roster = roster_policies(con)
+    print(f"  原文含名单表格的政策：{len(table_roster)} 份")
+    want = {r[0]: classify(links.get(r[0], []), link_pids.get(r[0], []), table_roster)
+            for r in con.execute("select area_id from area")}
     stat = Counter(want.values())
 
     changed = 0
