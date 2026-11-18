@@ -1,0 +1,2 @@
+﻿name,type_code,city_code,county_code,cover_desc,status,founded_ymd,founded_precision,issuer,summary,source_policy_id,rel,town_codes,scale_towns,parent_area_key
+福田山居片区,T01,510700,510726,永昌镇福田山居片区，含福田村、安昌社区、开茂村、鼓楼村、北山村、裕清村6个村（居）,待核,,unknown,北川羌族自治县永昌镇人民政府,《北川羌族自治县永昌镇福田山居片区村庄规划（2021—2035年）》公示（2026-09-03）提出该片区，含6个村（居）；仅有规划公示，未见设立/批复文件，故 status=待核。,P510008,mention,,,

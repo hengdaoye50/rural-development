@@ -10,7 +10,7 @@
 
 统计中国大陆 31 省、**县/区以下**、以「片区」为单位推进乡村振兴的实践，建成可核验的档案库。
 
-**一句话现状**：政策全文层已完备（1 702 份 / 1 038.3 万汉字，全部可校验）；片区实体层是**建档式抽样**（主统计 468 个，浙江占 45%）；**空间锚定（村级归属）仍为 0**，是当前最大短板。
+**一句话现状**：政策全文层已完备（1 702 份 / 1 038.3 万汉字，全部可校验）；片区实体层是**建档式抽样**（主统计 471 个，浙江占 45%）；**空间锚定（村级归属）仍为 0**，是当前最大短板。
 
 **这个库不是**：全国普查、政策汇编、示范县镇村名录、片区实体生命周期台账。
 
@@ -20,28 +20,29 @@
 
 | 层 | 数据 |
 |---|---|
-| `area` 总行 | **1 126**（active 1 113 = 计入 886 + 待核 227；superseded 11；withdrawn 2） |
+| `area` 总行 | **1 135**（active 1 122 = 计入 901 + 待核 221；superseded 11；withdrawn 2） |
 | `belt` 象征单元 | 118（去跨表重名后计 100） |
 | `policy` 政策 | **1 702**（A 级 496），全文 **10 382 909 汉字** |
-| `area_policy_map` | **1 971**（primary 588 / support 594 / mention 760 量级） |
+| `area_policy_map` | **1 980**（primary 626 / support 594 / mention 760） |
 | `event` 事件 | 731（覆盖 455 个片区，**撤销类 0 条**） |
-| `source` 来源 | 473（456 有本地快照，15 显式无快照） |
-| `region` 区划 | 3 096（省 34 / 市 206 / 县 2 856） |
+| `source` 来源 | 477（462 有本地快照，15 显式无快照） |
+| `region` 区划 | 3 229（省 34 / 市 339 / 县 2 856） |
 | `macro_unit` 命名单元 | **1 213** |
 
-**口径分层（在册非待核 886）**：A 456｜B 12｜C 182｜D 18｜E 218
+**口径分层（在册非待核 901）**：A 459｜B 12｜C 187｜D 23｜E 220
 
 | 对外口径 | 数值 | 用途 |
 |---|---|---|
-| **主统计 A+B** | **468** | 论文主分析样本；可归时 + 可归因 |
-| 宽统计 A+B+C | 650 | 含时间不详，**不得进年份分布** |
-| 在册非待核 | 886 | 全部在册 |
+| **主统计 A+B** | **471** | 论文主分析样本；可归时 + 可归因 |
+| 宽统计 A+B+C | 658 | 含时间不详，**不得进年份分布** |
+| 在册非待核 | 901 | 全部在册 |
 | 案例池（四要素≥3） | 235 | 可写案例；浙江占 112（48%） |
 | 深描子集（四要素全备） | 41 | 单案例长文 |
 | 命名单元 | 1 213 | 只用于量级与分布 |
 
-**设立方式（主统计内）**：`roster` 名单型 169｜`deployment` 部署型 299。
-**县覆盖**：有命名单元的县 534／2 856；可信记录口径 447／2 856 = **15.7%**。
+**设立方式（主统计内）**：`roster` 名单型 170｜`deployment` 部署型 301。
+**县覆盖**：有命名单元的县 542／2 856（19.0%）；可信记录口径 **474／2 856 = 16.6%**。
+县覆盖有 4 套口径并存，报数前先看 `reports/qa/接手审校-2026-11-18.md` §三 A。
 
 ---
 
@@ -52,11 +53,11 @@ cd D:\CODEX\全国乡村片区化数据库
 $env:MIMO_PYTHON            # 应为 Runtime\win32-x64\python\Lib（Python 3.12.13）
 & $env:MIMO_PYTHON scripts/build_db.py        # 重建库（幂等）
 & $env:MIMO_PYTHON scripts/validate_db.py     # 期望：issues=0 warnings≈2234
-& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 468
+& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 471
 & $env:MIMO_PYTHON scripts/report_db_stats.py # 全量总览
 ```
 
-**判据**：`issues=0` 且主统计 468。若主统计对不上，先看 `git log` 有没有新提交改变了数据，
+**判据**：`issues=0` 且主统计 471。若主统计对不上，先看 `git log` 有没有新提交改变了数据，
 再看 `docs/01` §10 口径卡有没有被改。
 
 ---
@@ -70,19 +71,20 @@ docs/00-整体规划.md            里程碑、当前进度与偏差（含"停�
 docs/01-概念界定.md            §10 统计口径卡、§11 双层口径（M/P）——所有数字的地基
 docs/02-数据字典.md            字段唯一权威（含 setup_kind、is_core）
 docs/07-政策层.md              政策层白名单（只收 .gov.cn）与字段
-docs/09-研究数据与边界声明.md   论文可直接引用的数据段（N=446 那段已过时，最新是 468）
+docs/09-研究数据与边界声明.md   论文可直接引用的数据段（N=471，2026-11-18 已同步）
 data/raw/{ABBR}/             证据原件，只追加不覆盖，路径=data/raw/SD/20260513-slug/原文.md
 data/stage/batches/          ingest 待入库 JSONL（POL-{省码}{序号}-policy.jsonl）
 data/stage/candidates/       候选名单（area-roster-{ABBR}.csv、media-leads-*.csv、wechat-md/）
 data/clean/by_province/      分省 CSV（并发写这里，再 merge）
 data/db/片区库.sqlite3       主库，禁止手改，由 build_db 从 clean 重建
-scripts/                     85 个管线脚本（见 §5）
+scripts/                     89 个管线脚本（见 §5）
 reports/qa/                  校验、审计、口径对账
 reports/gaps/                缺采县、公众号线索、通道实测
 reports/pilot/               批次与名单入库小结
 ```
 
-**注意**：`docs/09` 里的「N=446」是本轮扩量前的数字，现为 **468**；改动时两处都要更新。
+**注意**：`docs/01` §10 口径卡与 `README`、`docs/09` 的数字必须随快照重算，
+2026-11-18 刚做过一次全量同步（见 `reports/qa/接手审校-2026-11-18.md` §五）。
 
 ---
 
@@ -106,7 +108,7 @@ reports/pilot/               批次与名单入库小结
 
 ### 口径与规则
 - 统计口径卡（`docs/01` §10）：四界一快照 + 五组互斥分层，落地为视图 `area_caliber`
-- 双层口径（§11）：M 宏观层 1 213 / P 政策层 468，不共用分母
+- 双层口径（§11）：M 宏观层 1 222 / P 政策层 471，不共用分母
 - 「有依据」只认 `primary`/`support`，`mention` 单列——**旧数字 96.8%／80.8% 全部作废**
 - `setup_kind` 分名单型/部署型（含"名单藏在附件表格里"的识别）
 - 案例池口径（四要素取三）：235
@@ -116,7 +118,13 @@ reports/pilot/               批次与名单入库小结
 - `first_source_id` 悬空 5 条：3 条按 raw 复原、2 条撤回
 - 数值字段污染 12 条清空（国道/省道编号、户数、地名被灌进 scale_*）
 - 摘要按原文摘录回填 78 条（台账 `reports/qa/text-backfill-log.csv`）
-- `validate_db` 已加四项硬检查：占位码、悬空城市码、引用悬空、数值字段须为整数
+- 浙江 13 条缺 `area_region_map` 行已补（`scripts/repair_area_region_map.py`）
+- P4 待核 16 条逐条裁定已落地（`scripts/adjudicate_pending_areas.py`）
+- **region 补 133 个地级市码**（`scripts/backfill_region_from_mca.py`，数据源为仓库内民政部代码表）
+- T1 24 县 + T2 49 县核查完成，关闭台账 `data/stage/candidates/gap-checks-*.csv`
+- 新增 `scripts/check_doc_caliber.py`：文档口径数字与库内值不一致时非零退出
+- `validate_db` 已加五项硬检查：占位码、悬空城市码、引用悬空、数值字段须为整数、
+  active 片区缺区划归属行
 
 ### 文稿
 - `reports/统计总览-2026-11.md`（全库七节统计，脚本生成）
@@ -129,14 +137,22 @@ reports/pilot/               批次与名单入库小结
 ## 6. 未完成（按优先级，带具体落点）
 
 ### P1 空间锚定（最大短板，做别的都绕不开它）
-- `area_region_map` 的 **village 级记录为 0 条**；有 `scale_villages` 528 条、`town_codes` 584 条
-- 起点：从 `cover_desc` 里已写出村名的记录反推（先挑 20 条试），再谈批量
+- `area_region_map` 的 **village 级记录为 0 条**；有 `scale_villages` 532 条、`town_codes` 594 条
+- **真正的卡点不是没写村名**：`cover_desc` 里点名具名村的记录有 **705 条**
+  （如 A110001「大周各庄村为示范村、小周各庄等 5 村为提升村」）
+- 卡在编码：`region` 表只有省/市/县三级（34/206/2856），**没有 town/village 行**，
+  而 `area_region_map.region_code` 有外键语义。`docs/02` 允许 level 取 town/village，
+  但**没有本地码编码规则**。所以 P1 第一步是定村级编码方案，不是填数据
 - 影响：规模分析、地图（M6）、"片区覆盖几村"这类描述全卡在这里
 
-### P2 131 个「证据已在手」的县（最稳的增量，不依赖外部通道）
-- 清单：`reports/gaps/coverage-gaps.md` / `.csv`（T1 24 / T2 66 / T3 41）
-- 做法：逐份读本地 `data/raw` 原文 → 建 `area-roster-{ABBR}.csv` → `ingest_area_roster.py`
-- 已做过样板：四川安州区（`reports/pilot/SC-anzhou-pilot.md`）、河北 P130001（23 条）
+### P2 114 个「证据已在手」的县（**2026-11-18 已清空 T1/T2**）
+- 清单：`reports/gaps/coverage-gaps.md` / `.csv`（现只剩 T3 41 县）
+- T1 24 县：逐县读本级文件，**全部查无具名单元**（城市控规片区/无专名示范带/园区先行区），
+  见 `reports/gaps/T1-24县核查-2026-11-18.md`
+- T2 49 县：新增 9 条（广西田园综合体 5、辽宁细河区段 1、江苏射阳段 1、待核 2），
+  41 县关闭（邻县点名/城市片区/名单类型不符），见 `reports/gaps/T2-49县核查-2026-11-18.md`
+- 关闭台账：`data/stage/candidates/gap-checks-*.csv`，`find_coverage_gaps` 会跳过
+- 做法已固化：逐份读本地 `data/raw` 原文 → 建 `area-roster-{ABBR}.csv` → `ingest_area_roster.py`
 
 ### P3 浙江 6 份名单的列结构登记（合计约 70 行）
 - P330514 黄岩（18 行）、P330052 海宁（12）、P330448 衢江（11）、P330064 乐清（10）、
@@ -144,10 +160,16 @@ reports/pilot/               批次与名单入库小结
 - 每份在 `scripts/roster_from_policy_table.py` 的 `FORMS` 里加一条列映射即可
 - 也可直接改 `--generic` 的匹配规则（现规则：名称须以片区类通名结尾）
 
-### P4 待核与无依据的处置
-- 待核 227：其中 **15 条已有 `.gov.cn` 来源**，只需抽证据即可升级（最快出成果）
-- 无依据 218+13：多数是「媒体名 vs 官方名」不一致（湖北/河南/天津模式），要么改名对齐，
-  要么登记"媒体有、官方无"
+### P4 待核与无依据的处置（**2026-11-18 已执行一轮，原「15 条快赢」前提已证伪**）
+- 待核从 227 降到 **219**：16 条逐条裁定，8 条升级（3 条同时改名对齐官方表述）、
+  2 条 rel 纠错（primary→mention/support）、6 条维持待核并写明卡点
+- 关键改名的 3 条：`吴中片区→东太湖宜居宜业和美乡村片区`、`湖埠片区→双浦环铜鉴湖·生态旅居片区组团`、
+  `金山银海片区→金山银海·和美金城片区`
+- 裁定表：`data/stage/candidates/pending-decisions-2026-11-18.csv`；落地脚本
+  `scripts/adjudicate_pending_areas.py`（幂等，`--dry-run` 可看）
+- 剩余 219 条的卡点分类：媒体单源 172、名称/规模/实体认定 47
+- 无依据 233（E 220 + D 组无依据 13）：多数是「媒体名 vs 官方名」不一致（湖北/河南/天津模式），
+  要么改名对齐，要么登记"媒体有、官方无"
 
 ### P5 其他省的官方锚点
 - 现只有山东/江苏/江西/绍兴/象山/济南。广东、河南、湖北、贵州四个大省缺锚点
@@ -169,7 +191,7 @@ reports/pilot/               批次与名单入库小结
 5. 名称、时间、村数取不到就留空，**不猜、不用区间或概数糊**
 6. 摘要一律**逐字摘原文**，摘不到就空着——不准写"看起来像摘要"的话
 7. 派生字段的判据**不能用宽泛词**（裸「公布」曾把 46 条"规划批后公布"误判成名单型）
-8. 报"片区数量"必须指明是哪个口径（主统计 468 / 宽 650 / 在册 886 / 命名单元 1 213）
+8. 报"片区数量"必须指明是哪个口径（主统计 471 / 宽 658 / 在册 901 / 命名单元 1 222）
 9. git 提交需显式授权；`data/raw` 是唯一证据副本，**永不 `git reset --hard` / `git clean`**
 10. 删文件前先问；自己本轮生成的临时产物可以清
 
@@ -184,6 +206,16 @@ reports/pilot/               批次与名单入库小结
    陕西是报道、武汉是方案）——命中县数只能排阅读顺序，不等于有名单
 3. **公众号通道**（`15afc73`）：OpenCLI Browser Bridge 打通，但 mp.weixin 签名链一次性，
    必须"搜索→立即打开→立即取文"，且 1/3 文章因隐私设置或删除读不到
+4. **接手审校**（2026-11-18，未提交）：修 `health_report` 硬编码 854、补 13 条浙江区划
+   归属行并加 validate 硬检查、全量同步 README/`docs/00`/`docs/01`/`docs/09` 口径数字、
+   重跑缺口清单。详见 `reports/qa/接手审校-2026-11-18.md`
+5. **P4 待核裁定**（2026-11-18 二，未提交）：16 条逐条读原文裁定，升级 8 条（3 条改名对齐
+   官方表述）、rel 纠错 2 条、维持待核 6 条；待核 227→219，主统计 468→**470**。
+   台账 `data/stage/candidates/pending-decisions-2026-11-18.csv`
+6. **T1/T2 缺口核查**（2026-11-18 三，未提交）：T1 24 县全部查无；T2 新增 9 条
+   （广西田园综合体 5 / 辽宁细河区段 / 江苏射阳段 / 两条待核）、关闭 41 县；
+   有证据县 114→**41**（只剩 T3）。顺带补 region 133 个地级市码，
+   并新增文档口径守卫 `check_doc_caliber.py`。详见 `reports/gaps/T2-49县核查-2026-11-18.md`
 
 ---
 
@@ -191,16 +223,19 @@ reports/pilot/               批次与名单入库小结
 
 | 项 | 状态 |
 |---|---|
-| `$env:MIMO_PYTHON` | Python 3.12.13（`MIMO_PYTHON -m ...` 调用；pip 脚本不可用） |
+| `$env:MIMO_PYTHON` | **新 harness 里为空**。管线脚本纯 stdlib，用系统 Python 3.12 即可：`C:\Users\zjh22\AppData\Local\Programs\Python\Python312\python.exe` |
+| pandas / openpyxl | 系统 Python **未装**；`export_excel.py` 等需要时用 `uv venv .venv` + `uv pip install pandas openpyxl` |
 | `.venv-ocr` | 存在（RapidOCR + pypdfium2），扫描件 OCR 用 `.venv-ocr\Scripts\python.exe scripts/ocr_pdf.py` |
 | `opencli` | v1.8.7，daemon 常驻；**Chrome 必须运行**且装 Browser Bridge 扩展才可用 |
 | tinyfish MCP | 可用（搜索/取页面），token 效率高于自建 HTTP |
-| git | 工作树干净，HEAD `819dc56`；`data/db/*.sqlite3` 与 `data/stage/batches/` 已 gitignore |
+| git | 工作树干净，HEAD `a6d7709`；`data/db/*.sqlite3` 与 `data/stage/batches/` 已 gitignore |
 
 **已知环境坑**
 - `core.autocrlf=true` 且无 `.gitattributes`：重新 clone 会把 raw 的 LF 转 CRLF，
   导致 `sha256(file) != hash_sha256`。**尚未修**，属待办
 - `opencli` 在 Windows 是 `.ps1` 包装：脚本内调用需 `shell=True`，直接 subprocess 会 `WinError 2`
+- PowerShell 读中文 CSV/MD 按 GBK 解码，看到的会是乱码；判断内容一律用 `read` 工具，
+  脚本内一律 `encoding='utf-8-sig'` + `sys.stdout.reconfigure(encoding='utf-8')`
 
 ---
 
@@ -208,9 +243,9 @@ reports/pilot/               批次与名单入库小结
 
 | 说法 | 含义 |
 |---|---|
-| 主统计 / A+B | 468。可归时（2022–2026 窗内或延续至今）+ 可归因（`primary`/`support`） |
-| 宽统计 / A+B+C | 650。加时间不详，不进年份分布 |
-| 在册非待核 | 886。含 D 组（口径外 18）与 E 组（无依据 218） |
+| 主统计 / A+B | 471。可归时（2022–2026 窗内或延续至今）+ 可归因（`primary`/`support`） |
+| 宽统计 / A+B+C | 658。加时间不详，不进年份分布 |
+| 在册非待核 | 901。含 D 组（口径外 23）与 E 组（无依据 220） |
 | 命名单元 / M 层 | 1 213 = area 1 113 + belt 100（去跨表重名）。只看量级 |
 | 案例池 | 235。四要素（覆盖可述/规模可知/有事件/时间精到月）取三 |
 | `primary` | 文件直接设立、批复、命名该片区 |
@@ -221,8 +256,17 @@ reports/pilot/               批次与名单入库小结
 
 ---
 
-## 11. 新 harness 上马后建议的第一件事
+## 11. 下一轮建议做什么
 
-不要急着扩量。先按 §2 跑自检，然后**只做 P4 里那 15 条**（已有 `.gov.cn` 来源的待核片区）——
-它们 1 小时内能出成果，且能验证整条管线（抽证据 → 档 → 挂接 → 校验）在新环境里是否正常。
-确认无误后再进 P1 或 P2。
+T1/T2 已在 2026-11-18 清空（§6 P2），剩余 T3 41 县按既定判断暂不做。建议顺序：
+
+1. 按 §2 跑自检；另跑 `repair_area_region_map.py --dry-run`、`adjudicate_pending_areas.py --dry-run`、
+   `check_doc_caliber.py`，三者都应 0 改动 / 全部一致
+2. **P1 空间锚定先定村级编码方案**（`region` 只有省/市/县三级，village 级 0 行），
+   别直接开始填村名——`cover_desc` 里点名具名村的记录已有 705 条，缺的是编码规则
+3. **P5 其他省官方锚点**：广东、河南、湖北、贵州四大省缺官方数锚点；贵州应改采
+   《省级集成示范试点名单》（用户已裁定）
+4. **P3 浙江 6 份名单列结构**（约 70 行，`roster_from_policy_table.py` 加列映射）
+5. T3 41 县可选：信号弱，只在有余力时做
+
+**不要做**：按省摊派并行采集、全库正文正则抽片区名、把 T3 的「动态顺带提及」当设立依据。

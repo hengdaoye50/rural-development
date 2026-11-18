@@ -1,0 +1,4 @@
+﻿area_id,abbr,action,new_name,new_status,new_cover,new_scale,policy_id,new_rel,new_parent,note
+A450003,GX,rel,,,,,P450007,primary,桂田园综合体-2021批,P450007 是逐条列名的试点项目下达通知，属名单型设立依据；原挂 mention 低估依据强度，改 primary
+A450004,GX,rel,,,,,P450007,primary,桂田园综合体-2021批,同批名单第1条，rel 由 mention 改 primary；补跨批 parent_area_key
+A210018,LN,note,,,,,,,辽农领办〔2023〕13号-第15条,跨县示范带（阜蒙县+细河区），按 R10 两县分建并共享 parent_area_key；细河区段见 A210026

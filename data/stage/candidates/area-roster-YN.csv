@@ -1,0 +1,2 @@
+﻿name,type_code,city_code,county_code,cover_desc,status,founded_ymd,founded_precision,issuer,summary,source_policy_id,rel,town_codes,scale_towns,parent_area_key
+剑湖片区,T04,532900,532931,剑川县剑湖片区，列入大理州世界级田园综合体创建序列,待核,,unknown,大理白族自治州人民政府,《大理州文旅康养产业发展三年行动计划（2023—2025）》提出「推进大理上关片区、剑川县剑湖片区…等世界级田园综合体创建」；仅有州级规划部署，未见县级设立文件，故 status=待核。,P530013,mention,,,
