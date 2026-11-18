@@ -35,10 +35,34 @@ DROP_TAGS = re.compile(r"<(script|style|nav|header|footer)[^>]*>.*?</\1>", re.S 
 def fetch(url: str) -> str:
     if ".gov.cn" not in urllib.parse.urlparse(url).netloc:
         raise ValueError(f"非 .gov.cn 域名，按 docs/07 拒绝：{url}")
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        raw = r.read()
-        ct = r.headers.get("Content-Type", "") or ""
+    # 政府站风控差异大：521/403 常是 UA 或协议触发，逐档退让重试
+    uas = [UA,
+           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+           "(KHTML, like Gecko) Chrome/120.0 Safari/537.36 Edg/120.0",
+           "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"]
+    urls = [url]
+    if url.startswith("https://"):
+        urls.append("http://" + url[len("https://"):])
+    last = None
+    for u in urls:
+        for ua in uas:
+            req = urllib.request.Request(u, headers={
+                "User-Agent": ua,
+                "Accept": "text/html,application/xhtml+xml,*/*",
+                "Accept-Language": "zh-CN,zh;q=0.9",
+            })
+            try:
+                with urllib.request.urlopen(req, timeout=30) as r:
+                    raw = r.read()
+                    ct = r.headers.get("Content-Type", "") or ""
+                break
+            except Exception as e:      # noqa: BLE001 逐档重试，最后一档再抛
+                last = e
+        else:
+            continue
+        break
+    else:
+        raise last  # type: ignore[misc]
     m = re.search(r"charset=([\w-]+)", ct, re.I)
     encs = [m.group(1)] if m else []
     encs += ["utf-8", "gb18030"]
