@@ -211,7 +211,7 @@ def main() -> int:
             "lead_org": r.get("lead_org", ""),
             "issuer": r.get("issuer", ""),
             "summary": r.get("summary", ""),
-            "parent_area_key": "",
+            "parent_area_key": (r.get("parent_area_key") or "").strip(),
             "first_source_id": sid,
             "record_state": "active",
             "created_at": today,

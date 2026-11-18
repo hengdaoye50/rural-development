@@ -81,7 +81,8 @@ def main() -> int:
     add(f"- 宽统计 A+B+C：{n_wide}（含时间不详，**不得进年份分布**）")
     add(f"- A 窗内 {cal.get('A', 0)}｜B 延续至今 {cal.get('B', 0)}｜C 时间不详 {cal.get('C', 0)}"
         f"｜D 口径外 {cal.get('D', 0)}｜E 无依据 {cal.get('E', 0)}")
-    add("- 全量库 854 只用于说明采集规模，**不得当结论基数**。视图 `area_caliber` 为唯一口径来源")
+    add(f"- 全量库 {n_area}（在册 active 且非待核）只用于说明采集规模，"
+        f"**不得当结论基数**。视图 `area_caliber` 为唯一口径来源")
 
     sk = {r["setup_kind"]: r["n"] for r in cur.execute(
         "select setup_kind, count(*) n from area_caliber where in_scope=1 group by setup_kind")}

@@ -65,6 +65,21 @@ def main(argv: list[str]) -> int:
     if retired:
         print(f"  跳过退休/占位区划码 {len(retired)} 个（不算缺口）")
 
+    # 已核查关闭的县：台账 data/stage/candidates/gap-checks-*.csv，verdict 以「查无」开头
+    # 的意义是「本级文件已读，无具名单元」——不再重复列入 T1/T2/T3，避免下一轮重复读
+    checks: dict[str, str] = {}
+    for cp in sorted((ROOT / "data" / "stage" / "candidates").glob("gap-checks-*.csv")):
+        with cp.open("r", encoding="utf-8-sig", newline="") as f:
+            for cr in csv.DictReader(f):
+                cd = (cr.get("county_code") or "").strip()
+                vd = (cr.get("verdict") or "").strip()
+                if cd and vd:
+                    checks[cd] = vd
+    closed = {cd for cd, vd in checks.items() if vd.startswith("查无")}
+    closed_uncovered = closed & uncovered
+    if closed_uncovered:
+        print(f"  已核查关闭 {len(closed_uncovered)} 个县（本级文件无具名单元，见 gap-checks 台账）")
+
     pol = list(con.execute(
         "select policy_id, title, doc_type, local_path, county_code, province_code "
         "from policy where coalesce(local_path,'')<>''"))
@@ -113,6 +128,8 @@ def main(argv: list[str]) -> int:
 
     rows = []
     for cd in uncovered:
+        if cd in closed_uncovered:
+            continue
         own_docs = own.get(cd, [])
         men = mention.get(cd, [])
         strong = [d for d in men if (d["doc_type"] or "") in STRONG_TYPES]
@@ -174,6 +191,8 @@ def main(argv: list[str]) -> int:
         f"| **T1** | {tiers.get('T1', 0)} | 该县本级发文但库里零单元 | 读 1 份本级文件即可判定，成本最低 |",
         f"| **T2** | {tiers.get('T2', 0)} | 名单/规划/批复/公告类文件含该县全名 | 逐份精读，入库入口精度最高 |",
         f"| **T3** | {tiers.get('T3', 0)} | 仅动态/报告/总结类提及 | 信号弱，最后做 |",
+        f"| **已核查关闭** | {len(closed_uncovered)} | 本级文件已读、无具名单元 | 不再重复读；"
+        f"台账 `data/stage/candidates/gap-checks-*.csv` |",
         "",
         "各省分布：",
         "",

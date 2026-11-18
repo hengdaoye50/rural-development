@@ -216,6 +216,7 @@ def validate() -> int:
     belts = _rows("belt.csv")
     policies = _rows("policy.csv")
     area_policy_map = _rows("area_policy_map.csv")
+    area_region_map = _rows("area_region_map.csv")
     events = _rows("event.csv")
 
     area_ids = {a["area_id"] for a in areas}
@@ -287,6 +288,21 @@ def validate() -> int:
             warnings.append(f"[area:{aid}] county_code={cc} 是 region 占位行（name 等于代码），需回原始来源核定")
         if city and city not in region_by_code and city != cc:
             warnings.append(f"[area:{aid}] city_code={city} 在 region 表不存在")
+
+    # 区划归属行完整性：active 片区必须有 area_region_map 行。
+    # 缺行不会报错，只会让「按 map 聚合」的县覆盖/分市统计**静默少算**——
+    # 2026-11 浙江 13 条就是这样漏的（见 scripts/repair_area_region_map.py）。
+    areg_ids = {r.get("area_id") for r in area_region_map}
+    for a in areas:
+        if a.get("record_state") == "active" and a["area_id"] not in areg_ids:
+            issues.append(f"[area:{a['area_id']}] active 但无 area_region_map 行（按 map 聚合会漏算）")
+    for r in area_region_map:
+        aid = r.get("area_id") or ""
+        if aid and aid not in area_ids:
+            issues.append(f"[area_region_map:{aid}] area_id 不存在")
+        rc = r.get("region_code") or ""
+        if rc and rc not in region_ids:
+            warnings.append(f"[area_region_map:{aid}] region_code={rc} 不在 region 表")
 
     # 数值字段必须是整数：国道/省道编号、户数常被灌进来
     for a in areas:

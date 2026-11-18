@@ -170,6 +170,27 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/repair_area_sources.py --dry-run  # first_source_id 悬空，按 raw 证据复原
 # 清洗记录见 reports/qa/data-cleaning-2026-11.md
 
+# 区划归属行补漏：active 片区缺 area_region_map 行（按 map 聚合会静默少算）
+& $env:MIMO_PYTHON scripts/repair_area_region_map.py --dry-run
+& $env:MIMO_PYTHON scripts/repair_area_region_map.py
+# 跑完接 merge_by_province -> build_db -> validate_db；validate 已把缺行记为 issue
+
+# 待核逐条裁定：按裁定表改 status/name/cover/rel（幂等；只写 by_province）
+# 裁定表 data/stage/candidates/pending-decisions-{date}.csv，列见脚本 docstring
+& $env:MIMO_PYTHON scripts/adjudicate_pending_areas.py --dry-run
+& $env:MIMO_PYTHON scripts/adjudicate_pending_areas.py
+# 跑完同样接 merge_by_province -> build_db -> validate_db -> health_report
+
+# region 补省/市级行：县级 parent_code 引用了 region 里不存在的市码时用
+# 数据源是仓库内民政部《县以上行政区划代码》HTML；只补省/市两级，不动县级分母
+& $env:MIMO_PYTHON scripts/backfill_region_from_mca.py --dry-run
+& $env:MIMO_PYTHON scripts/backfill_region_from_mca.py
+# 跑完接 build_db -> validate_db
+
+# 文档口径守卫（只读）：README/docs/00/docs/01/docs/09/HANDOVER 的关键数字与库内值比对
+& $env:MIMO_PYTHON scripts/check_doc_caliber.py
+# 不一致即非零退出；每次批量入库后跑一次，防止「数字地基」再次漂移
+
 # 公众号线索（只做「发现」，不做「证据」；公众号不是 .gov.cn，不得进 policy）
 & $env:MIMO_PYTHON scripts/wechat_leads.py "潍坊 片区 乡村振兴" "昌邑 片区 乡村振兴"
 & $env:MIMO_PYTHON scripts/wechat_resolve.py "<搜狗 link>"   # 当前被反爬拦截，仅用于探测
@@ -290,6 +311,10 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 
 ## 决策日志（Architecture decisions）
 
+> 以下是**按时间记录的决策**，条目里的数字是**当时的快照**，不是当前值。
+> 当前口径数字一律以 `docs/01` §10–§11 与 `reports/qa/health-latest.md` 为准；
+> 引用历史数字时必须同时标注口径与快照日。
+
 - 2025-06：主库选 SQLite 而非 Excel 长表——字段将超 20 列且需多表关联与 SQL 聚合
 - 2025-06：「片区」采用**证据制准入**（官方来源可核验）而非名称包含「片区」二字即可入库
 - 2025-06：原始证据与结构化数据严格分层（raw / stage / clean / db），保证可追溯与可重建
@@ -385,3 +410,39 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   另有 14 个市码（河北 6、辽宁 8）在 region 里根本不存在，26 条片区的 city_code 悬空。
   前者按片区自身 cover_desc 定县，后者按「该市码下辖县级行」印证后按 GB/T 2260 补名。
   `validate_db` 已加占位码与悬空城市码检查
+- 2026-11：**同一实体要有「归属行」与「报数口径」双保险**。浙江 13 条 active 片区缺
+  `area_region_map` 行，按 map 聚合的县覆盖静默少算、按 `area.county_code` 聚合又数得到，
+  于是同库出现多套县覆盖数字（534／464／459）。已加 `repair_area_region_map.py` 与
+  validate 硬检查；**县覆盖口径仍需单独裁定**，见 `reports/qa/接手审校-2026-11-18.md` §三 A
+- 2026-11：**报告脚本里的数字不许硬编码**。`health_report.py` 曾把「全量库」写死 854，
+  数据涨到 886 后报告照印旧值。所有口径数字必须从库现查；文档数字随快照重算（三处：`docs/01`、
+  `README`、`docs/09`）
+- 2026-11：**待核的「卡点」要逐条记，不能归成一个原因**。227 条待核里只有 174 条是
+  「唯一来源为媒体」，另 53 条卡在名称未证实/规模待补/无具名实体。所以「补 .gov.cn 来源」
+  只能解决子集（实测 2 条），把待核当单一原因会导致升级计划落空
+- 2026-11：**待核裁定要「先读原文改名，再升级」**。16 条裁定里 3 条的核心问题是**名字不对**
+  而不是证据不足：`吴中片区` 官方名是「东太湖宜居宜业和美乡村片区」、`湖埠片区` 实为
+  「双浦环铜鉴湖·生态旅居片区组团」、「金山银海片区」官方全称含「和美金城」。
+  只补来源不改名，等于把自拟名永久写进库。裁定表与落地脚本见
+  `data/stage/candidates/pending-decisions-2026-11-18.csv` / `scripts/adjudicate_pending_areas.py`
+- 2026-11：**`excerpt` 必须能在 `local_path` 快照里逐字找到**。裁定中发现 S044 的 excerpt
+  含「安吉县大余村片区」，但其 744 字快照里没有该串——摘录与快照不一致，属证据链缺陷。
+  入库时应校验 `excerpt in 快照正文`，不一致就报出来（待加检查）
+- 2026-11：**「有证据在手」的县要看命中位置，不能只看命中**。T2 的 49 个县里，41 个是
+  假阳性：安州规划顺带点到罗江/涪城/游仙（区位段）、绵阳政府网底栏挂盐亭/梓潼链接、
+  云南「百千万」名单是示范乡镇村、武汉方案只写「示范片带」无专名。**关闭台账**
+  `data/stage/candidates/gap-checks-*.csv` 记录 verdict，`find_coverage_gaps.py` 据此跳过，
+  避免下一轮重复读同一批文件
+- 2026-11：**区域表要按「父码闭包」校验，而不是只校验业务表引用**。`region` 早期从已有
+  片区反推，导致 133 个地级市码根本不存在（县级行的 `parent_code` 悬空），而 `validate_db`
+  只查 `area.city_code`，看不见 region 自身断裂。已用民政部代码表补省/市两级
+  （`backfill_region_from_mca.py`，3 096→3 229 行）。**只补两级不补县级**：补县级会动
+  「县级单位 2 856」分母，属需单独裁定的口径变更
+- 2026-11：**文档口径要能「断言」，不能靠手抄**。一天内口径漂了三轮，
+  `docs/01`（数字地基）连续两轮落后于库。新增 `scripts/check_doc_caliber.py`：
+  把 README/docs/00/docs/01/docs/09/HANDOVER 里的关键数字与库内实测值比对，不一致即非零退出。
+  **入库后固定动作**：`validate_db` → `health_report` → `check_doc_caliber`
+- 2026-11：**跨县单元按 R10 分建，`parent_area_key` 首次落地**。辽宁「阜蒙县、细河区」
+  示范带、江苏「亭湖+射阳」新洋港片区都只建了一个县的记录。已按 R10 两县分建并共享
+  `parent_area_key`（`ingest_area_roster.py` 支持该列，`adjudicate_pending_areas.py` 可补写）。
+  同一份省级名单里已有 2 条、缺 6 条的广西田园综合体也按「名单闭环」补齐 5 条
