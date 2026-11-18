@@ -5,8 +5,13 @@ A450001,P450003,area,mention
 A450001,P450004,area,primary
 A450006,P450005,area,mention
 A450006,P450006,area,mention
-A450004,P450007,area,mention
-A450003,P450007,area,mention
+A450004,P450007,area,primary
+A450003,P450007,area,primary
 A450006,P450007,area,mention
 A450006,P450008,area,mention
 A450002,P450009,area,mention
+A450008,P450007,area,primary
+A450009,P450007,area,primary
+A450010,P450007,area,primary
+A450011,P450007,area,primary
+A450012,P450007,area,primary

@@ -17,7 +17,7 @@ A210006,P210011,area,primary
 A210007,P210011,area,support
 A210008,P210012,area,primary
 A210008,P210013,area,mention
-A210010,P210014,area,primary
+A210010,P210014,area,mention
 A210001,P210015,area,support
 A210005,P210016,area,support
 A210002,P210016,area,mention
@@ -47,3 +47,4 @@ A210022,P210001,area,primary
 A210023,P210001,area,primary
 A210024,P210001,area,primary
 A210025,P210001,area,primary
+A210026,P210001,area,primary
