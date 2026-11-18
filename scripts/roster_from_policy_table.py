@@ -30,7 +30,110 @@ FORMS = {
 }
 
 
+def _generic(con, pids: list[str], dry: bool) -> int:
+    """通用模式：从任意政策的表格里找「县 + 片区名」，不做逐份定制。
+
+    规则：表格行内含「片区」；从单元格里取最长的含「片区」者为名称；
+    县通过 region 表县名匹配（先「XX县/区/市」前缀，再全名包含）。
+    """
+    counties: dict[str, str] = {}
+    for r in con.execute("select region_code, name from region where level='county'"):
+        counties[r["name"]] = r["region_code"]
+    name_by_core = {}
+    for nm, code in counties.items():
+        core = re.sub(r'(自治县|自治旗|县|区|市|旗|林区)$', '', nm)
+        if len(core) >= 2:
+            name_by_core.setdefault(core, code)
+
+    all_rows = []
+    for pid in pids:
+        p = con.execute("select title, issuer, issued_ymd, published_ymd, local_path from policy where policy_id=?", (pid,)).fetchone()
+        if not p:
+            print(f"  !! {pid} 不存在")
+            continue
+        body = (ROOT / p["local_path"]).read_text(encoding="utf-8", errors="ignore")
+        got = 0
+        for line in body.split("\n"):
+            s = line.strip()
+            if not s.startswith("|") or "片区" not in s:
+                continue
+            cells = [x.strip() for x in s.strip("|").split("|")]
+            # 名称：含「片区」的最长单元格
+            names = [c for c in cells if "片区" in c and 4 <= len(c) <= 40]
+            if not names:
+                continue
+            name = max(names, key=len)
+            if re.fullmatch(r'[^区]{0,4}片区', name) or name in ("片区", "重点片区"):
+                continue
+            # 表格标题不是片区名（如「…建设项目计划表」「…名单」）
+            if re.search(r'(计划表|名单|公示|方案|通知|汇总表|安排表|一览表)', name):
+                continue
+            # 必须是命名单元：以片区类通名结尾；排除公司名与工程项目名
+            if not re.search(r'(片区|示范带|示范片|田园综合体|示范区)$', name):
+                continue
+            if re.search(r'(有限公司|公司|建设发展|建设项目|工程|项目|中心|基地|产业园)', name):
+                continue
+            # 县：优先名称前缀，其次单元格全名匹配
+            code = ""
+            m = re.match(r'(.{2,8}?(?:自治县|县|区|市))', name)
+            if m:
+                code = counties.get(m.group(1), "")
+            if not code:
+                for c in cells:
+                    if c in counties and c != name:
+                        code = counties[c]
+                        break
+            if not code:
+                for core, cc in name_by_core.items():
+                    if core and core in name:
+                        code = cc
+                        break
+            if not code:
+                continue
+            all_rows.append({
+                "name": name, "type_code": "T01",
+                "type_primary_note": f"按政策附件表格补建（{pid}）",
+                "tags": "片区", "city_code": "", "county_code": code,
+                "town_codes": "", "scale_villages": "", "scale_towns": "",
+                "cover_desc": f"{name}；出自 {pid}《{(p['title'] or '')[:30]}》表格行",
+                "status": "运行中", "founded_ymd": "", "founded_precision": "unknown",
+                "lead_org": "", "issuer": p["issuer"] or "",
+                "summary": f"由 {pid}（{p['issued_ymd'] or p['published_ymd'] or '日期不详'}）表格逐条列出",
+                "source_policy_id": pid, "rel": "primary",
+            })
+            got += 1
+        print(f"  {pid}: 解析 {got} 条")
+    print(f"通用模式合计 {len(all_rows)} 条")
+    for r in all_rows[:12]:
+        print(f"    {r['county_code']} {r['name'][:34]}")
+    if dry or not all_rows:
+        return 0
+    by_prov = {}
+    prov_of = {r["region_code"]: r["region_code"][:2] for r in con.execute(
+        "select region_code from region where level='county'")}
+    abbr = {"13": "HE", "33": "ZJ", "37": "SD", "32": "JS", "50": "CQ", "51": "SC",
+            "61": "SN", "42": "HB", "44": "GD", "41": "HA"}
+    for r in all_rows:
+        a = abbr.get(prov_of.get(r["county_code"], "")[:2], "")
+        if a:
+            by_prov.setdefault(a, []).append(r)
+    for a, rows in by_prov.items():
+        out = CAND / f"area-roster-{a}.csv"
+        with out.open("w", encoding="utf-8-sig", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+            w.writeheader()
+            w.writerows(rows)
+        print(f"  名单 -> {out.relative_to(ROOT)}（{len(rows)} 条）")
+    return 0
+
+
 def main(argv: list[str]) -> int:
+    dry = "--dry-run" in argv
+    if "--generic" in argv:
+        pids = argv[argv.index("--generic") + 1].split(",")
+        con = sqlite3.connect(DB)
+        con.row_factory = sqlite3.Row
+        return _generic(con, pids, dry)
     if not argv:
         print(__doc__)
         return 2
