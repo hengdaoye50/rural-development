@@ -179,6 +179,13 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/repair_area_region_map.py
 # 跑完接 merge_by_province -> build_db -> validate_db；validate 已把缺行记为 issue
 
+# 媒体名单建档（省级名单常见于党报报道、拿不到 .gov.cn 全文时）
+# 只写 area + source + 两张 map，不写 policy；status 默认待核，等官方原文再升级
+# 候选表 data/stage/candidates/area-media-roster-{ABBR}.csv
+& $env:MIMO_PYTHON scripts/ingest_area_media_roster.py GD --dry-run
+& $env:MIMO_PYTHON scripts/ingest_area_media_roster.py GD
+# 跑完接 merge_by_province -> build_db -> validate_db -> health_report
+
 # 待核逐条裁定：按裁定表改 status/name/cover/rel（幂等；只写 by_province）
 # 裁定表 data/stage/candidates/pending-decisions-{date}.csv，列见脚本 docstring
 & $env:MIMO_PYTHON scripts/adjudicate_pending_areas.py --dry-run
@@ -450,3 +457,14 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   示范带、江苏「亭湖+射阳」新洋港片区都只建了一个县的记录。已按 R10 两县分建并共享
   `parent_area_key`（`ingest_area_roster.py` 支持该列，`adjudicate_pending_areas.py` 可补写）。
   同一份省级名单里已有 2 条、缺 6 条的广西田园综合体也按「名单闭环」补齐 5 条
+- 2026-11-19：**分层夯实顺序定为「省 → 市 → 县」**。省级名单一份顶几十到几百条，
+  且能提供**可对账的分母**（官方名单条数），边际收益最高；县级铺量成本高、还常撞
+  「只写数量不点名」的报告。省级层用台账管理：`reports/qa/省级名单台账-2026-11-19.md`
+  （31 省 × 状态：已对账/部分/仅官方数/名单非片区类型/未见）
+- 2026-11-19：**媒体名单可以建档，但不能当官方依据**。广东首批 130 个镇村片区组团
+  只有南方网（省级党报）逐条报道，无 `.gov.cn` 全文。按 `docs/01` §5 C 级可作 `source`，
+  故新增 `ingest_area_media_roster.py`：**只写 area + source + 两张 map，不写 policy**，
+  `status=待核`；官方原文出现后再升级为 `primary`。这样既不丢名单，也不污染政策层
+- 2026-11-19：**「名单在库」不等于「名单已落地」**。天津 P120001 方案里逐条列了 12 个
+  乡村旅游示范片区，库内恰好 12 条但来源分散；广西 P450007 名单 8 条原来只进了 7 条。
+  台账必须同时记「名单条数」与「库内已入库数」，否则会把漏采看成已完成
