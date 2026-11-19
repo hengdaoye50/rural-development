@@ -76,8 +76,9 @@ data/raw/{ABBR}/             证据原件，只追加不覆盖，路径=data/raw
 data/stage/batches/          ingest 待入库 JSONL（POL-{省码}{序号}-policy.jsonl）
 data/stage/candidates/       候选名单（area-roster-{ABBR}.csv、media-leads-*.csv、wechat-md/）
 data/clean/by_province/      分省 CSV（并发写这里，再 merge）
+data/clean/province_roster.csv 省级名单台账（31 省名单状态/官方数 vs 库内数）
 data/db/片区库.sqlite3       主库，禁止手改，由 build_db 从 clean 重建
-scripts/                     91 个管线脚本（见 §5）
+scripts/                     92 个管线脚本（见 §5）
 reports/qa/                  校验、审计、口径对账
 reports/gaps/                缺采县、公众号线索、通道实测
 reports/pilot/               批次与名单入库小结
@@ -216,10 +217,12 @@ reports/pilot/               批次与名单入库小结
    （广西田园综合体 5 / 辽宁细河区段 / 江苏射阳段 / 两条待核）、关闭 41 县；
    有证据县 114→**41**（只剩 T3）。顺带补 region 133 个地级市码，
    并新增文档口径守卫 `check_doc_caliber.py`。详见 `reports/gaps/T2-49县核查-2026-11-18.md`
-7. **省级层落实**（2026-11-19，未提交）：广东 130 条省级名单按媒体（C）建档（待核）、
-   广西田园综合体补到 8/8、天津 12 条核对为完整；新建省级名单台账（31 省状态），
-   新增 `ingest_area_media_roster.py`、`report_level_distribution.py`。
-   详见 `reports/qa/省级名单台账-2026-11-19.md`、`reports/片区层级分布.md`
+7. **省级层落实（两轮，2026-11-19/20，未提交）**：
+   - 广东 130 条省级名单按媒体（C）建档（待核）、广西田园综合体补到 8/8、天津 12 条核对为完整
+   - **省级名单台账进库**：新增 `province_roster` 表（31 省 × 名单状态/官方数/库内数），
+     报告改由 `report_province_roster.py` 从表生成；`validate_db` 增加该表引用与数值检查
+   - 新增脚本：`ingest_area_media_roster.py`、`report_level_distribution.py`、`report_province_roster.py`
+   - 详见 `reports/省级名单台账.md`、`reports/片区层级分布.md`
 
 ---
 

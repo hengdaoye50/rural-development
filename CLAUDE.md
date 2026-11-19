@@ -198,6 +198,9 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/backfill_region_from_mca.py
 # 跑完接 build_db -> validate_db
 
+# 省级名单台账（province_roster 表）：31 省名单状态 + 官方数 vs 库内已入库
+& $env:MIMO_PYTHON scripts/report_province_roster.py          # -> reports/省级名单台账.md
+
 # 文档口径守卫（只读）：README/docs/00/docs/01/docs/09/HANDOVER 的关键数字与库内值比对
 & $env:MIMO_PYTHON scripts/check_doc_caliber.py
 # 不一致即非零退出；每次批量入库后跑一次，防止「数字地基」再次漂移
@@ -468,3 +471,13 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-19：**「名单在库」不等于「名单已落地」**。天津 P120001 方案里逐条列了 12 个
   乡村旅游示范片区，库内恰好 12 条但来源分散；广西 P450007 名单 8 条原来只进了 7 条。
   台账必须同时记「名单条数」与「库内已入库数」，否则会把漏采看成已完成
+- 2026-11-20：**省级口径从「报告里的表」升级为「库里的表」**。新增 `province_roster`
+  表（31 省：名单名称/批次/policy_id/source_id/官方数/库内数/口径/状态/备注），
+  `status` 五值封闭枚举（matched/partial/count_only/not_area/none）。
+  **为什么要进库**：覆盖率的分母来源必须可查询、可校验，写在 Markdown 里无法 join、
+  也无法被 `validate_db` 检查。报告改由 `report_province_roster.py` 从表生成，
+  `validate_db` 新增该表的引用与数值检查
+- 2026-11-20：**`not_area` 是一个必要的状态，不是失败**。检索发现多数省的省级名单是
+  示范村/乡镇/精品村（吉林千村示范、安徽精品示范村、福建示范乡镇村、湖南重点村、
+  云南百千万、陕西千万工程示范村、山西示范村、黑龙江精品村）——这些**不是片区**，
+  按 `docs/01` §3 不收，但必须在台账里显式登记，否则下一轮还会去查一遍
