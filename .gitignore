@@ -33,6 +33,7 @@ data/stage/batches/
 # candidates 大多是中间产物，但下面三类是**决策台账/名单**，不可再生，必须入库
 data/stage/candidates/*
 !data/stage/candidates/area-roster-*.csv
+!data/stage/candidates/area-media-roster-*.csv
 !data/stage/candidates/gap-checks-*.csv
 !data/stage/candidates/pending-decisions-*.csv
 !data/stage/candidates/t2-decisions-*.csv
