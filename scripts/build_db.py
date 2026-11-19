@@ -183,6 +183,23 @@ CREATE TABLE IF NOT EXISTS area_source_map (
     PRIMARY KEY (area_id, source_id)
 );
 
+-- 省级名单台账：每省「省级层面有没有一份可逐条对账的片区名单」
+-- 用途：报覆盖率时分母来源登记；status 只用封闭枚举（见 docs/02）
+CREATE TABLE IF NOT EXISTS province_roster (
+    province_code  TEXT PRIMARY KEY,
+    roster_name    TEXT,           -- 名单名称；空表示未见
+    roster_scope   TEXT,           -- 批次/年度/文号
+    policy_id      TEXT,           -- 库内 .gov.cn 全文（可空）
+    source_id      TEXT,           -- 只有媒体来源时记 source（可空）
+    official_count INTEGER,        -- 官方数/名单条数（空=未取得）
+    in_db_count    INTEGER,        -- 人工核定的库内已入库条数（空=按关联现算）
+    count_basis    TEXT,           -- 名单条数/年度目标/年度实际/累计/试点县数
+    status         TEXT NOT NULL CHECK (status IN
+                     ('matched','partial','count_only','not_area','none')),
+    note           TEXT,
+    updated_at     TEXT NOT NULL
+);
+
 -- 统计口径卡（docs/01 §10）：把「入库」与「进分母」分开。
 -- A 窗口内+有依据 / B 2022 前成立但延续至今 / C 时间不详+有依据 / D 口径外 / E 无依据
 -- D 组不删记录、不改 status，只在此处被排除，口径调整只改本视图
@@ -257,6 +274,7 @@ CSV_TABLES = {
     "belt_region_map": "belt_region_map.csv",
     "area_source_map": "area_source_map.csv",
     "area_policy_map": "area_policy_map.csv",
+    "province_roster": "province_roster.csv",
 }
 
 

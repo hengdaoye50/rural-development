@@ -331,6 +331,28 @@ def validate() -> int:
     issues.extend(e_issues)
     warnings.extend(e_warnings)
 
+    # 省级名单台账：引用与数值必须自洽（docs/02 province_roster）
+    rosters = _rows("province_roster.csv")
+    prov_ids = {r.get("region_code") for r in regions if r.get("level") == "province"}
+    for r in rosters:
+        code = r.get("province_code") or "<empty>"
+        if code not in prov_ids:
+            issues.append(f"[province_roster:{code}] province_code 不是 region 里的省级行")
+        pid = (r.get("policy_id") or "").strip()
+        if pid and pid not in policy_ids:
+            issues.append(f"[province_roster:{code}] policy_id={pid} 不存在")
+        sid = (r.get("source_id") or "").strip()
+        if sid and sid not in source_ids:
+            issues.append(f"[province_roster:{code}] source_id={sid} 不存在")
+        for f in ("official_count", "in_db_count"):
+            v = (r.get(f) or "").strip()
+            if v and not v.isdigit():
+                issues.append(f"[province_roster:{code}] {f}={v!r} 非整数")
+        if r.get("status") not in {"matched", "partial", "count_only", "not_area", "none"}:
+            issues.append(f"[province_roster:{code}] 非法 status={r.get('status')}")
+    if not rosters:
+        warnings.append("[province_roster] 台账为空（省级层口径未登记）")
+
     for b in belts:
         bid = b.get("belt_id") or "<empty>"
         for k in BELT_REQUIRED:
