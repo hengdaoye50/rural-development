@@ -77,7 +77,7 @@ data/stage/batches/          ingest 待入库 JSONL（POL-{省码}{序号}-polic
 data/stage/candidates/       候选名单（area-roster-{ABBR}.csv、media-leads-*.csv、wechat-md/）
 data/clean/by_province/      分省 CSV（并发写这里，再 merge）
 data/db/片区库.sqlite3       主库，禁止手改，由 build_db 从 clean 重建
-scripts/                     89 个管线脚本（见 §5）
+scripts/                     90 个管线脚本（见 §5）
 reports/qa/                  校验、审计、口径对账
 reports/gaps/                缺采县、公众号线索、通道实测
 reports/pilot/               批次与名单入库小结

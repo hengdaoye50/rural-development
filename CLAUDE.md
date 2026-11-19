@@ -160,6 +160,10 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/report_macro_layer.py            # -> reports/宏观层-分省数量.md
 # 视图 macro_unit 为唯一来源（area + belt 去跨表重名）
 
+# 片区层级分布（省级/地市级/县区级/乡镇级）：按「设立/命名主体」反推，非空间归属
+# 口径：primary 政策 > area.issuer > support；直辖市的区记地市级、直辖市市级记省级
+& $env:MIMO_PYTHON scripts/report_level_distribution.py     # -> reports/片区层级分布.md
+
 # 覆盖率缺口定位：把零单元县收敛成「手里已有证据」的一小撮，按 T1/T2/T3 分层
 # 只定位不抽名——正文正则抽片区名七成是城市控规分区，别试
 & $env:MIMO_PYTHON scripts/find_coverage_gaps.py            # -> reports/gaps/coverage-gaps.{md,csv}
