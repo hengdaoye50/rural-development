@@ -28,6 +28,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CSV = ROOT / "data" / "clean" / "city_roster.csv"
+DB = ROOT / "data" / "db" / "片区库.sqlite3"
 STATUS = {"matched", "partial", "count_only", "not_area", "none"}
 
 
@@ -42,14 +43,24 @@ def main() -> int:
     rows = list(csv.DictReader(CSV.open(encoding="utf-8-sig", newline="")))
     hdr = list(rows[0].keys())
     by_code = {r["city_code"]: r for r in rows}
+    import sqlite3
+    con = sqlite3.connect(DB)
+    region = {r[0]: r[1] for r in con.execute(
+        "select region_code, name from region where level='city'")}
 
     changes, skipped = [], []
     for c in cities:
         code = (c.get("city_code") or "").strip()
         r = by_code.get(code)
         if not r:
-            skipped.append(f"{code or '?'} 不在台账（非浙苏鲁？）")
-            continue
+            if code not in region:
+                skipped.append(f"{code or '?'} 不在台账，且 region 无此市码")
+                continue
+            r = {k: "" for k in hdr}
+            r.update(city_code=code, city_name=region[code],
+                     province_code=code[:2] + "0000", in_db_count="0", status="none")
+            rows.append(r)
+            by_code[code] = r
         if not c.get("found") or (c.get("source_kind") or "none") == "none":
             skipped.append(f"{code} {c.get('city_name')}: 未找到官方名单")
             continue
@@ -91,12 +102,17 @@ def main() -> int:
         print("dry-run，未写盘")
         return 0
     for r, u in changes:
+        assert set(u) <= set(hdr), f"字段不在表头: {set(u) - set(hdr)}"
         r.update(u)
         r["updated_at"] = date.today().isoformat() + "T00:00:00+08:00"
-    with CSV.open("w", encoding="utf-8-sig", newline="") as f:
+    import os
+    tmp = CSV.with_suffix(".csv.tmp")
+    with tmp.open("w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=hdr, lineterminator="\r\n")
         w.writeheader()
-        w.writerows(rows)
+        for r in rows:
+            w.writerow({k: r.get(k, "") for k in hdr})
+    os.replace(tmp, CSV)
     print(f"已写 {CSV.relative_to(ROOT)}")
     print("接着跑：build_db -> validate_db -> report_city_roster -> check_doc_caliber")
     return 0
