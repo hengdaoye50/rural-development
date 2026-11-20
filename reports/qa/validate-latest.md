@@ -1,11 +1,11 @@
 # QA 报告
 
-- area: 1337
-- source: 485
+- area: 1345
+- source: 486
 - region: 3229
 - belt: 118
-- policy: 1708
-- area_policy_map: 2052
+- policy: 1709
+- area_policy_map: 2060
 - event: 731
 - issues: 0
 - warnings: 2234
@@ -16,7 +16,6 @@
 - [source:S140004] A/B/C 级缺 local_path 快照
 - [source:S140005] A/B/C 级缺 local_path 快照
 - [source:S310003] A/B/C 级缺 local_path 快照
-- [source:S320006] A/B/C 级缺 local_path 快照
 - [source:S340001] A/B/C 级缺 local_path 快照
 - [source:S340002] A/B/C 级缺 local_path 快照
 - [source:S340003] A/B/C 级缺 local_path 快照
@@ -296,6 +295,7 @@
 - [policy:P320111] 非预设文种（开放词表，允许）: 工作动态
 - [policy:P320111] 非预设标签（开放词表，允许）: 片区化全要素统筹,片区建设,特色田园乡村,美丽乡村示范点,农村户厕改造,生活污水治理,垃圾分类收运处置,村集体经济增收,抱团发展,农旅融合
 - [policy:P320112] 非预设标签（开放词表，允许）: 片区组团;和美乡村;规划
+- [policy:P320114] 非预设标签（开放词表，允许）: 片区组团
 - [policy:P330001] 非预设标签（开放词表，允许）: 样板片区,组团式未来乡村,片区组团,创建制,名单公示
 - [policy:P330002] 非预设标签（开放词表，允许）: 样板片区,组团式未来乡村,补助资金,验收评审,片区组团
 - [policy:P330003] 非预设标签（开放词表，允许）: 样板片区,组团式未来乡村,补助资金,片区组团,创建制
