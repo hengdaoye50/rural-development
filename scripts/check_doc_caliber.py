@@ -128,33 +128,36 @@ CHECKS: list[tuple[str, str, list[str]]] = [
 ]
 
 
-def main() -> int:
-    verbose = "--verbose" in sys.argv
+def _fmt(want, like: str) -> str:
+    if isinstance(want, float):
+        return f"{want:.1f}"
+    s = str(int(want))
+    if " " in like and len(s) > 3:          # 保留「1 332」式空格分位
+        return s[:-3] + " " + s[-3:]
+    return s
+
+
+def _load_facts() -> dict:
     f = facts()
-    # macro 视图里 belt 去重后的数量与重名数
     con = sqlite3.connect(DB)
     f["macro_belt"] = con.execute("select count(*) from macro_unit where kind='belt'").fetchone()[0]
     f["macro_dup"] = con.execute("select count(*) from belt").fetchone()[0] - f["macro_belt"]
+    return f
 
+
+def verify(f: dict, verbose: bool) -> int:
     bad = 0
     for doc, pat, keys in CHECKS:
         path = DOCS[doc]
         if not path.exists():
-            print(f"✗ {doc}: 文件不存在 {path}")
-            bad += 1
-            continue
+            print(f"✗ {doc}: 文件不存在 {path}"); bad += 1; continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         m = re.search(pat, text, flags=re.M)
         if not m:
-            # 09 的 roster/deploy 有两个同义写法，正则已合并；其他找不到说明文档改写了
-            print(f"✗ {doc}: 找不到模式 {pat[:48]}")
-            bad += 1
-            continue
+            print(f"✗ {doc}: 找不到模式 {pat[:48]}"); bad += 1; continue
         groups = [g for g in m.groups() if g is not None]
         if len(groups) != len(keys):
-            print(f"✗ {doc}: 组数不符 {pat[:48]}")
-            bad += 1
-            continue
+            print(f"✗ {doc}: 组数不符 {pat[:48]}"); bad += 1; continue
         line = text[:m.start()].count("\n") + 1
         for g, k in zip(groups, keys):
             want = f.get(k)
@@ -162,13 +165,70 @@ def main() -> int:
                 continue
             got = float(g.replace(" ", "")) if isinstance(want, float) else int(g.replace(" ", ""))
             if abs(got - want) > 0.05:
-                print(f"✗ {doc}:{line} {k}: 文档 {got} ≠ 库内 {want}")
-                bad += 1
+                print(f"✗ {doc}:{line} {k}: 文档 {got} ≠ 库内 {want}"); bad += 1
             elif verbose:
                 print(f"✓ {doc}:{line} {k} = {want}")
+    return bad
+
+
+def apply_fix(f: dict) -> int:
+    """按 CHECKS 的期望值重写文档数字；写盘原子化。返回被改动的检查条数。"""
+    import os
+    changed_total = 0
+    for doc in DOCS:
+        path = DOCS[doc]
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        before = text
+        for d, pat, keys in CHECKS:
+            if d != doc:
+                continue
+            m = re.search(pat, text, flags=re.M)
+            if not m:
+                continue
+            n_groups = len([g for g in m.groups() if g is not None])
+            if n_groups != len(keys):
+                continue
+
+            def repl(mm, keys=keys):
+                groups = [g for g in mm.groups() if g is not None]
+                if len(groups) != len(keys):
+                    return mm.group(0)
+                spans = [(mm.start(i + 1) - mm.start(0), mm.end(i + 1) - mm.start(0))
+                         for i in range(len(groups))]
+                out = mm.group(0)
+                for (a, b), g, k in sorted(zip(spans, groups, keys), key=lambda x: -x[0][0]):
+                    want = f.get(k)
+                    if want is None:
+                        continue
+                    out = out[:a] + _fmt(want, g) + out[b:]
+                return out
+
+            new = re.sub(pat, repl, text, count=1, flags=re.M)
+            if new != text:
+                changed_total += 1
+                text = new
+        if text != before:
+            tmp = path.with_suffix(path.suffix + ".tmp")
+            tmp.write_text(text, encoding="utf-8")
+            os.replace(tmp, path)
+            print(f"  ~ 已修正 {doc}")
+    return changed_total
+
+
+def main() -> int:
+    verbose = "--verbose" in sys.argv
+    fix = "--fix" in sys.argv
+    f = _load_facts()
+    if fix:
+        n = apply_fix(f)
+        print(f"\n自动修正 {n} 条检查对应的文档数字")
+    bad = verify(f, verbose)
     print(f"\n口径数字检查：{'全部一致' if bad == 0 else f'{bad} 处不一致'}")
     if bad:
-        print("修法：按库内值重算上述行；或跑 scripts/health_report.py 看最新快照段。")
+        print("修法：--fix 未覆盖的行（如空格分位/无关键词上下文）需手工改；"
+              "或先跑 scripts/health_report.py 看最新快照段。")
     return 1 if bad else 0
 
 

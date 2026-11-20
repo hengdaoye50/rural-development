@@ -212,8 +212,9 @@ $env:MIMO_PYTHON
 # 名单抽取 JSON（agent 落盘）-> ingest_area_roster 候选表；县区按「市级前缀+名称」匹配
 & $env:MIMO_PYTHON scripts/build_city_rosters.py
 
-# 文档口径守卫（只读）：README/docs/00/docs/01/docs/09/HANDOVER 的关键数字与库内值比对
+# 文档口径守卫：README/docs/00/docs/01/docs/09/HANDOVER 的关键数字与库内值比对
 & $env:MIMO_PYTHON scripts/check_doc_caliber.py
+& $env:MIMO_PYTHON scripts/check_doc_caliber.py --fix   # 按库内值自动重写文档数字（原子写；覆盖不了的会剩 ✗）
 # 不一致即非零退出；每次批量入库后跑一次，防止「数字地基」再次漂移
 
 # 公众号线索（只做「发现」，不做「证据」；公众号不是 .gov.cn，不得进 policy）
@@ -512,3 +513,4 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**「一份名单」可能是多批次多文件**。青岛 18 条分在 2022 第一批通知与 2025 第二批公示，公示页不含第一批；每批要各建 policy，台账 `official_count` 按批累计、`in_db_count` 按名单口径数，**不能按「新增行数」数**（青岛 10 条里 8 条同名同县被去重，净增仅 2）
 - 2026-11-21：**判断名单在不在正文，比判断「是不是原文」更省事**。平度政务转载页把通知正文与附件名单都放在 HTML 里，直接 `fetch_gov_doc` 即可；反之台州/宁波页面 404，应先 `--dry-run` 探活再派 agent。**先 grep 第一个片区名**，再决定走正文/附件/换源
 - 2026-11-21：**工作要点/年度计划可作部署型依据**。连云港《2023 年工作要点》正文点名 3 个乡村振兴示范区，按 `docs/01` §10.2 属 `deployment` 型设立，可入库；跨县片区按 R10 分建。另：PDF 先试 pypdfium2 文本层（5171 字直抽成功），失败再 OCR
+- 2026-11-21：**数字同步做成 `--fix`**。`check_doc_caliber.py --fix` 按 CHECKS 的期望值重写 6 个文档的数字（保留「1 332」式空格分位、原子写），实测把人为改坏的 999 自动改回 556。每轮入库后的「数字同步 + 手写 patch」从 30–60 分钟压到一条命令；未被 CHECKS 覆盖的行（A 行、N = ）仍会剩 ✗，需补 CHECKS 而不是手改
