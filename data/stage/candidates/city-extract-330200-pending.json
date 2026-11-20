@@ -1,0 +1,135 @@
+{
+ "city_code": "330200",
+ "city_name": "宁波市",
+ "status": "pending_official_page",
+ "official_url": "http://nyncj.ningbo.gov.cn/art/2025/4/23/art_1229058294_4660632.html",
+ "official_url_status": "404（2026-11-21 复核）",
+ "mirror_url": "https://chacewang.com/newsdetail/news839104.html",
+ "mirror_note": "第三方政策站转载，逐字抄录官方公示与附件表；非 .gov.cn，按 docs/07 不得进 policy",
+ "title": "宁波市农业农村局关于2025年省级重点村组团片区推荐名单的公示",
+ "published_ymd": "2025-04-23",
+ "areas_count": 20,
+ "areas": [
+  {
+   "name": "蜃蛟千年席乡片区",
+   "county_name": "海曙区",
+   "town_desc": "古林镇茂新村",
+   "surrounding_villages": "7"
+  },
+  {
+   "name": "广德科创运动片区",
+   "county_name": "海曙区",
+   "town_desc": "集士港镇深溪村",
+   "surrounding_villages": "9"
+  },
+  {
+   "name": "姚江农业公园片区",
+   "county_name": "江北区",
+   "town_desc": "慈城镇半浦村",
+   "surrounding_villages": "6"
+  },
+  {
+   "name": "水润翠屏农文旅片区",
+   "county_name": "镇海区",
+   "town_desc": "澥浦镇沿山村",
+   "surrounding_villages": "4"
+  },
+  {
+   "name": "甬江十里城乡融合片区",
+   "county_name": "镇海区",
+   "town_desc": "庄市街道永旺村",
+   "surrounding_villages": "4"
+  },
+  {
+   "name": "小浃江生态湿地片区",
+   "county_name": "北仑区",
+   "town_desc": "小港街道合兴村",
+   "surrounding_villages": "6"
+  },
+  {
+   "name": "九峰山农创逸居片区",
+   "county_name": "北仑区",
+   "town_desc": "大碶街道城湾村",
+   "surrounding_villages": "5"
+  },
+  {
+   "name": "大湾底片区",
+   "county_name": "鄞州区",
+   "town_desc": "下应街道湾底村",
+   "surrounding_villages": "9"
+  },
+  {
+   "name": "东钱湖农文旅融合片区",
+   "county_name": "鄞州区",
+   "town_desc": "东钱湖镇建设村",
+   "surrounding_villages": "9"
+  },
+  {
+   "name": "大滕头片区",
+   "county_name": "奉化区",
+   "town_desc": "萧王庙街道滕头村",
+   "surrounding_villages": "9"
+  },
+  {
+   "name": "金溪五村片区",
+   "county_name": "奉化区",
+   "town_desc": "西坞街道金峨村",
+   "surrounding_villages": "4"
+  },
+  {
+   "name": "大横坎头片区",
+   "county_name": "余姚市",
+   "town_desc": "梁弄镇横坎头村",
+   "surrounding_villages": "6"
+  },
+  {
+   "name": "五车堰新乡邻经济发展片区",
+   "county_name": "余姚市",
+   "town_desc": "黄家埠镇五车堰村",
+   "surrounding_villages": "7"
+  },
+  {
+   "name": "徐福片区",
+   "county_name": "慈溪市",
+   "town_desc": "龙山镇徐福村",
+   "surrounding_villages": "2"
+  },
+  {
+   "name": "鸣鹤山水古韵片区",
+   "county_name": "慈溪市",
+   "town_desc": "观海卫镇双湖村",
+   "surrounding_villages": "3"
+  },
+  {
+   "name": "文化大院片区",
+   "county_name": "宁海县",
+   "town_desc": "深甽镇南溪村",
+   "surrounding_villages": "7"
+  },
+  {
+   "name": "正学乡村艺术谷片区",
+   "county_name": "宁海县",
+   "town_desc": "大佳何镇葛家村",
+   "surrounding_villages": "4"
+  },
+  {
+   "name": "象山西沪港桂花产业片区",
+   "county_name": "象山县",
+   "town_desc": "墙头镇舫前村",
+   "surrounding_villages": "6"
+  },
+  {
+   "name": "象山滨海农业公园片区",
+   "county_name": "象山县",
+   "town_desc": "丹东街道下余村",
+   "surrounding_villages": "3"
+  },
+  {
+   "name": "傅家路众家治村片区",
+   "county_name": "前湾新区",
+   "town_desc": "崇寿镇傅家路村",
+   "surrounding_villages": "3"
+  }
+ ],
+ "next_action": "等 nyncj.ningbo.gov.cn 恢复该页，或从市农业农村局/信息公开另取 .gov.cn 全文后，用 ingest_policy + build_city_rosters 入库"
+}

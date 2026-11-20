@@ -514,3 +514,6 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**判断名单在不在正文，比判断「是不是原文」更省事**。平度政务转载页把通知正文与附件名单都放在 HTML 里，直接 `fetch_gov_doc` 即可；反之台州/宁波页面 404，应先 `--dry-run` 探活再派 agent。**先 grep 第一个片区名**，再决定走正文/附件/换源
 - 2026-11-21：**工作要点/年度计划可作部署型依据**。连云港《2023 年工作要点》正文点名 3 个乡村振兴示范区，按 `docs/01` §10.2 属 `deployment` 型设立，可入库；跨县片区按 R10 分建。另：PDF 先试 pypdfium2 文本层（5171 字直抽成功），失败再 OCR
 - 2026-11-21：**数字同步做成 `--fix`**。`check_doc_caliber.py --fix` 按 CHECKS 的期望值重写 6 个文档的数字（保留「1 332」式空格分位、原子写），实测把人为改坏的 999 自动改回 556。每轮入库后的「数字同步 + 手写 patch」从 30–60 分钟压到一条命令；未被 CHECKS 覆盖的行（A 行、N = ）仍会剩 ✗，需补 CHECKS 而不是手改
+- 2026-11-21：**`.doc` 抽取链 = LibreOffice headless**。`D:\libreoffice\program\soffice.exe`，`--convert-to "txt:Text (encoded):UTF8"`，必须带 `-env:UserInstallation=file:///...`；soffice 的 stdout 是 GBK 字节，subprocess 要按 bytes 捕获再 decode（`text=True` 会崩）。但「附件 ≠ 名单」：苏州转出的是实施方案、无 9 个名单，转完先 grep 再决定
+- 2026-11-21：**只有第三方转载的名单不能入库**。宁波 20 个片区名单逐条拿到（含县区/重点村/周边村），但官方公示页 404、唯一承载是政策聚合站（非 C 级权威媒体），按 docs/07 不进 policy/source；存成 `city-extract-{code}-pending.json` 待官方页恢复，台账维持 partial
+- 2026-11-21：**同音地名域名要核对**。`nyncj.taizhou.gov.cn` 是泰州（江苏），台州市农业农村局是 `nyncj.zjtz.gov.cn`；同类别名（taizhou/zjtz）在派 agent 前先确认
