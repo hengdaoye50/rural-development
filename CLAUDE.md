@@ -205,6 +205,13 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/report_city_roster.py              # -> reports/市级名单台账.md
 & $env:MIMO_PYTHON scripts/report_city_roster.py --province 330000
 
+# 市级名单扫描结果合并（含 matched→partial 降级、note 截断；先 --dry-run）
+& $env:MIMO_PYTHON scripts/apply_city_roster_scan.py data/stage/candidates/city-roster-scan-{date}.json --dry-run
+& $env:MIMO_PYTHON scripts/apply_city_roster_scan.py data/stage/candidates/city-roster-scan-{date}.json
+
+# 名单抽取 JSON（agent 落盘）-> ingest_area_roster 候选表；县区按「市级前缀+名称」匹配
+& $env:MIMO_PYTHON scripts/build_city_rosters.py
+
 # 文档口径守卫（只读）：README/docs/00/docs/01/docs/09/HANDOVER 的关键数字与库内值比对
 & $env:MIMO_PYTHON scripts/check_doc_caliber.py
 # 不一致即非零退出；每次批量入库后跑一次，防止「数字地基」再次漂移
@@ -498,3 +505,7 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-20：**市级名单用「一市一智能体」并行核，结果必须落成 JSON 文件**。40 市一次跑完（6 个/批，受子智能体并发上限 8 限制），命中 35 市；但第一轮只返回文本、没落盘，导致结果无法被脚本复用，只能重跑。第二轮改为「智能体把 JSON 写到 data/stage/candidates/city-extract-{code}.json」，再由 `build_city_rosters.py` 生成候选表——**并行产出必须落到工作区文件，不能只停在对话里**
 - 2026-11-20：**县区解析必须「城市前缀 + 名称」双重匹配**。枣庄「市中区」被按名称匹配到济南市市中区（370103），一次错 2 条（孟庄镇/西王庄镇）。全国同名县区（市中区/城区/新城区/开发区等）很多，凡按名称查 `region` 都要带父级前缀
 - 2026-11-20：**市级名单是主统计增长的现实来源**。三市入库 39 条（青岛第二批 8、枣庄 20、常州 11）全部 2022 年后成立且有官方 primary 依据，主统计 477→**516**。这些市之前库内只有零星区县来源，市级名单一次性补上县以下实体——验证了「省→市」的分层判断
+- 2026-11-21：**智能体集群三条硬约束**（本轮实测）：①子智能体并发上限 8，超过会让**整个 workflow 失败**，必须 6 个/批串行；②workflow 返回值不落盘且长结果会被截断，要复用的产出必须让 agent 用 write 写到 `data/stage/candidates/` 并返回 file_path；③agent 的 `matched` 只是「找到了页面」，入库前的台账只能记 `partial`，`matched` 必须由根侧在条目入库后确认
+- 2026-11-21：**CSV 写盘必须原子化**。`apply_city_roster_scan` 因更新 dict 多出一个表头外字段（source_url），`writerows` 中途抛错，把 40 行 `city_roster.csv` 写成 1 行。规则：写前断言 `set(row) <= set(fieldnames)`；写临时文件再 `os.replace`；任何批量 CSV 写入都要能「失败即原样」
+- 2026-11-21：**县区解析必须带市级前缀，功能区要有别名表**。枣庄「市中区」按名称匹配到济南（370103）错 2 条；烟台潮水镇（黄渤海新区）无县级码被拒。别名：黄渤海新区→蓬莱 370614、西海岸新区→黄岛 370211、常州经开区→武进 320412、泰安高新区→岱岳 370911
+- 2026-11-21：**附件型名单要有独立抽取链**。`fetch_gov_doc` 只吃 HTML：淄博名单在 docx（zipfile 读 `word/document.xml` 去标签）、东营/泰安排在 PDF（`.venv-ocr` 的 pypdfium2 抽文本层）、宿迁在 20 张扫描页（rapidocr）。本轮完整踩坑清单与下一轮 SOP 见 `reports/qa/经验教训-2026-11-21.md`

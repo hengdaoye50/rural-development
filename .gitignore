@@ -39,3 +39,4 @@ data/stage/candidates/*
 !data/stage/candidates/gap-checks-*.csv
 !data/stage/candidates/pending-decisions-*.csv
 !data/stage/candidates/t2-decisions-*.csv
+.tmp*/
