@@ -201,6 +201,10 @@ $env:MIMO_PYTHON
 # 省级名单台账（province_roster 表）：31 省名单状态 + 官方数 vs 库内已入库
 & $env:MIMO_PYTHON scripts/report_province_roster.py          # -> reports/省级名单台账.md
 
+# 市级名单台账（city_roster 表）：浙苏鲁 40 市起，逐市名单状态 + 官方数 vs 库内已入库
+& $env:MIMO_PYTHON scripts/report_city_roster.py              # -> reports/市级名单台账.md
+& $env:MIMO_PYTHON scripts/report_city_roster.py --province 330000
+
 # 文档口径守卫（只读）：README/docs/00/docs/01/docs/09/HANDOVER 的关键数字与库内值比对
 & $env:MIMO_PYTHON scripts/check_doc_caliber.py
 # 不一致即非零退出；每次批量入库后跑一次，防止「数字地基」再次漂移
@@ -489,3 +493,5 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   2021 年《第一批试点**村**名单》，村层；而原裁定（2026-11）是「改采该名单作抽样框」。
   两者冲突，已在 `province_roster` 标 `not_area` 并注记，等用户重新裁定
 - 2026-11-20：**「未见名单」逐省清零后，结论是「多数省根本没有省级片区名单」**。海南（和美乡村 100/200 村）、重庆（巴渝示范村/镇）、青海（示范试点村）、宁夏（示范乡镇 10 个）、新疆（示范村建设名单）全部是**村/乡镇层**名单，改判 not_area。31 省里只有 4 个能逐条对账（津/冀/鄂/桂）、3 个部分（辽/沪/粤）、6 个只有官方数；余下 15 个省的省级名单对象不是县以下片区。**这不是数据缺口，是制度事实**：县以下片区主要靠市/县级名单，省级层更多是「试点县/示范村」框架
+- 2026-11-20：**市级层是县以下片区实体的主要来源**。省层多数只到「试点县/示范村」，而市级会直接命名片区（湖州「样板片区」6 批、绍兴「精品片区」认定、烟台 2025 市级 6 个、宿迁「八大示范片区」）。故「省→市→县」的下一层是市，且市级名单要进 `city_roster` 台账（与 `province_roster` 同构），否则覆盖率分母无来源
+- 2026-11-20：**市级台账的 `none` 不能写成「该市没有」**。浙苏鲁 40 市里 34 市标 `none`，含义只是「库里没有市级名单文件、未做站外检索」。台账 note 必须写清这一点，否则下一轮会把「没搜过」读成「不存在」

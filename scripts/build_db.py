@@ -185,6 +185,23 @@ CREATE TABLE IF NOT EXISTS area_source_map (
 
 -- 省级名单台账：每省「省级层面有没有一份可逐条对账的片区名单」
 -- 用途：报覆盖率时分母来源登记；status 只用封闭枚举（见 docs/02）
+CREATE TABLE IF NOT EXISTS city_roster (
+    city_code      TEXT PRIMARY KEY,
+    city_name      TEXT,
+    province_code  TEXT NOT NULL,
+    roster_name    TEXT,
+    roster_scope   TEXT,
+    policy_id      TEXT,
+    source_id      TEXT,
+    official_count INTEGER,
+    in_db_count    INTEGER,
+    count_basis    TEXT,
+    status         TEXT NOT NULL CHECK (status IN
+                     ("matched","partial","count_only","not_area","none")),
+    note           TEXT,
+    updated_at     TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS province_roster (
     province_code  TEXT PRIMARY KEY,
     roster_name    TEXT,           -- 名单名称；空表示未见
@@ -275,6 +292,7 @@ CSV_TABLES = {
     "area_source_map": "area_source_map.csv",
     "area_policy_map": "area_policy_map.csv",
     "province_roster": "province_roster.csv",
+    "city_roster": "city_roster.csv",
 }
 
 
