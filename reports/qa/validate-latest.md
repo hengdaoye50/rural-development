@@ -1,11 +1,11 @@
 # QA 报告
 
-- area: 1266
-- source: 478
+- area: 1272
+- source: 479
 - region: 3229
 - belt: 118
 - policy: 1702
-- area_policy_map: 1981
+- area_policy_map: 1987
 - event: 731
 - issues: 0
 - warnings: 2234
