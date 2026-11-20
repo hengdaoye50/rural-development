@@ -1,0 +1,15 @@
+{
+    "source_url":  "http://gxq.taian.gov.cn/module/download/downfile.jsp?classid=0\u0026filename=0b0fd9f7fbb14c458f854e32e773f8a0.pdf",
+    "ocr":  "scripts/ocr_pdf.py（.venv-ocr, rapidocr）",
+    "pdf_text_layer":  "不可用（字体 ToUnicode 映射损坏，PyMuPDF 抽取为乱码），改用 OCR + 页面渲染校读",
+    "published_ymd":  "2022-05-05",
+    "site":  "gxq.taian.gov.cn",
+    "issuer":  "泰安市乡村振兴工作领导小组办公室",
+    "file_pdf":  "原件.pdf",
+    "fetched_at":  "2026-11-20",
+    "sha256_pdf":  "1bba560ee6816ce43cefb97013ee724d49b7c491fde777481525ddfe2d536de7",
+    "pdf_pages":  2,
+    "doc_no":  "",
+    "doc_title":  "关于公布2022年度市级乡村振兴示范区创建名单的通知",
+    "file_text":  "原文.md"
+}

@@ -1,0 +1,27 @@
+{
+  "source_id": null,
+  "primary_url": "http://www.rizhao.gov.cn/module/download/downfile.jsp?classid=0&filename=0a098be18e7e47bfac3e6150035af723.pdf",
+  "secondary_urls": [
+    "http://www.rizhao.gov.cn/module/download/downfile.jsp?classid=0&filename=31f56745bf6e414ebb56504aa2a0e5e2.pdf"
+  ],
+  "title": "日照市农业农村局《关于公布2021年度日照市市级美丽乡村创建名单的通知》（日农社字〔2021〕1号）附件1 市级美丽乡村片区创建名单；另附2022年度同类文件（日农社字〔2022〕6号）",
+  "publisher": "日照市农业农村局",
+  "published_ymd": "2021-07-14",
+  "fetched_at": "2026-11-20",
+  "credibility": "A",
+  "source_kind": "gov",
+  "local_path": "data/raw/SD/20261120-rizhao-city-pianqu/原文.md",
+  "attachments": [
+    "原件-日农社字2021-1号.pdf",
+    "原件-日农社字2022-6号.pdf",
+    "OCR-2021.txt",
+    "OCR-2022.txt"
+  ],
+  "hashes": {
+    "原件-日农社字2021-1号.pdf": "c6ec74219dbce0d9a6bc5f658403303965e43ceabd6c3d948e515b2df808a0de",
+    "原件-日农社字2022-6号.pdf": "e668699fbef56c814470780743779bb1969b81a7fb4b4e3a745799b1553c9bef"
+  },
+  "extraction_note": "PDF 内嵌字体无 ToUnicode 映射，pymupdf/pypdf 抽取为乱码；正文由 scripts/ocr_pdf.py（.venv-ocr）识别，摘录以 OCR 文本为准，OCR 可能有个别形近字误差",
+  "areas": [],
+  "created_by": "agent-43"
+}

@@ -34,6 +34,8 @@ data/stage/batches/
 data/stage/candidates/*
 !data/stage/candidates/area-roster-*.csv
 !data/stage/candidates/area-media-roster-*.csv
+!data/stage/candidates/city-extract-*.json
+!data/stage/candidates/city-roster-scan-*.json
 !data/stage/candidates/gap-checks-*.csv
 !data/stage/candidates/pending-decisions-*.csv
 !data/stage/candidates/t2-decisions-*.csv

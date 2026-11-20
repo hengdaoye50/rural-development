@@ -1,0 +1,86 @@
+{
+  "city_code": "370900",
+  "city_name": "泰安市",
+  "ok": true,
+  "policy_url": "http://gxq.taian.gov.cn/module/download/downfile.jsp?classid=0&filename=0b0fd9f7fbb14c458f854e32e773f8a0.pdf",
+  "policy_title": "关于公布2022年度市级乡村振兴示范区创建名单的通知",
+  "policy_issuer": "泰安市乡村振兴工作领导小组办公室",
+  "policy_doc_no": "",
+  "policy_published_ymd": "2022-05-05",
+  "areas": [
+    {
+      "name": "泰山区中部乡村振兴示范区",
+      "county_name": "泰山区",
+      "town_desc": "",
+      "note": "原文附件第1条，以「区名+方位」命名，未列具体乡镇/村范围；正文亦称「泰山区中部示范区」"
+    },
+    {
+      "name": "岱岳区山口镇乡村振兴示范区",
+      "county_name": "岱岳区",
+      "town_desc": "山口镇",
+      "note": "原文附件第2条；正文亦称「岱岳区山口镇示范区」"
+    },
+    {
+      "name": "岱岳区范镇乡村振兴示范区",
+      "county_name": "岱岳区",
+      "town_desc": "范镇",
+      "note": "原文附件第3条，镇名为「范镇」"
+    },
+    {
+      "name": "新泰市龙廷镇乡村振兴示范区",
+      "county_name": "新泰市",
+      "town_desc": "龙廷镇",
+      "note": "原文附件第4条"
+    },
+    {
+      "name": "新泰市青云街道乡村振兴示范区",
+      "county_name": "新泰市",
+      "town_desc": "青云街道",
+      "note": "原文附件第5条，范围为街道"
+    },
+    {
+      "name": "肥城市桃园镇乡村振兴示范区",
+      "county_name": "肥城市",
+      "town_desc": "桃园镇",
+      "note": "原文附件第6条"
+    },
+    {
+      "name": "肥城市老城街道乡村振兴示范区",
+      "county_name": "肥城市",
+      "town_desc": "老城街道",
+      "note": "原文附件第7条，范围为街道"
+    },
+    {
+      "name": "宁阳县伏山镇乡村振兴示范区",
+      "county_name": "宁阳县",
+      "town_desc": "伏山镇",
+      "note": "原文附件第8条"
+    },
+    {
+      "name": "宁阳县磁窑镇乡村振兴示范区",
+      "county_name": "宁阳县",
+      "town_desc": "磁窑镇",
+      "note": "原文附件第9条"
+    },
+    {
+      "name": "东平县梯门镇乡村振兴示范区",
+      "county_name": "东平县",
+      "town_desc": "梯门镇",
+      "note": "原文附件第10条"
+    },
+    {
+      "name": "东平县接山镇乡村振兴示范区",
+      "county_name": "东平县",
+      "town_desc": "接山镇",
+      "note": "原文附件第11条"
+    },
+    {
+      "name": "泰安高新区北集坡乡村振兴示范区",
+      "county_name": "泰安高新区",
+      "town_desc": "北集坡",
+      "note": "原文附件第12条，按功能区列名；北集坡为街道，原文未标「街道」；泰安高新区为功能区而非县级行政区划，北集坡街道行政上属岱岳区（据乡镇推断）"
+    }
+  ],
+  "excluded": [],
+  "problem": ""
+}

@@ -1,0 +1,44 @@
+{
+  "city_code": "370500",
+  "city_name": "东营市",
+  "ok": true,
+  "policy_url": "http://www.lijin.gov.cn/module/download/downfile.jsp?filename=2908e43c690447b995fd2fc3ceee72fa.pdf&classid=0",
+  "policy_title": "关于批准创建第三批市级乡村振兴示范片区的通知",
+  "policy_issuer": "中共东营市委农业农村委员会办公室、东营市农业农村局",
+  "policy_doc_no": "东农委办发〔2023〕11号",
+  "policy_published_ymd": "2023-05-24",
+  "areas": [
+    {
+      "name": "东营区“魅力城南”乡村振兴示范片区",
+      "county_name": "东营区",
+      "town_desc": "",
+      "note": "原文附件《第三批市级乡村振兴示范片区创建名单》第1条，片区名称前直接冠县区名；名单未列乡镇/村范围"
+    },
+    {
+      "name": "河口区“七彩孤岛”乡村振兴示范片区",
+      "county_name": "河口区",
+      "town_desc": "",
+      "note": "原文附件名单第2条，片区名称前直接冠县区名；名单未列乡镇/村范围"
+    },
+    {
+      "name": "垦利区“海智渔乡”乡村振兴示范片区",
+      "county_name": "垦利区",
+      "town_desc": "",
+      "note": "原文附件名单第3条，片区名称前直接冠县区名；名单未列乡镇/村范围"
+    },
+    {
+      "name": "广饶县“粮河故道”乡村振兴示范片区",
+      "county_name": "广饶县",
+      "town_desc": "",
+      "note": "原文附件名单第4条，片区名称前直接冠县区名；名单未列乡镇/村范围"
+    },
+    {
+      "name": "利津县“田园牧歌”乡村振兴示范片区",
+      "county_name": "利津县",
+      "town_desc": "",
+      "note": "原文附件名单第5条，片区名称前直接冠县区名；名单未列乡镇/村范围"
+    }
+  ],
+  "excluded": [],
+  "problem": ""
+}

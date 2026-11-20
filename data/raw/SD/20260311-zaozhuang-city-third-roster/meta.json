@@ -1,0 +1,28 @@
+{
+  "source_url": "http://www.zaozhuang.gov.cn/zwgk/zfgzbm/snyncj/202605/t20260527_2288034.html",
+  "source_kind": "gov_website",
+  "domain": "www.zaozhuang.gov.cn",
+  "fetched_at": "2026-11-20",
+  "city_code": "370400",
+  "city_name": "枣庄市",
+  "province_code": "370000",
+  "policy_title": "关于公布市级第三批乡村振兴片区创建提升名单的通知",
+  "policy_issuer": "中共枣庄市委农村工作领导小组办公室 枣庄市农业农村局 枣庄市财政局",
+  "policy_doc_no": "",
+  "policy_published_ymd": "2026-03-11",
+  "index_no": "370400/2026-00009",
+  "attachments": [
+    "1.第三批市级乡村振兴片区创建名单（15 个）",
+    "2.市级乡村振兴片区提升名单（5 个）"
+  ],
+  "attachment_pdf": "原件.pdf",
+  "attachment_pdf_note": "扫描件，pypdf extract_text 抽 0 字符；已用 .venv-ocr（rapidocr）OCR 第 3-5 页，结果与 HTML 页内附件文本一致",
+  "extracted_counts": {
+    "attach1_create": 15,
+    "attach2_improve": 5,
+    "total": 20
+  },
+  "county_inference": "正文与附件只给镇街名、未给县（市、区）；县区名按行政区划常识推断，逐条 note 已标「据乡镇推断」",
+  "excluded_objects": [],
+  "note": "名单对象全部为「乡村振兴片区」，无示范村/示范乡镇/精品村/整县试点混入"
+}

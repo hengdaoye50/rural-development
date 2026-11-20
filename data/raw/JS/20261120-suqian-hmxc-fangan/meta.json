@@ -1,0 +1,34 @@
+{
+  "doc_title": "市委办公室 市政府办公室关于印发《高质量建设宜居宜业和美乡村的实施方案》的通知",
+  "doc_no": "宿办发〔2024〕5号",
+  "doc_date": "2024-03-18",
+  "issuer": "中共宿迁市委办公室、宿迁市人民政府办公室",
+  "issuer_level": "city",
+  "province": "江苏省",
+  "city": "宿迁市",
+  "city_code": "321300",
+  "url": "https://kfq.suqian.gov.cn/sjjkfq/xczx/202407/cd5088996404468985cf9252b805b81a.shtml",
+  "url_alt": "http://www.suyu.gov.cn/suyu/nynczc/202407/108e22bd65f24ba9b4a4df3ed2ba21b4.shtml",
+  "site": "kfq.suqian.gov.cn（宿迁经济技术开发区管理委员会）",
+  "source_kind": "gov",
+  "credibility": "A",
+  "access": "正文为 20 张 PNG 页面图，无 HTML 文本层；PDF 原件（suqian.gov.cn/zfb/zcfg/202404/...pdf）已 404",
+  "retrieval": "2026-11-20 Invoke-WebRequest 抓取页面与 20 张页面图；rapidocr 全文 OCR；第 4/5 页与页面图逐字核对",
+  "text_form": "OCR",
+  "full_text_chars": 14376,
+  "areas": [
+    {"name": "黄河故道北部国家农业公园片区", "body": "宿城区王官集镇、蔡集镇、耿车镇", "radiate": "湖滨新区皂河镇", "counties": ["宿城区", "湖滨新区"]},
+    {"name": "黄河故道中部都市农业片区", "body": "宿城区龙河镇、埠子镇", "radiate": "宿迁经开区南蔡乡、市洋河新区仓集片区", "counties": ["宿城区", "宿迁经开区", "洋河新区"]},
+    {"name": "黄河故道南部生态富民片区", "body": "泗阳县卢集镇、李口镇、新袁镇、城厢街道", "radiate": "", "counties": ["泗阳县"]},
+    {"name": "六塘河上游农旅融合片区", "body": "宿豫区曹集乡、新庄镇、大兴镇", "radiate": "", "counties": ["宿豫区"]},
+    {"name": "六塘河中部稻香农园片区", "body": "宿豫区来龙镇、关庙镇，泗阳县穿城镇", "radiate": "", "counties": ["宿豫区", "泗阳县"]},
+    {"name": "洪泽湖渔家风情片区", "body": "泗洪县龙集镇、半城镇、临淮镇", "radiate": "", "counties": ["泗洪县"]},
+    {"name": "淮沭河花乡核心区片区", "body": "沭阳县耿圩镇、陇集镇", "radiate": "新河镇、颜集镇、扎下镇", "counties": ["沭阳县"]},
+    {"name": "古泊河创业富民片区", "body": "沭阳县青伊湖镇、桑墟镇、贤官镇", "radiate": "", "counties": ["沭阳县"]}
+  ],
+  "files": {
+    "full_text_ocr": "原文.md",
+    "verified_excerpt": "八大片区-原文摘录.md",
+    "page_images": "原件图片/"
+  }
+}

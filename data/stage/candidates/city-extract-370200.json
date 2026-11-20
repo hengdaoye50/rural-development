@@ -1,0 +1,62 @@
+{
+  "city_code": "370200",
+  "city_name": "青岛市",
+  "ok": true,
+  "policy_url": "http://nw.qingdao.gov.cn/zwgk/nyncj11/202506/t20250609_9639717.shtml",
+  "policy_title": "第二批市级乡村振兴片区名单公示",
+  "policy_issuer": "青岛市农业农村局",
+  "policy_doc_no": "",
+  "policy_published_ymd": "2025-06-09",
+  "areas": [
+    {
+      "name": "崂山湾",
+      "county_name": "崂山区",
+      "town_desc": "王哥庄街道",
+      "note": "原文：「崂山区王哥庄街道“崂山湾”」，为第二批市级乡村振兴片区拟确定对象，公示期2025-06-09至2025-06-11"
+    },
+    {
+      "name": "琅琊台",
+      "county_name": "西海岸新区",
+      "town_desc": "琅琊镇",
+      "note": "原文：「西海岸新区琅琊镇“琅琊台”」；西海岸新区即黄岛区，county_name 照抄原文用字"
+    },
+    {
+      "name": "山水藏马",
+      "county_name": "西海岸新区",
+      "town_desc": "藏马镇",
+      "note": "原文：「西海岸新区藏马镇“山水藏马”」；西海岸新区即黄岛区，county_name 照抄原文用字"
+    },
+    {
+      "name": "百果百福",
+      "county_name": "城阳区",
+      "town_desc": "惜福镇街道",
+      "note": "原文：「城阳区惜福镇街道“百果百福”」"
+    },
+    {
+      "name": "灵秀原乡",
+      "county_name": "即墨区",
+      "town_desc": "灵山街道",
+      "note": "原文：「即墨区灵山街道“灵秀原乡”」"
+    },
+    {
+      "name": "智农祓里",
+      "county_name": "胶州市",
+      "town_desc": "里岔镇",
+      "note": "原文：「胶州市里岔镇“智农祓里”」，片名用字「祓」照原文保留"
+    },
+    {
+      "name": "编艺侨乡",
+      "county_name": "平度市",
+      "town_desc": "新河镇",
+      "note": "原文：「平度市新河镇“编艺侨乡”」"
+    },
+    {
+      "name": "醉美萄院",
+      "county_name": "莱西市",
+      "town_desc": "院上镇",
+      "note": "原文：「莱西市院上镇“醉美萄院”」"
+    }
+  ],
+  "excluded": [],
+  "problem": ""
+}
