@@ -94,12 +94,15 @@ def main() -> int:
             print("  ~", s["source_id"], "->", d.relative_to(ROOT))
             ok += 1
             continue
-        f.write_text(body, encoding="utf-8")
+        # newline="\n" 防止 Windows 文本模式把 LF 写坏，哈希才与文件一致
+        with f.open("w", encoding="utf-8", newline="\n") as fh:
+            fh.write(body)
+        digest = hashlib.sha256(f.read_bytes()).hexdigest()
         hdr, rows = read(sp)
         for r in rows:
             if r.get("source_id") == s["source_id"]:
                 r["local_path"] = str(f.relative_to(ROOT)).replace("\\", "/")
-                r["hash_sha256"] = hashlib.sha256(body.encode("utf-8")).hexdigest()
+                r["hash_sha256"] = digest
                 r["fetched_at"] = date.today().isoformat()
                 r["excerpt_status"] = "verbatim" if (r.get("excerpt") or "").strip() and \
                     (r["excerpt"].strip() in body or re.sub(r"\s", "", r["excerpt"]) in re.sub(r"\s", "", body)) else "digest"
