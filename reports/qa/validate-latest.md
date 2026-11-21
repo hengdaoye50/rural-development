@@ -4,23 +4,21 @@
 - source: 494
 - region: 3229
 - belt: 118
-- policy: 1717
-- area_policy_map: 2203
+- policy: 1742
+- area_policy_map: 2254
 - event: 731
 - issues: 0
-- warnings: 2237
+- warnings: 2235
 
 问题清单为空。
 
 ## 警告（不阻断）
-- [source:S140004] A/B/C 级缺 local_path 快照
 - [source:S140005] A/B/C 级缺 local_path 快照
 - [source:S310003] A/B/C 级缺 local_path 快照
 - [source:S340001] A/B/C 级缺 local_path 快照
 - [source:S340002] A/B/C 级缺 local_path 快照
 - [source:S340003] A/B/C 级缺 local_path 快照
 - [source:S360006] A/B/C 级缺 local_path 快照
-- [source:S360009] A/B/C 级缺 local_path 快照
 - [source:S430011] A/B/C 级缺 local_path 快照
 - [source:S460003] A/B/C 级缺 local_path 快照
 - [source:S510007] A/B/C 级缺 local_path 快照

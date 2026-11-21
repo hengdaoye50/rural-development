@@ -23,7 +23,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "data" / "db" / "片区库.sqlite3"
 OUT = ROOT / "data" / "clean" / "evidence_debt.csv"
 COLS = ["debt_id", "entity_type", "entity_id", "entity_name", "province_code",
-        "debt_type", "detail", "last_seen"]
+        "debt_type", "actionable", "detail", "last_seen"]
+ACTIONABLE = {"excerpt_digest", "missing_snapshot"}
 TODAY = "2026-11-21"
 
 
@@ -36,7 +37,8 @@ def main() -> int:
     def add(entity_type, eid, name, prov, dtype, detail):
         rows.append(dict(debt_id=f"{dtype}:{eid}", entity_type=entity_type, entity_id=eid,
                          entity_name=(name or "")[:60], province_code=prov or "",
-                         debt_type=dtype, detail=(detail or "")[:160], last_seen=TODAY))
+                         debt_type=dtype, actionable=1 if dtype in ACTIONABLE else 0,
+                         detail=(detail or "")[:160], last_seen=TODAY))
 
     for s in con.execute("select source_id, title, excerpt_status, local_path from source"):
         if s["excerpt_status"] == "digest":
@@ -60,7 +62,8 @@ def main() -> int:
                         "county_village", r["roster_name"][:80])
 
     cnt = Counter(r["debt_type"] for r in rows)
-    print("evidence_debt:", len(rows), dict(cnt))
+    act = sum(1 for r in rows if r["actionable"])
+    print("evidence_debt:", len(rows), dict(cnt), f"其中可执行 {act} / 结构性 {len(rows) - act}")
     if dry:
         print("dry-run，未写盘")
         return 0

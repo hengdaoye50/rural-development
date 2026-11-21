@@ -96,7 +96,7 @@ A330272,P330084,area,support
 A330399,P330084,area,mention
 A330027,P330086,area,mention
 A330027,P330087,area,support
-A330083,P330087,area,mention
+A330083,P330087,area,support
 A330400,P330090,area,mention
 A330089,P330090,area,primary
 A330093,P330090,area,mention
@@ -494,8 +494,8 @@ A330296,P330482,area,primary
 A330036,P330483,area,support
 A330038,P330484,area,support
 A330039,P330485,area,mention
-A330165,P330486,area,mention
-A330168,P330486,area,mention
+A330165,P330486,area,support
+A330168,P330486,area,support
 A330015,P330487,area,support
 A330170,P330488,area,support
 A330166,P330489,area,support
@@ -508,7 +508,7 @@ A330053,P330492,area,mention
 A330053,P330493,area,mention
 A330289,P330494,area,mention
 A330085,P330495,area,mention
-A330074,P330496,area,mention
+A330074,P330496,area,support
 A330155,P330497,area,primary
 A330157,P330497,area,primary
 A330158,P330497,area,primary
@@ -634,3 +634,8 @@ A330450,P330437,area,primary
 A330451,P330437,area,primary
 A330452,P330437,area,primary
 A330453,P330532,area,primary
+A330155,P330533,area,primary
+A330156,P330533,area,primary
+A330157,P330533,area,primary
+A330158,P330533,area,primary
+A330267,P330533,area,primary

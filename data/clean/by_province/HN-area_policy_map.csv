@@ -38,7 +38,7 @@ A430024,P430031,area,primary
 A430025,P430031,area,primary
 A430006,P430032,area,mention
 A430005,P430032,area,mention
-A430005,P430033,area,mention
+A430005,P430033,area,support
 A430028,P430034,area,primary
 A430029,P430034,area,primary
 A430030,P430034,area,primary
@@ -152,3 +152,10 @@ A430137,P430034,area,primary
 A430138,P430034,area,primary
 A430139,P430034,area,primary
 A430140,P430034,area,primary
+A430005,P430035,area,primary
+A370112,P430036,area,support
+A430006,P430036,area,support
+A430008,P430037,area,primary
+A430011,P430037,area,primary
+A430012,P430037,area,primary
+A430013,P430037,area,primary

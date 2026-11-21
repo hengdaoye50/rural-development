@@ -218,6 +218,15 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/migrate_level_fields.py
 # 跑完接 merge_by_province -> build_db -> validate_db
 
+# 清欠账（第 3 轮）：.gov.cn source 升格 policy、mention→support、credibility 修正、待核升级
+& $env:MIMO_PYTHON scripts/promote_sources_to_policies.py --dry-run
+& $env:MIMO_PYTHON scripts/promote_sources_to_policies.py
+& $env:MIMO_PYTHON scripts/fix_promoted_policies.py     # 补 county_code / 降 issuer_level / 挂接
+& $env:MIMO_PYTHON scripts/clear_evidence_debt.py       # mention→support、C→B、待核→运行中
+& $env:MIMO_PYTHON scripts/reanchor_excerpts.py         # 二轮 excerpt 重锚（difflib）
+& $env:MIMO_PYTHON scripts/refetch_missing_sources.py --limit 20   # 无快照来源补采
+# 跑完接 merge_by_province -> build_db -> validate_db -> build_evidence_debt
+
 # 县级名单台账：从 policy(issuer_level=county) 筛名单/认定类，生成 data/clean/county_roster.csv
 & $env:MIMO_PYTHON scripts/build_county_roster.py --dry-run
 & $env:MIMO_PYTHON scripts/build_county_roster.py
@@ -552,3 +561,4 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**口径要从「视图 + 文档」实体化为「字段 + 表 + 分析视图」**。设计见 `docs/10-统计口径与数据库设计.md`：①`area.admin_level`/`agency_level`（空间层级与设立主体分层）；②`source.excerpt_status`（verbatim/digest/missing）；③`v_analysis_area` 分析主表（一行一区，含证据强度）；④`county_roster` 县级台账；⑤`evidence_debt` 欠账表；⑥`area_policy_map.evidence_tier` 回写。**目标：任何数字一条 SQL 可复现、任何「有依据」可追到点名级证据**
 - 2026-11-21：**口径实体化（第 1 轮）完成**。`area.admin_level`（空间层级 county/city）+ `area.agency_level`（设立主体 province/city/county/town/unknown）+ `source.excerpt_status`（verbatim/digest/missing）+ 分析视图 `v_analysis_area`（一行一区，1475 行）。派生规则：primary 政策 issuer_level → issuer 关键词 → support 政策；直辖市特例保留。实测：agency_level = city 437 / county 394 / province 378 / unknown 229 / town 37；excerpt_status = verbatim 290 / digest 190 / missing 14。**下一轮**：报告改从视图取数、建 `county_roster`、`evidence_debt`
 - 2026-11-21：**口径实体化第 2 轮完成**。①`county_roster` 县级台账（15 县：matched 2 / not_area 13，**县级公开名单绝大多数是村/乡镇层**，这是制度事实不是缺采）；②`evidence_debt` 欠账表 774 条（pending_review 326 / no_primary 231 / excerpt_digest 190 / missing_snapshot 14 / county_village 13）；③层级分布报告改读 `agency_level` 字段，单一事实源（省378/地市437/县区394/乡镇37/未知228）；④validate 增两张台账的引用与数值校验。**欠账要报、不要清**：对外数字必须声明未清欠账条数
+- 2026-11-21：**欠账要分清「可执行」与「结构性」**。774 条欠账里，真正有动作可做的是 excerpt_digest + missing_snapshot（43 条）；待核 322（媒体唯一来源）、no_primary 182（E 组）、county_village 13（村层名单已裁定）都是**已知口径状态**，不是待办。**清欠账的四把刀**：①`.gov.cn` 的 `source` 升格 `policy`（根因：早期只登记 source，政策层天然"无依据"）；②mention→support（正文真点名）；③credibility C→B（.gov.cn 域误标）；④excerpt 二轮重锚（difflib 最长公共块）。实测：no_primary 231→182、digest 190→30、主统计 591→630、宽 792→846

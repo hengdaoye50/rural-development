@@ -6,4 +6,10 @@ A110009,P110005,area,support
 A110001,P110006,area,mention
 A110002,P110006,area,mention
 A110003,P110006,area,mention
-A110010,P110007,area,mention
+A110010,P110007,area,support
+A110001,P110008,area,primary
+A110002,P110008,area,primary
+A110003,P110008,area,primary
+A110007,P110009,area,primary
+A110010,P110010,area,primary
+A110012,P110010,area,primary

@@ -329,6 +329,7 @@ CREATE TABLE IF NOT EXISTS evidence_debt (
     entity_name   TEXT,
     province_code TEXT,
     debt_type     TEXT NOT NULL,
+    actionable    INTEGER,
     detail        TEXT,
     last_seen     TEXT
 );

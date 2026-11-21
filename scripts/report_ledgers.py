@@ -59,9 +59,13 @@ def main() -> int:
         "每一行是一条可执行的补采/修正任务。\n")
     debts = list(con.execute("select * from evidence_debt"))
     by = Counter(r["debt_type"] for r in debts)
+    act = sum(1 for r in debts if r["actionable"] == 1)
+    m(f"**总计 {len(debts)} 条：可执行 {act} 条 / 结构性 {len(debts) - act} 条**\n")
+    m("「可执行」= 有具体动作可做（重锚摘录/补采快照）；「结构性」= 已知口径状态（待核/无依据/村层名单），"
+      "不是待办，也不应计入「待清账」。\n")
     m("## 一、按类型\n")
-    m("| 类型 | 条数 | 含义 | 处置 |")
-    m("|---|---|---|---|")
+    m("| 类型 | 条数 | 可执行 | 含义 | 处置 |")
+    m("|---|---|---|---|---|")
     MEAN = {
         "pending_review": ("status=待核", "补 .gov.cn 原文或官方名单后升 运行中"),
         "no_primary": ("在册非待核但无 primary/support", "补挂政策或降待核"),
@@ -71,7 +75,8 @@ def main() -> int:
     }
     for k, n in by.most_common():
         mean, fix = MEAN.get(k, ("", ""))
-        m(f"| {k} | {n} | {mean} | {fix} |")
+        na = sum(1 for r in debts if r["debt_type"] == k and r["actionable"] == 1)
+        m(f"| {k} | {n} | {na} | {mean} | {fix} |")
     m("")
     m("## 二、按省分布（前 12）\n")
     m("| 省 | 欠账条数 |")
