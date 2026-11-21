@@ -518,3 +518,4 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**只有第三方转载的名单不能入库**。宁波 20 个片区名单逐条拿到（含县区/重点村/周边村），但官方公示页 404、唯一承载是政策聚合站（非 C 级权威媒体），按 docs/07 不进 policy/source；存成 `city-extract-{code}-pending.json` 待官方页恢复，台账维持 partial
 - 2026-11-21：**同音地名域名要核对**。`nyncj.taizhou.gov.cn` 是泰州（江苏），台州市农业农村局是 `nyncj.zjtz.gov.cn`；同类别名（taizhou/zjtz）在派 agent 前先确认
 - 2026-11-21：**扫描提示词漏写「写文件」= 白跑**。广东+河南 38 市扫描结果只在对话里，只能手工挑平顶山/鹤壁两市的记录入库，其余 36 市结论无法批量入账。**固定尾句**：让 agent 用 write 把 JSON 写到 `data/stage/candidates/{prefix}-{code}.json` 并返回 file_path；派发前自查「并发 ≤6/批、有 write 指令、schema 含 file_path」三项
+- 2026-11-21：**四川的「片区」多半是国土空间规划分区，不是乡村振兴片区**。绵阳/乐山/广安/巴中/凉山/遂宁/内江/雅安/阿坝/资阳 10 市的「片区」实为县域国土空间规划里的乡镇级片区（规划分区），有官方文件但按 docs/01 §3 不收。判据：标题含「国土空间规划／乡镇级片区／镇级片区／县域内片区划分」→ 台账记 `not_area`。**看到「片区」先判它是哪套制度里的片区**
