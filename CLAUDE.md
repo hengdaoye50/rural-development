@@ -267,7 +267,13 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/media_leads.py --from-code 0 --limit 50 --channels sogou-wechat
 # 产出 data/stage/candidates/media-leads-{date}.csv；实测与方案见 reports/gaps/media-leads-2026-11.md
 
-# 公众号正文（需 OpenCLI Browser Bridge：Chrome 运行中 + 扩展已连）
+# 公众号正文（OpenCLI Browser Bridge 已连通 2026-11-21；opencli 必须经 PowerShell 调，Windows 下是 .ps1 shim）
+& $env:MIMO_PYTHON scripts/wechat_fetch_urls.py --abbr SD --urls "<mp.weixin URL>"
+& $env:MIMO_PYTHON scripts/wechat_batch_collect.py --preset sd5 --top 2
+# 产出 data/raw/{ABBR}/{date}-{slug}/原文.md + data/stage/candidates/wechat-urls-{date}.csv
+# 注意：名单常常是文章里的长图，需要 OCR（.venv-ocr）才能取到名字
+
+# 公众号正文（旧：需 OpenCLI Browser Bridge：Chrome 运行中 + 扩展已连）
 # 必须一条龙跑：mp.weixin 的签名链一次性，复用旧链只会拿到空壳
 & $env:MIMO_PYTHON scripts/wechat_fetch.py --query "沁水县 片区 乡村振兴" --top 4
 # 产出 data/stage/candidates/wechat-md/*.md + wechat-fetch-{date}.csv
