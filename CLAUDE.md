@@ -22,7 +22,8 @@
 │   ├── 03-采集规范.md        # 检索关键词、来源优先级、质检
 │   ├── 04-行政区划代码表.md  # 省市县国标代码与别名
 │   ├── 07-政策层.md          # 政策文件/政务动态的权威门槛、检索入口、工具编码
-│   └── 08-并行采集编排.md    # 多 agent 分片、采集契约、失败抢救
+│   ├── 08-并行采集编排.md    # 多 agent 分片、采集契约、失败抢救
+│   └── 10-统计口径与数据库设计.md # 口径实体化：分析单元/分层/覆盖率/落地路线
 ├── data/
 │   ├── raw/                  # 原始证据，只追加不覆盖
 │   │   └── {ABBR}/           # 仅 2 字母省码（ZJ/SD/JS…），禁止 6 位码或中文
@@ -211,6 +212,17 @@ $env:MIMO_PYTHON
 
 # 名单抽取 JSON（agent 落盘）-> ingest_area_roster 候选表；县区按「市级前缀+名称」匹配
 & $env:MIMO_PYTHON scripts/build_city_rosters.py
+
+# 数据资产盘点（只读）：表规模/文件资产/分省资产/口径分布/时间分布
+& $env:MIMO_PYTHON scripts/report_data_assets.py     # -> reports/qa/数据资产盘点-{date}.md
+
+# 数据质量审计（只读）：结构/证据链/口径自洽/区划归属，ERROR/WARN/INFO 分级
+& $env:MIMO_PYTHON scripts/audit_data_quality.py --csv reports/qa/data-quality-{date}.csv
+
+# 数据质量批量修复（幂等，先 --dry-run）：快照路径/excerpt 重锚/市码/待核升级/台账计数
+& $env:MIMO_PYTHON scripts/repair_data_quality.py --dry-run
+& $env:MIMO_PYTHON scripts/repair_data_quality.py
+# 跑完接 merge_by_province -> build_db -> validate_db -> audit_data_quality
 
 # 文档口径守卫：README/docs/00/docs/01/docs/09/HANDOVER 的关键数字与库内值比对
 & $env:MIMO_PYTHON scripts/check_doc_caliber.py
@@ -519,3 +531,6 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**同音地名域名要核对**。`nyncj.taizhou.gov.cn` 是泰州（江苏），台州市农业农村局是 `nyncj.zjtz.gov.cn`；同类别名（taizhou/zjtz）在派 agent 前先确认
 - 2026-11-21：**扫描提示词漏写「写文件」= 白跑**。广东+河南 38 市扫描结果只在对话里，只能手工挑平顶山/鹤壁两市的记录入库，其余 36 市结论无法批量入账。**固定尾句**：让 agent 用 write 把 JSON 写到 `data/stage/candidates/{prefix}-{code}.json` 并返回 file_path；派发前自查「并发 ≤6/批、有 write 指令、schema 含 file_path」三项
 - 2026-11-21：**四川的「片区」多半是国土空间规划分区，不是乡村振兴片区**。绵阳/乐山/广安/巴中/凉山/遂宁/内江/雅安/阿坝/资阳 10 市的「片区」实为县域国土空间规划里的乡镇级片区（规划分区），有官方文件但按 docs/01 §3 不收。判据：标题含「国土空间规划／乡镇级片区／镇级片区／县域内片区划分」→ 台账记 `not_area`。**看到「片区」先判它是哪套制度里的片区**
+- 2026-11-21：**清洗先于继续采集**。资产盘点（`report_data_assets.py`）+ 质量审计（`audit_data_quality.py`）发现 ERROR 172 / WARN 390，集中在三类：source 路径指向目录（109）、excerpt 与快照不一致（148 可修 + 190 不可定位）、city_code 与县所属市不符（20 非直辖市 + 61 直辖市豁免）。修复后 **ERROR=0 / WARN=203**。教训：**「来源路径」和「摘录逐字」这两类错误不会自己消失**，必须在每轮入库后跑审计
+- 2026-11-21：**待核与证据要一致**。25 条 `待核` 却挂了 primary/support（tier=core/exact/stripped 点名级），按口径定义（待核=证据链不达标）全部升为 `运行中`：主统计 578→591、宽 767→792。**status 与 area_policy_map 必须同源判断**，否则待核池会一直虚高
+- 2026-11-21：**口径要从「视图 + 文档」实体化为「字段 + 表 + 分析视图」**。设计见 `docs/10-统计口径与数据库设计.md`：①`area.admin_level`/`agency_level`（空间层级与设立主体分层）；②`source.excerpt_status`（verbatim/digest/missing）；③`v_analysis_area` 分析主表（一行一区，含证据强度）；④`county_roster` 县级台账；⑤`evidence_debt` 欠账表；⑥`area_policy_map.evidence_tier` 回写。**目标：任何数字一条 SQL 可复现、任何「有依据」可追到点名级证据**

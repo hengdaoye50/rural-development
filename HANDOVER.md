@@ -20,7 +20,7 @@
 
 | 层 | 数据 |
 |---|---|
-| `area` 总行 | **1 351**（active 1 475 = 计入 1124 + 待核 351；superseded 11；withdrawn 2） |
+| `area` 总行 | **1 351**（active 1 475 = 计入 1149 + 待核 326；superseded 11；withdrawn 2） |
 | `belt` 象征单元 | 118（去跨表重名后计 100） |
 | `policy` 政策 | **1 702**（A 级 496），全文 **10 382 909 汉字** |
 | `area_policy_map` | **1 981**（primary 625 / support 595 / mention 761） |
@@ -29,19 +29,19 @@
 | `region` 区划 | 3 229（省 34 / 市 339 / 县 2 856） |
 | `macro_unit` 命名单元 | **1 353** |
 
-**口径分层（在册非待核 1124）**：A 566｜B 12｜C 189｜D 137｜E 220
+**口径分层（在册非待核 1149）**：A 579｜B 12｜C 201｜D 137｜E 220
 
 | 对外口径 | 数值 | 用途 |
 |---|---|---|
-| **主统计 A+B** | **578** | 论文主分析样本；可归时 + 可归因 |
-| 宽统计 A+B+C | 767 | 含时间不详，**不得进年份分布** |
-| 在册非待核 | 1124 | 全部在册 |
+| **主统计 A+B** | **591** | 论文主分析样本；可归时 + 可归因 |
+| 宽统计 A+B+C | 792 | 含时间不详，**不得进年份分布** |
+| 在册非待核 | 1149 | 全部在册 |
 | 案例池（四要素≥3） | 235 | 可写案例；浙江占 112（48%） |
 | 深描子集（四要素全备） | 41 | 单案例长文 |
 | 命名单元 | 1 353 | 只用于量级与分布 |
 
-**设立方式（主统计内）**：`roster` 名单型 170｜`deployment` 部署型 301。
-**县覆盖**：有命名单元的县 657／2 856（22.3%）；可信记录口径 **508／2 856 = 17.8%**。
+**设立方式（主统计内）**：`roster` 名单型 176｜`deployment` 部署型 308。
+**县覆盖**：有命名单元的县 657／2 856（22.3%）；可信记录口径 **522／2 856 = 18.3%**。
 县覆盖有 4 套口径并存，报数前先看 `reports/qa/接手审校-2066-11-18.md` §三 A。
 
 ---
@@ -53,7 +53,7 @@ cd D:\CODEX\全国乡村片区化数据库
 $env:MIMO_PYTHON            # 应为 Runtime\win32-x64\python\Lib（Python 3.12.13）
 & $env:MIMO_PYTHON scripts/build_db.py        # 重建库（幂等）
 & $env:MIMO_PYTHON scripts/validate_db.py     # 期望：issues=0 warnings≈2234
-& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 578
+& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 591
 & $env:MIMO_PYTHON scripts/report_db_stats.py # 全量总览
 ```
 
@@ -79,7 +79,7 @@ data/clean/by_province/      分省 CSV（并发写这里，再 merge）
 data/clean/province_roster.csv 省级名单台账（31 省名单状态/官方数 vs 库内数）
 data/clean/city_roster.csv   市级名单台账（浙苏鲁 40 市）
 data/db/片区库.sqlite3       主库，禁止手改，由 build_db 从 clean 重建
-scripts/                     97 个管线脚本（见 §5）
+scripts/                     100 个管线脚本（见 §5）
 reports/qa/                  校验、审计、口径对账
 reports/gaps/                缺采县、公众号线索、通道实测
 reports/pilot/               批次与名单入库小结
@@ -288,3 +288,5 @@ reports/pilot/               批次与名单入库小结
 9. **市级层落地（2066-11-20 二，未提交）**：40 市名单扫描（一市一智能体，结果落 `data/stage/candidates/city-roster-scan-2066-11-21.json`），city_roster 变为 matched 6 / partial 20 / count_only 8 / not_area 1 / none 5；青岛（第二批 8）、枣庄（20）、常州（11）三市名单按官方全文入库 39 条，主统计 477→**556**、宽 664→743、全量库 908→987。新增 `build_city_rosters.py`、`apply_city_roster_scan.py`、`upgrade_media_roster.py`
 
 10. **市级层续（2026-11-21，未提交）**：青岛补齐 18/18（新增 P370341 首批 10 条，净增 2）；连云港按 连乡振〔2023〕3号 工作要点入库 4 条（石梁河跨县分建）；city_roster matched 11 / partial 15 / count_only 8 / not_area 1 / none 5；主统计 556、全量库 987、M 层 1438、县覆盖 637（可信 487）
+
+11. **数据清洗 + 口径设计（2026-11-21 三，未提交）**：新增资产盘点/质量审计/批量修复三脚本，ERROR 172→0、WARN 390→203；待核升级 25 条使主统计 591、宽 792；新增 `docs/10-统计口径与数据库设计.md`（分析单元/分层维度/覆盖率分母/证据强度/落地路线 P0–P2）。详见 `reports/qa/数据清洗-2026-11-21.md`
