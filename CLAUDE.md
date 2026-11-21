@@ -218,6 +218,17 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/migrate_level_fields.py
 # 跑完接 merge_by_province -> build_db -> validate_db
 
+# 县级名单台账：从 policy(issuer_level=county) 筛名单/认定类，生成 data/clean/county_roster.csv
+& $env:MIMO_PYTHON scripts/build_county_roster.py --dry-run
+& $env:MIMO_PYTHON scripts/build_county_roster.py
+
+# 证据欠账表：把审计 WARN 变成任务单 -> data/clean/evidence_debt.csv
+& $env:MIMO_PYTHON scripts/build_evidence_debt.py
+
+# 县级台账 + 欠账报告
+& $env:MIMO_PYTHON scripts/report_ledgers.py   # -> reports/县级名单台账.md / reports/qa/证据欠账-{date}.md
+# 三者改完接 build_db -> validate_db
+
 # 数据资产盘点（只读）：表规模/文件资产/分省资产/口径分布/时间分布
 & $env:MIMO_PYTHON scripts/report_data_assets.py     # -> reports/qa/数据资产盘点-{date}.md
 
@@ -540,3 +551,4 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**待核与证据要一致**。25 条 `待核` 却挂了 primary/support（tier=core/exact/stripped 点名级），按口径定义（待核=证据链不达标）全部升为 `运行中`：主统计 578→591、宽 767→792。**status 与 area_policy_map 必须同源判断**，否则待核池会一直虚高
 - 2026-11-21：**口径要从「视图 + 文档」实体化为「字段 + 表 + 分析视图」**。设计见 `docs/10-统计口径与数据库设计.md`：①`area.admin_level`/`agency_level`（空间层级与设立主体分层）；②`source.excerpt_status`（verbatim/digest/missing）；③`v_analysis_area` 分析主表（一行一区，含证据强度）；④`county_roster` 县级台账；⑤`evidence_debt` 欠账表；⑥`area_policy_map.evidence_tier` 回写。**目标：任何数字一条 SQL 可复现、任何「有依据」可追到点名级证据**
 - 2026-11-21：**口径实体化（第 1 轮）完成**。`area.admin_level`（空间层级 county/city）+ `area.agency_level`（设立主体 province/city/county/town/unknown）+ `source.excerpt_status`（verbatim/digest/missing）+ 分析视图 `v_analysis_area`（一行一区，1475 行）。派生规则：primary 政策 issuer_level → issuer 关键词 → support 政策；直辖市特例保留。实测：agency_level = city 437 / county 394 / province 378 / unknown 229 / town 37；excerpt_status = verbatim 290 / digest 190 / missing 14。**下一轮**：报告改从视图取数、建 `county_roster`、`evidence_debt`
+- 2026-11-21：**口径实体化第 2 轮完成**。①`county_roster` 县级台账（15 县：matched 2 / not_area 13，**县级公开名单绝大多数是村/乡镇层**，这是制度事实不是缺采）；②`evidence_debt` 欠账表 774 条（pending_review 326 / no_primary 231 / excerpt_digest 190 / missing_snapshot 14 / county_village 13）；③层级分布报告改读 `agency_level` 字段，单一事实源（省378/地市437/县区394/乡镇37/未知228）；④validate 增两张台账的引用与数值校验。**欠账要报、不要清**：对外数字必须声明未清欠账条数

@@ -393,6 +393,39 @@ def validate() -> int:
     if not crosters:
         warnings.append("[city_roster] 台账为空（市级层口径未登记）")
 
+    # 县级名单台账（docs/02 §12.3）：与省/市台账同构
+    yrosters = _rows("county_roster.csv")
+    county_ids = {r.get("region_code") for r in regions if r.get("level") == "county"}
+    for r in yrosters:
+        code = r.get("county_code") or "<empty>"
+        if code not in county_ids:
+            issues.append(f"[county_roster:{code}] county_code 不是 region 里的县级行")
+        pid = (r.get("policy_id") or "").strip()
+        if pid and pid not in policy_ids:
+            issues.append(f"[county_roster:{code}] policy_id={pid} 不存在")
+        for f in ("official_count", "in_db_count"):
+            v = (r.get(f) or "").strip()
+            if v and not v.isdigit():
+                issues.append(f"[county_roster:{code}] {f}={v!r} 非整数")
+        if r.get("status") not in {"matched", "partial", "count_only", "not_area", "none"}:
+            issues.append(f"[county_roster:{code}] 非法 status={r.get('status')}")
+    if not yrosters:
+        warnings.append("[county_roster] 台账为空（县级层口径未登记）")
+
+    # 证据欠账表（docs/02 §12.4）：实体引用必须存在
+    debts = _rows("evidence_debt.csv")
+    for d in debts:
+        et = d.get("entity_type") or ""
+        eid = d.get("entity_id") or ""
+        if et == "source" and eid not in source_ids:
+            issues.append(f"[evidence_debt:{d.get('debt_id')}] source {eid} 不存在")
+        elif et == "area" and eid not in area_ids:
+            issues.append(f"[evidence_debt:{d.get('debt_id')}] area {eid} 不存在")
+        elif et not in {"source", "area", "county_roster", "policy", "belt"}:
+            issues.append(f"[evidence_debt:{d.get('debt_id')}] 非法 entity_type={et}")
+    if not debts:
+        warnings.append("[evidence_debt] 欠账表为空（可能未生成）")
+
     for b in belts:
         bid = b.get("belt_id") or "<empty>"
         for k in BELT_REQUIRED:

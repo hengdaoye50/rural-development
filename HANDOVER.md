@@ -79,7 +79,7 @@ data/clean/by_province/      分省 CSV（并发写这里，再 merge）
 data/clean/province_roster.csv 省级名单台账（31 省名单状态/官方数 vs 库内数）
 data/clean/city_roster.csv   市级名单台账（浙苏鲁 40 市）
 data/db/片区库.sqlite3       主库，禁止手改，由 build_db 从 clean 重建
-scripts/                     102 个管线脚本（见 §5）
+scripts/                     105 个管线脚本（见 §5）
 reports/qa/                  校验、审计、口径对账
 reports/gaps/                缺采县、公众号线索、通道实测
 reports/pilot/               批次与名单入库小结
@@ -292,3 +292,5 @@ reports/pilot/               批次与名单入库小结
 11. **数据清洗 + 口径设计（2026-11-21 三，未提交）**：新增资产盘点/质量审计/批量修复三脚本，ERROR 172→0、WARN 390→203；待核升级 25 条使主统计 591、宽 792；新增 `docs/10-统计口径与数据库设计.md`（分析单元/分层维度/覆盖率分母/证据强度/落地路线 P0–P2）。详见 `reports/qa/数据清洗-2026-11-21.md`
 
 12. **口径实体化第 1 轮（2026-11-21 四，未提交）**：`area.admin_level`/`agency_level`、`source.excerpt_status` 落库并派生（`migrate_level_fields.py`），新增分析视图 `v_analysis_area`；validate 增枚举校验。agency_level 分布 city 437 / county 394 / province 378 / unknown 229 / town 37；excerpt_status 290 verbatim / 190 digest / 14 missing。下一轮：报告切换视图 + county_roster + evidence_debt
+
+13. **口径实体化第 2 轮（2026-11-21 四晚）**：`county_roster`（15 县：matched 2 / not_area 13）与 `evidence_debt`（774 条）入主库；`report_ledgers.py` 出两份报告；层级分布改读 `agency_level` 字段（省378/地市437/县区394/乡镇37/未知228）；validate 增两张台账校验、issues=0。下一轮：`area_policy_map.evidence_tier` 回写 + 前端网站（web/）

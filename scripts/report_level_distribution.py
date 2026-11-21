@@ -110,7 +110,7 @@ def main() -> int:
         return lv
 
     rows = con.execute(
-        """select a.area_id,a.name,a.province_code,a.county_code,a.issuer,a.status,a.setup_kind,
+        """select a.area_id,a.name,a.province_code,a.county_code,a.issuer,a.status,a.setup_kind,a.agency_level,
                   (select count(*) from area_caliber c where c.area_id=a.area_id and c.in_main_stat=1) is_main
            from area a where a.record_state='active'"""
     ).fetchall()
@@ -130,7 +130,9 @@ def main() -> int:
         p = pick(L.get("primary", []))
         il = issuer_level(a["issuer"])
         s = pick(L.get("support", []))
-        if variant == "V4":       # 主口径：设立依据 > 记录发布者 > 支持
+        if variant == "V4" and (a["agency_level"] or "") in ORDER:
+            return a["agency_level"], "field"   # 口径已实体化（docs/02 §1.1），单一事实源
+        if variant == "V4":       # 兜底：设立依据 > 记录发布者 > 支持
             chain = [("primary", p), ("issuer", il), ("support", s)]
         elif variant == "V1":     # 宽口径：再退到 mention（仅用于敏感性对照）
             anyl = pick([x for v in L.values() for x in v])
@@ -156,6 +158,7 @@ def main() -> int:
     add(f"> 生成：`scripts/report_level_distribution.py`｜快照：{date.today().isoformat()}｜库：`data/db/片区库.sqlite3`\n")
     add("## 口径（先说清楚层级指什么）\n")
     add("**层级 = 这个片区由哪一级政府/部门设立或命名**，不是它所在县的级别，也不是规模分层。判定优先序：\n")
+    add("0. **库内字段 `area.agency_level`**（口径已实体化，主表用这个；为空时再走下面兜底链）；")
     add("1. `primary` 政策层级（`policy.issuer_level`）——代表设立/命名主体，最硬；")
     add("2. `area.issuer` 文本（记录自带的设立/发布机构）；")
     add("3. `support` 政策层级（点名支持，不是设立，只作补充）；")

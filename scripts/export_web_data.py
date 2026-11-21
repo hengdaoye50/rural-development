@@ -99,13 +99,20 @@ def main() -> int:
     # 台账
     city_rows = [dict(r) for r in con.execute(
         "select city_code, city_name, province_code, roster_name, roster_scope, official_count, "
-        "in_db_count, count_basis, status, note, source_url from city_roster order by city_code")]
+        "in_db_count, count_basis, status, note from city_roster order by city_code")]
     prov_rows = [dict(r) for r in con.execute(
         "select province_code, roster_name, roster_scope, official_count, in_db_count, "
         "count_basis, status, note from province_roster order by province_code")]
     cname = {r["region_code"]: r["name"] for r in con.execute("select * from region where level='province'")}
     for r in city_rows:
         r["province_name"] = cname.get(r["province_code"], "")
+
+    # 县级台账与欠账
+    county_rows = [dict(r) for r in con.execute(
+        "select county_code, county_name, province_code, roster_name, official_count, "
+        "in_db_count, status, note from county_roster order by province_code, county_code")]
+    debt = [dict(r) for r in con.execute(
+        "select debt_type, count(*) as n from evidence_debt group by 1 order by 2 desc")]
 
     # 质量
     qual = {}
@@ -146,6 +153,8 @@ def main() -> int:
         "areas": rows,
         "city_roster": city_rows,
         "province_roster": prov_rows,
+        "county_roster": county_rows,
+        "debt": debt,
         "quality": qual,
     }
     WEB.mkdir(parents=True, exist_ok=True)

@@ -302,6 +302,36 @@ LEFT JOIN region rp ON rp.region_code = a.province_code
 LEFT JOIN region rc ON rc.region_code = a.city_code
 LEFT JOIN region rg ON rg.region_code = a.county_code
 WHERE a.record_state = 'active';
+
+-- 县级名单台账（docs/02 §12.3）：与省/市台账同构，粒度=县
+CREATE TABLE IF NOT EXISTS county_roster (
+    county_code    TEXT PRIMARY KEY,
+    county_name    TEXT,
+    city_code      TEXT,
+    province_code  TEXT NOT NULL,
+    roster_name    TEXT,
+    roster_scope   TEXT,
+    policy_id      TEXT,
+    official_count INTEGER,
+    in_db_count    INTEGER,
+    count_basis    TEXT,
+    status         TEXT NOT NULL CHECK (status IN
+                     ('matched','partial','count_only','not_area','none')),
+    note           TEXT,
+    updated_at     TEXT NOT NULL
+);
+
+-- 证据欠账表（docs/02 §12.4）：把审计 WARN 变成任务单
+CREATE TABLE IF NOT EXISTS evidence_debt (
+    debt_id       TEXT PRIMARY KEY,
+    entity_type   TEXT NOT NULL,
+    entity_id     TEXT NOT NULL,
+    entity_name   TEXT,
+    province_code TEXT,
+    debt_type     TEXT NOT NULL,
+    detail        TEXT,
+    last_seen     TEXT
+);
 """
 
 CSV_TABLES = {
@@ -317,6 +347,8 @@ CSV_TABLES = {
     "area_policy_map": "area_policy_map.csv",
     "province_roster": "province_roster.csv",
     "city_roster": "city_roster.csv",
+    "county_roster": "county_roster.csv",
+    "evidence_debt": "evidence_debt.csv",
 }
 
 
