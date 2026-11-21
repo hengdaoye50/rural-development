@@ -20,7 +20,7 @@
 
 | 层 | 数据 |
 |---|---|
-| `area` 总行 | **1 351**（active 1 362 = 计入 1040 + 待核 322；superseded 11；withdrawn 2） |
+| `area` 总行 | **1 351**（active 1 448 = 计入 1040 + 待核 408；superseded 11；withdrawn 2） |
 | `belt` 象征单元 | 118（去跨表重名后计 100） |
 | `policy` 政策 | **1 702**（A 级 496），全文 **10 382 909 汉字** |
 | `area_policy_map` | **1 981**（primary 625 / support 595 / mention 761） |
@@ -41,7 +41,7 @@
 | 命名单元 | 1 353 | 只用于量级与分布 |
 
 **设立方式（主统计内）**：`roster` 名单型 176｜`deployment` 部署型 308。
-**县覆盖**：有命名单元的县 652／2 856（22.3%）；可信记录口径 **521／2 856 = 18.2%**。
+**县覆盖**：有命名单元的县 671／2 856（22.3%）；可信记录口径 **521／2 856 = 18.2%**。
 县覆盖有 4 套口径并存，报数前先看 `reports/qa/接手审校-2066-11-18.md` §三 A。
 
 ---
@@ -79,7 +79,7 @@ data/clean/by_province/      分省 CSV（并发写这里，再 merge）
 data/clean/province_roster.csv 省级名单台账（31 省名单状态/官方数 vs 库内数）
 data/clean/city_roster.csv   市级名单台账（浙苏鲁 40 市）
 data/db/片区库.sqlite3       主库，禁止手改，由 build_db 从 clean 重建
-scripts/                     108 个管线脚本（见 §5）
+scripts/                     113 个管线脚本（见 §5）
 reports/qa/                  校验、审计、口径对账
 reports/gaps/                缺采县、公众号线索、通道实测
 reports/pilot/               批次与名单入库小结
@@ -298,3 +298,5 @@ reports/pilot/               批次与名单入库小结
 14. **清欠账（2026-11-21 五）**：evidence_debt 774→560，其中**可执行仅 43**（digest 30 / missing 12）；no_primary 231→182、digest 190→30；主统计 591→630、宽 846；新增 4 个清账脚本（promote_sources_to_policies / fix_promoted_policies / clear_evidence_debt / reanchor_excerpts / refetch_missing_sources）；`evidence_debt` 增 `actionable` 列。下一轮：前端（web/）
 
 15. **口径裁定（2026-11-21 五）**：对外总量改用 M 层 **1462**（area 1362 + belt 100，示范带计入）；删除长沙「集中连片」113 条（不是片区化，docs/01 §13）；主统计降为 P 层子口径 629。新增 `drop_area_batch.py`；`macro_unit` 补 belt 年份/归属/证据强度。公众号通道：搜狗线索可用、正文抓取被验证码+Browser Bridge 挡住，需用户装 OpenCLI 扩展
+
+16. **公众号通道打通（2026-11-21 晚）**：OpenCLI 扩展装好后可抓公众号正文与长图；`wechat_fetch_urls.py`（URL→正文）、`wechat_ocr_images.py`（长图→OCR）、`wechat_batch_collect.py`（检索式批量）。首胜：山东第五批 102 个片区（新建70+提升32）从公众号长图 OCR 解析并入库 86 条待核，M 层 1462→1548。SOP 见 `reports/gaps/公众号采集通道-2026-11-21.md`

@@ -1,14 +1,14 @@
 # QA 报告
 
-- area: 1375
-- source: 493
+- area: 1461
+- source: 494
 - region: 3229
 - belt: 118
 - policy: 1741
 - area_policy_map: 2140
 - event: 731
 - issues: 0
-- warnings: 2235
+- warnings: 2407
 
 问题清单为空。
 
@@ -2248,3 +2248,175 @@
 - [event:E650011] 非预设事件类型（开放词表，允许）: 命名
 - [event:E650012] 非预设事件类型（开放词表，允许）: 命名
 - [event:E650013] 非预设事件类型（开放词表，允许）: 命名
+- [area:A370258] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370258] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370259] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370259] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370260] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370260] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370261] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370261] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370262] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370262] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370263] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370263] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370264] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370264] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370265] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370265] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370266] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370266] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370267] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370267] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370268] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370268] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370269] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370269] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370270] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370270] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370271] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370271] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370272] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370272] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370273] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370273] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370274] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370274] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370275] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370275] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370276] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370276] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370277] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370277] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370278] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370278] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370279] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370279] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370280] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370280] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370281] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370281] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370282] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370282] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370283] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370283] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370284] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370284] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370285] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370285] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370286] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370286] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370287] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370287] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370288] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370288] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370289] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370289] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370290] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370290] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370291] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370291] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370292] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370292] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370293] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370293] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370294] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370294] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370295] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370295] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370296] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370296] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370297] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370297] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370298] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370298] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370299] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370299] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370300] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370300] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370301] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370301] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370302] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370302] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370303] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370303] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370304] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370304] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370305] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370305] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370306] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370306] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370307] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370307] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370308] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370308] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370309] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370309] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370310] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370310] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370311] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370311] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370312] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370312] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370313] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370313] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370314] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370314] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370315] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370315] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370316] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370316] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370317] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370317] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370318] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370318] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370319] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370319] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370320] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370320] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370321] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370321] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370322] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370322] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370323] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370323] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370324] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370324] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370325] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370325] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370326] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370326] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370327] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370327] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370328] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370328] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370329] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370329] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370330] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370330] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370331] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370331] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370332] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370332] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370333] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370333] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370334] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370334] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370335] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370335] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370336] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370336] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370337] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370337] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370338] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370338] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370339] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370339] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370340] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370340] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370341] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370341] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370342] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370342] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A370343] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A370343] agency_level 为空（跑 migrate_level_fields.py）
