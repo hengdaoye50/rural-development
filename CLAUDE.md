@@ -517,3 +517,4 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**`.doc` 抽取链 = LibreOffice headless**。`D:\libreoffice\program\soffice.exe`，`--convert-to "txt:Text (encoded):UTF8"`，必须带 `-env:UserInstallation=file:///...`；soffice 的 stdout 是 GBK 字节，subprocess 要按 bytes 捕获再 decode（`text=True` 会崩）。但「附件 ≠ 名单」：苏州转出的是实施方案、无 9 个名单，转完先 grep 再决定
 - 2026-11-21：**只有第三方转载的名单不能入库**。宁波 20 个片区名单逐条拿到（含县区/重点村/周边村），但官方公示页 404、唯一承载是政策聚合站（非 C 级权威媒体），按 docs/07 不进 policy/source；存成 `city-extract-{code}-pending.json` 待官方页恢复，台账维持 partial
 - 2026-11-21：**同音地名域名要核对**。`nyncj.taizhou.gov.cn` 是泰州（江苏），台州市农业农村局是 `nyncj.zjtz.gov.cn`；同类别名（taizhou/zjtz）在派 agent 前先确认
+- 2026-11-21：**扫描提示词漏写「写文件」= 白跑**。广东+河南 38 市扫描结果只在对话里，只能手工挑平顶山/鹤壁两市的记录入库，其余 36 市结论无法批量入账。**固定尾句**：让 agent 用 write 把 JSON 写到 `data/stage/candidates/{prefix}-{code}.json` 并返回 file_path；派发前自查「并发 ≤6/批、有 write 指令、schema 含 file_path」三项

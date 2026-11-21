@@ -1,0 +1,18 @@
+{
+  "city_code": "441500",
+  "city_name": "汕尾市",
+  "found": true,
+  "roster_name": "汕尾市镇村片区组团培育名单（省级第一批6个、市级8个）",
+  "roster_scope": "市级（镇村片区组团，跨镇街组团；全市已谋划21个，覆盖50个镇街）",
+  "source_url": "https://www.shanwei.gov.cn/shanwei/zwgk/jcxx/zwdt/rdgz/content/post_1247055.html",
+  "source_kind": "media",
+  "count_int": 8,
+  "count_basis": "累计",
+  "names_listed": false,
+  "county_mapping_available": true,
+  "status_suggestion": "count_only",
+  "evidence_excerpt": "市城区红草—马宫—香洲，陆丰市上英—东海、金厢—碣石，海丰县梅陇—联安，陆河县河田—螺溪—南万、河田—东坑—水唇共6个镇村片区组团入选第一批镇村片区组团培育名单；梅陇镇入选第一批小城市试点培育名单",
+  "note": "省级：广东省第一批镇村片区组团培育名单 2026-05-11 全省推进会宣读，汕尾入选6个且名称可在市政府门户政务动态逐字核对（城区1、陆丰2、海丰1、陆河2）。市级：8个，仅见2026-08 市'百千万工程'指挥部会议/汕尾日报口径'6个省级、8个市级'与他人转述的'三甲组团'等零星名称，未检索到市级公示/通知/认定名单文件及文号，故按 count_only 记。另市政府门户同文载'10个乡村振兴连线成片示范片区'（晨洲—金町、金厢—碣石等），属部署型示范片，未获逐条名单。来源页在 .gov.cn 但标注来源=汕尾日报，属党报报道转载，非文件，故 source_kind=media。",
+  "confidence": "medium",
+  "search_budget_used": "3 次搜索 + 3 次抓取（其中 swrd.gov.cn 人大公报 PDF 无法解析，未采用）"
+}
