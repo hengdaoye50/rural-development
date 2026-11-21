@@ -320,6 +320,11 @@ def validate() -> int:
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+    for s in sources:
+        st = s.get("excerpt_status") or ""
+        if st and st not in {"verbatim", "digest", "missing"}:
+            issues.append(f"[source:{s.get('source_id')}] 非法 excerpt_status={st}")
+
     source_ids = {s.get("source_id") for s in sources}
 
     policy_ids = {p.get("policy_id") for p in policies}
@@ -332,6 +337,19 @@ def validate() -> int:
     warnings.extend(e_warnings)
 
     # 省级名单台账：引用与数值必须自洽（docs/02 province_roster）
+    # 口径实体化字段（docs/02 §1 末尾）
+    for a in areas:
+        if a.get("record_state") != "active":
+            continue
+        if a.get("admin_level") not in {"county", "city", "unknown", ""}:
+            issues.append(f"[area:{a.get('area_id')}] 非法 admin_level={a.get('admin_level')}")
+        if a.get("agency_level") not in {"province", "city", "county", "town", "unknown", ""}:
+            issues.append(f"[area:{a.get('area_id')}] 非法 agency_level={a.get('agency_level')}")
+        if not a.get("admin_level"):
+            warnings.append(f"[area:{a.get('area_id')}] admin_level 为空（跑 migrate_level_fields.py）")
+        if not a.get("agency_level"):
+            warnings.append(f"[area:{a.get('area_id')}] agency_level 为空（跑 migrate_level_fields.py）")
+
     rosters = _rows("province_roster.csv")
     prov_ids = {r.get("region_code") for r in regions if r.get("level") == "province"}
     for r in rosters:

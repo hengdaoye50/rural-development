@@ -49,7 +49,9 @@ CREATE TABLE IF NOT EXISTS area (
     record_state        TEXT NOT NULL CHECK (record_state IN ('active','superseded','withdrawn')),
     created_at          TEXT NOT NULL,
     updated_at          TEXT NOT NULL,
-    created_by          TEXT NOT NULL
+    created_by          TEXT NOT NULL,
+    admin_level         TEXT,   -- 空间层级：county / city（片区所在县级或市级单元）
+    agency_level        TEXT    -- 设立/命名主体层级：province/city/county/town/unknown
 );
 
 CREATE TABLE IF NOT EXISTS source (
@@ -61,6 +63,8 @@ CREATE TABLE IF NOT EXISTS source (
     publisher     TEXT NOT NULL,
     published_ymd TEXT,
     excerpt       TEXT NOT NULL,
+    excerpt_status TEXT,        -- verbatim / digest / missing
+
     fetched_at    TEXT NOT NULL,
     credibility   TEXT NOT NULL CHECK (credibility IN ('A','B','C','D','E')),
     local_path    TEXT,
@@ -278,6 +282,26 @@ WHERE b.record_state = 'active'
                   WHERE a.record_state = 'active'
                     AND a.province_code = b.province_code
                     AND a.name_norm = b.name_norm);
+
+
+CREATE VIEW IF NOT EXISTS v_analysis_area AS
+SELECT a.area_id, a.name, a.name_norm, a.type_code, a.setup_kind,
+       a.province_code, rp.name AS province_name,
+       a.city_code, rc.name AS city_name,
+       a.county_code, rg.name AS county_name,
+       a.admin_level, a.agency_level,
+       a.founded_ymd, a.founded_precision, a.status,
+       cal.caliber_group, cal.in_main_stat,
+       (SELECT COUNT(*) FROM area_policy_map m WHERE m.area_id=a.area_id AND m.rel='primary') AS n_primary,
+       (SELECT COUNT(*) FROM area_policy_map m WHERE m.area_id=a.area_id AND m.rel='support') AS n_support,
+       (SELECT COUNT(*) FROM source s WHERE s.area_id=a.area_id) AS n_source,
+       a.scale_villages, a.issuer
+FROM area a
+LEFT JOIN area_caliber cal ON cal.area_id = a.area_id
+LEFT JOIN region rp ON rp.region_code = a.province_code
+LEFT JOIN region rc ON rc.region_code = a.city_code
+LEFT JOIN region rg ON rg.region_code = a.county_code
+WHERE a.record_state = 'active';
 """
 
 CSV_TABLES = {

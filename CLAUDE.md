@@ -213,6 +213,11 @@ $env:MIMO_PYTHON
 # 名单抽取 JSON（agent 落盘）-> ingest_area_roster 候选表；县区按「市级前缀+名称」匹配
 & $env:MIMO_PYTHON scripts/build_city_rosters.py
 
+# 口径实体化字段：admin_level/agency_level/excerpt_status（幂等，只补空值）
+& $env:MIMO_PYTHON scripts/migrate_level_fields.py --dry-run
+& $env:MIMO_PYTHON scripts/migrate_level_fields.py
+# 跑完接 merge_by_province -> build_db -> validate_db
+
 # 数据资产盘点（只读）：表规模/文件资产/分省资产/口径分布/时间分布
 & $env:MIMO_PYTHON scripts/report_data_assets.py     # -> reports/qa/数据资产盘点-{date}.md
 
@@ -534,3 +539,4 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**清洗先于继续采集**。资产盘点（`report_data_assets.py`）+ 质量审计（`audit_data_quality.py`）发现 ERROR 172 / WARN 390，集中在三类：source 路径指向目录（109）、excerpt 与快照不一致（148 可修 + 190 不可定位）、city_code 与县所属市不符（20 非直辖市 + 61 直辖市豁免）。修复后 **ERROR=0 / WARN=203**。教训：**「来源路径」和「摘录逐字」这两类错误不会自己消失**，必须在每轮入库后跑审计
 - 2026-11-21：**待核与证据要一致**。25 条 `待核` 却挂了 primary/support（tier=core/exact/stripped 点名级），按口径定义（待核=证据链不达标）全部升为 `运行中`：主统计 578→591、宽 767→792。**status 与 area_policy_map 必须同源判断**，否则待核池会一直虚高
 - 2026-11-21：**口径要从「视图 + 文档」实体化为「字段 + 表 + 分析视图」**。设计见 `docs/10-统计口径与数据库设计.md`：①`area.admin_level`/`agency_level`（空间层级与设立主体分层）；②`source.excerpt_status`（verbatim/digest/missing）；③`v_analysis_area` 分析主表（一行一区，含证据强度）；④`county_roster` 县级台账；⑤`evidence_debt` 欠账表；⑥`area_policy_map.evidence_tier` 回写。**目标：任何数字一条 SQL 可复现、任何「有依据」可追到点名级证据**
+- 2026-11-21：**口径实体化（第 1 轮）完成**。`area.admin_level`（空间层级 county/city）+ `area.agency_level`（设立主体 province/city/county/town/unknown）+ `source.excerpt_status`（verbatim/digest/missing）+ 分析视图 `v_analysis_area`（一行一区，1475 行）。派生规则：primary 政策 issuer_level → issuer 关键词 → support 政策；直辖市特例保留。实测：agency_level = city 437 / county 394 / province 378 / unknown 229 / town 37；excerpt_status = verbatim 290 / digest 190 / missing 14。**下一轮**：报告改从视图取数、建 `county_roster`、`evidence_debt`
