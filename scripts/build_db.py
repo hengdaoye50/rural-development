@@ -265,17 +265,36 @@ FROM (
 -- belt 与 area 同省同名时保留 area 那条，避免同一单元被数两次。
 CREATE VIEW IF NOT EXISTS macro_unit AS
 SELECT a.area_id AS unit_id, 'area' AS kind, a.name, a.name_norm, a.province_code,
-       a.county_code, a.status, a.type_code AS subtype, a.setup_kind,
+       a.city_code, a.county_code, a.status, a.type_code AS subtype, a.setup_kind,
+       substr(a.founded_ymd,1,4) AS year,
        CASE WHEN a.status <> '待核' THEN 1 ELSE 0 END AS in_policy_layer,
        CASE WHEN EXISTS (SELECT 1 FROM area_policy_map m
                          WHERE m.area_id = a.area_id AND m.rel IN ('primary','support'))
-            THEN 1 ELSE 0 END AS has_hard
+            THEN 1 ELSE 0 END AS has_hard,
+       CASE WHEN a.status = '待核' THEN '待核'
+            WHEN EXISTS (SELECT 1 FROM area_policy_map m
+                         WHERE m.area_id = a.area_id AND m.rel IN ('primary','support'))
+            THEN '强' ELSE '弱' END AS evidence_strength
 FROM area a
 WHERE a.record_state = 'active'
 UNION ALL
 SELECT b.belt_id, 'belt', b.name, b.name_norm, b.province_code,
-       NULL, NULL, b.belt_type, NULL,
-       0, 0
+       b.city_code, b.county_code, '命名', b.belt_type, NULL,
+       substr(b.announced_ymd,1,4),
+       0,
+       CASE WHEN EXISTS (SELECT 1 FROM area_policy_map m
+                         WHERE m.area_id = b.belt_id AND m.rel IN ('primary','support'))
+             OR EXISTS (SELECT 1 FROM source s
+                        WHERE s.source_id = b.source_id
+                          AND s.credibility IN ('A','B')
+                          AND coalesce(s.local_path,'') <> '')
+            THEN 1 ELSE 0 END,
+       CASE WHEN EXISTS (SELECT 1 FROM area_policy_map m
+                         WHERE m.area_id = b.belt_id AND m.rel IN ('primary','support'))
+            THEN '强'
+            WHEN EXISTS (SELECT 1 FROM source s
+                         WHERE s.source_id = b.source_id AND s.credibility IN ('A','B'))
+            THEN '弱' ELSE '无' END
 FROM belt b
 WHERE b.record_state = 'active'
   AND NOT EXISTS (SELECT 1 FROM area a

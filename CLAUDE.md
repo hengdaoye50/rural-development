@@ -218,6 +218,10 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/migrate_level_fields.py
 # 跑完接 merge_by_province -> build_db -> validate_db
 
+# 按批次下架片区（口径不符时）：raw 移 archive 不删，master 由 merge 重建
+& $env:MIMO_PYTHON scripts/drop_area_batch.py --policy P430034 --reason "集中连片不是片区化" --dry-run
+& $env:MIMO_PYTHON scripts/drop_area_batch.py --policy P430034 --reason "集中连片不是片区化"
+
 # 清欠账（第 3 轮）：.gov.cn source 升格 policy、mention→support、credibility 修正、待核升级
 & $env:MIMO_PYTHON scripts/promote_sources_to_policies.py --dry-run
 & $env:MIMO_PYTHON scripts/promote_sources_to_policies.py
@@ -562,3 +566,6 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**口径实体化（第 1 轮）完成**。`area.admin_level`（空间层级 county/city）+ `area.agency_level`（设立主体 province/city/county/town/unknown）+ `source.excerpt_status`（verbatim/digest/missing）+ 分析视图 `v_analysis_area`（一行一区，1475 行）。派生规则：primary 政策 issuer_level → issuer 关键词 → support 政策；直辖市特例保留。实测：agency_level = city 437 / county 394 / province 378 / unknown 229 / town 37；excerpt_status = verbatim 290 / digest 190 / missing 14。**下一轮**：报告改从视图取数、建 `county_roster`、`evidence_debt`
 - 2026-11-21：**口径实体化第 2 轮完成**。①`county_roster` 县级台账（15 县：matched 2 / not_area 13，**县级公开名单绝大多数是村/乡镇层**，这是制度事实不是缺采）；②`evidence_debt` 欠账表 774 条（pending_review 326 / no_primary 231 / excerpt_digest 190 / missing_snapshot 14 / county_village 13）；③层级分布报告改读 `agency_level` 字段，单一事实源（省378/地市437/县区394/乡镇37/未知228）；④validate 增两张台账的引用与数值校验。**欠账要报、不要清**：对外数字必须声明未清欠账条数
 - 2026-11-21：**欠账要分清「可执行」与「结构性」**。774 条欠账里，真正有动作可做的是 excerpt_digest + missing_snapshot（43 条）；待核 322（媒体唯一来源）、no_primary 182（E 组）、county_village 13（村层名单已裁定）都是**已知口径状态**，不是待办。**清欠账的四把刀**：①`.gov.cn` 的 `source` 升格 `policy`（根因：早期只登记 source，政策层天然"无依据"）；②mention→support（正文真点名）；③credibility C→B（.gov.cn 域误标）；④excerpt 二轮重锚（difflib 最长公共块）。实测：no_primary 231→182、digest 190→30、主统计 591→630、宽 792→846
+- 2026-11-21：**对外总量改用 M 层（命名单元），示范带计入**（用户裁定）。删去长沙「美丽宜居村庄集中连片」113 条后 M 层 = **1462**（area 1362 + belt 100）；主统计 629 降为 P 层子口径。M 层宽的是证据强度（强858/弱256/待核322/无26），**对象类型仍不放宽**（示范村镇、园区景区、控规分区照旧不收）。新增 `drop_area_batch.py`（raw 移 archive、不删数据），并给 `macro_unit` 视图补 belt 的city/county/年份与 evidence_strength
+- 2026-11-21：**「集中连片」不是片区化**（用户裁定）。长沙 2021 年度美丽宜居村庄「集中连片」认定 113 条属村庄整治连片，无跨村治理机制与片区命名主体，已整批下架并写入 docs/01 §13 排除项。**教训**：名单标题里出现「片区/连片/组团」不等于片区化，必须看有没有跨村机制与命名主体
+- 2026-11-21：**公众号是主要可得渠道，但只能走「发现 → 待核档案」**。实测：搜狗微信线索可抓（`wechat_leads.py`，标题实体已修）；公众号正文被微信验证码挡住（`mp.weixin.qq.com` 返回环境异常），`opencli` 浏览器桥未连接（需用户在 Chrome 装 OpenCLI 扩展）→ 正文批量抓取暂不可用。可行路径：①搜狗线索按「省+片区+名单/公布/认定」精检；②搜索引擎 snippet 常直接含名单；③名称线索经 agent 抽取后按 `ingest_area_media_roster.py` 建 `status=待核` 档案（进 M 层、不进主统计）。**公众号永远不能进 policy**（docs/07 白名单），只能进 source

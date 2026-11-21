@@ -20,7 +20,7 @@
 
 | 层 | 数据 |
 |---|---|
-| `area` 总行 | **1 351**（active 1 475 = 计入 1153 + 待核 322；superseded 11；withdrawn 2） |
+| `area` 总行 | **1 351**（active 1 362 = 计入 1040 + 待核 322；superseded 11；withdrawn 2） |
 | `belt` 象征单元 | 118（去跨表重名后计 100） |
 | `policy` 政策 | **1 702**（A 级 496），全文 **10 382 909 汉字** |
 | `area_policy_map` | **1 981**（primary 625 / support 595 / mention 761） |
@@ -29,19 +29,19 @@
 | `region` 区划 | 3 229（省 34 / 市 339 / 县 2 856） |
 | `macro_unit` 命名单元 | **1 353** |
 
-**口径分层（在册非待核 1153）**：A 617｜B 13｜C 216｜D 136｜E 171
+**口径分层（在册非待核 1040）**：A 617｜B 12｜C 216｜D 24｜E 171
 
 | 对外口径 | 数值 | 用途 |
 |---|---|---|
-| **主统计 A+B** | **630** | 论文主分析样本；可归时 + 可归因 |
-| 宽统计 A+B+C | 846 | 含时间不详，**不得进年份分布** |
-| 在册非待核 | 1153 | 全部在册 |
+| **主统计 A+B** | **629** | 论文主分析样本；可归时 + 可归因 |
+| 宽统计 A+B+C | 845 | 含时间不详，**不得进年份分布** |
+| 在册非待核 | 1040 | 全部在册 |
 | 案例池（四要素≥3） | 235 | 可写案例；浙江占 112（48%） |
 | 深描子集（四要素全备） | 41 | 单案例长文 |
 | 命名单元 | 1 353 | 只用于量级与分布 |
 
 **设立方式（主统计内）**：`roster` 名单型 176｜`deployment` 部署型 308。
-**县覆盖**：有命名单元的县 657／2 856（22.3%）；可信记录口径 **526／2 856 = 18.4%**。
+**县覆盖**：有命名单元的县 652／2 856（22.3%）；可信记录口径 **521／2 856 = 18.2%**。
 县覆盖有 4 套口径并存，报数前先看 `reports/qa/接手审校-2066-11-18.md` §三 A。
 
 ---
@@ -53,7 +53,7 @@ cd D:\CODEX\全国乡村片区化数据库
 $env:MIMO_PYTHON            # 应为 Runtime\win32-x64\python\Lib（Python 3.12.13）
 & $env:MIMO_PYTHON scripts/build_db.py        # 重建库（幂等）
 & $env:MIMO_PYTHON scripts/validate_db.py     # 期望：issues=0 warnings≈2234
-& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 630
+& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 629
 & $env:MIMO_PYTHON scripts/report_db_stats.py # 全量总览
 ```
 
@@ -296,3 +296,5 @@ reports/pilot/               批次与名单入库小结
 13. **口径实体化第 2 轮（2026-11-21 四晚）**：`county_roster`（15 县：matched 2 / not_area 13）与 `evidence_debt`（774 条）入主库；`report_ledgers.py` 出两份报告；层级分布改读 `agency_level` 字段（省378/地市437/县区394/乡镇37/未知228）；validate 增两张台账校验、issues=0。下一轮：`area_policy_map.evidence_tier` 回写 + 前端网站（web/）
 
 14. **清欠账（2026-11-21 五）**：evidence_debt 774→560，其中**可执行仅 43**（digest 30 / missing 12）；no_primary 231→182、digest 190→30；主统计 591→630、宽 846；新增 4 个清账脚本（promote_sources_to_policies / fix_promoted_policies / clear_evidence_debt / reanchor_excerpts / refetch_missing_sources）；`evidence_debt` 增 `actionable` 列。下一轮：前端（web/）
+
+15. **口径裁定（2026-11-21 五）**：对外总量改用 M 层 **1462**（area 1362 + belt 100，示范带计入）；删除长沙「集中连片」113 条（不是片区化，docs/01 §13）；主统计降为 P 层子口径 629。新增 `drop_area_batch.py`；`macro_unit` 补 belt 年份/归属/证据强度。公众号通道：搜狗线索可用、正文抓取被验证码+Browser Bridge 挡住，需用户装 OpenCLI 扩展

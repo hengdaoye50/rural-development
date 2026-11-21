@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import csv
+import html as html_module
 import re
 import sys
 import time
@@ -48,6 +49,8 @@ def fetch(url: str, timeout: int = 25) -> str:
 
 def strip_tags(s: str) -> str:
     s = re.sub(r"<[^>]+>", "", s)
+    s = html_module.unescape(s)          # &ldquo; &mdash; 等实体要还原，否则标题不可读
+    s = s.replace("\u200b", "").replace("\xa0", " ")
     return re.sub(r"\s+", " ", s).strip()
 
 
