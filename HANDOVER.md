@@ -1,3 +1,82 @@
+# 新会话启动包（2026-11-21 晚更新）
+
+> 这是交接给**新对话**的最短路径。读完这 60 行即可开工，不必翻历史。
+> 详细文档：`docs/01`（口径）、`docs/02`（字典）、`docs/10`（设计）、
+> `reports/gaps/公众号采集通道-2026-11-21.md`（通道 SOP）。
+
+## 0. 一句话现状
+
+全国县以下「片区化推进乡村振兴」数据库已建成可运行态：**M 层命名单元 1548**
+（area 1448 + belt 100 去重）、主统计 629、待核 408、县覆盖 697/2856、31 省全覆盖；
+质量：`validate issues=0`、审计 ERROR=0、可执行欠账 42。
+
+## 1. 当前口径（用户已裁定，勿擅改）
+
+| 口径 | 值 | 含义 |
+|---|---|---|
+| **对外总量 = M 层** | **1548** | area+belt 去重；示范带/示范片/走廊**计入** |
+| 主统计（P 层） | 629 | 2022+ 且 primary/support，仅用于政策分析 |
+| 宽统计 | 845 | 主统计 + 时间不详 |
+| 待核 | 408 | 媒体/公众号唯一来源，**计入 M 层、不计入主统计** |
+| 县覆盖 | 697/2856 | 必须与总量并列报 |
+
+**对象类型永不放宽**：示范县/乡镇/村、园区景区、城市控规与国土空间规划分区 一律不收。
+「集中连片」已裁定**不是片区化**（docs/01 §13，长沙 113 条已删）。
+
+## 2. 环境与命令（Windows）
+
+```powershell
+$py='C:\Users\zjh22\AppData\Local\Programs\Python\Python312\python.exe'
+& $py scripts/validate_db.py          # 期望 issues=0
+& $py scripts/build_db.py             # 改了 clean CSV 后必跑
+& $py scripts/merge_by_province.py    # 并发写 by_province 后必跑
+& $py scripts/check_doc_caliber.py --fix   # 文档数字自动同步
+& $py scripts/audit_data_quality.py   # ERROR 应为 0
+& $py scripts/report_macro_layer.py / health_report.py / report_data_assets.py
+```
+
+纪律：**不手改 `data/clean` 与 `data/db`**；一切走脚本；删除走 `drop_area_batch.py`
+（raw 移 archive）。
+
+## 3. 下一步（按优先级）
+
+### P0 公众号名单批量化（用户已同意，建议先 2 省验证再 5–8 省）
+已完成一条完整链路（山东第五批 102 → 入库 86 待核）。SOP：
+1. `web_search "第X批 省级乡村振兴片区 名单 省名"` 找 `mp.weixin.qq.com` 文章（snippet 常带名字）；
+2. `& $py scripts/wechat_ocr_images.py --url "<链接>" --abbr <省码字母> --keep 14`
+   → `data/raw/{ABBR}/{date}-wx-img-*/ocr.md`；
+3. 复制 `scripts/parse_sd5_roster.py` 改成通用 `parse_roster_ocr.py`（改 CITY/ALIAS/正则即可）；
+4. 候选表 → `& $py scripts/ingest_area_media_roster.py <ABBR>`（`status=待核`，进 M 层）；
+5. `merge_by_province → build_db → validate_db → report_macro_layer → check_doc_caliber --fix`。
+
+**公众号只能进 `source`，永不进 `policy`**；找到 `.gov.cn` 原文再升级 primary。
+
+### P1 山东第五批升级
+找鲁农组办发〔2026〕14号原文（省农业农村厅/省政府），有全文即可把 86 条待核升 primary（主统计 +86）。
+
+### P2 前端网站（材料已备）
+`scripts/export_web_data.py` 已能导出 `web/data.js`（506KB，1448 条）。缺 `web/index.html + app.js + style.css`：
+概览（M 层 1548 / 主统计 629 / 县覆盖 697）/ 省份 / 三级台账 / 片区检索 / 质量与方法。
+
+## 4. 关键坑（都踩过）
+
+1. **opencli 在 Windows 是 .ps1 shim**，Python subprocess 直调会 FileNotFound → 用
+   `node <USERPROFILE>/scoop/apps/nodejs-lts/current/bin/node_modules/@jackwener/opencli/dist/src/main.js`
+   或 PowerShell 包装。
+2. 公众号页面异步渲染：open 后 **sleep 4–6s**，否则拿到「微信公众平台」登录壳。
+3. 名单常是**长图**，必须 OCR；功能区（西海岸新区/黄渤海新区/泰山景区等）要别名表映射到邻近县区码。
+4. CSV 写入必须原子（临时文件 + os.replace + 断言字段 ⊆ 表头）。
+5. 县区解析必须「市级前缀 + 名称」双匹配（曾把枣庄市中区错配济南）。
+6. 智能体集群：并发 ≤6/批（上限 8），产出必须让 agent 用 write 落 `data/stage/candidates/` 并返回 file_path。
+7. 文档数字改完跑 `check_doc_caliber --fix`，否则会漂。
+
+## 5. 仓库
+
+`https://github.com/hengdaoye50/rural-development`，分支 `main`，最新提交 `4f83574`。
+push 需 `$env:GIT_TERMINAL_PROMPT='0'` + `-c http.lowSpeedLimit=1000 -c http.lowSpeedTime=20`（常超 120s，可放后台）。
+
+---
+
 # 交接文件（HANDOVER）
 
 > **给接手的新 harness：先读这一份，再读 `CLAUDE.md`（约束权威）。**
