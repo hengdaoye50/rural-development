@@ -20,7 +20,7 @@
 
 | 层 | 数据 |
 |---|---|
-| `area` 总行 | **1 351**（active 1 361 = 计入 1010 + 待核 351；superseded 11；withdrawn 2） |
+| `area` 总行 | **1 351**（active 1 362 = 计入 1011 + 待核 351；superseded 11；withdrawn 2） |
 | `belt` 象征单元 | 118（去跨表重名后计 100） |
 | `policy` 政策 | **1 702**（A 级 496），全文 **10 382 909 汉字** |
 | `area_policy_map` | **1 981**（primary 625 / support 595 / mention 761） |
@@ -29,13 +29,13 @@
 | `region` 区划 | 3 229（省 34 / 市 339 / 县 2 856） |
 | `macro_unit` 命名单元 | **1 353** |
 
-**口径分层（在册非待核 1010）**：A 565｜B 12｜C 189｜D 24｜E 220
+**口径分层（在册非待核 1011）**：A 566｜B 12｜C 189｜D 24｜E 220
 
 | 对外口径 | 数值 | 用途 |
 |---|---|---|
-| **主统计 A+B** | **577** | 论文主分析样本；可归时 + 可归因 |
-| 宽统计 A+B+C | 766 | 含时间不详，**不得进年份分布** |
-| 在册非待核 | 1010 | 全部在册 |
+| **主统计 A+B** | **578** | 论文主分析样本；可归时 + 可归因 |
+| 宽统计 A+B+C | 767 | 含时间不详，**不得进年份分布** |
+| 在册非待核 | 1011 | 全部在册 |
 | 案例池（四要素≥3） | 235 | 可写案例；浙江占 112（48%） |
 | 深描子集（四要素全备） | 41 | 单案例长文 |
 | 命名单元 | 1 353 | 只用于量级与分布 |
@@ -53,7 +53,7 @@ cd D:\CODEX\全国乡村片区化数据库
 $env:MIMO_PYTHON            # 应为 Runtime\win32-x64\python\Lib（Python 3.12.13）
 & $env:MIMO_PYTHON scripts/build_db.py        # 重建库（幂等）
 & $env:MIMO_PYTHON scripts/validate_db.py     # 期望：issues=0 warnings≈2234
-& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 577
+& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 578
 & $env:MIMO_PYTHON scripts/report_db_stats.py # 全量总览
 ```
 

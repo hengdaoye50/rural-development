@@ -1,0 +1,48 @@
+{
+  "city_code": "430500",
+  "city_name": "邵阳市",
+  "ok": false,
+  "policy_url": "",
+  "policy_title": "",
+  "policy_issuer": "",
+  "policy_doc_no": "",
+  "policy_published_ymd": "",
+  "areas": [],
+  "excluded": [
+    {
+      "name": "2026-2027年度市级和美乡村建设重点村名单",
+      "county_name": "",
+      "town_desc": "邵阳县岩口铺镇皇安寺村、黄荆乡高龙村、罗城乡扣子铺村、诸甲亭乡新安村、塘渡口镇真如庵村等，逐县列村",
+      "note": "邵阳市农业农村局公告，确为市级官方逐条名单，但对象为「村」，非县以下片区；按对象层级排除（not_area 型）",
+      "source_url": "http://nc.shaoyang.gov.cn/sync/tzgg/202611/ba4a79233a9b40df8db5e1c5fdba96c3.shtml",
+      "source_kind": "gov"
+    },
+    {
+      "name": "抓党建促乡村振兴示范乡镇/示范村（邵阳市名单）",
+      "county_name": "",
+      "town_desc": "邵东市水东江镇、城步苗族自治县兰蓉乡、邵阳县塘田市镇；示范村含邵东市灵官殿镇大全社区等",
+      "note": "乡镇/村层名单，非片区；仅见媒体转述（source_kind=media），仅作线索",
+      "source_url": "https://finance.sina.com.cn/jjxw/2024-09-18/doc-incpqkkq4525441.shtml",
+      "source_kind": "media"
+    },
+    {
+      "name": "隆回县雪峰山高山台地旅游度假区",
+      "county_name": "隆回县",
+      "town_desc": "",
+      "note": "仅见于湖南省自然资源厅《村庄规划省级示范性片区名录》13 个之中，属省级发布、单体片区命名，不是市级名单；且只见媒体转述、未见 .gov.cn 原文，作线索留给省级台账",
+      "source_url": "https://news.qq.com/rain/a/20240421A078IZ00",
+      "source_kind": "media"
+    },
+    {
+      "name": "大祥区清风台上片区、龙头片区",
+      "county_name": "大祥区",
+      "town_desc": "板桥乡龙头、桥头、板桥、召伯等 7 村连片的「龙头片区市级新农村示范片」",
+      "note": "仅见邵阳市农业农村局答复/汇报正文叙述性提及与早年区级报道，未见市级认定名单文件；不足以作为市级片区名单",
+      "source_url": "http://nc.shaoyang.gov.cn/sync/tzgg/202412/e770c617ef0d4db9a61e0e7d0f4e2636/files/f7e7c069bd014ecca2d1f43d737eb546.pdf",
+      "source_kind": "gov"
+    }
+  ],
+  "problem": "未检索到邵阳市级官方发布的「片区」名单（片区/示范片区/样板片区/片区组团/示范带）。站内可见的市级官方逐条名单均为村/乡镇层：邵阳市农业农村局《2026-2027年度市级和美乡村建设重点村名单》（.gov.cn，逐村列名）与抓党建促乡村振兴示范乡镇/示范村名单，按对象层级不入片区（not_area）。市级文件中「片区」多以叙述性提法出现（如市城郊片区、大祥区清风台上片区/龙头片区），无认定或公布名单。另：湖南省自然资源厅《村庄规划省级示范性片区名录》13 个中含邵阳 1 个（隆回县雪峰山高山台地旅游度假区），但属省级发布、单体命名，非市级名单，且仅见媒体转述。本轮 4 次检索，未逐页抓取所有 .gov.cn 通知公告列表页，故结论为「未发现」。",
+  "search_queries_used": 4,
+  "checked_ymd": "2026-11-21"
+}
