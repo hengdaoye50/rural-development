@@ -64,7 +64,7 @@
         </tbody>
       </table>
     </div>
-    <p class="sub" style="margin-top:10px;font-size:12px;color:var(--ink-3)">当前库内 E 组为 0：口径内的记录全部挂到了点名级证据；未达标的记录进入「待核」，单独计数。</p>
+    <p class="sub" id="e-note" style="margin-top:10px;font-size:12px;color:var(--ink-3)">—</p>
   </section>
 
   <section>
@@ -130,6 +130,10 @@
     var el = document.getElementById(k);
     if (el) el.textContent = f(map[k] || 0);
   });
+  var e = G.E || 0;
+  document.getElementById("e-note").textContent = e
+    ? "当前 E 组 " + e + " 条：名单确认存在、但尚未挂到点名级依据，按人工裁定记为运行中；不计入主统计。"
+    : "当前库内 E 组为 0：口径内的记录全部挂到了点名级证据；未达标的记录进入「待核」，单独计数。";
 })();
 </script>
 </body>
