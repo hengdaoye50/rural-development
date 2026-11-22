@@ -123,7 +123,7 @@ push 需 `$env:GIT_TERMINAL_PROMPT='0'` + `-c http.lowSpeedLimit=1000 -c http.lo
 
 | 层 | 数据 |
 |---|---|
-| `area` 总行 | **1 351**（active 1 383 = 计入 814 + 待核 569；superseded 11；withdrawn 2） |
+| `area` 总行 | **1 351**（active 1 384 = 计入 814 + 待核 570；superseded 11；withdrawn 2） |
 | `belt` 象征单元 | 118（去跨表重名后计 100） |
 | `policy` 政策 | **1 702**（A 级 496），全文 **10 382 909 汉字** |
 | `area_policy_map` | **1 981**（primary 625 / support 595 / mention 761） |

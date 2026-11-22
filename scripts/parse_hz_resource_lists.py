@@ -20,6 +20,7 @@ PUNCT = re.compile(r"[\s\u3000（）()《》〈〉「」【】\[\]、，,。.：
 DISTRICT = {
     "yuhang": "余杭区", "qiantang": "钱塘区", "fuyang": "富阳区", "chunan": "淳安县",
     "linping": "临平区", "tonglu": "桐庐县", "jiande": "建德市", "xihu": "西湖区",
+    "linan": "临安区", "xiaoshan": "萧山区",
 }
 
 
