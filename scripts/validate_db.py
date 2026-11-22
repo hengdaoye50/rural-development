@@ -366,7 +366,7 @@ def validate() -> int:
             v = (r.get(f) or "").strip()
             if v and not v.isdigit():
                 issues.append(f"[province_roster:{code}] {f}={v!r} 非整数")
-        if r.get("status") not in {"matched", "partial", "count_only", "not_area", "none"}:
+        if r.get("status") not in {"matched", "partial", "count_only", "not_area", "none", "unavailable"}:
             issues.append(f"[province_roster:{code}] 非法 status={r.get('status')}")
     if not rosters:
         warnings.append("[province_roster] 台账为空（省级层口径未登记）")
@@ -388,7 +388,7 @@ def validate() -> int:
             v = (r.get(f) or "").strip()
             if v and not v.isdigit():
                 issues.append(f"[city_roster:{code}] {f}={v!r} 非整数")
-        if r.get("status") not in {"matched", "partial", "count_only", "not_area", "none"}:
+        if r.get("status") not in {"matched", "partial", "count_only", "not_area", "none", "unavailable"}:
             issues.append(f"[city_roster:{code}] 非法 status={r.get('status')}")
     if not crosters:
         warnings.append("[city_roster] 台账为空（市级层口径未登记）")
@@ -407,7 +407,7 @@ def validate() -> int:
             v = (r.get(f) or "").strip()
             if v and not v.isdigit():
                 issues.append(f"[county_roster:{code}] {f}={v!r} 非整数")
-        if r.get("status") not in {"matched", "partial", "count_only", "not_area", "none"}:
+        if r.get("status") not in {"matched", "partial", "count_only", "not_area", "none", "unavailable"}:
             issues.append(f"[county_roster:{code}] 非法 status={r.get('status')}")
     if not yrosters:
         warnings.append("[county_roster] 台账为空（县级层口径未登记）")

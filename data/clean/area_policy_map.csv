@@ -1758,7 +1758,7 @@ A430002,P430023,area,primary
 A430003,P430010,area,mention
 A430003,P430023,area,primary
 A430005,P430032,area,mention
-A430005,P430033,area,support
+A430005,P430033,area,mention
 A430005,P430035,area,primary
 A430006,P430032,area,mention
 A430006,P430036,area,support
@@ -1801,8 +1801,8 @@ A440172,P440087,area,primary
 A450001,P450003,area,mention
 A450001,P450004,area,primary
 A450002,P450009,area,mention
-A450003,P450007,area,primary
-A450004,P450007,area,primary
+A450003,P450007,area,mention
+A450004,P450007,area,mention
 A450008,P450007,area,primary
 A450009,P450007,area,primary
 A450010,P450007,area,primary

@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS city_roster (
     in_db_count    INTEGER,
     count_basis    TEXT,
     status         TEXT NOT NULL CHECK (status IN
-                     ("matched","partial","count_only","not_area","none")),
+                     ("matched","partial","count_only","not_area","none","unavailable")),
     note           TEXT,
     updated_at     TEXT NOT NULL
 );
@@ -216,7 +216,7 @@ CREATE TABLE IF NOT EXISTS province_roster (
     in_db_count    INTEGER,        -- 人工核定的库内已入库条数（空=按关联现算）
     count_basis    TEXT,           -- 名单条数/年度目标/年度实际/累计/试点县数
     status         TEXT NOT NULL CHECK (status IN
-                     ('matched','partial','count_only','not_area','none')),
+                     ('matched','partial','count_only','not_area','none','unavailable')),
     note           TEXT,
     updated_at     TEXT NOT NULL
 );
@@ -335,7 +335,7 @@ CREATE TABLE IF NOT EXISTS county_roster (
     in_db_count    INTEGER,
     count_basis    TEXT,
     status         TEXT NOT NULL CHECK (status IN
-                     ('matched','partial','count_only','not_area','none')),
+                     ('matched','partial','count_only','not_area','none','unavailable')),
     note           TEXT,
     updated_at     TEXT NOT NULL
 );

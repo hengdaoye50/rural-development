@@ -1,8 +1,8 @@
 ﻿area_id,policy_id,entity_type,rel
 A450001,P450003,area,mention
 A450001,P450004,area,primary
-A450004,P450007,area,primary
-A450003,P450007,area,primary
+A450004,P450007,area,mention
+A450003,P450007,area,mention
 A450002,P450009,area,mention
 A450008,P450007,area,primary
 A450009,P450007,area,primary
