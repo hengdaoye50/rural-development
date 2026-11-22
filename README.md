@@ -2,6 +2,8 @@
 
 统计中国大陆 31 个省级单位**县/区以下**设立「片区」推进乡村振兴的实践，建成可核验、可查询、可重建的结构化数据库。
 
+**在线站点**：<https://ruraldevelopment.jinhuazhang.top>（GitHub Actions → Cloudflare Pages 自动部署，站点源码在 `web/`，构建脚本 `scripts/build-site.mjs`）
+
 一句话说清它现在是什么：**一个以浙苏鲁为重心的抽样库，政策全文层已经很厚，片区实体层还远未铺满。**
 
 ---
