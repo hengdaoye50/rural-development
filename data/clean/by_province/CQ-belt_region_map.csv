@@ -1,3 +1,8 @@
-﻿belt_id,region_code,role
-B500001,500238,county
-B500002,500126,county
+﻿belt_id,region_code,role,is_core
+B500001,500238,county,
+B500002,500126,county,
+B500003,500106,county,1
+B500003,500000,town,0
+B500004,500231,county,1
+B500004,500000,town,0
+B500005,500231,county,1

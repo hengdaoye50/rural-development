@@ -1,9 +1,4 @@
 ﻿area_id,region_code,role,is_core
-A500001,500106,county,1
-A500001,500000,town,0
-A500002,500231,county,1
-A500002,500000,town,0
-A500003,500231,county,1
 A500004,500155,county,1
 A500004,500000,town,0
 A500005,500155,county,1

@@ -1,1 +1,2 @@
-belt_id,name,name_norm,belt_type,theme,province_code,city_code,county_code,cover_desc,scale_villages,scale_towns,announced_ymd,year_precision,issuer,source_id,summary,institutional_note,record_state,created_at,updated_at,created_by
+﻿belt_id,name,name_norm,belt_type,theme,province_code,city_code,county_code,cover_desc,scale_villages,scale_towns,announced_ymd,year_precision,issuer,source_id,summary,institutional_note,record_state,created_at,updated_at,created_by
+B610001,瀛湖片区湖岸经济带,瀛湖片区湖岸经济带,带,,610000,610900,610902,汉滨区瀛湖片区湖岸经济带，节庆期间单次活动吸引游客超5.2万人次,31,,2025-01-01,day,,S610004,汉滨区2025年初以片区化推进为抓手，瀛湖片区“湖岸经济带”在节庆期间单次活动吸引游客超5.2万人次，实现旅游综合收入300余万元。,由 area A610009 迁入：名称属带/廊/圈/线，按 docs/01 §3 E07 归 belt,active,2026-11-21,2026-11-21,migrate-belt-from-area

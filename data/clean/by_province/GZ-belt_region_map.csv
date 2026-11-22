@@ -1,5 +1,7 @@
-﻿belt_id,region_code,role
-B520001,520100,county
-B520002,522323,county
-B520003,520625,county
-B520004,522622,county
+﻿belt_id,region_code,role,is_core
+B520001,520100,county,
+B520002,522323,county,
+B520003,520625,county,
+B520004,522622,county,
+B520005,520112,county,1
+B520005,520100,town,0

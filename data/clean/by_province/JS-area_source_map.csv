@@ -1,4 +1,4 @@
-area_id,source_id,entity_type,rel
+﻿area_id,source_id,entity_type,rel
 A320051,S320031,area,support
 A320051,S320038,area,support
 A320051,S320040,area,support
@@ -10,7 +10,6 @@ A320054,S320041,area,support
 A320055,S320031,area,support
 A320056,S320031,area,support
 A320057,S320034,area,support
-A320058,S320034,area,support
 A320025,S320035,area,support
 A320026,S320035,area,support
 A320027,S320031,area,support
@@ -51,7 +50,6 @@ A320070,S320050,area,primary
 A320071,S320050,area,primary
 A320021,S320050,area,support
 A320029,S320051,area,support
-A320058,S320052,area,primary
 A320070,S320053,area,support
 A320077,S320054,area,primary
 A320078,S320054,area,primary

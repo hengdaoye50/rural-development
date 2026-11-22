@@ -185,7 +185,41 @@ $env:MIMO_PYTHON
 # 候选表 data/stage/candidates/area-media-roster-{ABBR}.csv
 & $env:MIMO_PYTHON scripts/ingest_area_media_roster.py GD --dry-run
 & $env:MIMO_PYTHON scripts/ingest_area_media_roster.py GD
+# 同省多份名单（省级批次 + 市级名单）用 --csv 指定文件，别覆盖省级候选表
+& $env:MIMO_PYTHON scripts/ingest_area_media_roster.py SD --csv data/stage/candidates/area-media-roster-SD-weifang.csv
 # 跑完接 merge_by_province -> build_db -> validate_db -> health_report
+
+# 名单 OCR 文本 -> 候选表（通用解析器：省/市级名单共用；公众号长图/政务网页图片/PDF 扫描件都适用）
+# profile 缺省读 data/stage/candidates/roster-profile-{ABBR}.json（名单名/发文机关/日期/功能区别名）
+& $env:MIMO_PYTHON scripts/parse_roster_ocr.py --abbr SD --ocr "data/raw/SD/<日期>-<slug>/ocr.md"
+& $env:MIMO_PYTHON scripts/parse_roster_ocr.py --abbr HB --ocr path/原文.md `
+    --profile data/stage/candidates/roster-profile-HB-xiangyang.json `
+    --out data/stage/candidates/area-media-roster-HB-xiangyang.csv
+& $env:MIMO_PYTHON scripts/parse_roster_ocr.py --abbr SD --ocr path/ocr.md --dry-run
+# 解析不出的行进 data/stage/candidates/{候选表名}-rejects.csv（不猜，留人工补别名/补县归属）
+
+# 名单类 OCR 摘录 <40 字时按快照连续原文行向上扩（幂等，保证 excerpt 仍逐字命中）
+& $env:MIMO_PYTHON scripts/lengthen_short_excerpts.py --dry-run
+& $env:MIMO_PYTHON scripts/lengthen_short_excerpts.py
+
+# 口径清洗（目标：只要「发展意义上的片区」；带/廊/圈/片归 belt，非片区下架）
+& $env:MIMO_PYTHON scripts/audit_scope.py                      # 只读，出 reports/qa/口径外候选-{date}.csv
+& $env:MIMO_PYTHON scripts/withdraw_out_of_scope.py --dry-run  # rec=drop 置 withdrawn（不删 raw）
+& $env:MIMO_PYTHON scripts/withdraw_out_of_scope.py
+& $env:MIMO_PYTHON scripts/migrate_belt_from_area.py --dry-run  # area 里带/廊/圈/片 -> belt
+& $env:MIMO_PYTHON scripts/migrate_belt_from_area.py
+& $env:MIMO_PYTHON scripts/dedupe_belt.py                       # 迁入后同名去重（保留原记录）
+& $env:MIMO_PYTHON scripts/repair_after_belt_migration.py       # event/source 悬挂引用改指 belt
+& $env:MIMO_PYTHON scripts/fix_status_evidence.py --dry-run     # 运行中但无 primary/support -> 待核
+& $env:MIMO_PYTHON scripts/fix_city_county_shift.py --dry-run   # 市码填进 county_code 的错位修复
+& $env:MIMO_PYTHON scripts/repair_empty_county_code.py          # county_code 为空则填市级码（NOT NULL）
+& $env:MIMO_PYTHON scripts/build_brand_name_decisions.py        # 名称不含「片区」且无依据 -> 裁定表
+& $env:MIMO_PYTHON scripts/withdraw_by_decision.py --file <裁定表> --actions 拆分 --dry-run
+& $env:MIMO_PYTHON scripts/audit_missing_policy_links.py --csv reports/qa/missing-policy-links.csv
+& $env:MIMO_PYTHON scripts/apply_missing_policy_links.py --dry-run  # 正文点名但漏挂 -> 补 primary/support
+& $env:MIMO_PYTHON scripts/build_pending_worklist.py            # 待核按省出补采工单
+# 跑完接 merge_by_province -> build_db -> validate_db -> health_report -> check_doc_caliber --fix
+# 单省质量抽查：& $env:MIMO_PYTHON scripts/report_province.py 610000（省码或省名）
 
 # 待核逐条裁定：按裁定表改 status/name/cover/rel（幂等；只写 by_province）
 # 裁定表 data/stage/candidates/pending-decisions-{date}.csv，列见脚本 docstring
@@ -242,7 +276,21 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/report_ledgers.py   # -> reports/县级名单台账.md / reports/qa/证据欠账-{date}.md
 # 三者改完接 build_db -> validate_db
 
-# 数据资产盘点（只读）：表规模/文件资产/分省资产/口径分布/时间分布
+# 数据集清单（只读盘点：表/视图行数、口径分层、分省、年份、类型、层级、证据、台账、县覆盖）
+& $env:MIMO_PYTHON scripts/report_data_inventory.py     # -> reports/qa/数据清单-{date}.md
+
+# 前端数据导出（含 areas 1531 + belts 118 + 三份台账 + 质量；file:// 直开）
+& $env:MIMO_PYTHON scripts/export_web_data.py            # -> web/data.js（window.DATA）
+# 契约与页面取数见 reports/阶段总结与前端数据底稿-2026-11-21.md
+
+# 地图数据：省级/市级 GeoJSON + 分省分市分县汇总 CSV（边界缓存在 data/geo）
+& $env:MIMO_PYTHON scripts/export_map_data.py            # -> data/export/map/
+& $env:MIMO_PYTHON scripts/export_map_data.py --fetch    # 刷新边界（35 次请求）
+& $env:MIMO_PYTHON scripts/export_map_data.py --no-fetch # 只出 CSV，不联网
+& $env:MIMO_PYTHON scripts/export_map_preview.py         # -> data/export/map/preview.html（自包含单页）
+# 字段与坑（0 值≠当地没有、直辖市区级套市域）见 data/export/map/README.md
+
+# 资料盘点（只读）：表规模/文件资产/分省资产/口径分布/时间分布
 & $env:MIMO_PYTHON scripts/report_data_assets.py     # -> reports/qa/数据资产盘点-{date}.md
 
 # 数据质量审计（只读）：结构/证据链/口径自洽/区划归属，ERROR/WARN/INFO 分级
@@ -258,7 +306,18 @@ $env:MIMO_PYTHON
 & $env:MIMO_PYTHON scripts/check_doc_caliber.py --fix   # 按库内值自动重写文档数字（原子写；覆盖不了的会剩 ✗）
 # 不一致即非零退出；每次批量入库后跑一次，防止「数字地基」再次漂移
 
-# 公众号线索（只做「发现」，不做「证据」；公众号不是 .gov.cn，不得进 policy）
+# 公众号检索（搜狗微信，走浏览器桥；按账号分档，只采党政机关/事业单位官方号与权威媒体）
+& $env:MIMO_PYTHON scripts/wechat_search.py "第五批省级乡村振兴片区 名单"
+& $env:MIMO_PYTHON scripts/wechat_search.py "<查询>" --pages 2
+& $env:MIMO_PYTHON scripts/wechat_search.py "<查询>" --open 1,2 --abbr SD   # 打开正文并落 raw
+# 自媒体/服务商号默认跳过（要采加 --all）；产出 data/stage/candidates/wechat-search-{date}.csv
+
+# 片区名引号清理（OCR 常只吃掉前引号，留「”」在 name 里；幂等）
+& $env:MIMO_PYTHON scripts/fix_area_name_quotes.py --dry-run
+& $env:MIMO_PYTHON scripts/fix_area_name_quotes.py
+# 跑完接 merge_by_province -> build_db -> validate_db
+
+# 公众号线索（只做「发现」；官方号现已可入 policy，见 docs/07 §3）
 & $env:MIMO_PYTHON scripts/wechat_leads.py "潍坊 片区 乡村振兴" "昌邑 片区 乡村振兴"
 & $env:MIMO_PYTHON scripts/wechat_resolve.py "<搜狗 link>"   # 当前被反爬拦截，仅用于探测
 # 产出 reports/gaps/wechat-leads-{date}.csv；说明见 reports/gaps/wechat-leads-2026-11.md
@@ -363,7 +422,10 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 
 **政策层硬约束**（详见 `docs/07-政策层.md`）：
 
-- 只收 `.gov.cn` 域名原文或政府公报；商业门户/聚合站/自媒体**禁止入 `policy`**
+- 只收 `.gov.cn` 域名原文、政府公报原件，或**党政机关/事业单位官方公众号**的名单原文
+  （2026-11-21 放宽；四条件见 `docs/07` §3：主体是机关/事业单位、内容是原文非报道、能读到逐条名单、
+  `source_kind=部门动态` 且 `credibility=B`）；媒体号（报社/电视台/融媒中心/通讯社）仍只进 `source`；
+  商业门户/聚合站/自媒体**禁止入 `policy`**
 - `credibility` 只允许 `A`/`B`
 - 必须存**全文**（`local_path` 指向 `原文.md`，`full_text_chars` 可复核），只存摘录的退回重采
 - `hash_sha256` 按磁盘字节计算，写入固定 LF，保证 `sha256(file) == hash_sha256` 可验证
@@ -457,7 +519,7 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
   `area_region_map.is_core` 在字典与 CSV 里都存在、DDL 里漏了 `belt_region_map.is_core`，
   于是 `merge_by_province` 按 master 旧表头写文件、把 by_province 的新列整个吞掉。
   已改为表头取并集 + DDL 补齐。**新增列时三处都要改：`docs/02`、DDL、by_province CSV**
-- 2026-11：**公众号只能做「发现」，不能做「证据」**。`docs/07` 白名单只收 `.gov.cn`，
+- 2026-11：**公众号只能做「发现」，不能做「证据」**（**2026-11-21 部分修订**：党政机关/事业单位官方公众号现可入 `policy`，见同日裁定；媒体号与自媒体仍不行）。`docs/07` 白名单原只收 `.gov.cn`，
   公众号无论运营方是县农业农村局还是媒体，都不得进 `policy`；进 `source` 也只能支撑
   待核或 mention。正确顺序是「公众号确认叫什么 → 去 `.gov.cn` 找文本 → 再建档」，
   反过来做就是把媒体名当官方名。工具与产出见 `reports/gaps/wechat-leads-2026-11.md`
@@ -576,3 +638,9 @@ uv pip install --python .venv-ocr\Scripts\python.exe rapidocr-onnxruntime pypdfi
 - 2026-11-21：**「集中连片」不是片区化**（用户裁定）。长沙 2021 年度美丽宜居村庄「集中连片」认定 113 条属村庄整治连片，无跨村治理机制与片区命名主体，已整批下架并写入 docs/01 §13 排除项。**教训**：名单标题里出现「片区/连片/组团」不等于片区化，必须看有没有跨村机制与命名主体
 - 2026-11-21：**公众号是主要可得渠道，但只能走「发现 → 待核档案」**。实测：搜狗微信线索可抓（`wechat_leads.py`，标题实体已修）；公众号正文被微信验证码挡住（`mp.weixin.qq.com` 返回环境异常），`opencli` 浏览器桥未连接（需用户在 Chrome 装 OpenCLI 扩展）→ 正文批量抓取暂不可用。可行路径：①搜狗线索按「省+片区+名单/公布/认定」精检；②搜索引擎 snippet 常直接含名单；③名称线索经 agent 抽取后按 `ingest_area_media_roster.py` 建 `status=待核` 档案（进 M 层、不进主统计）。**公众号永远不能进 policy**（docs/07 白名单），只能进 source
 - 2026-11-21：**公众号 OCR 通道首胜，名单长图可批量转结构化**。用户装 OpenCLI 扩展后桥接通：`opencli browser main open/extract/eval`（Windows 下必须经 PowerShell 或 node main.js 调，.ps1 shim 不能直接被 subprocess 调）；`wechat_ocr_images.py` 读 `img[data-src]` → 下载 mmbiz 长图 → `.venv-ocr` rapidocr 识别；`parse_sd5_roster.py` 解析。实测山东第五批：14 张图 OCR 出 16 市 102 个片区（新建70+提升32，与官方数字吻合），入库 86 条待核（16 同名已在库），M 层 1462→1548。**注意**：公众号只能是 `source`（待核），解析后必须留 `local_path` 指向 OCR 文本快照；名单图识别对「·」分隔与功能区名敏感，功能区别名表是关键
+- 2026-11-21：**名单 OCR 批量化跑通「先 2 省验证、再单轮 4 省」**。通用解析器 parse_roster_ocr.py 覆盖六种实际版式（市级/阶段表头、县区小节标题、片区名一行+县区下一行、顿号串列长段落、功能区别名、核心村/组团村回填），2 省验证（杭州 23/23、恩施 11/11）后一轮跑 6 份名单入库 83 条待核，M 层 1548→**1631**。三条通道修法必须记住：①opencli 用 --window background 拿到的是「微信公众平台」登录壳，**必须前台窗口 + 8–12s 等待 + 重试**；②政务网页的名单图不是 mmbiz，需 wechat_ocr_images.py --all-img（且小图跳过后要继续扫后续图，不能只扫前 N 张）；③同省多份名单（省级批次 + 市级名单）用 ingest_area_media_roster.py --csv，否则会覆盖省级候选表。另修两处静默错误：source_id 历史 S001 式会让 ingest 崩（int('')），去重只比 name 会漏判「淳安县大下姜片区」vs「大下姜片区」（已加 name_norm 比对）。**功能区（潍坊滨海区/峡山区）无县级码时宁可留 rejects 也不猜**——猜错的代价是把片区永久挂到不相干的县
+- 2026-11-21：**待核升级的瓶颈是「官方全文不公开」，不是「没补来源」**。日照 2022 用 10 页 PDF 全量 OCR 建 policy（P370348，2 324 字）升 5 条，主统计 629→**634**；其余 6 份名单（山东第五批 86、潍坊 19、杭州 23、恩施 11、襄阳 7、岳阳 19）全部只有公众号/媒体/网页嵌入图，**没有点名文本，加采媒体不会让它们进主统计**。潍坊是反例：页面在 `.gov.cn` 域，但名单只在嵌入的公众号图片里（图中带「公众号·昌邑农业农村」水印），HTML 无文本 → **域名合规 ≠ 文本合规**。工程上补了 `upgrade_media_roster.py --parent-key`：同省多份名单若不限批次，会把全省 110 条待核一起升级并挂到同一政策上（实测）。另：`ingest_policy` 只接受**全量** OCR 全文，日照原 OCR 只有前 3 页（664 字），重跑 `ocr_pdf.py` 到 10 页（3 249 字）才能入库
+- 2026-11-21：**政策层白名单放宽到「党政机关/事业单位官方公众号」**（用户裁定 A）。原「只收 `.gov.cn`」导致省/市名单大量卡在待核——名单常以「部门官方号 + 长图」首发，`.gov.cn` 只转载同一张图。四条件写进 `docs/07` §3：①主体是党政机关/事业单位；②内容是名单/公示/通知原文（非报道/非转载）；③能读到逐条名单（长图须 OCR 且快照可核）；④`source_kind=部门动态`、`credibility=B`。**媒体号（报社/电视台/融媒中心）仍只进 `source`**，自媒体与服务商号（如「农畔」）仍禁止。落地首例：潍坊 19 条（名单来自市委农办光荣册长图，转载页在 `nyncj.weifang.gov.cn`）建 `P370349` 升 primary，主统计 634→**653**、待核 486→**467**。同日清理 `area.name`/`name_norm` 的引号残留（158 个字段，`fix_area_name_quotes.py`）——OCR 常只吃掉前引号，留个「”」在名字里（`上农智田·于河印象”乡村振兴示范片区`）
+- 2026-11-21：**搜狗微信检索不能作为「名单原文」通道，只能做发现**（实测四种入口全 0：16 市批量、精确实体名、文号、6 县关键词；账号定向页也取不到文章列表）。两个结构性原因：①搜狗索引没覆盖 2026 年这批县区通报，长标题会被泛化成无关大稿；②跳转后是**临时签名 URL**（`src=11&timestamp=…`），会过期，不能当 `policy.url`。**边界在「原文 vs 报道」**：潍坊 19 能升是因为光荣册名单页本身就是名单（图片 OCR 即全文）；县局的「入选通报」是报道，按 `docs/07` §3 不能入 policy。记录见 `reports/gaps/公众号检索边界-2026-11-21.md`
+- 2026-11-21：**口径清洗：把「带/廊/圈/片」从 area 迁到 belt，下架 18 条非片区**（用户要求"要发展意义上的片区，不是收集"）。判据按**名称词尾=实体类型**：`带/廊/圈/线`→belt（129 条迁出，17 组与既有 belt 同名合并），田园综合体/示范村群落/小镇/项目/规划分区→`record_state='withdrawn'`（18 条，不删 raw）。结果：area 1 531→1 381、belt 118→230、M 1 631→**1 611**、主统计 653→**582**、待核 467→438、县覆盖 691→615。**主统计下降不是数据缩水**：129 条带/廊原按片区计入 P 层，纠正后只进 M 层，不进政策分析样本。三条教训：①**名称语义比正则可靠**——首版审计把「片区」里的「区」当行政区前缀，误报 696 条，改成"词尾判实体"才收敛；②**迁移脚本的删除集合只能含真正迁出的 id**——首版把"同名 belt 已存在（跳过）"的 3 条 area 也删了，靠 `SKIPPED` 映射补回并改用 `moved_ids`；③迁移后必须跑 `repair_after_belt_migration.py` 把 event/source 改指 belt，否则 validate 直接报 199 个悬挂引用。报告见 `reports/qa/口径清洗-2026-11-21.md`
+- 2026-11-21：**待核先查「库里是否已有证据」，再谈加采**。反查 1 743 份政策全文，123 条其实已被正文点名（只是漏挂映射），补后 primary 31 / support 92、19 条待核升运行中，主统计 582→593、宽 778→797；剩余 566 条按省出工单，见 `reports/qa/待核工单-2026-11-21.md`

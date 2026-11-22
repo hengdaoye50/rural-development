@@ -1,1 +1,2 @@
-belt_id,region_code,role
+﻿belt_id,region_code,role,is_core
+B610001,610902,county,1

@@ -3,6 +3,11 @@
 .env.*
 !.env.example
 
+# ç«™ç‚¹æ„å»ºä¸éƒ¨ç½²
+node_modules/
+dist/
+.wrangler/
+
 # python
 __pycache__/
 *.pyc
@@ -40,3 +45,8 @@ data/stage/candidates/*
 !data/stage/candidates/pending-decisions-*.csv
 !data/stage/candidates/t2-decisions-*.csv
 .tmp*/
+
+# ²¿Êğ²úÎïÓëÁÙÊ±½ØÍ¼
+dist.zip
+web/_*.png
+

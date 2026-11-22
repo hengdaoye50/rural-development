@@ -65,21 +65,30 @@ def main() -> int:
     ap.add_argument("--abbr", default="WX")
     ap.add_argument("--min-height", type=int, default=600, help="只 OCR 高度≥该值的图（长图才是名单）")
     ap.add_argument("--keep", type=int, default=8)
+    ap.add_argument("--all-img", action="store_true",
+                    help="非公众号页面（政府网图片名单）：收所有 jpg/png，不只 mmbiz")
     args = ap.parse_args()
 
-    cli("browser", "main", "open", args.url, "--window", "background")
-    time.sleep(5)   # 公众号页面异步渲染，太快拿到的是壳
+    # 2026-11-21 实测：background 窗口会拿到「微信公众平台」登录壳，需前台窗口 + 异步等待
     title = ""
+    for wait in (8, 12):
+        cli("browser", "main", "open", args.url)
+        time.sleep(wait)
+        state = cli("browser", "main", "extract")
+        mt = re.search(r'"title":\s*"([^"]*)"', state)
+        title = mt.group(1) if mt else "wx"
+        if title and "微信公众平台" not in title:
+            break
     js = ("JSON.stringify(Array.from(document.querySelectorAll('img'))"
           ".map(function(i){return i.dataset.src||i.src;})"
-          ".filter(function(s){return s && s.indexOf('mmbiz')>=0;}))")
+          ".filter(function(s){return s && ("
+          + ("/\\.(jpg|jpeg|png|webp)/i.test(s)" if args.all_img or "mp.weixin.qq.com" not in args.url
+             else "s.indexOf('mmbiz')>=0")
+          + ");}))")
     raw = cli("browser", "main", "eval", js)
     m = re.search(r"\[.*\]", raw, re.S)
     urls = json.loads(m.group(0)) if m else []
     imgs = [{"s": u} for u in urls]
-    state = cli("browser", "main", "extract")
-    mt = re.search(r'"title":\s*"([^"]*)"', state)
-    title = mt.group(1) if mt else "wx"
     print(f"标题：{title}｜候选长图 {len(imgs)} 张")
 
     if not imgs:
@@ -89,7 +98,10 @@ def main() -> int:
     d = ROOT / "data" / "raw" / args.abbr / f"{date.today():%Y%m%d}-wx-img-{slug(title)}"
     d.mkdir(parents=True, exist_ok=True)
     texts = []
-    for i, im in enumerate(imgs[: args.keep], 1):
+    done = 0
+    for i, im in enumerate(imgs, 1):
+        if done >= args.keep:
+            break
         src = im["s"]
         ext = ".jpg"
         f = d / f"img-{i:02d}{ext}"
@@ -108,6 +120,7 @@ def main() -> int:
         print(f"  ✓ 图 {i} {f.stat().st_size//1024}KB -> OCR {len(t)} 字")
         if t:
             texts.append(f"\n\n## 图 {i}\n\n{t}")
+            done += 1
     if texts:
         (d / "ocr.md").write_text("".join(texts).strip(), encoding="utf-8", newline="\n")
         (d / "meta.json").write_text(json.dumps({

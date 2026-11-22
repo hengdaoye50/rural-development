@@ -1,7 +1,4 @@
 ﻿area_id,source_id,entity_type,rel
-A500001,S500001,area,primary
-A500002,S500002,area,primary
-A500003,S500002,area,primary
 A500009,S500002,area,primary
 A500004,S500003,area,primary
 A500005,S500003,area,primary

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>地图 · 全国乡村片区化数据库</title>
+<meta name="description" content="按省查看全国乡村片区分布：片区数、主统计、待核占比，点击省份查看明细。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html"><div class="mark">片</div><b>全国乡村片区化数据库</b></a>
+    <nav class="main">
+      <a href="index.html">概览</a><a href="map.html">地图</a><a href="provinces.html">省份</a>
+      <a href="explore.html">检索</a><a href="method.html">方法与质量</a><a href="about.html">关于</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="filterbar" style="margin-top:22px">
+    <div class="seg" id="seg" style="margin:0">
+      <button data-m="areas" class="on">片区数</button>
+      <button data-m="main">主统计</button>
+      <button data-m="pending_share">待核占比</button>
+    </div>
+    <span class="sub" style="font-size:12px;color:var(--ink-3);margin-left:6px" id="map-sub">按片区数着色</span>
+    <span style="margin-left:auto;font-size:12px;color:var(--ink-3)">点击省份查看详情 · 灰色＝库内暂无记录</span>
+  </div>
+
+  <div class="mapfull" id="mapfull" style="margin-top:14px">
+    <div id="map"></div>
+    <div class="maplegend" id="legend" style="left:18px"></div>
+  </div>
+</div>
+
+<div class="drawer" id="drawer">
+  <button class="close" id="close">×</button>
+  <div class="lbl">省份</div>
+  <h2 id="d-name">—</h2>
+  <div id="d-body"></div>
+  <div style="margin-top:18px"><a class="btn" id="d-go" href="explore.html" style="text-decoration:none;display:inline-block">查看该省片区 →</a></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>全国乡村片区化数据库</h4>
+        <p>记录中国大陆 31 个省级单位、县/区以下、以片区为单元推进乡村振兴的实践。</p></div>
+      <div><h4>数据</h4><ul><li><a href="about.html">下载 CSV / GeoJSON</a></li><li><a href="method.html">口径与方法</a></li></ul></div>
+      <div><h4>引用</h4><ul><li>数据快照 <span id="f-snapshot">—</span></li><li><a href="about.html#cite">引用格式</a></li></ul></div>
+    </div>
+    <div class="copy"><span>© 2026 · 学术用途</span><span>ruraldevelopment.jinhuazhang.top</span></div>
+  </div>
+</footer>
+
+<script src="assets/data/summary.js"></script>
+<script src="assets/data/provinces.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  var RD = window.RD || {}, kit = window.RDKit, fmt = kit.fmt;
+  document.getElementById("f-snapshot").textContent = RD.snapshot || "—";
+  var metric = "areas";
+  var LABEL = {areas:"片区数", main:"主统计", pending_share:"待核占比"};
+  var drawer = document.getElementById("drawer");
+  var cur = null;
+
+  function fill(p) {
+    cur = p;
+    document.getElementById("d-name").textContent = p.name + "（" + p.code + "）";
+    var rows = [
+      ["片区数（在册）", fmt(p.areas)],
+      ["主统计 A+B", fmt(p.main)],
+      ["宽统计 A+B+C", fmt(p.wide)],
+      ["待核", fmt(p.pending) + (p.areas ? "（" + p.pending_share + "%）" : "")],
+      ["覆盖县", fmt(p.counties)],
+      ["象征单元 belt", fmt(p.belt)],
+      ["政策文件", fmt(p.policy)]
+    ];
+    document.getElementById("d-body").innerHTML = rows.map(function(r){
+      return '<div class="kv"><span>' + r[0] + "</span><b>" + r[1] + "</b></div>";
+    }).join("");
+    document.getElementById("d-go").href = "explore.html?prov=" + p.code;
+    drawer.classList.add("open");
+  }
+
+  var map = kit.buildMap(document.getElementById("map"), { metric: metric, onSelect: fill,
+    onRedraw: function(){ paintLegend(); } });
+  var legend = document.getElementById("legend");
+  function paintLegend(){
+    if (!map) return;
+    legend.innerHTML = '<span class="sw" style="background:var(--map-0)"></span><span>无记录</span>' +
+      '<span style="margin:0 4px 0 12px">' + LABEL[metric] + "</span>" +
+      map.getPalette().slice(1).map(function(c){ return '<span class="sw" style="background:' + c + '"></span>'; }).join("") +
+      '<span>0 → ' + (map.maxOf(metric)||0) + (metric==="pending_share"?"%":"") + "</span>";
+    document.getElementById("map-sub").textContent = "按" + LABEL[metric] + "着色";
+  }
+  function paint(){
+    map.setMetric(metric);
+    paintLegend();
+  }
+  document.getElementById("seg").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b) return;
+    metric = b.getAttribute("data-m");
+    Array.prototype.forEach.call(this.querySelectorAll("button"), function(x){ x.classList.toggle("on", x===b); });
+    paint();
+  });
+  document.getElementById("close").onclick = function(){ drawer.classList.remove("open"); };
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") drawer.classList.remove("open"); });
+
+  paint();
+  var q = new URLSearchParams(location.search).get("prov");
+  if (q) {
+    var p = (RD.provinces||[]).filter(function(x){ return x.code === q; })[0];
+    if (p) fill(p);
+  }
+})();
+</script>
+</body>
+</html>

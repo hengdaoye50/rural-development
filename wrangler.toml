@@ -1,0 +1,11 @@
+# Cloudflare Pages 配置
+# 与 Innovation-in-Local-Government 同款：Actions 里用 wrangler 部署 dist/
+name = "rural-development"
+compatibility_date = "2026-11-22"
+pages_build_output_dir = "dist"
+
+# 本仓库为纯静态站点，不绑定 D1 / KV / R2。
+# 若将来需要，再在此追加绑定（参考创新案例库仓库）。
+
+[vars]
+SITE_ORIGIN = "https://ruraldevelopment.jinhuazhang.top"

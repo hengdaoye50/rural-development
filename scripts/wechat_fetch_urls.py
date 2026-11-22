@@ -18,6 +18,7 @@ import json
 import re
 import subprocess
 import sys
+import time
 from datetime import date
 from pathlib import Path
 
@@ -32,13 +33,22 @@ def _ps(cmd: str) -> str:
 
 
 def extract(url: str) -> tuple[str, str]:
-    """返回 (title, markdown_text)。opencli 在 Windows 是 .ps1 shim，必须经 PowerShell 调。"""
-    _ps(f"opencli browser main open '{url}' --window background")
-    out = _ps("opencli browser main extract")
-    try:
-        d = json.loads(out[out.index("{"):]) if "{" in out else {}
-    except Exception:  # noqa: BLE001
-        d = {}
+    """返回 (title, markdown_text)。opencli 在 Windows 是 .ps1 shim，必须经 PowerShell 调。
+
+    2026-11-21 实测：`--window background` 会拿到「微信公众平台」登录壳（poc_token 跳转），
+    前台窗口才渲染正文，且需等异步加载。故默认前台 + 重试一次。
+    """
+    for wait in (6, 10):
+        _ps(f"opencli browser main open '{url}'")
+        time.sleep(wait)
+        out = _ps("opencli browser main extract")
+        try:
+            d = json.loads(out[out.index("{"):]) if "{" in out else {}
+        except Exception:  # noqa: BLE001
+            d = {}
+        title, text = d.get("title", ""), d.get("content", "")
+        if title and "微信公众平台" not in title and len(text) >= 200:
+            return title, text
     return d.get("title", ""), d.get("content", "")
 
 

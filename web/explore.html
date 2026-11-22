@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>检索 · 全国乡村片区化数据库</title>
+<meta name="description" content="按名称、省份、类型、口径组、证据强度筛选 1 000 余条县以下片区记录，可导出 CSV。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html"><div class="mark">片</div><b>全国乡村片区化数据库</b></a>
+    <nav class="main">
+      <a href="index.html">概览</a><a href="map.html">地图</a><a href="provinces.html">省份</a>
+      <a href="explore.html">检索</a><a href="method.html">方法与质量</a><a href="about.html">关于</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="filterbar" style="margin-top:22px">
+    <input type="search" id="kw" placeholder="名称 / 县区">
+    <select id="prov"><option value="">全部省份</option></select>
+    <select id="type"><option value="">全部类型</option></select>
+    <select id="group">
+      <option value="">全部口径组</option>
+      <option value="A">A 窗内</option><option value="B">B 延续至今</option>
+      <option value="C">C 时间不详</option><option value="D">D 口径外</option>
+    </select>
+    <select id="ev">
+      <option value="">全部证据</option><option value="强">强</option>
+      <option value="弱">弱</option><option value="无">无</option>
+    </select>
+    <select id="status"><option value="">全部状态</option><option value="运行中">运行中</option><option value="待核">待核</option></select>
+    <button class="btn ghost" id="reset">重置</button>
+    <button class="btn" id="csv">导出 CSV</button>
+  </div>
+
+  <div class="card" style="margin-top:16px;padding:0;overflow:hidden">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line)">
+      <span style="font-size:13px;color:var(--ink-2)">结果 <b id="cnt">—</b> 条</span>
+      <span style="font-size:12px;color:var(--ink-3)">点击行查看详情</span>
+    </div>
+    <div style="overflow:auto"><table id="tbl"></table></div>
+  </div>
+  <div class="pager" id="pager"></div>
+</div>
+
+<div class="drawer" id="drawer">
+  <button class="close" id="close">×</button>
+  <div class="lbl">片区</div>
+  <h2 id="d-name">—</h2>
+  <div id="d-body"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>全国乡村片区化数据库</h4>
+        <p>记录中国大陆 31 个省级单位、县/区以下、以片区为单元推进乡村振兴的实践。</p></div>
+      <div><h4>数据</h4><ul><li><a href="about.html">下载 CSV / GeoJSON</a></li><li><a href="method.html">口径与方法</a></li></ul></div>
+      <div><h4>引用</h4><ul><li>数据快照 <span id="f-snapshot">—</span></li><li><a href="about.html#cite">引用格式</a></li></ul></div>
+    </div>
+    <div class="copy"><span>© 2026 · 学术用途</span><span>ruraldevelopment.jinhuazhang.top</span></div>
+  </div>
+</footer>
+
+<script src="assets/data/summary.js"></script>
+<script src="assets/data/areas.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(function(){
+  var RD = window.RD || {}, AREAS = window.RD_AREAS || [], kit = window.RDKit, fmt = kit.fmt;
+  document.getElementById("f-snapshot").textContent = RD.snapshot || "—";
+  var pName = {};
+  (RD.provinces || []).forEach(function(p){ pName[p.code] = p.name; });
+  var TYPE = {T01:"示范片区",T02:"片区联合党委",T03:"示范带/廊/圈",T04:"产业片区",
+              T05:"农文旅片区",T06:"帮扶协作",T07:"城乡融合",T08:"改革试验"};
+
+  var provSel = document.getElementById("prov"), typeSel = document.getElementById("type");
+  var provs = Object.keys(pName).filter(function(k){ return (RD.provinces||[]).some(function(p){return p.code===k && p.areas;}); });
+  provs.sort(function(a,b){ return pName[a].localeCompare(pName[b], "zh"); });
+  provs.forEach(function(c){ var o = document.createElement("option"); o.value = c; o.textContent = pName[c]; provSel.appendChild(o); });
+  Object.keys(TYPE).forEach(function(t){ var o = document.createElement("option"); o.value = t; o.textContent = t + " " + TYPE[t]; typeSel.appendChild(o); });
+
+  var PAGE = 40, page = 0, rows = [];
+  function pick(){
+    var kw = document.getElementById("kw").value.trim();
+    var pv = provSel.value, ty = typeSel.value, gp = document.getElementById("group").value;
+    var ev = document.getElementById("ev").value, st = document.getElementById("status").value;
+    rows = AREAS.filter(function(a){
+      if (pv && a.prov !== pv) return false;
+      if (ty && a.type !== ty) return false;
+      if (gp && a.g !== gp) return false;
+      if (ev && a.ev !== ev) return false;
+      if (st && a.status !== st) return false;
+      if (kw && (a.name + " " + (a.county||"")).indexOf(kw) < 0) return false;
+      return true;
+    });
+    page = 0; render();
+  }
+
+  function chip(a){
+    if (a.status === "待核") return '<span class="chip c">待核</span>';
+    return '<span class="chip a">' + (a.g || "?") + "</span>";
+  }
+  function render(){
+    var start = page * PAGE, slice = rows.slice(start, start + PAGE);
+    document.getElementById("cnt").textContent = fmt(rows.length);
+    var head = "<thead><tr><th>名称</th><th>省份 / 县区</th><th>类型</th><th>成立</th><th>口径</th><th>证据</th><th class='n'>政策</th></tr></thead>";
+    var body = slice.map(function(a){
+      return "<tr data-id='" + a.id + "'" + (a.status === "待核" ? ' class="pending"' : "") + ">" +
+        "<td>" + a.name + "</td>" +
+        "<td>" + (pName[a.prov] || "") + " · " + (a.county_name || a.county || "") + "</td>" +
+        "<td>" + a.type + " " + (TYPE[a.type] || "") + "</td>" +
+        "<td>" + (a.ymd ? a.ymd.slice(0,7) : "—") + "</td>" +
+        "<td>" + chip(a) + "</td>" +
+        "<td>" + a.ev + "</td>" +
+        "<td class='n'>" + (a.npol || 0) + "</td></tr>";
+    }).join("");
+    document.getElementById("tbl").innerHTML = head + "<tbody>" + (body || "<tr><td colspan='7' style='color:var(--ink-3)'>没有匹配的记录</td></tr>") + "</tbody>";
+    var pages = Math.max(1, Math.ceil(rows.length / PAGE));
+    document.getElementById("pager").innerHTML =
+      "<span>第 " + (page + 1) + " / " + pages + " 页</span>" +
+      '<button id="prev"' + (page ? "" : " disabled") + ">上一页</button>" +
+      '<button id="next"' + (page < pages - 1 ? "" : " disabled") + ">下一页</button>";
+    var prev = document.getElementById("prev"), next = document.getElementById("next");
+    if (prev) prev.onclick = function(){ page--; render(); };
+    if (next) next.onclick = function(){ page++; render(); };
+    Array.prototype.forEach.call(document.querySelectorAll("#tbl tbody tr[data-id]"), function(tr){
+      tr.style.cursor = "pointer";
+      tr.onclick = function(){ open(tr.getAttribute("data-id")); };
+    });
+  }
+
+  function open(id){
+    var a = AREAS.filter(function(x){ return x.id === id; })[0];
+    if (!a) return;
+    document.getElementById("d-name").textContent = a.name;
+    var rows = [
+      ["编号", a.id], ["省份", (pName[a.prov] || a.prov) + "（" + a.prov + "）"],
+      ["县区码", a.county || "—"], ["类型", a.type + " " + (TYPE[a.type] || "")],
+      ["设立方式", ({roster:"名单型",deployment:"部署型",unknown:"未判定"})[a.setup] || a.setup],
+      ["成立时间", a.ymd || "未填"], ["状态", a.status],
+      ["口径组", a.g || "—"], ["证据", a.ev], ["政策挂接", fmt(a.npol)],
+      ["覆盖村数", a.villages || "—"]
+    ];
+    document.getElementById("d-body").innerHTML = rows.map(function(r){
+      return '<div class="kv"><span>' + r[0] + "</span><b>" + r[1] + "</b></div>";
+    }).join("");
+    document.getElementById("drawer").classList.add("open");
+  }
+
+  ["kw","prov","type","group","ev","status"].forEach(function(id){
+    var el = document.getElementById(id);
+    el.addEventListener(el.tagName === "INPUT" ? "input" : "change", pick);
+  });
+  document.getElementById("reset").onclick = function(){
+    document.getElementById("kw").value = "";
+    ["prov","type","group","ev","status"].forEach(function(id){ document.getElementById(id).value = ""; });
+    pick();
+  };
+  document.getElementById("csv").onclick = function(){
+    var cols = ["id","name","prov","county","type","setup","ymd","status","g","ev","npol"];
+    var lines = [cols.join(",")];
+    rows.forEach(function(a){
+      lines.push(cols.map(function(c){
+        var v = (c === "prov") ? (pName[a.prov] || a.prov) : a[c];
+        return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
+      }).join(","));
+    });
+    var blob = new Blob(["\ufeff" + lines.join("\r\n")], {type:"text/csv;charset=utf-8"});
+    var link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "片区检索-" + (RD.snapshot || "export") + ".csv";
+    link.click();
+    setTimeout(function(){ URL.revokeObjectURL(link.href); }, 1000);
+  };
+  document.getElementById("close").onclick = function(){ document.getElementById("drawer").classList.remove("open"); };
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") document.getElementById("drawer").classList.remove("open"); });
+
+  var qp = new URLSearchParams(location.search).get("prov");
+  if (qp) provSel.value = qp;
+  pick();
+})();
+</script>
+</body>
+</html>

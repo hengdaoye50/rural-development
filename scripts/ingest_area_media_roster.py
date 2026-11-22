@@ -66,6 +66,10 @@ def main() -> int:
         return 2
     abbr = args[0].upper()
     src_csv = CAND / f"area-media-roster-{abbr}.csv"
+    if "--csv" in sys.argv:      # 同省多份名单（省级批次 / 市级名单）时指定具体文件
+        src_csv = Path(sys.argv[sys.argv.index("--csv") + 1])
+        if not src_csv.is_absolute():
+            src_csv = (ROOT / src_csv).resolve()
     if not src_csv.exists():
         print(f"找不到 {src_csv}")
         return 1
@@ -82,9 +86,18 @@ def main() -> int:
     sp, srows = _read(BY_PROV / f"{abbr}-source.csv")
     xp, xrows = _read(BY_PROV / f"{abbr}-area_source_map.csv")
     have = {(r.get("county_code"), PUNCT.sub("", r.get("name") or "")) for r in arows}
+    have_norm = {(r.get("county_code"), PUNCT.sub("", r.get("name_norm") or "")) for r in arows}
     seq_area = max([int(r["area_id"][3:]) for r in arows if r.get("area_id", "").startswith("A")] or [0])
-    seq_src = max([int(r["source_id"][4:]) for r in srows if r.get("source_id", "").startswith("S")] or [0])
-    prov2 = None
+    prov2 = (items[0].get("county_code", "")[:2] if items else "").strip()
+    # source_id 两套历史编号：新版 S{省2}{4位}，早期省份是 S{3位}（浙江 S001…）。
+    # 沿用本省已有风格，避免同省两套编号并存。
+    legacy = [int(m.group(1)) for r in srows
+              for m in [re.match(r"^S(\d{3,6})$", (r.get("source_id") or "").strip())] if m]
+    pref = [int((r.get("source_id") or "")[4:]) for r in srows
+            if (r.get("source_id") or "").startswith("S" + prov2)
+            and (r.get("source_id") or "")[4:].isdigit()]
+    use_legacy = bool(legacy) and not pref
+    seq_src = max(legacy) if use_legacy else max(pref or [0])
 
     errors, adds, skipped = [], [], []
     src_by_url: dict[str, dict[str, str]] = {}
@@ -106,13 +119,13 @@ def main() -> int:
             errors.append(f"{name}: local_path 不存在 {lp}"); continue
         prov2 = prov2 or cc[:2]
         nn = PUNCT.sub("", name)
-        if (cc, nn) in have:
+        if (cc, nn) in have or (cc, nn) in have_norm:
             skipped.append(name); continue
 
         sid = src_by_url.get(url, {}).get("source_id")
         if not sid:
             seq_src += 1
-            sid = f"S{prov2}{seq_src:04d}"
+            sid = f"S{seq_src:03d}" if use_legacy else f"S{prov2}{seq_src:04d}"
             src_by_url[url] = {
                 "source_id": sid, "area_id": "", "url": url,
                 "title": (it.get("source_title") or "").strip(),

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>关于与下载 · 全国乡村片区化数据库</title>
+<meta name="description" content="数据快照、下载、引用格式与使用许可。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html"><div class="mark">片</div><b>全国乡村片区化数据库</b></a>
+    <nav class="main">
+      <a href="index.html">概览</a><a href="map.html">地图</a><a href="provinces.html">省份</a>
+      <a href="explore.html">检索</a><a href="method.html">方法与质量</a><a href="about.html">关于</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="masthead" style="border:0">
+    <div class="mast" style="padding:28px 0 6px">
+      <div><h1>关于与下载</h1>
+        <div class="meta">数据快照 <span id="snap">—</span> · 版本 v0.1 · 学术用途</div>
+        <div class="links"><a href="method.html">口径与方法</a><a href="#cite">引用格式</a></div></div>
+    </div>
+  </div>
+
+  <section style="padding-top:10px">
+    <div class="sec-h"><span class="no">01</span><h2>下载</h2></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table>
+        <thead><tr><th>文件</th><th>内容</th><th>格式</th></tr></thead>
+        <tbody>
+          <tr><td><a href="downloads/分省汇总.csv">分省汇总.csv</a></td><td>34 个省级单位：片区数、主统计、宽统计、待核占比、覆盖县、政策数</td><td>CSV</td></tr>
+          <tr><td><a href="downloads/分市汇总.csv">分市汇总.csv</a></td><td>449 个市级单元，与 GeoJSON 一一对应（含 0 值城市）</td><td>CSV</td></tr>
+          <tr><td><a href="downloads/分县汇总.csv">分县汇总.csv</a></td><td>607 个有片区的县：片区数、主统计、待核</td><td>CSV</td></tr>
+          <tr><td><a href="downloads/provinces.geojson">provinces.geojson</a></td><td>省级边界 + 统计属性，可直接拖进 QGIS</td><td>GeoJSON</td></tr>
+          <tr><td><a href="downloads/cities.geojson">cities.geojson</a></td><td>市级边界（直辖市为区级要素，数值取市域统计）</td><td>GeoJSON</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" style="margin-top:10px;font-size:12px;color:var(--ink-3)">
+      原始证据（data/raw 的政策原文快照）不随站点发布；需要逐条核验请联系作者。</p>
+  </section>
+
+  <section id="cite">
+    <div class="sec-h"><span class="no">02</span><h2>引用</h2></div>
+    <div class="card">
+      <h3>中文引用</h3>
+      <p style="font-size:13px;color:var(--ink-2)">全国乡村片区化数据库（<span class="snap2">—</span>）：中国县以下片区化推进乡村振兴数据库，v0.1。访问地址：https://ruraldevelopment.jinhuazhang.top</p>
+      <h3 style="margin-top:18px">BibTeX</h3>
+      <pre class="mono" style="background:var(--th);padding:12px 14px;border-radius:6px;overflow:auto;font-size:12.5px;line-height:1.7;margin:0">@misc{ruralarea2026,
+  title  = {全国乡村片区化数据库},
+  author = {张锦华},
+  year   = {2026},
+  note   = {数据快照 <span class="snap2">—</span>，v0.1},
+  url    = {https://ruraldevelopment.jinhuazhang.top}
+}</pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><span class="no">03</span><h2>版本与许可</h2></div>
+    <div class="grid2">
+      <div class="card"><h3>版本</h3><p class="sub">每次入库产生新快照，数字以页面为准</p>
+        <div class="kv" style="display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line)"><span>数据快照</span><b class="snap2">—</b></div>
+        <div class="kv" style="display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--line)"><span>在册记录</span><b id="v-areas">—</b></div>
+        <div class="kv" style="display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:13px;padding:7px 0"><span>政策文件</span><b id="v-policy">—</b></div>
+      </div>
+      <div class="card"><h3>使用许可</h3>
+        <p class="sub">学术研究与非商业使用免费；转载与二次发布请注明来源与快照日。</p>
+        <p class="sub" style="margin-top:8px">数据库中「待核」记录的证据链未达标，引用时请勿当作已核实的官方名单。</p></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>全国乡村片区化数据库</h4>
+        <p>记录中国大陆 31 个省级单位、县/区以下、以片区为单元推进乡村振兴的实践。</p></div>
+      <div><h4>数据</h4><ul><li><a href="about.html">下载 CSV / GeoJSON</a></li><li><a href="method.html">口径与方法</a></li></ul></div>
+      <div><h4>引用</h4><ul><li>数据快照 <span id="f-snapshot">—</span></li><li><a href="#cite">引用格式</a></li></ul></div>
+    </div>
+    <div class="copy"><span>© 2026 · 学术用途</span><span>ruraldevelopment.jinhuazhang.top</span></div>
+  </div>
+</footer>
+
+<script src="assets/data/summary.js"></script>
+<script>
+(function(){
+  var RD = window.RD || {}, T = RD.totals || {};
+  var f = function(n){ return n == null ? "—" : Number(n).toLocaleString("zh-CN"); };
+  document.getElementById("f-snapshot").textContent = RD.snapshot || "—";
+  document.getElementById("snap").textContent = RD.snapshot || "—";
+  document.getElementById("v-areas").textContent = f(T.areas);
+  document.getElementById("v-policy").textContent = f(T.policy);
+  Array.prototype.forEach.call(document.querySelectorAll(".snap2"), function(el){
+    el.textContent = RD.snapshot || "—";
+  });
+})();
+</script>
+</body>
+</html>

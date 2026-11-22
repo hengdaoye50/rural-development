@@ -1,4 +1,12 @@
-﻿belt_id,region_code,role
-B360001,360782,county
-B360002,360722,county
-B360003,360725,county
+﻿belt_id,region_code,role,is_core
+B360001,360782,county,
+B360002,360722,county,
+B360003,360725,county,
+B360004,360703,county,1
+B360005,360724,county,1
+B360006,360724,county,1
+B360007,360725,county,1
+B360008,360725,county,1
+B360009,360725,county,1
+B360010,360725,county,1
+B360011,360726,county,1

@@ -54,6 +54,10 @@ def main() -> int:
     mp, mrows = _read(BY_PROV / f"{abbr}-area_policy_map.csv")
     have = {(r["area_id"], r["policy_id"]) for r in mrows}
     targets = [r for r in arows if r.get("created_by") == creator and r.get("status") == "待核"]
+    # 同省多份名单时按 parent_area_key 限定批次（否则会把全省所有媒体名单一起升级）
+    if "--parent-key" in sys.argv:
+        pkey = sys.argv[sys.argv.index("--parent-key") + 1]
+        targets = [r for r in targets if r.get("parent_area_key") == pkey]
     if not targets:
         print(f"{abbr}: 没有 created_by={creator} 且 status=待核 的片区（可能已升级）")
         return 0

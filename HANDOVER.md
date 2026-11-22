@@ -6,19 +6,25 @@
 
 ## 0. 一句话现状
 
-全国县以下「片区化推进乡村振兴」数据库已建成可运行态：**M 层命名单元 1548**
-（area 1448 + belt 100 去重）、主统计 629、待核 408、县覆盖 697/2856、31 省全覆盖；
-质量：`validate issues=0`、审计 ERROR=0、可执行欠账 42。
+全国县以下「片区化推进乡村振兴」数据库已建成可运行态：**M 层命名单元 1598**
+（area 1368 + belt 230 去重）、主统计 593、待核 566、县覆盖 607/2856、31 省全覆盖；
+质量：`validate issues=0`、审计 ERROR=0。
+**2026-11-21 晚做过两轮口径清洗**：①带/廊/圈/片 129 条迁出 area 入 belt、下架 18 条非片区；
+②160 条「运行中但无依据」收严为待核、16 条市/县码错位修复、13 条区域级「先行区/示范区」
+下架。主统计 653→582 是口径纠正而非数据缩水，详见 `reports/qa/口径清洗-2026-11-21.md`。
 
 ## 1. 当前口径（用户已裁定，勿擅改）
 
 | 口径 | 值 | 含义 |
 |---|---|---|
-| **对外总量 = M 层** | **1548** | area+belt 去重；示范带/示范片/走廊**计入** |
-| 主统计（P 层） | 629 | 2022+ 且 primary/support，仅用于政策分析 |
-| 宽统计 | 845 | 主统计 + 时间不详 |
-| 待核 | 408 | 媒体/公众号唯一来源，**计入 M 层、不计入主统计** |
-| 县覆盖 | 697/2856 | 必须与总量并列报 |
+| **对外总量 = M 层** | **1598** | area+belt 去重；示范带/示范片/走廊**计入** |
+| 主统计（P 层） | 593 | 2022+ 且 primary/support，仅用于政策分析 |
+| 宽统计 | 797 | 主统计 + 时间不详 |
+| 待核 | 566 | 媒体/公众号唯一来源或证据不足，**计入 M 层、不计入主统计** |
+| 县覆盖 | 607/2856（按 county_code）｜626（按归属行） | 必须与总量并列报 |
+
+> **2026-11-21 口径修订**：政策层白名单放宽到**党政机关/事业单位官方公众号**（四条件见 `docs/07` §3）。
+> 媒体号（报社/电视台/融媒中心）仍只进 `source`；自媒体/服务商号禁止。
 
 **对象类型永不放宽**：示范县/乡镇/村、园区景区、城市控规与国土空间规划分区 一律不收。
 「集中连片」已裁定**不是片区化**（docs/01 §13，长沙 113 条已删）。
@@ -40,23 +46,41 @@ $py='C:\Users\zjh22\AppData\Local\Programs\Python\Python312\python.exe'
 
 ## 3. 下一步（按优先级）
 
-### P0 公众号名单批量化（用户已同意，建议先 2 省验证再 5–8 省）
-已完成一条完整链路（山东第五批 102 → 入库 86 待核）。SOP：
-1. `web_search "第X批 省级乡村振兴片区 名单 省名"` 找 `mp.weixin.qq.com` 文章（snippet 常带名字）；
-2. `& $py scripts/wechat_ocr_images.py --url "<链接>" --abbr <省码字母> --keep 14`
-   → `data/raw/{ABBR}/{date}-wx-img-*/ocr.md`；
-3. 复制 `scripts/parse_sd5_roster.py` 改成通用 `parse_roster_ocr.py`（改 CITY/ALIAS/正则即可）；
-4. 候选表 → `& $py scripts/ingest_area_media_roster.py <ABBR>`（`status=待核`，进 M 层）；
-5. `merge_by_province → build_db → validate_db → report_macro_layer → check_doc_caliber --fix`。
+### P0 公众号/长图名单批量化（2026-11-21 第二轮已完成）
+先做 2 省验证（浙江杭州 23/23、湖北恩施 11/11 解析率 100%），通过后单轮批量跑 4 省 6 份名单：
+杭州 23、恩施 11、潍坊 19、日照 5、襄阳 7、岳阳 19 → **入库 83 条待核**，M 层 1548→**1631**。
+小结与遗留见 `reports/pilot/公众号名单批量-2026-11-21.md`。SOP（已固化）：
+
+1. 找文章/页面（名单常是长图）：`web_search "<省/市> 乡村振兴片区 名单 公示"`；公众号正文被反爬时
+   优先用搜索引擎 snippet 拿到标题与名字线索；
+2. 抓快照：`wechat_fetch_urls.py --abbr <ABBR> --urls <url>`（正文）或
+   `wechat_ocr_images.py --url <url> --abbr <ABBR> --all-img`（图片名单，政务网页也可用）；
+3. 解析：`parse_roster_ocr.py --abbr <ABBR> --ocr <原文.md|ocr.md> [--profile ...] [--out ...]`，
+   六种版式已覆盖（市级/阶段表头、县区小节、片区名一行县区下一行、顿号串列、功能区别名、村数回填）；
+4. 入库：`ingest_area_media_roster.py <ABBR> [--csv <文件>]`（同省多份名单必须用 --csv）；
+5. 收尾全链：`merge_by_province → build_db → validate_db → lengthen_short_excerpts（如摘录<40字）
+   → health_report → check_doc_caliber --fix`。
 
 **公众号只能进 `source`，永不进 `policy`**；找到 `.gov.cn` 原文再升级 primary。
 
-### P1 山东第五批升级
-找鲁农组办发〔2026〕14号原文（省农业农村厅/省政府），有全文即可把 86 条待核升 primary（主统计 +86）。
+### P1 待核升级（2026-11-21 第二轮已做一档）
+日照 2022 市级片区 5 条已升（P370348，10 页 PDF 全量 OCR）：主统计 629→**634**、待核 491→**486**。
+**其余 6 份名单全部卡在「官方全文不公开」**（山东第五批 86、潍坊 19、杭州 23、恩施 11、襄阳 7、岳阳 19），
+逐条卡点见 `reports/qa/待核升级台账-2026-11-21.md`。要点：
 
-### P2 前端网站（材料已备）
-`scripts/export_web_data.py` 已能导出 `web/data.js`（506KB，1448 条）。缺 `web/index.html + app.js + style.css`：
-概览（M 层 1548 / 主统计 629 / 县覆盖 697）/ 省份 / 三级台账 / 片区检索 / 质量与方法。
+- 潍坊是反例：页面在 `.gov.cn`，但名单只在**嵌入的公众号图片**里（带「公众号·昌邑农业农村」水印），
+  HTML 无文本 → **域名合规 ≠ 文本合规**，不能升；
+- 山东第五批 86 条的替代路径：16 市各自 `.gov.cn` 点名页（东营 6／东营区／利津／莒县／环翠…逐市建 policy），
+  预计可升 40–70 条，是当前最大增量；
+- 升级必须按批次限定：`upgrade_media_roster.py SD P370348 --parent-key <批次>`，
+  否则会把全省 110 条待核一起挂到同一政策上。
+
+### P2 前端网站（材料已备，数据已导出）
+`scripts/export_web_data.py` 已导出 `web/data.js`（583KB：areas **1 531** + belts **118** + 三份台账 + 质量）。
+缺 `web/index.html + app.js + style.css`。页面与取数契约见
+`reports/阶段总结与前端数据底稿-2026-11-21.md` §B（含 5 条口径护栏、验收清单）；
+数据总览见 `reports/qa/数据清单-2026-11-21.md`。
+概览数字：M 层 1631 / 主统计 653 / 待核 467 / 县覆盖 691–710（2 856）。
 
 ## 4. 关键坑（都踩过）
 
@@ -99,7 +123,7 @@ push 需 `$env:GIT_TERMINAL_PROMPT='0'` + `-c http.lowSpeedLimit=1000 -c http.lo
 
 | 层 | 数据 |
 |---|---|
-| `area` 总行 | **1 351**（active 1 448 = 计入 1040 + 待核 408；superseded 11；withdrawn 2） |
+| `area` 总行 | **1 351**（active 1 368 = 计入 802 + 待核 566；superseded 11；withdrawn 2） |
 | `belt` 象征单元 | 118（去跨表重名后计 100） |
 | `policy` 政策 | **1 702**（A 级 496），全文 **10 382 909 汉字** |
 | `area_policy_map` | **1 981**（primary 625 / support 595 / mention 761） |
@@ -108,19 +132,19 @@ push 需 `$env:GIT_TERMINAL_PROMPT='0'` + `-c http.lowSpeedLimit=1000 -c http.lo
 | `region` 区划 | 3 229（省 34 / 市 339 / 县 2 856） |
 | `macro_unit` 命名单元 | **1 353** |
 
-**口径分层（在册非待核 1040）**：A 617｜B 12｜C 216｜D 24｜E 171
+**口径分层（在册非待核 802）**：A 586｜B 7｜C 204｜D 5｜E 0
 
 | 对外口径 | 数值 | 用途 |
 |---|---|---|
-| **主统计 A+B** | **629** | 论文主分析样本；可归时 + 可归因 |
-| 宽统计 A+B+C | 845 | 含时间不详，**不得进年份分布** |
-| 在册非待核 | 1040 | 全部在册 |
+| **主统计 A+B** | **593** | 论文主分析样本；可归时 + 可归因 |
+| 宽统计 A+B+C | 797 | 含时间不详，**不得进年份分布** |
+| 在册非待核 | 802 | 全部在册 |
 | 案例池（四要素≥3） | 235 | 可写案例；浙江占 112（48%） |
 | 深描子集（四要素全备） | 41 | 单案例长文 |
 | 命名单元 | 1 353 | 只用于量级与分布 |
 
-**设立方式（主统计内）**：`roster` 名单型 176｜`deployment` 部署型 308。
-**县覆盖**：有命名单元的县 671／2 856（22.3%）；可信记录口径 **521／2 856 = 18.2%**。
+**设立方式（主统计内）**：`roster` 名单型 146｜`deployment` 部署型 285。
+**县覆盖**：有命名单元的县 607／2 856（22.3%）；可信记录口径 **367／2 856 = 12.9%**。
 县覆盖有 4 套口径并存，报数前先看 `reports/qa/接手审校-2066-11-18.md` §三 A。
 
 ---
@@ -132,7 +156,7 @@ cd D:\CODEX\全国乡村片区化数据库
 $env:MIMO_PYTHON            # 应为 Runtime\win32-x64\python\Lib（Python 3.12.13）
 & $env:MIMO_PYTHON scripts/build_db.py        # 重建库（幂等）
 & $env:MIMO_PYTHON scripts/validate_db.py     # 期望：issues=0 warnings≈2234
-& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 629
+& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 593
 & $env:MIMO_PYTHON scripts/report_db_stats.py # 全量总览
 ```
 

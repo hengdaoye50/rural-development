@@ -1,3 +1,5 @@
 ﻿belt_id,name,name_norm,belt_type,theme,province_code,city_code,county_code,cover_desc,scale_villages,scale_towns,announced_ymd,year_precision,issuer,source_id,summary,institutional_note,record_state,created_at,updated_at,created_by
 B450001,粤桂协作乡村振兴示范带,粤桂协作乡村振兴示范带,带,帮扶协作,450000,450300,,粤桂协作县项目点串点成线连线成片,,,2023,year,粤桂协作机制,S450005,在协作县选取有条件打造升级的项目点，以点为基、串点成线、连线成片打造乡村振兴示范带。,协作框架泛称；无县域以下具名实体单元清单，故记belt。,active,2026-09-30,2026-09-30,GX-batch01
 B450002,右江区乡村振兴示范带,右江区乡村振兴示范带,带,和美乡村,450000,451000,451002,百色市右江区乡村振兴示范带（泛称）,,,2022,year,,S450005,围绕地域特色打造产业兴旺、生态宜居、乡风文明、治理有效、生活富裕的乡村振兴示范带。,报道泛称未见具名设立/挂牌；防误判记belt。,active,2026-09-30,2026-09-30,GX-batch01
+B450003,那桐定典乡村振兴示范带,那桐定典乡村振兴示范带,带,,450000,450100,450123,隆安县那桐镇定典屯等重点村屯,1,,,unknown,隆安县,S450006,形成以那桐镇定典屯等重点村屯为主的乡村振兴示范带。,由 area A450006 迁入：名称属带/廊/圈/线，按 docs/01 §3 E07 归 belt,active,2026-11-21,2026-11-21,migrate-belt-from-area
+B450004,玉州乡村振兴示范带,玉州乡村振兴示范带,带,,450000,450900,450902,玉林市玉州区两高两道沿线乡村振兴示范带,,,2022,year,,S450007,【证据待核】唯一来源为中新网广西，依证据制准入（CLAUDE.md 2025-06）需补 .gov.cn 官方依据,由 area A450007 迁入：名称属带/廊/圈/线，按 docs/01 §3 E07 归 belt,active,2026-11-21,2026-11-21,migrate-belt-from-area

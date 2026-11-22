@@ -1,4 +1,9 @@
-﻿belt_id,region_code,role
-B330001,330326,county
-B330002,330324,county
-B330003,330522,county
+﻿belt_id,region_code,role,is_core
+B330001,330326,county,
+B330002,330324,county,
+B330003,330522,county,
+B330004,330110,county,0
+B330005,330110,county,0
+B330006,330110,county,0
+B330007,330110,county,0
+B330008,330110,county,0

@@ -27,28 +27,17 @@ def main() -> int:
     con.row_factory = sqlite3.Row
     q = lambda s, p=(): con.execute(s, p).fetchone()[0]  # noqa: E731
 
-    region = {r["region_code"]: r for r in con.execute("select * from region")}
-    strength = {}
-    vp = ROOT / "reports" / "qa" / "link-veracity.csv"
-    if vp.exists():
-        with vp.open(encoding="utf-8-sig", newline="") as f:
-            for r in csv.DictReader(f):
-                t = r["tier"]
-                s = "强" if t in ("core", "exact", "stripped", "tail") else ("弱" if t == "place_only" else "无")
-                key = (r["area_id"], r["policy_id"])
-                if s == "强" or key not in strength:
-                    strength[key] = s
+    region = {r["region_code"]: dict(r) for r in con.execute("select * from region")}
+    # 每个片区的依据强度：按 area_policy_map 的 rel 归三档（与 area_caliber 口径一致）
+    rels: dict[str, set[str]] = defaultdict(set)
+    for r in con.execute("select area_id, rel from area_policy_map"):
+        rels[r["area_id"]].add(r["rel"])
 
-    # 每个片区的依据强度与政策数
-    evid: dict[str, str] = {}
-    n_pol: dict[str, int] = defaultdict(int)
-    for r in con.execute("""select area_id, policy_id, rel from area_policy_map
-                            where rel in ('primary','support')"""):
-        n_pol[r["area_id"]] += 1
-        s = strength.get((r["area_id"], r["policy_id"]), "弱")
-        rank = {"强": 3, "弱": 2, "无": 1}
-        if rank.get(s, 0) > rank.get(evid.get(r["area_id"], "无"), 0):
-            evid[r["area_id"]] = s
+    def ev_of(aid: str) -> str:
+        s = rels.get(aid, set())
+        if "primary" in s or "support" in s:
+            return "强"
+        return "弱" if "mention" in s else "无"
 
     rows = []
     for a in con.execute("""select area_id, name, type_code, setup_kind, province_code, city_code,
@@ -73,7 +62,8 @@ def main() -> int:
             "ymd": a["founded_ymd"] or "", "prec": a["founded_precision"] or "",
             "status": a["status"], "group": cal["caliber_group"] if cal else "?",
             "main": 1 if cal and cal["in_main_stat"] else 0,
-            "evidence": evid.get(a["area_id"], "无"), "n_pol": n_pol.get(a["area_id"], 0),
+            "evidence": ev_of(a["area_id"]),
+            "n_pol": len([x for x in rels.get(a["area_id"], set()) if x in ("primary", "support")]),
             "villages": a["scale_villages"] or "",
         })
 
@@ -82,10 +72,12 @@ def main() -> int:
     pending = sum(1 for r in rows if r["status"] == "待核")
     full = active - pending
     main_n = sum(r["main"] for r in rows)
-    groups = Counter(r["group"] for r in rows)
+    # A–E 只在「口径内」（非待核）上统计；待核是 in_scope=0，单独计数
+    groups = Counter(r["group"] for r in rows if r["status"] != "待核")
     levels = Counter(r["level"] for r in rows)
     years = Counter((r["ymd"][:4] or "未填") for r in rows)
     years_full = Counter((r["ymd"][:4] or "未填") for r in rows if r["status"] != "待核")
+    hard_n = sum(1 for r in rows if r["evidence"] == "强" and r["status"] != "待核")
     provs = []
     for p in con.execute("select region_code, name from region where level='province' order by region_code"):
         code = p["region_code"]
@@ -114,13 +106,31 @@ def main() -> int:
     debt = [dict(r) for r in con.execute(
         "select debt_type, count(*) as n from evidence_debt group by 1 order by 2 desc")]
 
+    # 象征性单元 belt（示范带/圈/廊/片）：M 层总量含它们，前端必须能分别看
+    belts = []
+    for b in con.execute("""select belt_id, name, belt_type, theme, province_code, city_code,
+        county_code, cover_desc, scale_villages, announced_ymd, issuer, record_state
+        from belt where record_state='active'"""):
+        cc = b["county_code"] or ""
+        bel_region = region.get(cc)
+        belts.append({
+            "id": b["belt_id"], "name": b["name"], "type": b["belt_type"], "theme": b["theme"] or "",
+            "prov": (region.get(b["province_code"]) or {}).get("name", "?"),
+            "prov_code": b["province_code"],
+            "city": (region.get(b["city_code"]) or {}).get("name", "?"),
+            "county": bel_region["name"] if bel_region else "", "county_code": cc,
+            "ymd": b["announced_ymd"] or "", "villages": b["scale_villages"] or "",
+            "issuer": b["issuer"] or "", "cover": (b["cover_desc"] or "")[:120],
+        })
+
     # 质量
     qual = {}
-    ap = ROOT / "reports" / "qa" / "data-quality-2026-11-21.csv"
-    if ap.exists():
-        with ap.open(encoding="utf-8-sig", newline="") as f:
+    ap = sorted((ROOT / "reports" / "qa").glob("data-quality-*.csv"))
+    if ap:
+        with ap[-1].open(encoding="utf-8-sig", newline="") as f:
             items = list(csv.DictReader(f))
-        qual = {"error": sum(1 for x in items if x["level"] == "ERROR"),
+        qual = {"file": ap[-1].name,
+                "error": sum(1 for x in items if x["level"] == "ERROR"),
                 "warn": sum(1 for x in items if x["level"] == "WARN"),
                 "info": sum(1 for x in items if x["level"] == "INFO"),
                 "top": [{"check": k, "n": v} for k, v in
@@ -128,7 +138,9 @@ def main() -> int:
     county_n = q("select count(*) from region where level='county'")
     county_all = len({r["county_code"] for r in rows})
     county_trusted = len({r["county_code"] for r in rows if r["status"] != "待核"})
-    hard = sum(1 for r in rows if r["evidence"] == "强" and r["status"] != "待核")
+    county_map = q("""select count(distinct m.region_code) from area_region_map m
+                      join area a on a.area_id=m.area_id where a.record_state='active'""")
+    hard = hard_n
 
     DATA = {
         "meta": {"snapshot": date.today().isoformat(), "built": date.today().isoformat(),
@@ -141,6 +153,7 @@ def main() -> int:
             "belt": q("select count(*) from belt"),
             "policy": q("select count(*) from policy"), "source_n": q("select count(*) from source"),
             "county_n": county_n, "county_all": county_all, "county_trusted": county_trusted,
+            "county_map": county_map,
             "hard": hard, "hard_pct": round(hard / full * 100, 1) if full else 0,
             "levels": {k: levels[k] for k in ("省级", "地市级", "县区级", "乡镇级", "不可判定")},
             "years": dict(sorted(years.items())), "years_full": dict(sorted(years_full.items())),
@@ -151,6 +164,10 @@ def main() -> int:
         },
         "provinces": provs,
         "areas": rows,
+        "belts": belts,
+        "policies_by_kind": {r["k"]: r["n"] for r in (
+            {"k": x[0], "n": x[1]} for x in con.execute(
+                "select coalesce(nullif(source_kind,''),'(空)'), count(*) from policy group by 1"))},
         "city_roster": city_rows,
         "province_roster": prov_rows,
         "county_roster": county_rows,
@@ -160,7 +177,7 @@ def main() -> int:
     WEB.mkdir(parents=True, exist_ok=True)
     js = "window.DATA = " + json.dumps(DATA, ensure_ascii=False) + ";\n"
     (WEB / "data.js").write_text(js, encoding="utf-8")
-    print("OK -> web/data.js", f"{len(js)/1024:.0f}KB", f"areas={len(rows)}")
+    print("OK -> web/data.js", f"{len(js)/1024:.0f}KB", f"areas={len(rows)} belts={len(belts)}")
     return 0
 
 
