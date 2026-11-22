@@ -44,6 +44,18 @@ def norm(name: str) -> str:
     return re.sub(r"[\s\u3000（）()《》〈〉「」【】\[\]、，,。.：:；;“”\"'·・—\-－]+", "", name or "")
 
 
+def strip_prefix(name_norm: str, prefix_pool: set[str]) -> str:
+    """去掉名称开头的行政区名前缀（淳安县大下姜片区 → 大下姜片区）。"""
+    out = name_norm
+    for _ in range(3):
+        hit = next((p for p in sorted(prefix_pool, key=len, reverse=True)
+                    if p and out.startswith(p) and len(out) > len(p) + 2), None)
+        if not hit:
+            break
+        out = out[len(hit):]
+    return out
+
+
 def main() -> int:
     sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
@@ -55,6 +67,17 @@ def main() -> int:
 
     new_name = args.name.strip()
     new_norm = norm(new_name)
+    # 用 region 名称做前缀池，规范 name_norm（与库内既有约定一致）
+    try:
+        import sqlite3
+        con = sqlite3.connect(f"file:{ROOT/'data/db/片区库.sqlite3'}?mode=ro", uri=True)
+        pool = {norm(r[0]) for r in con.execute("select name from region")}
+        pool |= {"浙江省", "杭州市", "宁波市", "温州市", "嘉兴市", "湖州市", "绍兴市",
+                 "金华市", "衢州市", "舟山市", "台州市", "丽水市"}
+        new_norm = strip_prefix(new_norm, pool)
+        con.close()
+    except Exception:  # noqa: BLE001
+        pass
     today = date.today().isoformat()
 
     # 冲突检查（同县同名）
