@@ -1,6 +1,5 @@
 ﻿area_id,region_code,role,is_core
-A370001,370211,county,1
-A370001,370200,town,0
+A370256,370200,town,0
 A370002,370211,county,1
 A370003,370481,county,1
 A370003,370400,town,0
