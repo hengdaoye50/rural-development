@@ -1,14 +1,14 @@
 # QA 报告
 
-- area: 1458
-- source: 519
+- area: 1464
+- source: 522
 - region: 3229
 - belt: 230
 - policy: 1743
 - area_policy_map: 1989
 - event: 731
 - issues: 0
-- warnings: 2653
+- warnings: 2665
 
 问题清单为空。
 
@@ -2264,6 +2264,16 @@
 - [area:A210006] agency_level 为空（跑 migrate_level_fields.py）
 - [area:A210007] admin_level 为空（跑 migrate_level_fields.py）
 - [area:A210007] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A210008] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A210008] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A210009] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A210009] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A210010] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A210010] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A210011] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A210011] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A210012] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A210012] agency_level 为空（跑 migrate_level_fields.py）
 - [area:A220016] admin_level 为空（跑 migrate_level_fields.py）
 - [area:A220016] agency_level 为空（跑 migrate_level_fields.py）
 - [area:A330454] admin_level 为空（跑 migrate_level_fields.py）
@@ -2666,3 +2676,5 @@
 - [area:A610027] agency_level 为空（跑 migrate_level_fields.py）
 - [area:A610028] admin_level 为空（跑 migrate_level_fields.py）
 - [area:A610028] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A610029] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A610029] agency_level 为空（跑 migrate_level_fields.py）
