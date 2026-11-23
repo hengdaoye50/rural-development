@@ -1,14 +1,14 @@
 # QA 报告
 
-- area: 1464
-- source: 522
+- area: 1480
+- source: 533
 - region: 3229
 - belt: 230
 - policy: 1743
 - area_policy_map: 1989
 - event: 731
 - issues: 0
-- warnings: 2665
+- warnings: 2697
 
 问题清单为空。
 
@@ -2276,6 +2276,38 @@
 - [area:A210012] agency_level 为空（跑 migrate_level_fields.py）
 - [area:A220016] admin_level 为空（跑 migrate_level_fields.py）
 - [area:A220016] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220017] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220017] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220018] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220018] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220019] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220019] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220020] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220020] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220021] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220021] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220022] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220022] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220023] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220023] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220024] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220024] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220025] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220025] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220026] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220026] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220027] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220027] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220028] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220028] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220029] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220029] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220030] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220030] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220031] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220031] agency_level 为空（跑 migrate_level_fields.py）
+- [area:A220032] admin_level 为空（跑 migrate_level_fields.py）
+- [area:A220032] agency_level 为空（跑 migrate_level_fields.py）
 - [area:A330454] admin_level 为空（跑 migrate_level_fields.py）
 - [area:A330454] agency_level 为空（跑 migrate_level_fields.py）
 - [area:A330455] admin_level 为空（跑 migrate_level_fields.py）
