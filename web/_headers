@@ -1,19 +1,18 @@
 /*
-  /assets/*     长缓存（无指纹但有内容改动时靠部署整体更新）
-  /assets/data/* 数据快照：短缓存 + 允许 stale-while-revalidate
-  HTML          短缓存，保证快照日与数字及时更新
+  HTML：短缓存，保证快照日与数字及时更新
+  静态资源与数据：构建时统一带 ?v=<stamp> 版本号，可长缓存
 */
 /assets/*
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=31536000, immutable
 
 /assets/data/*
-  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+  Cache-Control: public, max-age=31536000, immutable
 
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
-  Cache-Control: public, max-age=300
+  Cache-Control: public, max-age=300, must-revalidate
 
 /downloads/*
   Cache-Control: public, max-age=3600

@@ -98,6 +98,22 @@ async function main() {
 
   if (!existsSync(path.join(DIST, "404.html"))) fail("dist/404.html 缺失");
 
+  // 静态资源版本号：HTML 里的 assets/*.css|js 统一加 ?v=<stamp>，
+  // 避免「HTML 已更新、JS 还在浏览器缓存里」导致的功能错配
+  const stamp = new Date().toISOString().slice(0, 13).replace(/[-T:]/g, "");
+  let stamped = 0;
+  for (const f of await listFiles(DIST)) {
+    if (!f.endsWith(".html")) continue;
+    let html = await readFile(f, "utf8");
+    const before = html;
+    html = html.replace(/(href|src)="(assets\/[^"?]+\.(?:css|js))"/g, (m, a, u) => {
+      stamped += 1;
+      return `${a}="${u}?v=${stamp}"`;
+    });
+    if (html !== before) await writeFile(f, html, "utf8");
+  }
+  console.log(`资源版本号：${stamped} 处 → v=${stamp}`);
+
   await writeFile(
     path.join(DIST, ".build-meta"),
     `slug=${SLUG}\nbuilt=${new Date().toISOString()}\nfiles=${n}\ndownloads=${downloads.length}\nareas=${T.areas}\n`,

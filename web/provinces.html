@@ -53,7 +53,8 @@
 <script src="assets/app.js"></script>
 <script>
 (function(){
-  var RD = window.RD || {}, kit = window.RDKit, fmt = kit.fmt;
+  var RD = window.RD || {}, kit = window.RDKit || {};
+  var fmt = kit.fmt || function (n) { return n == null ? "—" : Number(n).toLocaleString("zh-CN"); };
   document.getElementById("f-snapshot").textContent = RD.snapshot || "—";
   var grid = document.getElementById("grid");
   var kw = document.getElementById("kw"), only = document.getElementById("only");

@@ -81,7 +81,12 @@
 <script>
 (function(){
   var RD = window.RD || {}, AREAS = window.RD_AREAS || [], kit = window.RDKit, fmt = kit.fmt;
-  var esc = kit.esc;
+  /* 兜底：旧版 app.js 被缓存时也不能整页崩掉 */
+  var esc = (kit && kit.esc) || function (s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  };
   document.getElementById("f-snapshot").textContent = RD.snapshot || "—";
   var pName = {};
   (RD.provinces || []).forEach(function(p){ pName[p.code] = p.name; });

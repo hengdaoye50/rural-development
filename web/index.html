@@ -62,9 +62,11 @@
     </div>
   </div>
 
-  <div class="ladder" id="ladder" aria-label="口径阶梯：从命名单元到主统计的推导">
-    <div class="ladder-h"><b>口径阶梯</b><span>每一级都标出「减去了什么」，六个数字不再各自为政</span></div>
-    <ol class="ladder-list" id="ladder-list"></ol>
+  <div class="kpis">
+    <div class="kpi"><div class="k">命名单元 M 层</div><div class="v" id="k-macro">—</div><div class="n">area + belt 去重</div></div>
+    <div class="kpi"><div class="k">主统计 A+B</div><div class="v" id="k-main">—</div><div class="n">2022 年后且有 primary/support</div></div>
+    <div class="kpi"><div class="k">待核</div><div class="v" id="k-pending">—</div><div class="n">计入 M 层，不计入主统计</div></div>
+    <div class="kpi"><div class="k">县覆盖</div><div class="v" id="k-county">—</div><div class="n" id="k-county-note">—</div></div>
   </div>
 
   <section>
@@ -129,18 +131,12 @@
 
   /* 口径阶梯：把 6 个数字焊成一个恒等式 */
   var G = RD.groups || {};
-  var ladderRows = [
-    ["命名单元 M 层", T.macro, fmt(T.areas) + " area + " + fmt(T.belt) + " belt（不与 P 层相减）", "m"],
-    ["在册记录", T.areas, "全部 active 记录", ""],
-    ["已裁定", (T.areas || 0) - (T.pending || 0), fmt(T.areas) + " − " + fmt(T.pending) + " 待核", ""],
-    ["宽统计 A+B+C", T.wide, fmt(T.main) + " + " + fmt(G.C) + " 时间不详", ""],
-    ["主统计 A+B", T.main, fmt(G.A) + " + " + fmt(G.B) + "，唯一可做政策分析的基数", "strong"],
-    ["其中 D 口径外 / E 无依据", fmt(G.D) + " / " + fmt(G.E), "不进统计", "muted", true]
-  ];
-  document.getElementById("ladder-list").innerHTML = ladderRows.map(function (r) {
-    return '<li class="' + (r[3] || "") + '"><span class="l">' + r[0] + '</span>' +
-      '<span class="v num">' + (r[4] ? r[1] : fmt(r[1])) + '</span><span class="n">' + r[2] + "</span></li>";
-  }).join("");
+  document.getElementById("k-macro").textContent = fmt(T.macro);
+  document.getElementById("k-main").textContent = fmt(T.main);
+  document.getElementById("k-pending").textContent = fmt(T.pending);
+  document.getElementById("k-county").innerHTML = fmt(T.county_all) + "<em>/ " + fmt(T.county_n) + "</em>";
+  document.getElementById("k-county-note").textContent =
+    (T.county_n ? (T.county_all / T.county_n * 100).toFixed(1) : 0) + "% · 按片区所在县";
 
   var metric = "areas";
   var map = kit.buildMap(document.getElementById("map"), {
