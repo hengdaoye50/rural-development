@@ -123,7 +123,7 @@ push 需 `$env:GIT_TERMINAL_PROMPT='0'` + `-c http.lowSpeedLimit=1000 -c http.lo
 
 | 层 | 数据 |
 |---|---|
-| `area` 总行 | **1 351**（active 1 382 = 计入 947 + 待核 435；superseded 11；withdrawn 2） |
+| `area` 总行 | **1 351**（active 1 379 = 计入 945 + 待核 434；superseded 11；withdrawn 2） |
 | `belt` 象征单元 | 118（去跨表重名后计 100） |
 | `policy` 政策 | **1 702**（A 级 496），全文 **10 382 909 汉字** |
 | `area_policy_map` | **1 981**（primary 625 / support 595 / mention 761） |
@@ -132,19 +132,19 @@ push 需 `$env:GIT_TERMINAL_PROMPT='0'` + `-c http.lowSpeedLimit=1000 -c http.lo
 | `region` 区划 | 3 229（省 34 / 市 339 / 县 2 856） |
 | `macro_unit` 命名单元 | **1 353** |
 
-**口径分层（在册非待核 947）**：A 567｜B 2｜C 208｜D 0｜E 170
+**口径分层（在册非待核 945）**：A 567｜B 0｜C 208｜D 0｜E 170
 
 | 对外口径 | 数值 | 用途 |
 |---|---|---|
-| **主统计 A+B** | **569** | 论文主分析样本；可归时 + 可归因 |
-| 宽统计 A+B+C | 777 | 含时间不详，**不得进年份分布** |
-| 在册非待核 | 947 | 全部在册 |
+| **主统计 A+B** | **567** | 论文主分析样本；可归时 + 可归因 |
+| 宽统计 A+B+C | 775 | 含时间不详，**不得进年份分布** |
+| 在册非待核 | 945 | 全部在册 |
 | 案例池（四要素≥3） | 235 | 可写案例；浙江占 112（48%） |
 | 深描子集（四要素全备） | 41 | 单案例长文 |
 | 命名单元 | 1 353 | 只用于量级与分布 |
 
-**设立方式（主统计内）**：`roster` 名单型 146｜`deployment` 部署型 276。
-**县覆盖**：有命名单元的县 618／2 856（22.3%）；可信记录口径 **495／2 856 = 17.3%**。
+**设立方式（主统计内）**：`roster` 名单型 146｜`deployment` 部署型 274。
+**县覆盖**：有命名单元的县 617／2 856（22.3%）；可信记录口径 **494／2 856 = 17.3%**。
 县覆盖有 4 套口径并存，报数前先看 `reports/qa/接手审校-2066-11-18.md` §三 A。
 
 ---
@@ -156,7 +156,7 @@ cd D:\CODEX\全国乡村片区化数据库
 $env:MIMO_PYTHON            # 应为 Runtime\win32-x64\python\Lib（Python 3.12.13）
 & $env:MIMO_PYTHON scripts/build_db.py        # 重建库（幂等）
 & $env:MIMO_PYTHON scripts/validate_db.py     # 期望：issues=0 warnings≈2234
-& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 569
+& $env:MIMO_PYTHON scripts/health_report.py   # 主统计应为 567
 & $env:MIMO_PYTHON scripts/report_db_stats.py # 全量总览
 ```
 
