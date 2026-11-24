@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>检索 · 全国乡村片区化数据库</title>
 <meta name="description" content="按名称、省份、类型、口径组、证据强度筛选 1 000 余条县以下片区记录，可导出 CSV。">
+<link rel="canonical" href="https://ruraldevelopment.jinhuazhang.top/explore.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="全国乡村片区化数据库">
+<meta property="og:title" content="检索 · 全国乡村片区化数据库">
+<meta property="og:description" content="按省份、类型、口径组、证据、状态检索 1 398 条片区记录，支持 CSV 导出。">
+<meta property="og:url" content="https://ruraldevelopment.jinhuazhang.top/explore.html">
+<meta property="og:image" content="https://ruraldevelopment.jinhuazhang.top/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -27,12 +35,13 @@
       <option value="">全部口径组</option>
       <option value="A">A 窗内</option><option value="B">B 延续至今</option>
       <option value="C">C 时间不详</option><option value="D">D 口径外</option>
+      <option value="E">E 无依据</option>
     </select>
     <select id="ev">
       <option value="">全部证据</option><option value="强">强</option>
       <option value="弱">弱</option><option value="无">无</option>
     </select>
-    <select id="status"><option value="">全部状态</option><option value="运行中">运行中</option><option value="待核">待核</option></select>
+    <select id="status"><option value="">全部状态</option><option value="运行中">运行中</option><option value="待核">待核</option><option value="已完成">已完成</option></select>
     <button class="btn ghost" id="reset">重置</button>
     <button class="btn" id="csv">导出 CSV</button>
   </div>
@@ -72,6 +81,7 @@
 <script>
 (function(){
   var RD = window.RD || {}, AREAS = window.RD_AREAS || [], kit = window.RDKit, fmt = kit.fmt;
+  var esc = kit.esc;
   document.getElementById("f-snapshot").textContent = RD.snapshot || "—";
   var pName = {};
   (RD.provinces || []).forEach(function(p){ pName[p.code] = p.name; });
@@ -111,8 +121,8 @@
     var head = "<thead><tr><th>名称</th><th>省份 / 县区</th><th>类型</th><th>成立</th><th>口径</th><th>证据</th><th class='n'>政策</th></tr></thead>";
     var body = slice.map(function(a){
       return "<tr data-id='" + a.id + "'" + (a.status === "待核" ? ' class="pending"' : "") + ">" +
-        "<td>" + a.name + "</td>" +
-        "<td>" + (pName[a.prov] || "") + " · " + (a.county_name || a.county || "") + "</td>" +
+        "<td>" + esc(a.name) + "</td>" +
+        "<td>" + esc(pName[a.prov] || "") + " · " + esc(a.county_name || a.county || "") + "</td>" +
         "<td>" + a.type + " " + (TYPE[a.type] || "") + "</td>" +
         "<td>" + (a.ymd ? a.ymd.slice(0,7) : "—") + "</td>" +
         "<td>" + chip(a) + "</td>" +

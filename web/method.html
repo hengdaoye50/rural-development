@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>方法与质量 · 全国乡村片区化数据库</title>
 <meta name="description" content="统计口径、分层（M/P）、A–E 分组、证据强度与数据边界说明。">
+<link rel="canonical" href="https://ruraldevelopment.jinhuazhang.top/method.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="全国乡村片区化数据库">
+<meta property="og:title" content="方法与质量 · 全国乡村片区化数据库">
+<meta property="og:description" content="两层口径（M/P）、A–E 分组、证据强度、六个质量比率与数据边界。">
+<meta property="og:url" content="https://ruraldevelopment.jinhuazhang.top/method.html">
+<meta property="og:image" content="https://ruraldevelopment.jinhuazhang.top/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -34,17 +42,17 @@
       <div class="card">
         <h3>M 层 · 命名单元</h3>
         <p class="sub">只用于看量级与分布</p>
-        <div class="bar"><span>命名单元</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="v" id="v-macro">—</span></div>
-        <div class="bar"><span>其中 area</span><span class="track"><span class="fill" style="width:86%"></span></span><span class="v" id="v-area">—</span></div>
-        <div class="bar"><span>其中 belt</span><span class="track"><span class="fill gold" style="width:15%"></span></span><span class="v" id="v-belt">—</span></div>
+        <div class="bar"><span>命名单元</span><span class="track"><span class="fill" id="f-macro" style="width:100%"></span></span><span class="v" id="v-macro">—</span></div>
+        <div class="bar"><span>其中 area</span><span class="track"><span class="fill" id="f-area"></span></span><span class="v" id="v-area">—</span></div>
+        <div class="bar"><span>其中 belt</span><span class="track"><span class="fill gold" id="f-belt"></span></span><span class="v" id="v-belt">—</span></div>
         <p class="sub" style="margin-top:12px">宽在证据强度：媒体稿、待核、时间不详都收；对象类型一条不放宽。</p>
       </div>
       <div class="card">
         <h3>P 层 · 主统计（A+B）</h3>
         <p class="sub">政策分析只能用这个</p>
-        <div class="bar"><span>主统计</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="v" id="v-main">—</span></div>
-        <div class="bar"><span>宽统计 A+B+C</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="v" id="v-wide">—</span></div>
-        <div class="bar"><span>待核（不计入）</span><span class="track"><span class="fill gold" style="width:72%"></span></span><span class="v" id="v-pending">—</span></div>
+        <div class="bar"><span>主统计</span><span class="track"><span class="fill" id="f-main"></span></span><span class="v" id="v-main">—</span></div>
+        <div class="bar"><span>宽统计 A+B+C</span><span class="track"><span class="fill" id="f-wide"></span></span><span class="v" id="v-wide">—</span></div>
+        <div class="bar"><span>待核（不计入）</span><span class="track"><span class="fill gold" id="f-pending"></span></span><span class="v" id="v-pending">—</span></div>
         <p class="sub" style="margin-top:12px">跨层相减没有意义：M−P 不是「质量差的片区」，是证据不足但确实被这么叫的单元。</p>
       </div>
     </div>
@@ -73,9 +81,9 @@
       <div class="card">
         <h3>三级</h3>
         <p class="sub">按政策正文是否点名该片区</p>
-        <div class="bar"><span>强（点名级）</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="v" id="e-strong">—</span></div>
-        <div class="bar"><span>弱（仅提地名）</span><span class="track"><span class="fill gold" style="width:40%"></span></span><span class="v" id="e-weak">—</span></div>
-        <div class="bar"><span>无挂接</span><span class="track"><span class="fill gold" style="width:48%"></span></span><span class="v" id="e-none">—</span></div>
+        <div class="bar"><span>强（点名级）</span><span class="track"><span class="fill" id="f-strong"></span></span><span class="v" id="e-strong">—</span></div>
+        <div class="bar"><span>弱（仅提地名）</span><span class="track"><span class="fill gold" id="f-weak"></span></span><span class="v" id="e-weak">—</span></div>
+        <div class="bar"><span>无挂接</span><span class="track"><span class="fill gold" id="f-none"></span></span><span class="v" id="e-none">—</span></div>
       </div>
       <div class="card">
         <h3>数据边界</h3>
@@ -100,6 +108,11 @@
       <div class="card"><h3>待核</h3><p class="sub">证据链未达标，单独计数</p>
         <div class="bar"><span>待核条数</span><span class="track"><span class="fill gold" style="width:100%"></span></span><span class="v" id="v-pending2">—</span></div>
         <p class="sub" style="margin-top:10px">待核计入 M 层、不计入主统计；每条都保留来源与线索，不删除。</p></div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h3>引用前应看的六个比率</h3>
+      <p class="sub">每个比率都带分母；均为当前快照实测，随数据入库自动更新</p>
+      <ul class="qlist" id="quality-list"></ul>
     </div>
   </section>
 </div>
@@ -131,6 +144,39 @@
     var el = document.getElementById(k);
     if (el) el.textContent = f(map[k] || 0);
   });
+  /* 条形宽度全部由数据算，不再写死百分比 */
+  var EV = RD.evidence || {}, Q = RD.quality || {}, A = T.areas || 1;
+  var w = function(id, part, whole){
+    var el = document.getElementById(id);
+    if (el) el.style.width = Math.max(0, Math.min(100, (part / (whole || 1)) * 100)).toFixed(1) + "%";
+  };
+  w("f-macro", 1, 1);
+  w("f-area", T.areas, T.macro);
+  w("f-belt", T.belt, T.macro);
+  w("f-main", T.main, A);
+  w("f-wide", T.wide, A);
+  w("f-pending", T.pending, A);
+  w("f-strong", EV.strong, A);
+  w("f-weak", EV.weak, A);
+  w("f-none", EV.none, A);
+  [["e-strong", EV.strong], ["e-weak", EV.weak], ["e-none", EV.none]].forEach(function(x){
+    var el = document.getElementById(x[0]);
+    if (el) el.textContent = f(x[1] || 0);
+  });
+  var qEl = document.getElementById("quality-list");
+  if (qEl && Q.cite_rate != null) {
+    var items = [
+      ["可引用率", Q.cite_rate, T.main + " / " + T.areas],
+      ["点名级证据率", Q.named_rate, (EV.strong || 0) + " / " + T.areas],
+      ["待核率", Q.pending_rate, T.pending + " / " + T.areas],
+      ["年份完整率", Q.year_rate, (T.areas - Q.year_missing) + " / " + T.areas],
+      ["规模字段完整率", Q.village_rate, (T.areas - Q.village_missing) + " / " + T.areas],
+      ["多依据率", Q.multi_rate, (EV.multi || 0) + " / " + T.areas]
+    ];
+    qEl.innerHTML = items.map(function(it){
+      return '<li><b>' + it[0] + '</b><span class="v">' + it[1] + '%</span><span class="n">' + it[2] + '</span></li>';
+    }).join("");
+  }
   var e = G.E || 0;
   document.getElementById("e-note").textContent = e
     ? "当前 E 组 " + e + " 条：名单确认存在、但尚未挂到点名级依据，按人工裁定记为运行中；不计入主统计。"

@@ -78,7 +78,7 @@ def main() -> int:
         "policy_chars": q("select coalesce(sum(full_text_chars),0) from policy"),
     }
     year_rows = [dict(r) for r in con.execute("""
-        select substr(a.founded_ymd,1,4) y, a.status, c.caliber_group g, c.in_scope sc, c.in_main_stat m
+        select a.area_id, substr(a.founded_ymd,1,4) y, a.status, c.caliber_group g, c.in_scope sc, c.in_main_stat m
         from area a left join area_caliber c on c.area_id=a.area_id
         where a.record_state='active' and a.founded_ymd is not null and a.founded_ymd<>''""")]
     by_year: dict[str, dict] = {}
@@ -91,6 +91,35 @@ def main() -> int:
         d["main"] += 1 if r["m"] else 0
     types = Counter(r["type_code"] for r in rows)
     groups = Counter(r["g"] for r in rows if r["status"] != "待核")
+
+    # 证据强度（与 areas.js 的 ev 同源：strong ⟺ 有 primary/support）
+    ev_rows = [dict(x) for x in con.execute("""
+        select a.area_id,
+               (select count(*) from area_policy_map m where m.area_id=a.area_id
+                 and m.rel in ('primary','support')) hard,
+               (select count(*) from area_policy_map m where m.area_id=a.area_id
+                 and m.rel='mention') men
+        from area a where a.record_state='active'""")]
+    evidence = {
+        "strong": sum(1 for r in ev_rows if r["hard"]),
+        "weak": sum(1 for r in ev_rows if not r["hard"] and r["men"]),
+        "none": sum(1 for r in ev_rows if not r["hard"] and not r["men"]),
+        "multi": sum(1 for r in ev_rows if r["hard"] >= 2),
+    }
+    n_village = q("select count(*) from area where record_state='active' "
+                  "and scale_villages is not null and scale_villages <> ''")
+    n_year = len({r["area_id"] for r in year_rows})
+    areas_n = totals["areas"] or 1
+    quality = {
+        "cite_rate": round(totals["main"] / areas_n * 100, 1),
+        "named_rate": round(evidence["strong"] / areas_n * 100, 1),
+        "pending_rate": round(totals["pending"] / areas_n * 100, 1),
+        "year_rate": round(n_year / areas_n * 100, 1),
+        "village_rate": round(n_village / areas_n * 100, 1),
+        "multi_rate": round(evidence["multi"] / areas_n * 100, 1),
+        "year_missing": totals["areas"] - n_year,
+        "village_missing": totals["areas"] - n_village,
+    }
 
     geojson = None
     if GEO.exists():
@@ -115,6 +144,8 @@ def main() -> int:
         "years": dict(sorted(by_year.items())),
         "types": dict(types),
         "groups": dict(groups),
+        "evidence": evidence,
+        "quality": quality,
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "summary.js").write_text(

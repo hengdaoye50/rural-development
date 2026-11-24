@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>关于与下载 · 全国乡村片区化数据库</title>
 <meta name="description" content="数据快照、下载、引用格式与使用许可。">
+<link rel="canonical" href="https://ruraldevelopment.jinhuazhang.top/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="全国乡村片区化数据库">
+<meta property="og:title" content="关于 · 全国乡村片区化数据库">
+<meta property="og:description" content="数据下载（CSV/GeoJSON）、引用格式、版本与许可说明。">
+<meta property="og:url" content="https://ruraldevelopment.jinhuazhang.top/about.html">
+<meta property="og:image" content="https://ruraldevelopment.jinhuazhang.top/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -35,7 +43,7 @@
         <tbody>
           <tr><td><a href="downloads/分省汇总.csv">分省汇总.csv</a></td><td>34 个省级单位：片区数、主统计、宽统计、待核占比、覆盖县、政策数</td><td>CSV</td></tr>
           <tr><td><a href="downloads/分市汇总.csv">分市汇总.csv</a></td><td>449 个市级单元，与 GeoJSON 一一对应（含 0 值城市）</td><td>CSV</td></tr>
-          <tr><td><a href="downloads/分县汇总.csv">分县汇总.csv</a></td><td>607 个有片区的县：片区数、主统计、待核</td><td>CSV</td></tr>
+          <tr><td><a href="downloads/分县汇总.csv">分县汇总.csv</a></td><td><span id="dl-county">—</span> 个有片区的县：片区数、主统计、待核</td><td>CSV</td></tr>
           <tr><td><a href="downloads/provinces.geojson">provinces.geojson</a></td><td>省级边界 + 统计属性，可直接拖进 QGIS</td><td>GeoJSON</td></tr>
           <tr><td><a href="downloads/cities.geojson">cities.geojson</a></td><td>市级边界（直辖市为区级要素，数值取市域统计）</td><td>GeoJSON</td></tr>
         </tbody>
@@ -80,7 +88,7 @@
   <div class="wrap">
     <div class="cols">
       <div><h4>全国乡村片区化数据库</h4>
-        <p>记录中国大陆 31 个省级单位、县/区以下、以片区为单元推进乡村振兴的实践。</p></div>
+        <p>记录中国大陆 31 个省级单位、县/区以下、以片区为单元推进乡村振兴的实践。港澳台不纳入采集，台账标注资料暂缺。</p></div>
       <div><h4>数据</h4><ul><li><a href="about.html">下载 CSV / GeoJSON</a></li><li><a href="method.html">口径与方法</a></li></ul></div>
       <div><h4>引用</h4><ul><li>数据快照 <span id="f-snapshot">—</span></li><li><a href="#cite">引用格式</a></li></ul></div>
     </div>
@@ -95,6 +103,8 @@
   var f = function(n){ return n == null ? "—" : Number(n).toLocaleString("zh-CN"); };
   document.getElementById("f-snapshot").textContent = RD.snapshot || "—";
   document.getElementById("snap").textContent = RD.snapshot || "—";
+  var dc = document.getElementById("dl-county");
+  if (dc) dc.textContent = f(T.county_all);
   document.getElementById("v-areas").textContent = f(T.areas);
   document.getElementById("v-policy").textContent = f(T.policy);
   Array.prototype.forEach.call(document.querySelectorAll(".snap2"), function(el){

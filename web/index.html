@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>全国乡村片区化数据库</title>
 <meta name="description" content="记录中国大陆 31 个省级单位、县/区以下以片区为单元推进乡村振兴的实践；每条记录附政策原文与快照，可逐条核验。">
+<link rel="canonical" href="https://ruraldevelopment.jinhuazhang.top/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="全国乡村片区化数据库">
+<meta property="og:title" content="概览 · 全国乡村片区化数据库">
+<meta property="og:description" content="全国乡村片区化数据库：1 398 条县/区以下片区记录、1 743 份政策原文，附口径阶梯与证据状态。">
+<meta property="og:url" content="https://ruraldevelopment.jinhuazhang.top/index.html">
+<meta property="og:image" content="https://ruraldevelopment.jinhuazhang.top/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -54,11 +62,9 @@
     </div>
   </div>
 
-  <div class="kpis">
-    <div class="kpi"><div class="k">命名单元 M 层</div><div class="v" id="k-macro">—</div><div class="n">area + belt 去重</div></div>
-    <div class="kpi"><div class="k">主统计 A+B</div><div class="v" id="k-main">—</div><div class="n">2022 年后且有 primary/support</div></div>
-    <div class="kpi"><div class="k">待核</div><div class="v" id="k-pending">—</div><div class="n">计入 M 层，不计入主统计</div></div>
-    <div class="kpi"><div class="k">县覆盖</div><div class="v" id="k-county">—</div><div class="n" id="k-county-note">—</div></div>
+  <div class="ladder" id="ladder" aria-label="口径阶梯：从命名单元到主统计的推导">
+    <div class="ladder-h"><b>口径阶梯</b><span>每一级都标出「减去了什么」，六个数字不再各自为政</span></div>
+    <ol class="ladder-list" id="ladder-list"></ol>
   </div>
 
   <section>
@@ -66,12 +72,12 @@
     <div class="grid2">
       <div class="card">
         <h3>命名单元数 · 前八省</h3>
-        <p class="sub">含待核与时间不详；条形按最大值归一</p>
+        <p class="sub">深色＝在册，浅色＝主统计；条形按最大值归一</p>
         <div id="bars-prov"></div>
       </div>
       <div class="card">
         <h3>口径分层 A–E</h3>
-        <p class="sub">非待核记录的口径归属；E 组当前归零</p>
+        <p class="sub" id="group-sub">—</p>
         <div id="bars-group"></div>
       </div>
     </div>
@@ -81,7 +87,7 @@
     <div class="sec-h"><span class="no">02</span><h2>成立年份</h2><a class="more" href="method.html">口径说明 →</a></div>
     <div class="card">
       <h3>按年份的在册记录</h3>
-      <p class="sub">在册全量（含待核）；未填年份不计</p>
+      <p class="sub" id="year-sub">—</p>
       <div id="bars-year"></div>
     </div>
   </section>
@@ -92,7 +98,7 @@
     <div class="cols">
       <div>
         <h4>全国乡村片区化数据库</h4>
-        <p>记录中国大陆 31 个省级单位、县/区以下、以片区为单元推进乡村振兴的实践。每条记录附政策原文、快照与哈希。</p>
+        <p>记录中国大陆 31 个省级单位、县/区以下、以片区为单元推进乡村振兴的实践。每条记录附政策原文、快照与哈希。港澳台资料暂缺，不以 0 计。</p>
       </div>
       <div><h4>数据</h4><ul>
         <li><a href="about.html">下载 CSV / GeoJSON</a></li>
@@ -114,17 +120,27 @@
   var RD = window.RD || {}, T = RD.totals || {};
   var kit = window.RDKit, fmt = kit.fmt;
   document.getElementById("meta-line").textContent =
-    "数据快照 " + RD.snapshot + " · 31 个省级单位 · " + fmt(T.areas) + " 条片区记录 · " + fmt(T.policy) + " 份政策原文";
+    "数据快照 " + RD.snapshot + " · 大陆 31 个省级单位（港澳台资料暂缺）· " + fmt(T.areas) +
+    " 条片区记录 · " + fmt(T.policy) + " 份政策原文";
   document.getElementById("f-snapshot").textContent = RD.snapshot || "—";
   document.getElementById("m-macro").textContent = fmt(T.macro);
   document.getElementById("m-main").textContent = fmt(T.main);
   document.getElementById("m-county").textContent = fmt(T.county_all);
-  document.getElementById("k-macro").textContent = fmt(T.macro);
-  document.getElementById("k-main").textContent = fmt(T.main);
-  document.getElementById("k-pending").textContent = fmt(T.pending);
-  document.getElementById("k-county").innerHTML = fmt(T.county_all) + "<em>/ " + fmt(T.county_n) + "</em>";
-  document.getElementById("k-county-note").textContent =
-    (T.county_n ? (T.county_all / T.county_n * 100).toFixed(1) : 0) + "% · 按片区所在县";
+
+  /* 口径阶梯：把 6 个数字焊成一个恒等式 */
+  var G = RD.groups || {};
+  var ladderRows = [
+    ["命名单元 M 层", T.macro, fmt(T.areas) + " area + " + fmt(T.belt) + " belt（不与 P 层相减）", "m"],
+    ["在册记录", T.areas, "全部 active 记录", ""],
+    ["已裁定", (T.areas || 0) - (T.pending || 0), fmt(T.areas) + " − " + fmt(T.pending) + " 待核", ""],
+    ["宽统计 A+B+C", T.wide, fmt(T.main) + " + " + fmt(G.C) + " 时间不详", ""],
+    ["主统计 A+B", T.main, fmt(G.A) + " + " + fmt(G.B) + "，唯一可做政策分析的基数", "strong"],
+    ["其中 D 口径外 / E 无依据", fmt(G.D) + " / " + fmt(G.E), "不进统计", "muted", true]
+  ];
+  document.getElementById("ladder-list").innerHTML = ladderRows.map(function (r) {
+    return '<li class="' + (r[3] || "") + '"><span class="l">' + r[0] + '</span>' +
+      '<span class="v num">' + (r[4] ? r[1] : fmt(r[1])) + '</span><span class="n">' + r[2] + "</span></li>";
+  }).join("");
 
   var metric = "areas";
   var map = kit.buildMap(document.getElementById("map"), {
@@ -139,6 +155,7 @@
   function legend() {
     if (!map) return;
     legendEl.innerHTML = '<span class="sw" style="background:var(--map-0)"></span><span>无记录</span>' +
+      '<span class="sw na"></span><span>不纳入采集</span>' +
       '<span style="margin:0 4px 0 12px">' + LABEL[metric] + "</span>" +
       map.getPalette().slice(1).map(function (c) { return '<span class="sw" style="background:' + c + '"></span>'; }).join("") +
       '<span>0 → ' + (map.maxOf(metric) || 0) + (metric === "pending_share" ? "%" : "") + "</span>";
@@ -148,7 +165,8 @@
     if (!map) return;
     map.setMetric(metric);
     kit.renderRank(rankEl, metric, RD.provinces || []);
-    document.getElementById("map-sub").textContent = "按" + LABEL[metric];
+    document.getElementById("map-sub").textContent = "按" + LABEL[metric] +
+      (metric === "areas" ? "（深浅＝库内建档量，不代表现实中片区多少）" : "");
     legend();
   }
   document.getElementById("seg").addEventListener("click", function (e) {
@@ -160,11 +178,11 @@
     paint();
   });
 
-  var top8 = (RD.provinces || []).filter(function (p) { return p.areas; }).slice(0, 8);
+  var top8 = (RD.provinces || []).filter(function (p) { return p.areas; })
+    .sort(function (a, b) { return (b.areas || 0) - (a.areas || 0); }).slice(0, 8);
   kit.renderBars(document.getElementById("bars-prov"), top8.map(function (p) {
-    return { label: p.name, v: p.areas };
+    return { label: p.name, v: p.areas, sub: p.main };
   }));
-  var G = RD.groups || {};
   kit.renderBars(document.getElementById("bars-group"), [
     { label: "A 窗内", v: G.A || 0 },
     { label: "B 延续至今", v: G.B || 0 },
@@ -172,10 +190,23 @@
     { label: "D 口径外", v: G.D || 0 },
     { label: "E 无依据", v: G.E || 0, gold: true }
   ]);
-  var years = Object.keys(RD.years || {}).sort();
-  kit.renderBars(document.getElementById("bars-year"), years.map(function (y) {
-    return { label: y, v: RD.years[y].all, gold: false };
-  }));
+  document.getElementById("group-sub").textContent =
+    "非待核记录的口径归属；E 组 " + fmt(G.E) + " 条（名单存在但无点名级依据，计入 M 层、不进主统计）";
+
+  /* 年份：固定 2018–2026 全轴（空年份画 0），末尾单列「未填年份」 */
+  var Y = RD.years || {};
+  var ySum = 0, yMain = 0;
+  Object.keys(Y).forEach(function (y) { ySum += Y[y].all || 0; yMain += Y[y].main || 0; });
+  var years = [];
+  for (var y = 2018; y <= 2026; y++) years.push(String(y));
+  var rows = years.map(function (y) {
+    var d = Y[y] || { all: 0, main: 0 };
+    return { label: y + (y === "2026" ? "（至11月）" : ""), v: d.all, sub: d.main, zero: !d.all };
+  });
+  rows.push({ label: "未填年份", v: (T.areas || 0) - ySum, sub: (T.main || 0) - yMain, gold: true });
+  kit.renderBars(document.getElementById("bars-year"), rows);
+  document.getElementById("year-sub").textContent =
+    "深色＝在册（含待核）　浅色＝主统计；未填年份 " + fmt((T.areas || 0) - ySum) + " 条单列，不计入趋势";
   paint();
 })();
 </script>
