@@ -100,7 +100,7 @@ async function main() {
 
   // 静态资源版本号：HTML 里的 assets/*.css|js 统一加 ?v=<stamp>，
   // 避免「HTML 已更新、JS 还在浏览器缓存里」导致的功能错配
-  const stamp = new Date().toISOString().slice(0, 13).replace(/[-T:]/g, "");
+  const stamp = new Date().toISOString().slice(0, 19).replace(/[-T:]/g, "");
   let stamped = 0;
   for (const f of await listFiles(DIST)) {
     if (!f.endsWith(".html")) continue;

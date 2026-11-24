@@ -45,15 +45,15 @@
         <div class="bar"><span>命名单元</span><span class="track"><span class="fill" id="f-macro" style="width:100%"></span></span><span class="v" id="v-macro">—</span></div>
         <div class="bar"><span>其中 area</span><span class="track"><span class="fill" id="f-area"></span></span><span class="v" id="v-area">—</span></div>
         <div class="bar"><span>其中 belt</span><span class="track"><span class="fill gold" id="f-belt"></span></span><span class="v" id="v-belt">—</span></div>
-        <p class="sub" style="margin-top:12px">宽在证据强度：媒体稿、待核、时间不详都收；对象类型一条不放宽。</p>
+        <p class="sub" style="margin-top:12px">含媒体稿、待核与时间不详；对象类型不放宽。</p>
       </div>
       <div class="card">
         <h3>P 层 · 主统计（A+B）</h3>
-        <p class="sub">政策分析只能用这个</p>
+        <p class="sub">政策分析口径</p>
         <div class="bar"><span>主统计</span><span class="track"><span class="fill" id="f-main"></span></span><span class="v" id="v-main">—</span></div>
         <div class="bar"><span>宽统计 A+B+C</span><span class="track"><span class="fill" id="f-wide"></span></span><span class="v" id="v-wide">—</span></div>
         <div class="bar"><span>待核（不计入）</span><span class="track"><span class="fill gold" id="f-pending"></span></span><span class="v" id="v-pending">—</span></div>
-        <p class="sub" style="margin-top:12px">跨层相减没有意义：M−P 不是「质量差的片区」，是证据不足但确实被这么叫的单元。</p>
+        <p class="sub" style="margin-top:12px">M 与 P 分层报数，不相减。</p>
       </div>
     </div>
   </section>
@@ -93,7 +93,7 @@
           <li>不收园区、景区、田园综合体、小镇（非片区实体）</li>
           <li>不收城市控规与国土空间规划分区</li>
           <li>「示范带 / 廊 / 圈」单独入 <code>belt</code>，不进片区表</li>
-          <li>港澳台（香港、澳门、台湾）不纳入采集范围，台账标注<strong>资料暂缺</strong>，不以 0 计</li>
+          <li>港澳台（香港、澳门、台湾）不纳入采集范围，台账标注<strong>资料暂缺</strong></li>
         </ul>
       </div>
     </div>
@@ -107,11 +107,11 @@
         <p class="sub" style="margin-top:10px">字段完整性、外键引用、区划归属、快照路径全部通过。</p></div>
       <div class="card"><h3>待核</h3><p class="sub">证据链未达标，单独计数</p>
         <div class="bar"><span>待核条数</span><span class="track"><span class="fill gold" style="width:100%"></span></span><span class="v" id="v-pending2">—</span></div>
-        <p class="sub" style="margin-top:10px">待核计入 M 层、不计入主统计；每条都保留来源与线索，不删除。</p></div>
+        <p class="sub" style="margin-top:10px">待核计入 M 层、不计入主统计。</p></div>
     </div>
     <div class="card" style="margin-top:16px">
       <h3>引用前应看的六个比率</h3>
-      <p class="sub">每个比率都带分母；均为当前快照实测，随数据入库自动更新</p>
+      <p class="sub">每个比率均带分母，随入库更新。</p>
       <ul class="qlist" id="quality-list"></ul>
     </div>
   </section>
@@ -125,7 +125,7 @@
       <div><h4>数据</h4><ul><li><a href="about.html">下载 CSV / GeoJSON</a></li><li><a href="method.html">口径与方法</a></li></ul></div>
       <div><h4>引用</h4><ul><li>数据快照 <span id="f-snapshot">—</span></li><li><a href="about.html#cite">引用格式</a></li></ul></div>
     </div>
-    <div class="copy"><span>© 2026 · 学术用途</span><span>ruraldevelopment.jinhuazhang.top</span></div>
+    <div class="copy"><span>© 2026</span><span>全国乡村片区化数据库</span></div>
   </div>
 </footer>
 
